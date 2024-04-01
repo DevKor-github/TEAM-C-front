@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:title=""
+        android:icon="@drawable/home_icon_selector"/>
+    <item
+        android:id="@+id/fragment_bus"
+        android:title=""
+        android:icon="@drawable/disabled_bus_button"/>
+    <item
+        android:id="@+id/fragment_community"
+        android:title=""
+        android:icon="@drawable/disabled_community_button"/>
+    <item
+        android:id="@+id/fragment_favorites"
+        android:title=""
+        android:icon="@drawable/disabled_favorites_button"/>
+    <item
+        android:id="@+id/fragment_mypage"
+        android:title=""
+        android:icon="@drawable/disabled_mypage_button"/>
+</menu>
