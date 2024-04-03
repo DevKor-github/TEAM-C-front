@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
@@ -29,6 +30,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+    private lateinit var marker1: Marker
+    private lateinit var marker2: Marker
+
+    private var isImageOneDisplayed = true
+    private var areMarkersVisible = true
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,6 +47,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             requestPermissions(PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
         } else {
             initMapView()
+        }
+
+        val pinOnoffButton: ImageButton = binding.pinOnoffButton
+        pinOnoffButton.setOnClickListener {
+            // 마커를 토글하는 로직 추가
+            if (areMarkersVisible) {
+                hideMarkers()
+            } else {
+                showMarkers()
+            }
+            areMarkersVisible = !areMarkersVisible
+
+            // 이미지 토글 로직은 그대로 유지
+            if (isImageOneDisplayed) {
+                pinOnoffButton.setImageResource(R.drawable.pin_on_button)
+            } else {
+                pinOnoffButton.setImageResource(R.drawable.pin_off_button)
+            }
+            isImageOneDisplayed = !isImageOneDisplayed
         }
     }
 
@@ -70,16 +96,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val cameraUpdate = CameraUpdate.zoomTo(17.0)
         naverMap.moveCamera(cameraUpdate)
 
-        // MainActivity의 onMapReady 코드를 여기에 추가
-        val marker1 = Marker()
-        marker1.position = LatLng(37.586868,127.0313414)
-        marker1.map = naverMap
-        marker1.icon = OverlayImage.fromResource(R.drawable.spot)
+        marker1 = Marker().apply {
+            position = LatLng(37.586868,127.0313414)
+            map = naverMap
+            icon = OverlayImage.fromResource(R.drawable.spot)
+        }
 
-        val marker2 = Marker()
-        marker2.position = LatLng(37.5843837,127.0274333)
-        marker2.map = naverMap
-        marker2.icon = OverlayImage.fromResource(R.drawable.spot)
+        marker2 = Marker().apply {
+            position = LatLng(37.5843837,127.0274333)
+            map = naverMap
+            icon = OverlayImage.fromResource(R.drawable.spot)
+        }
 
         var isBottomSheetVisible = false
         val bottomSheet = binding.bottomsheet1
@@ -97,6 +124,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             true
         }
+    }
+
+    private fun hideMarkers() {
+        // 마커를 숨김
+        marker1.map = null
+        marker2.map = null
+    }
+
+    private fun showMarkers() {
+        // 마커를 다시 보여줌
+        marker1.map = naverMap
+        marker2.map = naverMap
     }
 
     private fun toggleBottomSheet(view: View, isVisible: Boolean) {
