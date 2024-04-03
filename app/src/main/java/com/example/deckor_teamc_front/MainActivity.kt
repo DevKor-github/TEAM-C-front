@@ -28,22 +28,27 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.fragment_home -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, HomeFragment()).commit()
+                    item.setIcon(R.drawable.home_button)
                     true
                 }
                 R.id.fragment_bus -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, BusFragment()).commit()
+                    item.setIcon(R.drawable.bus_button)
                     true
                 }
                 R.id.fragment_community -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, CommunityFragment()).commit()
+                    item.setIcon(R.drawable.community_button)
                     true
                 }
                 R.id.fragment_favorites -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, FavoritesFragment()).commit()
+                    item.setIcon(R.drawable.favorites_button)
                     true
                 }
                 R.id.fragment_mypage -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, MypageFragment()).commit()
+                    item.setIcon(R.drawable.mypage_button)
                     true
                 }
                 else -> false
