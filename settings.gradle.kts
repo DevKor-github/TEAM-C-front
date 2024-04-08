@@ -10,6 +10,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://repository.map.naver.com/archive/maven")
+        maven ("https://www.jitpack.io")
     }
 }
 
