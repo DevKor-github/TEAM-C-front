@@ -1,0 +1,243 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/modal_sheet">
+
+    <FrameLayout
+        android:id="@+id/standard_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@color/black"
+        android:layout_marginTop="80dp"
+
+        android:backgroundTint="@color/white"
+        style="@style/Widget.Material3.BottomSheet">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/modal_guideline2"
+                app:layout_constraintStart_toStartOf="@id/modal_guideline1"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+
+            <!-- Drag handle for accessibility -->
+
+                <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/drag_handle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                <!-- Bottom sheet contents. -->
+
+
+                    <TextView
+                        android:id="@+id/building_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/building_name"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/map_main"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/building_class"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/map_sub"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/building_adress"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/map_sub"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clipToPadding="false">
+
+                    <ImageButton
+                        android:id="@+id/consent_button1"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/consent"
+                        android:elevation="8dp"/>
+
+                    <ImageButton
+                        android:id="@+id/consent_button2"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        app:layout_constraintStart_toEndOf="@+id/consent_button1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/consent"
+                        android:elevation="8dp"
+                        android:layout_marginStart="5dp"/>
+
+                    <ImageButton
+                        android:id="@+id/consent_button3"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        app:layout_constraintStart_toEndOf="@+id/consent_button2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/consent"
+                        android:elevation="8dp"
+                        android:layout_marginStart="5dp"/>
+
+                    <ImageButton
+                        android:id="@+id/consent_button4"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        app:layout_constraintStart_toEndOf="@+id/consent_button3"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/consent"
+                        android:elevation="8dp"
+                        android:layout_marginStart="5dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clipToPadding="false">
+
+                    <android.widget.Button
+
+                        android:id="@+id/modal_innermap_button"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@drawable/rounded_rec_red"
+                        android:text="건물 내부 지도 보기"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clipToPadding="false">
+
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.45" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.55" />
+
+
+                    <android.widget.Button
+
+                        android:id="@+id/modal_depart_button"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/red"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/rounded_rec_white"
+                        android:text="출발"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/modal_guideline3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <android.widget.Button
+
+                        android:id="@+id/modal_arrive_button"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textColor="@color/red"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/rounded_rec_white"
+                        android:text="도착"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/modal_guideline4"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
