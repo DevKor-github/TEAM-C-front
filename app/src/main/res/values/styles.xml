@@ -1,0 +1,9 @@
+<resources>
+    <!-- Custom Text Style -->
+    <style name="PretendardTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:lineSpacingExtra">21sp</item> <!-- 여기서 5sp는 예시값입니다. 실제 값은 아래 설명을 참조하세요. -->
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+</resources>

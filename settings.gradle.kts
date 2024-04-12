@@ -10,9 +10,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://repository.map.naver.com/archive/maven")
+        maven ("https://www.jitpack.io")
     }
 }
 
 rootProject.name = "deckor_teamC_front"
 include(":app")
- 
