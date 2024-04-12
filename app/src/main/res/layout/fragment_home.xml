@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="-32dp"
             tools:layout_editor_absoluteY="257dp" />
+
     </FrameLayout>
 
     <ImageButton
@@ -30,6 +31,7 @@
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageButton
         android:id="@+id/search_bar"
@@ -152,6 +154,7 @@
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>

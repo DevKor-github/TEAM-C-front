@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_home
         }
+
+
     }
 
     fun setBottomNavigationView() {
