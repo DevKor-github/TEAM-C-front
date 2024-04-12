@@ -3,11 +3,10 @@ package com.example.deckor_teamc_front
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -73,7 +72,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             isImageOneDisplayed = !isImageOneDisplayed
         }
-
     }
 
     private fun initMapView() {
@@ -83,8 +81,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         mapFragment.getMapAsync(this)
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
-
     }
 
     private fun hasPermission(): Boolean {
@@ -96,23 +92,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         return true
     }
 
-
-
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        /*
         val cameraUpdate = CameraUpdate.zoomTo(17.0)
         naverMap.moveCamera(cameraUpdate)
-         */
-
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.5871834,127.0298899))
-            .animate(CameraAnimation.Fly, 1000)
-        naverMap.moveCamera(cameraUpdate)
-
 
         val includedLayout = binding.includedLayout.root
         // sheet.xml 파일에서 TextView를 찾습니다.
@@ -153,46 +140,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
         val layout1 = (binding.root).findViewById<ConstraintLayout>(R.id.fragment_home)
 
-
-
-        val includedLayout = binding.includedLayout.root
-        // sheet.xml 파일에서 TextView를 찾습니다.
-
-        val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
-        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-
-        val buildingName = includedLayout.findViewById<TextView>(R.id.building_name)
-        var selectedBuilding=0
-
-        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                // 바텀시트 상태가 변경될 때 호출됩니다.
-                // 여기에 상태에 따른 작업을 추가할 수 있습니다.
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        // 바텀시트가 접혀있을 때의 동작 설정
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        // 바텀시트가 펼쳐져 있을 때의 동작 설정
-                    }
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                        selectedBuilding=0
-                        // 바텀시트가 숨겨져 있을 때의 동작 설정
-                    }
-                    else -> {}
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // 바텀시트가 슬라이드되는 동안 호출됩니다. (선택 사항)
-            }
-        })
-
-        val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
-        val layout1 = (binding.root).findViewById<ConstraintLayout>(R.id.fragment_home)
-
+        // MainActivity의 onMapReady 코드를 여기에 추가
         marker1 = Marker().apply {
             position = LatLng(37.586868,127.0313414)
             map = naverMap
@@ -220,6 +168,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             selectedBuilding=2
             true}
 
+
         innerMapButton.setOnClickListener {
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -246,7 +195,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         marker2.map = naverMap
     }
 
-
+    private fun toggleBottomSheet(view: View, isVisible: Boolean) {
+        if (isVisible) {
+            val slideDown = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down)
+            view.startAnimation(slideDown)
+            view.visibility = View.GONE
+        } else {
+            val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+            view.startAnimation(slideUp)
+            view.visibility = View.VISIBLE
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
