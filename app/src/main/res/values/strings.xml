@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">deckor_teamC_front</string>
+    <string name="building_name">고려대학교 서울캠퍼스 애기능생활관</string>
+    <string name="building_name2">고려대학교 서울캠퍼스 우당교양관</string>
+    <string name="building_class">부속건물</string>
+    <string name="building_adress">서울 성북구 안암로 73-15</string>
+    <string name="action">1</string>
+    <string name="switch_label">ㄴㄴ</string>
 </resources>
