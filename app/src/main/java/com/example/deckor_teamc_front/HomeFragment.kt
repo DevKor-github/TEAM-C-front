@@ -48,6 +48,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.searchButton.setOnClickListener {
+            navigateToSearchBuildingFragment()
+        }
+
         if (!hasPermission()) {
             requestPermissions(PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
         } else {
@@ -72,6 +77,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             isImageOneDisplayed = !isImageOneDisplayed
         }
+
+
     }
 
     private fun initMapView() {
@@ -195,16 +202,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         marker2.map = naverMap
     }
 
-    private fun toggleBottomSheet(view: View, isVisible: Boolean) {
-        if (isVisible) {
-            val slideDown = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_down)
-            view.startAnimation(slideDown)
-            view.visibility = View.GONE
-        } else {
-            val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
-            view.startAnimation(slideUp)
-            view.visibility = View.VISIBLE
-        }
+    private fun navigateToSearchBuildingFragment() {
+        val searchBuildingFragment = SearchBuildingFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, searchBuildingFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onDestroyView() {
