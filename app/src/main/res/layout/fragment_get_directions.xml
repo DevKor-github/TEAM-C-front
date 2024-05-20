@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_search_building"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/get_directions_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:gravity="center"
+        android:background="@drawable/search_list_item_border"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp">
+
+            <ImageButton
+                android:id="@+id/back_to_home_button"
+                android:src="@drawable/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:translationZ="50dp"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/search_starting_point_bar"
+                android:layout_width="340dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="10dp"
+                android:paddingStart="10dp"
+                android:hint="출발지를 입력해주세요"
+                android:textSize="15dp"
+                android:elevation="10dp"
+                android:background="@drawable/rounded_rec_white"/>
+
+            <ImageButton
+                android:id="@+id/delete_text_button_1"
+                android:src="@drawable/delete_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="25dp"
+                android:translationZ="50dp"
+                android:background="@android:color/transparent"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp">
+
+            <ImageButton
+                android:id="@+id/switch_button"
+                android:src="@drawable/button_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:translationZ="50dp"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/search_arrival_point_bar"
+                android:layout_width="340dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="10dp"
+                android:paddingStart="10dp"
+                android:hint="도착지를 입력해주세요"
+                android:textSize="15dp"
+                android:elevation="10dp"
+                android:background="@drawable/rounded_rec_white"/>
+
+            <ImageButton
+                android:id="@+id/delete_text_button_2"
+                android:src="@drawable/delete_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginEnd="25dp"
+                android:translationZ="50dp"
+                android:background="@android:color/transparent"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/get_directions_list_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        tools:listitem="@layout/search_list_item"
+        android:layout_below="@id/get_directions_bar_layout"/>
+
+</RelativeLayout>
