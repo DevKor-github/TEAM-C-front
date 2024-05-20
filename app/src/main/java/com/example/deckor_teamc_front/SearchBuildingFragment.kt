@@ -3,12 +3,14 @@ package com.example.deckor_teamc_front
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deckor_teamc_front.databinding.FragmentSearchBuildingBinding
 
@@ -17,7 +19,7 @@ class SearchBuildingFragment : Fragment() {
     private var _binding: FragmentSearchBuildingBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var originalBuildingList: List<BuildingItem>
+    private val viewModel: SearchBuildingViewModel by viewModels()
     private lateinit var adapter: SearchListAdapter
 
     override fun onCreateView(
@@ -42,22 +44,26 @@ class SearchBuildingFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.searchListRecyclerview.layoutManager = layoutManager
 
-        adapter = SearchListAdapter(emptyList()) // 빈 목록으로 초기화
+        adapter = SearchListAdapter(emptyList()) { buildingItem ->
+            if (buildingItem.placeType == "BUILDING") {
+                binding.searchBar.setText("[${buildingItem.name}] ")  // 태그 형식으로 설정
+            } else {
+                binding.searchBar.setText("${buildingItem.name} ")  // 일반 형식
+            }
+            moveCursorToEnd(binding.searchBar)
+        }
+
         binding.searchListRecyclerview.adapter = adapter
 
-        // RecyclerView에 어댑터 설정 및 데이터 바인딩
-        originalBuildingList = listOf(
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 학생식당", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 101호", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 102호", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 103호", "서울 성북구 안암로 73-15", "503m"),
-        )
+        // ViewModel의 데이터 관찰
+        viewModel.buildingItems.observe(viewLifecycleOwner, Observer { buildingItems ->
+            adapter.setBuildingList(buildingItems)
+        })
 
         binding.searchBar.addTextChangedListener { editable ->
             val searchText = editable.toString().trim()
             val filteredList = if (searchText.isNotBlank()) {
-                filterBuildingList(searchText)
+                filterBuildingList(searchText, viewModel.buildingItems.value ?: emptyList())
             } else {
                 emptyList() // 검색어가 비어 있을 때 빈 목록 반환
             }
@@ -73,15 +79,17 @@ class SearchBuildingFragment : Fragment() {
         _binding = null
     }
 
-    private fun filterBuildingList(searchText: String): List<BuildingItem> {
-        return originalBuildingList.filter { building ->
-            building.name.contains(searchText, true)
+    private fun filterBuildingList(searchText: String, originalList: List<BuildingItem>): List<BuildingItem> {
+        // 검색 텍스트에서 대괄호 [] 제거
+        val cleanedSearchText = searchText.replace(Regex("\\[|\\]"), "")
+
+        // 제거된 텍스트를 사용하여 목록 필터링
+        return originalList.filter { building ->
+            building.name.contains(cleanedSearchText, ignoreCase = true)
         }
     }
 
-    fun onTouchEvent(event: MotionEvent): Boolean {
-        val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-        return true
+    private fun moveCursorToEnd(editText: EditText) {
+        editText.setSelection(editText.text.length)
     }
 }
