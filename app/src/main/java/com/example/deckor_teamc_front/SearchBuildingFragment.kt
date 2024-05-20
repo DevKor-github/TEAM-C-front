@@ -11,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deckor_teamc_front.databinding.FragmentSearchBuildingBinding
+import com.naver.maps.geometry.LatLng
 
 class SearchBuildingFragment : Fragment() {
 
@@ -43,15 +44,15 @@ class SearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) // 빈 목록으로 초기화
-        binding.searchListRecyclerview.adapter = adapter
+
 
         // RecyclerView에 어댑터 설정 및 데이터 바인딩
         originalBuildingList = listOf(
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 학생식당", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 101호", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 102호", "서울 성북구 안암로 73-15", "503m"),
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관 103호", "서울 성북구 안암로 73-15", "503m"),
+            BuildingItem("고려대학교 서울캠퍼스애기능생활관", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
+            BuildingItem("고려대학교 서울캠퍼스애기능생활관 학생식당", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
+            BuildingItem("고려대학교 서울캠퍼스애기능생활관 101호", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
+            BuildingItem("고려대학교 서울캠퍼스애기능생활관 102호", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
+            BuildingItem("고려대학교 서울캠퍼스애기능생활관 103호", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
         )
 
         binding.searchBar.addTextChangedListener { editable ->

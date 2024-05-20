@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
@@ -20,6 +19,7 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
@@ -41,6 +41,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
+    private var startLatLng: LatLng? = null
+    private var arrivalLatLng: LatLng? = null
+    private var stopTracking = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,6 +55,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
+        }
+
+        binding.searchRouteButton.setOnClickListener {
+            navigateToGetDirectionsFragment()
         }
 
         if (!hasPermission()) {
@@ -78,7 +86,16 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             isImageOneDisplayed = !isImageOneDisplayed
         }
 
+        // Draw the path if coordinates are passed
+        startLatLng = arguments?.getParcelable("start_lat_lng")
+        arrivalLatLng = arguments?.getParcelable("arrival_lat_lng")
+        stopTracking = arguments?.getBoolean("stop_tracking") ?: false
 
+        if (startLatLng != null && arrivalLatLng != null) {
+            if (::naverMap.isInitialized) {
+                drawPath(startLatLng!!, arrivalLatLng!!)
+            }
+        }
     }
 
     private fun initMapView() {
@@ -103,7 +120,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = true
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+        // Stop tracking if the flag is set
+        if (stopTracking) {
+            naverMap.locationTrackingMode = LocationTrackingMode.None
+        } else {
+            naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        }
 
         val cameraUpdate = CameraUpdate.zoomTo(17.0)
         naverMap.moveCamera(cameraUpdate)
@@ -115,9 +138,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-
         val buildingName = includedLayout.findViewById<TextView>(R.id.building_name)
-        var selectedBuilding=0
+        var selectedBuilding = 0
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -131,7 +153,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                         // 바텀시트가 펼쳐져 있을 때의 동작 설정
                     }
                     BottomSheetBehavior.STATE_HIDDEN -> {
-                        selectedBuilding=0
+                        selectedBuilding = 0
                         // 바텀시트가 숨겨져 있을 때의 동작 설정
                     }
                     else -> {}
@@ -143,38 +165,39 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         })
 
-
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
         val layout1 = (binding.root).findViewById<ConstraintLayout>(R.id.fragment_home)
 
         // MainActivity의 onMapReady 코드를 여기에 추가
         marker1 = Marker().apply {
-            position = LatLng(37.586868,127.0313414)
+            position = LatLng(37.586868, 127.0313414)
             map = naverMap
             icon = OverlayImage.fromResource(R.drawable.spot)
         }
 
-
         marker2 = Marker().apply {
-            position = LatLng(37.5843837,127.0274333)
+            position = LatLng(37.5843837, 127.0274333)
             map = naverMap
             icon = OverlayImage.fromResource(R.drawable.spot)
         }
 
         marker1.setOnClickListener {
-            if(selectedBuilding!=1){
-                buildingName.text=getString(R.string.building_name2)
-                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED}
-            selectedBuilding=1
-            true}
+            if (selectedBuilding != 1) {
+                buildingName.text = getString(R.string.building_name2)
+                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            selectedBuilding = 1
+            true
+        }
 
         marker2.setOnClickListener {
-            if(selectedBuilding!=2){
-                buildingName.text=getString(R.string.building_name)
-                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED}
-            selectedBuilding=2
-            true}
-
+            if (selectedBuilding != 2) {
+                buildingName.text = getString(R.string.building_name)
+                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            selectedBuilding = 2
+            true
+        }
 
         innerMapButton.setOnClickListener {
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -187,6 +210,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             val index = parent.indexOfChild(layout3)
             parent.removeViewAt(index)
             parent.addView(layout2, index, layout3.layoutParams)
+        }
+
+        // Draw the path if coordinates were set before the map was ready
+        if (startLatLng != null && arrivalLatLng != null) {
+            drawPath(startLatLng!!, arrivalLatLng!!)
         }
     }
 
@@ -202,10 +230,39 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         marker2.map = naverMap
     }
 
+    private fun drawPath(startLatLng: LatLng, arrivalLatLng: LatLng) {
+        val path = PathOverlay()
+        path.coords = listOf(
+            startLatLng,
+            arrivalLatLng
+        )
+        path.color = ContextCompat.getColor(requireContext(), R.color.red) // Use the color from colors.xml
+        path.map = naverMap
+        path.outlineWidth = 0
+        path.width = 20
+
+        // Calculate the midpoint
+        val midLat = (startLatLng.latitude + arrivalLatLng.latitude) / 2
+        val midLng = (startLatLng.longitude + arrivalLatLng.longitude) / 2
+        val midPoint = LatLng(midLat, midLng)
+
+        // Move the camera to the midpoint
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(midPoint, 15.0)
+        naverMap.moveCamera(cameraUpdate)
+    }
+
     private fun navigateToSearchBuildingFragment() {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, searchBuildingFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun navigateToGetDirectionsFragment() {
+        val getDirectionsFragment = GetDirectionsFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, getDirectionsFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
