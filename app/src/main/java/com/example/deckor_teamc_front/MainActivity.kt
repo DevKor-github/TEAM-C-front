@@ -21,16 +21,6 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_home
         }
     }
-/*
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        // 프래그먼트로 터치 이벤트 전달
-        supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is SearchBuildingFragment) {
-                fragment.onTouchEvent(ev)
-            }
-        }
-        return super.dispatchTouchEvent(ev)
-    }*/
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
@@ -65,4 +55,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
