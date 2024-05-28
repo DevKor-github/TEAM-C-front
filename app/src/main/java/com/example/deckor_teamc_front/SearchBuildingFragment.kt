@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deckor_teamc_front.databinding.FragmentSearchBuildingBinding
+import com.google.android.flexbox.FlexboxLayout
 
 class SearchBuildingFragment : Fragment() {
 
@@ -31,12 +35,14 @@ class SearchBuildingFragment : Fragment() {
         _binding = FragmentSearchBuildingBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.backToHomeButton.setOnClickListener {
+        binding.customEditTextLayout.backToHomeButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
-        binding.deleteTextButton.setOnClickListener {
-            binding.searchBar.setText("")
+        binding.customEditTextLayout.clearButton.setOnClickListener {
+            binding.customEditTextLayout.editText.setText("")
+            binding.customEditTextLayout.tagContainer.removeAllViews()
+            binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
         }
 
         val layoutManager = LinearLayoutManager(requireContext())
@@ -44,11 +50,14 @@ class SearchBuildingFragment : Fragment() {
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
             if (buildingItem.placeType == "BUILDING") {
-                binding.searchBar.setText("[${buildingItem.name}] ")
+                // 건물을 선택했을 때 태그 추가
+                addTag(buildingItem.name)
+                binding.customEditTextLayout.editText.setText("")
+                binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
             } else {
-                binding.searchBar.setText("${buildingItem.name} ")
+                // 건물이 아닌 것을 선택했을 때 OpenModal 함수 호출
+                openLocationModal(requireActivity(), buildingItem)
             }
-            moveCursorToEnd(binding.searchBar)
         }
 
         binding.searchListRecyclerview.adapter = adapter
@@ -57,7 +66,7 @@ class SearchBuildingFragment : Fragment() {
             adapter.setBuildingList(buildingItems)
         })
 
-        binding.searchBar.addTextChangedListener(object : TextWatcher {
+        binding.customEditTextLayout.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -67,17 +76,17 @@ class SearchBuildingFragment : Fragment() {
                 } else {
                     adapter.setBuildingList(emptyList())
                 }
-                binding.deleteTextButton.visibility = if (searchText.isNotEmpty()) View.VISIBLE else View.GONE
+                binding.customEditTextLayout.clearButton.visibility = if (searchText.isNotEmpty()) View.VISIBLE else View.GONE
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Add this block to open the keyboard when the fragment is created
-        binding.searchBar.requestFocus()
-        binding.searchBar.postDelayed({
+        // Open keyboard when the fragment starts
+        binding.customEditTextLayout.editText.requestFocus()
+        binding.customEditTextLayout.editText.postDelayed({
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(binding.searchBar, InputMethodManager.SHOW_IMPLICIT)
+            imm.showSoftInput(binding.customEditTextLayout.editText, InputMethodManager.SHOW_IMPLICIT)
         }, 100)
 
         return view
@@ -88,7 +97,21 @@ class SearchBuildingFragment : Fragment() {
         _binding = null
     }
 
-    private fun moveCursorToEnd(editText: EditText) {
-        editText.setSelection(editText.text.length)
+    private fun addTag(tag: String) {
+        val tagContainer = binding.customEditTextLayout.tagContainer
+        val tagView = LayoutInflater.from(context).inflate(R.layout.tag_item, tagContainer, false) as LinearLayout
+        val tagText = tagView.findViewById<TextView>(R.id.tag_text)
+        val removeButton = tagView.findViewById<ImageButton>(R.id.remove_button)
+        tagText.text = tag
+
+        removeButton.setOnClickListener {
+            tagContainer.removeView(tagView)
+            // 태그가 모두 삭제되었는지 확인하고 힌트를 초기화하는 코드 추가
+            if (tagContainer.childCount == 0) {
+                binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
+            }
+        }
+
+        tagContainer.addView(tagView)
     }
 }
