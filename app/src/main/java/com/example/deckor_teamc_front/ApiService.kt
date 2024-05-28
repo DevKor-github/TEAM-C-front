@@ -8,7 +8,7 @@ interface ApiService {
     @GET("search")
     fun search(
         @Query("keyword") keyword: String,
-        @Query("buildingId") buildingId: Int? = null
+        @Query("building_id") buildingId: Int? = null
     ): Call<ApiResponse>
 }
 
