@@ -27,6 +27,8 @@ class SearchBuildingFragment : Fragment() {
     private val viewModel: SearchBuildingViewModel by viewModels()
     private lateinit var adapter: SearchListAdapter
 
+    private var taggedBuildingId : Int? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +45,7 @@ class SearchBuildingFragment : Fragment() {
             binding.customEditTextLayout.editText.setText("")
             binding.customEditTextLayout.tagContainer.removeAllViews()
             binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
+            taggedBuildingId = null
         }
 
         val layoutManager = LinearLayoutManager(requireContext())
@@ -58,6 +61,7 @@ class SearchBuildingFragment : Fragment() {
                 // 건물이 아닌 것을 선택했을 때 OpenModal 함수 호출
                 openLocationModal(requireActivity(), buildingItem)
             }
+            taggedBuildingId = buildingItem.id
         }
 
         binding.searchListRecyclerview.adapter = adapter
@@ -72,7 +76,7 @@ class SearchBuildingFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val searchText = s.toString().trim()
                 if (searchText.isNotBlank()) {
-                    viewModel.searchBuildings(searchText)
+                    viewModel.searchBuildings(searchText, taggedBuildingId)
                 } else {
                     adapter.setBuildingList(emptyList())
                 }
@@ -93,6 +97,7 @@ class SearchBuildingFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        taggedBuildingId = null
         super.onDestroyView()
         _binding = null
     }
@@ -106,6 +111,7 @@ class SearchBuildingFragment : Fragment() {
 
         removeButton.setOnClickListener {
             tagContainer.removeView(tagView)
+            taggedBuildingId = null
             // 태그가 모두 삭제되었는지 확인하고 힌트를 초기화하는 코드 추가
             if (tagContainer.childCount == 0) {
                 binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"

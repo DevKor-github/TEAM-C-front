@@ -3,6 +3,8 @@ package com.example.deckor_teamc_front
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +59,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
+            closeModal()
         }
 
         if (!hasPermission()) {
@@ -217,8 +220,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     fun moveCameraToPosition(position: LatLng) {
 
         if (::naverMap.isInitialized) {
-            naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing,2000L)
-                .finishCallback{expandModal()})
+            naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing,1000L))
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                expandModal()
+            }, 100L)
         } else {
             cameraPosition = position
         }
