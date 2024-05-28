@@ -22,16 +22,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        // 프래그먼트로 터치 이벤트 전달
-        supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is SearchBuildingFragment) {
-                fragment.onTouchEvent(ev)
-            }
-        }
-        return super.dispatchTouchEvent(ev)
-    }
-
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -58,10 +48,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.fragment_mypage -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, MypageFragment()).commit()
                     item.setIcon(R.drawable.mypage_button)
+
                     true
                 }
                 else -> false
             }
         }
     }
+
 }
