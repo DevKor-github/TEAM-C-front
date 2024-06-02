@@ -1,15 +1,17 @@
 package com.example.deckor_teamc_front
 
-import android.content.Context
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StyleSpan
+import android.graphics.Typeface
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.setFragmentResultListener
 import com.example.deckor_teamc_front.databinding.FragmentGetDirectionsBinding
 import com.naver.maps.geometry.LatLng
 
@@ -18,137 +20,131 @@ class GetDirectionsFragment : Fragment() {
     private var _binding: FragmentGetDirectionsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var originalBuildingList: List<BuildingItem>
-    private lateinit var adapter: GetDirectionsAdapter
-
-    private var selectedStartLatLng: LatLng? = null
-    private var selectedArrivalLatLng: LatLng? = null
+    private var startingPointHint: String? = null
+    private var arrivalPointHint: String? = null
+    private var startingPointLatLng: LatLng? = null
+    private var arrivalPointLatLng: LatLng? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGetDirectionsBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setFragmentResultListener("requestKey") { key, bundle ->
+            val result = bundle.getString("bundleKey")
+            val isStartingPoint = bundle.getBoolean("isStartingPoint")
+            val latitude = bundle.getDouble("latitude")
+            val longitude = bundle.getDouble("longitude")
+            if (isStartingPoint) {
+                startingPointHint = result
+                startingPointLatLng = LatLng(latitude, longitude)
+                if (result != null) {
+                    setHintWithStyle(binding.searchStartingPointBar, result)
+                }
+            } else {
+                arrivalPointHint = result
+                arrivalPointLatLng = LatLng(latitude, longitude)
+                if (result != null) {
+                    setHintWithStyle(binding.searchArrivalPointBar, result)
+                }
+            }
+
+            // Check if both points are set
+            if (startingPointLatLng != null && arrivalPointLatLng != null) {
+                navigateToHomeFragment()
+            }
+        }
+
+        binding.searchStartingPointBar.setOnClickListener {
+            navigateToGetDirectionsSearchBuildingFragment(true)
+        }
+
+        binding.searchArrivalPointBar.setOnClickListener {
+            navigateToGetDirectionsSearchBuildingFragment(false)
+        }
 
         binding.backToHomeButton.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        binding.deleteTextButton1.setOnClickListener {
-            binding.searchStartingPointBar.text.clear()
-            selectedStartLatLng = null
-        }
-
-        binding.deleteTextButton2.setOnClickListener {
-            binding.searchArrivalPointBar.text.clear()
-            selectedArrivalLatLng = null
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         binding.switchButton.setOnClickListener {
-            val startingPointText = binding.searchStartingPointBar.text.toString()
-            val arrivalPointText = binding.searchArrivalPointBar.text.toString()
-            binding.searchStartingPointBar.setText(arrivalPointText)
-            binding.searchArrivalPointBar.setText(startingPointText)
-
-            // Swap the LatLng values as well
-            val tempLatLng = selectedStartLatLng
-            selectedStartLatLng = selectedArrivalLatLng
-            selectedArrivalLatLng = tempLatLng
-
-            checkAndNavigate()
+            switchHints()
         }
 
-        // RecyclerView 설정
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.getDirectionsListRecyclerview.layoutManager = layoutManager
-
-        // Initialize the adapter with an item click listener
-        adapter = GetDirectionsAdapter(emptyList()) { buildingItem ->
-            onBuildingItemSelected(buildingItem)
-        }
-        binding.getDirectionsListRecyclerview.adapter = adapter
-
-        // Initialize building list
-        originalBuildingList = listOf(
-            BuildingItem("고려대학교 서울캠퍼스애기능생활관", "서울 성북구 안암로 73-15", "503m", LatLng(37.5844, 127.0274)),
-            BuildingItem("고려대학교 서울캠퍼스우당교양관", "서울 성북구 고려대로 104 105", "479m", LatLng(37.5869, 127.0314)),
-        )
-
-        binding.searchStartingPointBar.addTextChangedListener { editable ->
-            val searchText = editable.toString().trim()
-            val filteredList = if (searchText.isNotBlank()) {
-                filterBuildingList(searchText)
-            } else {
-                emptyList() // 검색어가 비어 있을 때 빈 목록 반환
-            }
-            adapter.setBuildingList(filteredList)
-            binding.deleteTextButton1.visibility = if (searchText.isNotEmpty()) View.VISIBLE else View.GONE
+        // Restore hints if they were previously set
+        startingPointHint?.let {
+            setHintWithStyle(binding.searchStartingPointBar, it)
         }
 
-        binding.searchArrivalPointBar.addTextChangedListener { editable ->
-            val searchText = editable.toString().trim()
-            val filteredList = if (searchText.isNotBlank()) {
-                filterBuildingList(searchText)
-            } else {
-                emptyList() // 검색어가 비어 있을 때 빈 목록 반환
-            }
-            adapter.setBuildingList(filteredList)
-            binding.deleteTextButton2.visibility = if (searchText.isNotEmpty()) View.VISIBLE else View.GONE
-        }
-
-        return view
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun filterBuildingList(searchText: String): List<BuildingItem> {
-        return originalBuildingList.filter { building ->
-            building.name.contains(searchText, true)
+        arrivalPointHint?.let {
+            setHintWithStyle(binding.searchArrivalPointBar, it)
         }
     }
 
-    private fun onBuildingItemSelected(buildingItem: BuildingItem) {
-        // Here, you can set the selected item's name to the currently focused EditText
-        val currentFocus = requireActivity().currentFocus
-        if (currentFocus == binding.searchStartingPointBar) {
-            binding.searchStartingPointBar.setText(buildingItem.name)
-            selectedStartLatLng = buildingItem.location
-        } else if (currentFocus == binding.searchArrivalPointBar) {
-            binding.searchArrivalPointBar.setText(buildingItem.name)
-            selectedArrivalLatLng = buildingItem.location
+    private fun switchHints() {
+        val tempHint = startingPointHint
+        startingPointHint = arrivalPointHint
+        arrivalPointHint = tempHint
+
+        val tempLatLng = startingPointLatLng
+        startingPointLatLng = arrivalPointLatLng
+        arrivalPointLatLng = tempLatLng
+
+        binding.searchStartingPointBar.hint = startingPointHint ?: "출발지를 입력해주세요"
+        binding.searchArrivalPointBar.hint = arrivalPointHint ?: "도착지를 입력해주세요"
+
+        if (startingPointHint != null) {
+            setHintWithStyle(binding.searchStartingPointBar, startingPointHint!!)
+        } else {
+            binding.searchStartingPointBar.setHintTextColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
         }
-        checkAndNavigate()
+
+        if (arrivalPointHint != null) {
+            setHintWithStyle(binding.searchArrivalPointBar, arrivalPointHint!!)
+        } else {
+            binding.searchArrivalPointBar.setHintTextColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
+        }
     }
 
-    private fun checkAndNavigate() {
-        if (selectedStartLatLng != null && selectedArrivalLatLng != null) {
-            navigateToHomeFragment()
+    private fun setHintWithStyle(button: AppCompatButton, hint: String) {
+        val spannableString = SpannableString(hint).apply {
+            setSpan(StyleSpan(Typeface.BOLD), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
+        button.hint = spannableString
+        button.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+    }
+
+    private fun navigateToGetDirectionsSearchBuildingFragment(isStartingPoint: Boolean) {
+        val getDirectionsSearchBuildingFragment = GetDirectionsSearchBuildingFragment()
+        getDirectionsSearchBuildingFragment.arguments = Bundle().apply {
+            putBoolean("isStartingPoint", isStartingPoint)
+        }
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, getDirectionsSearchBuildingFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun navigateToHomeFragment() {
         val homeFragment = HomeFragment()
-        val bundle = Bundle().apply {
-            putParcelable("start_lat_lng", selectedStartLatLng)
-            putParcelable("arrival_lat_lng", selectedArrivalLatLng)
-            putBoolean("stop_tracking", true)
+        homeFragment.arguments = Bundle().apply {
+            putParcelable("startLatLng", startingPointLatLng)
+            putParcelable("arrivalLatLng", arrivalPointLatLng)
         }
-        homeFragment.arguments = bundle
-
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    fun onTouchEvent(event: MotionEvent): Boolean {
-        val imm: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
-        return true
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
