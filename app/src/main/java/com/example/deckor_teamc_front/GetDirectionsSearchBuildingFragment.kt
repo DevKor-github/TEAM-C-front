@@ -12,12 +12,13 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deckor_teamc_front.databinding.FragmentSearchBuildingBinding
 
-class SearchBuildingFragment : Fragment() {
+class GetDirectionsSearchBuildingFragment : Fragment() {
 
     private var _binding: FragmentSearchBuildingBinding? = null
     private val binding get() = _binding!!
@@ -25,7 +26,8 @@ class SearchBuildingFragment : Fragment() {
     private val viewModel: SearchBuildingViewModel by viewModels()
     private lateinit var adapter: SearchListAdapter
 
-    private var taggedBuildingId : Int? = null
+    private var taggedBuildingId: Int? = null
+    private var isStartingPoint: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +36,8 @@ class SearchBuildingFragment : Fragment() {
     ): View {
         _binding = FragmentSearchBuildingBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        isStartingPoint = arguments?.getBoolean("isStartingPoint") ?: false
 
         binding.customEditTextLayout.backToHomeButton.setOnClickListener {
             requireActivity().onBackPressed()
@@ -51,13 +55,17 @@ class SearchBuildingFragment : Fragment() {
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
             if (buildingItem.placeType == "BUILDING") {
-                // 건물을 선택했을 때 태그 추가
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
             } else {
-                // 건물이 아닌 것을 선택했을 때 OpenModal 함수 호출
-                openLocationModal(requireActivity(), buildingItem)
+                buildingItem.latitude?.let {
+                    buildingItem.longitude?.let { it1 ->
+                        returnToGetDirectionsFragment(buildingItem.name,
+                            it, it1
+                        )
+                    }
+                }
             }
             taggedBuildingId = buildingItem.id
         }
@@ -84,7 +92,6 @@ class SearchBuildingFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Open keyboard when the fragment starts
         binding.customEditTextLayout.editText.requestFocus()
         binding.customEditTextLayout.editText.postDelayed({
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -110,12 +117,21 @@ class SearchBuildingFragment : Fragment() {
         removeButton.setOnClickListener {
             tagContainer.removeView(tagView)
             taggedBuildingId = null
-            // 태그가 모두 삭제되었는지 확인하고 힌트를 초기화하는 코드 추가
             if (tagContainer.childCount == 0) {
                 binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
             }
         }
 
         tagContainer.addView(tagView)
+    }
+
+    private fun returnToGetDirectionsFragment(buildingName: String, latitude: Double, longitude: Double) {
+        setFragmentResult("requestKey", Bundle().apply {
+            putString("bundleKey", buildingName)
+            putBoolean("isStartingPoint", isStartingPoint)
+            putDouble("latitude", latitude)
+            putDouble("longitude", longitude)
+        })
+        requireActivity().supportFragmentManager.popBackStack()
     }
 }

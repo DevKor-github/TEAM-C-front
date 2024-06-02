@@ -3,6 +3,8 @@ package com.example.deckor_teamc_front
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,10 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
+import okhttp3.*
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -44,6 +50,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var startLatLng: LatLng? = null
     private var arrivalLatLng: LatLng? = null
     private var stopTracking = false
+    private var cameraPosition: LatLng? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -55,6 +62,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
+            closeModal()
         }
 
         binding.searchRouteButton.setOnClickListener {
@@ -69,7 +77,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val pinOnoffButton: ImageButton = binding.pinOnoffButton
         pinOnoffButton.setOnClickListener {
-            // 마커를 토글하는 로직 추가
             if (areMarkersVisible) {
                 hideMarkers()
             } else {
@@ -77,7 +84,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             areMarkersVisible = !areMarkersVisible
 
-            // 이미지 토글 로직은 그대로 유지
             if (isImageOneDisplayed) {
                 pinOnoffButton.setImageResource(R.drawable.pin_on_button)
             } else {
@@ -86,16 +92,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             isImageOneDisplayed = !isImageOneDisplayed
         }
 
-        // Draw the path if coordinates are passed
         startLatLng = arguments?.getParcelable("start_lat_lng")
         arrivalLatLng = arguments?.getParcelable("arrival_lat_lng")
         stopTracking = arguments?.getBoolean("stop_tracking") ?: false
-
-        if (startLatLng != null && arrivalLatLng != null) {
-            if (::naverMap.isInitialized) {
-                drawPath(startLatLng!!, arrivalLatLng!!)
-            }
-        }
     }
 
     private fun initMapView() {
@@ -121,7 +120,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = true
 
-        // Stop tracking if the flag is set
         if (stopTracking) {
             naverMap.locationTrackingMode = LocationTrackingMode.None
         } else {
@@ -131,9 +129,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val cameraUpdate = CameraUpdate.zoomTo(17.0)
         naverMap.moveCamera(cameraUpdate)
 
-        val includedLayout = binding.includedLayout.root
-        // sheet.xml 파일에서 TextView를 찾습니다.
+        if(cameraPosition!=null){
+            moveCameraToPosition(cameraPosition!!)
+        }
 
+        val includedLayout = binding.includedLayout.root
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -143,32 +143,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                // 바텀시트 상태가 변경될 때 호출됩니다.
-                // 여기에 상태에 따른 작업을 추가할 수 있습니다.
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        // 바텀시트가 접혀있을 때의 동작 설정
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        // 바텀시트가 펼쳐져 있을 때의 동작 설정
-                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> { }
+                    BottomSheetBehavior.STATE_EXPANDED -> { }
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         selectedBuilding = 0
-                        // 바텀시트가 숨겨져 있을 때의 동작 설정
                     }
-                    else -> {}
+                    else -> { }
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // 바텀시트가 슬라이드되는 동안 호출됩니다. (선택 사항)
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
 
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
         val layout1 = (binding.root).findViewById<ConstraintLayout>(R.id.fragment_home)
 
-        // MainActivity의 onMapReady 코드를 여기에 추가
         marker1 = Marker().apply {
             position = LatLng(37.586868, 127.0313414)
             map = naverMap
@@ -212,41 +202,80 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             parent.addView(layout2, index, layout3.layoutParams)
         }
 
-        // Draw the path if coordinates were set before the map was ready
         if (startLatLng != null && arrivalLatLng != null) {
-            drawPath(startLatLng!!, arrivalLatLng!!)
+            fetchAndDrawPath(startLatLng!!, arrivalLatLng!!)
         }
     }
 
     private fun hideMarkers() {
-        // 마커를 숨김
         marker1.map = null
         marker2.map = null
     }
 
     private fun showMarkers() {
-        // 마커를 다시 보여줌
         marker1.map = naverMap
         marker2.map = naverMap
     }
 
-    private fun drawPath(startLatLng: LatLng, arrivalLatLng: LatLng) {
+    private fun fetchAndDrawPath(startLatLng: LatLng, arrivalLatLng: LatLng) {
+        val client = OkHttpClient()
+        val url = "http://3.34.68.172:8080/api/outer-route?startLong=${startLatLng.longitude}&startLat=${startLatLng.latitude}&endLong=${arrivalLatLng.longitude}&endLat=${arrivalLatLng.latitude}"
+
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body?.string()
+                    responseBody?.let {
+                        try {
+                            val jsonResponse = JSONObject(it)
+                            val route = jsonResponse.getJSONObject("data").getJSONArray("route")
+                            val pathCoords = mutableListOf<LatLng>()
+
+                            for (i in 0 until route.length()) {
+                                val point = route.getJSONArray(i)
+                                val lat = point.getString(0).toDouble()
+                                val lng = point.getString(1).toDouble()
+                                pathCoords.add(LatLng(lat, lng))
+                            }
+
+                            pathCoords.add(0, startLatLng)
+                            pathCoords.add(arrivalLatLng)
+
+                            activity?.runOnUiThread {
+                                drawPath(pathCoords)
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+                } else {
+                    response.body?.let {
+                        val errorResponse = it.string()
+                        println("Error response: $errorResponse")
+                    }
+                }
+            }
+        })
+    }
+
+    private fun drawPath(pathCoords: List<LatLng>) {
         val path = PathOverlay()
-        path.coords = listOf(
-            startLatLng,
-            arrivalLatLng
-        )
-        path.color = ContextCompat.getColor(requireContext(), R.color.red) // Use the color from colors.xml
+        path.coords = pathCoords
+        path.color = ContextCompat.getColor(requireContext(), R.color.red)
         path.map = naverMap
         path.outlineWidth = 0
         path.width = 20
 
-        // Calculate the midpoint
-        val midLat = (startLatLng.latitude + arrivalLatLng.latitude) / 2
-        val midLng = (startLatLng.longitude + arrivalLatLng.longitude) / 2
-        val midPoint = LatLng(midLat, midLng)
-
-        // Move the camera to the midpoint
+        val midPoint = pathCoords[pathCoords.size / 2]
         val cameraUpdate = CameraUpdate.scrollAndZoomTo(midPoint, 15.0)
         naverMap.moveCamera(cameraUpdate)
     }
@@ -254,7 +283,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun navigateToSearchBuildingFragment() {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, searchBuildingFragment)
+        transaction.add(R.id.main_container, searchBuildingFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -270,5 +299,33 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun moveCameraToPosition(position: LatLng) {
+        if (::naverMap.isInitialized) {
+            naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing,1000L))
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                expandModal()
+            }, 100L)
+        } else {
+            cameraPosition = position
+        }
+    }
+
+    private fun expandModal() {
+        val includedLayout = binding.includedLayout.root
+        val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun closeModal() {
+        val includedLayout = binding.includedLayout.root
+        val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 }

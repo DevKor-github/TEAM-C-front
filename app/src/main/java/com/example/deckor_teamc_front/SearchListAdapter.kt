@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SearchListAdapter(private var buildingList: List<BuildingItem>) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
+class SearchListAdapter(
+    private var buildingList: List<BuildingItem>,
+    private val itemClick: (BuildingItem) -> Unit  // 클릭 리스너를 위한 함수 타입 매개변수 추가
+) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_list_item, parent, false)
@@ -15,6 +18,7 @@ class SearchListAdapter(private var buildingList: List<BuildingItem>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val building = buildingList[position]
+        holder.itemView.setOnClickListener { itemClick(building) }  // 클릭 리스너 설정
         holder.bind(building)
     }
 
@@ -25,12 +29,10 @@ class SearchListAdapter(private var buildingList: List<BuildingItem>) : Recycler
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val buildingNameTextView: TextView = itemView.findViewById(R.id.building_name)
         private val buildingAddressTextView: TextView = itemView.findViewById(R.id.building_address)
-        private val buildingDistanceTextView: TextView = itemView.findViewById(R.id.building_distance)
 
         fun bind(building: BuildingItem) {
             buildingNameTextView.text = building.name
             buildingAddressTextView.text = building.address
-            buildingDistanceTextView.text = building.distance
         }
     }
 
@@ -40,4 +42,3 @@ class SearchListAdapter(private var buildingList: List<BuildingItem>) : Recycler
         notifyDataSetChanged()
     }
 }
-
