@@ -16,7 +16,7 @@ class InnerMapTouchHandler(
     private val container: FrameLayout,
     private val svgFileNames: List<String>,
     private val folderName: String,
-    private val viewModel: InnerMapViewModel,
+    private val viewModel: FetchDataViewModel,
     private val lifecycleOwner: LifecycleOwner // Add LifecycleOwner to observe LiveData
 ) : View.OnTouchListener {
 
