@@ -2,11 +2,9 @@ package com.example.deckor_teamc_front
 
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.launch
 

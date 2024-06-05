@@ -2,7 +2,6 @@ package com.example.deckor_teamc_front
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
 import com.example.deckor_teamc_front.databinding.ActivityMainBinding
 
 
