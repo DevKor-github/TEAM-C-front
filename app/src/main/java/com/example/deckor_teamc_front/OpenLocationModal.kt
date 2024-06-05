@@ -11,6 +11,7 @@ import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.launch
 
 fun openLocationModal(activity: FragmentActivity, place: BuildingItem) {
+
     try {
         // FragmentManager를 통해 HomeFragment를 찾거나 새로 생성
         val fragmentManager = activity.supportFragmentManager

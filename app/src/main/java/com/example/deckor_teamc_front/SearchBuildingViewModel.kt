@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,12 +12,7 @@ class SearchBuildingViewModel : ViewModel() {
     private val _buildingItems = MutableLiveData<List<BuildingItem>>()
     val buildingItems: LiveData<List<BuildingItem>> get() = _buildingItems
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://3.34.68.172:8080/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val service = retrofit.create(ApiService::class.java)
+    private val service = RetrofitClient.instance
 
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
@@ -28,8 +21,8 @@ class SearchBuildingViewModel : ViewModel() {
             service.search(keyword)
         }
 
-        call.enqueue(object : Callback<ApiResponse> {
-            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+        call.enqueue(object : Callback<ApiResponse<List<BuildingItem>>> {
+            override fun onResponse(call: Call<ApiResponse<List<BuildingItem>>>, response: Response<ApiResponse<List<BuildingItem>>>) {
                 if (response.isSuccessful) {
                     _buildingItems.value = response.body()?.data ?: emptyList()
                 } else {
@@ -37,7 +30,7 @@ class SearchBuildingViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<List<BuildingItem>>>, t: Throwable) {
                 Log.e("SearchBuildingViewModel", "Failure: ${t.message}")
             }
         })
