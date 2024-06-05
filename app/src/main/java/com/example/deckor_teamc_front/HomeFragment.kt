@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
@@ -22,6 +26,10 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -43,6 +51,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var areMarkersVisible = true
 
     private var cameraPosition: LatLng? = null
+
+    private lateinit var viewModel: FetchDataViewModel
+
+    private val markers = mutableListOf<Marker>()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -148,53 +161,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         })
 
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
-        val homeLayout = binding.root.findViewById<ConstraintLayout>(R.id.fragment_home)
-
-        marker1 = Marker().apply {
-            position = LatLng(37.586868, 127.0313414)
-            map = naverMap
-            icon = OverlayImage.fromResource(R.drawable.spot)
-        }
-
-        marker2 = Marker().apply {
-            position = LatLng(37.5843837, 127.0274333)
-            map = naverMap
-            icon = OverlayImage.fromResource(R.drawable.spot)
-        }
-
-        marker1.setOnClickListener {
-            if (selectedBuilding != 1) {
-                buildingName.text = getString(R.string.building_name2)
-                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-            selectedBuilding = 1
-            true
-        }
-
-        marker2.setOnClickListener {
-            if (selectedBuilding != 2) {
-                buildingName.text = getString(R.string.building_name)
-                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-            selectedBuilding = 2
-            true
-        }
 
         innerMapButton.setOnClickListener {
             navigateToInnerMapFragment()
             closeModal()
-
         }
+
+        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
+        observeViewModel()
+        //viewModel.fetchBuildingList()
+        // API 제공 될 때 까지 임시로 제거
+
     }
 
     private fun hideMarkers() {
-        marker1.map = null
-        marker2.map = null
+        markers.forEach { it.map = null }
     }
 
     private fun showMarkers() {
-        marker1.map = naverMap
-        marker2.map = naverMap
+        markers.forEach { it.map = naverMap }
     }
 
     private fun navigateToSearchBuildingFragment() {
@@ -256,4 +241,37 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
+
+    private fun observeViewModel() {
+        viewModel.buildingList.observe(viewLifecycleOwner, Observer { buildingList ->
+            buildingList.forEach { building ->
+                // 여기서 UI 업데이트 또는 로그 출력
+                Log.d("ExampleFragment", "Building: $building")
+                setMarker(building)
+            }
+        })
+    }
+
+    private fun setMarker(building: BuildingItem) {
+        val marker = Marker().apply {
+            position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
+            map = naverMap
+            icon = OverlayImage.fromResource(R.drawable.spot)
+        }
+
+        markers.add(marker) // 마커 리스트에 추가
+
+        marker.setOnClickListener {
+            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.building_name)
+            val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+            val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+
+            buildingName.text = building.name
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            true
+        }
+    }
+
+
+
 }
