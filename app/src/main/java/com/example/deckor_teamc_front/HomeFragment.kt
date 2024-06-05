@@ -15,7 +15,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
@@ -23,10 +22,6 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -59,6 +54,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
+            closeModal()
+        }
+
+        binding.searchRouteButton.setOnClickListener {
+            navigateToGetDirectionsFragment()
             closeModal()
         }
 
@@ -205,6 +205,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         transaction.commit()
     }
 
+    private fun navigateToGetDirectionsFragment() {
+        val getDirectionsFragment = GetDirectionsFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, getDirectionsFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     private fun navigateToInnerMapFragment() {
         val innerMapFragment = InnerMapFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -241,7 +249,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
     }
-
 
     private fun closeModal() {
         val includedLayout = binding.includedLayout.root
