@@ -148,7 +148,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         })
 
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
-        val layout1 = binding.root.findViewById<ConstraintLayout>(R.id.fragment_home)
+        val homeLayout = binding.root.findViewById<ConstraintLayout>(R.id.fragment_home)
 
         marker1 = Marker().apply {
             position = LatLng(37.586868, 127.0313414)
@@ -181,16 +181,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
 
         innerMapButton.setOnClickListener {
-            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            navigateToInnerMapFragment()
+            closeModal()
 
-            val layoutInflater = LayoutInflater.from(requireContext())
-            val layout2 = layoutInflater.inflate(R.layout.inner_maps, null)
-
-            val layout3 = layout1.findViewById<FrameLayout>(R.id.map_view)
-            val parent = layout3.parent as ViewGroup
-            val index = parent.indexOfChild(layout3)
-            parent.removeViewAt(index)
-            parent.addView(layout2, index, layout3.layoutParams)
         }
     }
 
@@ -208,6 +201,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun navigateToInnerMapFragment() {
+        val innerMapFragment = InnerMapFragment()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, innerMapFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
