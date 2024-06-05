@@ -9,6 +9,31 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FetchDataViewModel : ViewModel() {
+    private val _buildingItems = MutableLiveData<List<BuildingItem>>()
+    val buildingItems: LiveData<List<BuildingItem>> get() = _buildingItems
+
+    fun searchBuildings(keyword: String, buildingId: Int? = null) {
+        val call = if (buildingId != null) {
+            service.search(keyword, buildingId)
+        } else {
+            service.search(keyword)
+        }
+
+        call.enqueue(object : Callback<ApiResponse<List<BuildingItem>>> {
+            override fun onResponse(call: Call<ApiResponse<List<BuildingItem>>>, response: Response<ApiResponse<List<BuildingItem>>>) {
+                if (response.isSuccessful) {
+                    _buildingItems.value = response.body()?.data ?: emptyList()
+                } else {
+                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<List<BuildingItem>>>, t: Throwable) {
+                Log.e("FetchDataViewModel", "Failure: ${t.message}")
+            }
+        })
+    }
+
 
     private val _buildingList = MutableLiveData<List<BuildingItem>>()
     val buildingList: LiveData<List<BuildingItem>> get() = _buildingList
