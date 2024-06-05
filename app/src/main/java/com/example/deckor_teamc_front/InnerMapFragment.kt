@@ -77,8 +77,8 @@ class InnerMapFragment : Fragment() {
             val assetManager = requireContext().assets
             val svgFiles = assetManager.list("1floor")?.sortedWith(compareBy {
                 when (it) {
-                    "FloorBackground.svg" -> 0
-                    "Border.svg" -> 2
+                    "1floor/FloorBackground.svg" -> 0
+                    "1floor/Border.svg" -> 2
                     else -> 1
                 }
             }) ?: return

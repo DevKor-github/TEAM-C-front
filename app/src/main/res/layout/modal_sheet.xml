@@ -47,19 +47,19 @@
 
 
 
-            <!-- Drag handle for accessibility -->
+                <!-- Drag handle for accessibility -->
 
                 <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                android:id="@+id/drag_handle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                    android:id="@+id/drag_handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                <!-- Bottom sheet contents. -->
+                    <!-- Bottom sheet contents. -->
 
 
                     <TextView
@@ -237,7 +237,7 @@
 
 
 
-        </LinearLayout>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

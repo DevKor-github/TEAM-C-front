@@ -249,7 +249,4 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
-
-
-
 }
