@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class InnerMapViewModel : ViewModel() {
+class FetchDataViewModel : ViewModel() {
     private val _roomList = MutableLiveData<List<RoomList>>()
     val roomList: LiveData<List<RoomList>> get() = _roomList
 

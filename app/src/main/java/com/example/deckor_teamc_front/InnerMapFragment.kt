@@ -21,7 +21,7 @@ class InnerMapFragment : Fragment() {
 
     private val originalViews = mutableListOf<FrameLayout>()
 
-    private lateinit var viewModel: InnerMapViewModel
+    private lateinit var viewModel: FetchDataViewModel
     private var selectedBuildingId: Int = 1 // 기본값 설정 또는 실제 값으로 대체
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class InnerMapFragment : Fragment() {
     ): View {
         _binding = InnerMapContainerBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(InnerMapViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
         fetchData()
 
