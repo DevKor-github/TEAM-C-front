@@ -23,7 +23,7 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
     private var _binding: FragmentSearchBuildingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchBuildingViewModel by viewModels()
+    private val viewModel: FetchDataViewModel by viewModels()
     private lateinit var adapter: SearchListAdapter
 
     private var taggedBuildingId: Int? = null

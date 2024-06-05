@@ -15,18 +15,18 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
-import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
-import okhttp3.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -47,9 +47,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
-    private var startLatLng: LatLng? = null
-    private var arrivalLatLng: LatLng? = null
-    private var stopTracking = false
     private var cameraPosition: LatLng? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -65,10 +62,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
-        binding.searchRouteButton.setOnClickListener {
-            navigateToGetDirectionsFragment()
-        }
-
         if (!hasPermission()) {
             requestPermissions(PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
         } else {
@@ -77,6 +70,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val pinOnoffButton: ImageButton = binding.pinOnoffButton
         pinOnoffButton.setOnClickListener {
+            // 마커를 토글하는 로직 추가
             if (areMarkersVisible) {
                 hideMarkers()
             } else {
@@ -84,6 +78,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             areMarkersVisible = !areMarkersVisible
 
+            // 이미지 토글 로직은 그대로 유지
             if (isImageOneDisplayed) {
                 pinOnoffButton.setImageResource(R.drawable.pin_on_button)
             } else {
@@ -91,10 +86,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             isImageOneDisplayed = !isImageOneDisplayed
         }
-
-        startLatLng = arguments?.getParcelable("start_lat_lng")
-        arrivalLatLng = arguments?.getParcelable("arrival_lat_lng")
-        stopTracking = arguments?.getBoolean("stop_tracking") ?: false
     }
 
     private fun initMapView() {
@@ -119,21 +110,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = true
-
-        if (stopTracking) {
-            naverMap.locationTrackingMode = LocationTrackingMode.None
-        } else {
-            naverMap.locationTrackingMode = LocationTrackingMode.Follow
-        }
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
         val cameraUpdate = CameraUpdate.zoomTo(17.0)
         naverMap.moveCamera(cameraUpdate)
 
         if(cameraPosition!=null){
             moveCameraToPosition(cameraPosition!!)
+
         }
 
         val includedLayout = binding.includedLayout.root
+
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -144,20 +132,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> { }
-                    BottomSheetBehavior.STATE_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                    }
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         selectedBuilding = 0
                     }
-                    else -> { }
+                    else -> {}
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
         })
 
         val innerMapButton = includedLayout.findViewById<Button>(R.id.modal_innermap_button)
-        val layout1 = (binding.root).findViewById<ConstraintLayout>(R.id.fragment_home)
+        val homeLayout = binding.root.findViewById<ConstraintLayout>(R.id.fragment_home)
 
         marker1 = Marker().apply {
             position = LatLng(37.586868, 127.0313414)
@@ -190,20 +181,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
 
         innerMapButton.setOnClickListener {
-            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            navigateToInnerMapFragment()
+            closeModal()
 
-            val layoutInflater = LayoutInflater.from(requireContext())
-            val layout2 = layoutInflater.inflate(R.layout.inner_maps, null)
-
-            val layout3 = layout1.findViewById<FrameLayout>(R.id.map_view)
-            val parent = layout3.parent as ViewGroup
-            val index = parent.indexOfChild(layout3)
-            parent.removeViewAt(index)
-            parent.addView(layout2, index, layout3.layoutParams)
-        }
-
-        if (startLatLng != null && arrivalLatLng != null) {
-            fetchAndDrawPath(startLatLng!!, arrivalLatLng!!)
         }
     }
 
@@ -217,69 +197,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         marker2.map = naverMap
     }
 
-    private fun fetchAndDrawPath(startLatLng: LatLng, arrivalLatLng: LatLng) {
-        val client = OkHttpClient()
-        val url = "http://3.34.68.172:8080/api/outer-route?startLong=${startLatLng.longitude}&startLat=${startLatLng.latitude}&endLong=${arrivalLatLng.longitude}&endLat=${arrivalLatLng.latitude}"
-
-        val request = Request.Builder()
-            .url(url)
-            .get()
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body?.string()
-                    responseBody?.let {
-                        try {
-                            val jsonResponse = JSONObject(it)
-                            val route = jsonResponse.getJSONObject("data").getJSONArray("route")
-                            val pathCoords = mutableListOf<LatLng>()
-
-                            for (i in 0 until route.length()) {
-                                val point = route.getJSONArray(i)
-                                val lat = point.getString(0).toDouble()
-                                val lng = point.getString(1).toDouble()
-                                pathCoords.add(LatLng(lat, lng))
-                            }
-
-                            pathCoords.add(0, startLatLng)
-                            pathCoords.add(arrivalLatLng)
-
-                            activity?.runOnUiThread {
-                                drawPath(pathCoords)
-                            }
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-                    }
-                } else {
-                    response.body?.let {
-                        val errorResponse = it.string()
-                        println("Error response: $errorResponse")
-                    }
-                }
-            }
-        })
-    }
-
-    private fun drawPath(pathCoords: List<LatLng>) {
-        val path = PathOverlay()
-        path.coords = pathCoords
-        path.color = ContextCompat.getColor(requireContext(), R.color.red)
-        path.map = naverMap
-        path.outlineWidth = 0
-        path.width = 20
-
-        val midPoint = pathCoords[pathCoords.size / 2]
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(midPoint, 15.0)
-        naverMap.moveCamera(cameraUpdate)
-    }
-
     private fun navigateToSearchBuildingFragment() {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -288,10 +205,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         transaction.commit()
     }
 
-    private fun navigateToGetDirectionsFragment() {
-        val getDirectionsFragment = GetDirectionsFragment()
+    private fun navigateToInnerMapFragment() {
+        val innerMapFragment = InnerMapFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, getDirectionsFragment)
+        transaction.add(R.id.main_container, innerMapFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -302,25 +219,29 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun moveCameraToPosition(position: LatLng) {
+
         if (::naverMap.isInitialized) {
             naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing,1000L))
 
             Handler(Looper.getMainLooper()).postDelayed({
+
                 expandModal()
             }, 100L)
         } else {
             cameraPosition = position
         }
     }
-
     private fun expandModal() {
+
         val includedLayout = binding.includedLayout.root
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
     }
+
 
     private fun closeModal() {
         val includedLayout = binding.includedLayout.root
@@ -328,4 +249,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
+
+
+
 }

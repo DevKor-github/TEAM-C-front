@@ -41,6 +41,7 @@ class GetDirectionsFragment : Fragment() {
             val isStartingPoint = bundle.getBoolean("isStartingPoint")
             val latitude = bundle.getDouble("latitude")
             val longitude = bundle.getDouble("longitude")
+
             if (isStartingPoint) {
                 startingPointHint = result
                 startingPointLatLng = LatLng(latitude, longitude)
@@ -55,10 +56,6 @@ class GetDirectionsFragment : Fragment() {
                 }
             }
 
-            // Check if both points are set
-            if (startingPointLatLng != null && arrivalPointLatLng != null) {
-                navigateToHomeFragment()
-            }
         }
 
         binding.searchStartingPointBar.setOnClickListener {
@@ -127,18 +124,6 @@ class GetDirectionsFragment : Fragment() {
         }
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, getDirectionsSearchBuildingFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
-    private fun navigateToHomeFragment() {
-        val homeFragment = HomeFragment()
-        homeFragment.arguments = Bundle().apply {
-            putParcelable("startLatLng", startingPointLatLng)
-            putParcelable("arrivalLatLng", arrivalPointLatLng)
-        }
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
