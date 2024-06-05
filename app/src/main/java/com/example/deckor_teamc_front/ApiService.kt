@@ -20,7 +20,14 @@ interface ApiService {
 
     @GET("search/buildings/{buildingId}/floor/2/rooms")//임시데이터
     fun searchBuildingFloor(@Path("buildingId") buildingId: Int): Call<ApiResponse<RoomListResponse>>
+
+    @GET("allBuildings")
+    fun getAllBuildings(): Call<ApiResponse<BuildingListResponse>>
 }
+
+data class BuildingListResponse(
+    val buildingList: List<BuildingItem>
+)
 
 
 data class BuildingItem(

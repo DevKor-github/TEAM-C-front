@@ -24,6 +24,7 @@ class InnerMapFragment : Fragment() {
     private lateinit var viewModel: FetchDataViewModel
     private var selectedBuildingId: Int = 1 // 기본값 설정 또는 실제 값으로 대체
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
