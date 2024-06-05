@@ -48,10 +48,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.fragment_mypage -> {
                     supportFragmentManager.beginTransaction().replace(R.id.main_container, MypageFragment()).commit()
                     item.setIcon(R.drawable.mypage_button)
+
                     true
                 }
                 else -> false
             }
         }
     }
+
 }
