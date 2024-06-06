@@ -13,12 +13,10 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
@@ -26,10 +24,6 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -44,9 +38,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    private lateinit var marker1: Marker
-    private lateinit var marker2: Marker
-
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
@@ -56,9 +47,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private val markers = mutableListOf<Marker>()
 
+    private lateinit var selectedBuildingName: String
+    private var selectedBuildingFloor: Int? = 1
+        get() = field ?: 1
+        set(value) {
+            field = value ?: 1
+        }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        closeModal()
+
         return binding.root
     }
 
@@ -140,7 +140,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         val buildingName = includedLayout.findViewById<TextView>(R.id.building_name)
-        var selectedBuilding = 0
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -150,7 +149,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     BottomSheetBehavior.STATE_EXPANDED -> {
                     }
                     BottomSheetBehavior.STATE_HIDDEN -> {
-                        selectedBuilding = 0
                     }
                     else -> {}
                 }
@@ -199,9 +197,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun navigateToInnerMapFragment() {
-        val innerMapFragment = InnerMapFragment()
+        val innerMapFragment =
+            selectedBuildingFloor?.let { InnerMapFragment.newInstance(selectedBuildingName, it) }
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, innerMapFragment)
+        if (innerMapFragment != null) {
+            transaction.add(R.id.main_container, innerMapFragment)
+        }
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -263,10 +264,16 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         marker.setOnClickListener {
             val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.building_name)
+            val buildingClass = binding.includedLayout.root.findViewById<TextView>(R.id.building_class)
+            val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.building_address)
             val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
             val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
             buildingName.text = building.name
+            buildingClass.text = building.placeType
+            buildingAddress.text = building.address
+            selectedBuildingName = building.name
+            selectedBuildingFloor = building.floor
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }

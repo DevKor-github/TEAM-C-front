@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
+import android.widget.TextView
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.caverock.androidsvg.SVG
@@ -24,6 +25,18 @@ class InnerMapFragment : Fragment() {
     private lateinit var viewModel: FetchDataViewModel
     private var selectedBuildingId: Int = 1 // 기본값 설정 또는 실제 값으로 대체
 
+    private var selectedBuildingName: String? = null
+    private var selectedBuildingFloor: Int? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            selectedBuildingName = it.getString("selectedBuildingName")
+
+            selectedBuildingFloor = it.getInt("selectedBuildingFloor")
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +49,39 @@ class InnerMapFragment : Fragment() {
         fetchData()
 
         closeModal()
-        setupSvgFiles()
+        setupSvgFiles(1)
+
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        val buildingNameTextView = view?.findViewById<TextView>(R.id.building_name)
+        buildingNameTextView?.text = "고려대학교 서울캠퍼스 " + selectedBuildingName
+
+
+        val customScrollView = view?.findViewById<CustomScrollView>(R.id.customScrollView)
+        selectedBuildingFloor?.let { customScrollView?.setMaxNumber(it) } // 최대 숫자를 설정 (예: 7)
+
+        // Use the selectedBuildingName as needed
+        Log.d("InnerMapFragment", "Selected Building Name: $selectedBuildingName")
+
+
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(selectedBuildingName: String, selectedBuildingFloor: Int) =
+            InnerMapFragment().apply {
+                arguments = Bundle().apply {
+                    putString("selectedBuildingName", selectedBuildingName)
+                    putInt("selectedBuildingFloor", selectedBuildingFloor)
+                }
+            }
+    }
+
 
     private fun fetchData() {
         viewModel.fetchRoomList(selectedBuildingId)
@@ -69,14 +112,15 @@ class InnerMapFragment : Fragment() {
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-    private fun setupSvgFiles() {
+    private fun setupSvgFiles(floor: Int) {
         val includedLayout = binding.includedMap.root
         val container: FrameLayout = includedLayout.findViewById(R.id.frameLayoutContainer)
         val svgFileNames = mutableListOf<String>()
 
         try {
             val assetManager = requireContext().assets
-            val svgFiles = assetManager.list("1floor")?.sortedWith(compareBy {
+            val folderName = "$selectedBuildingName/$floor"
+            val svgFiles = assetManager.list(folderName)?.sortedWith(compareBy {
                 when (it) {
                     "FloorBackground.svg" -> 0
                     "Border.svg" -> 2
@@ -90,7 +134,7 @@ class InnerMapFragment : Fragment() {
                 if (fileName.endsWith(".svg")) {
                     svgFileNames.add(fileName)
 
-                    val svgInputStream = assetManager.open("1floor/$fileName")
+                    val svgInputStream = assetManager.open("$folderName/$fileName")
                     val svg = SVG.getFromInputStream(svgInputStream)
 
                     val svgImageView = SVGImageView(requireContext())
@@ -122,7 +166,7 @@ class InnerMapFragment : Fragment() {
                 context = requireContext(),
                 container = container,
                 svgFileNames = svgFileNames,
-                folderName = "1floor",
+                folderName = folderName,
                 viewModel = viewModel,
                 lifecycleOwner = viewLifecycleOwner
             )
@@ -132,4 +176,5 @@ class InnerMapFragment : Fragment() {
             e.printStackTrace()
         }
     }
+
 }
