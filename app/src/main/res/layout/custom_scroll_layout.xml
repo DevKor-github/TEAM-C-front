@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom|start"
+    android:background="@android:color/darker_gray">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="@dimen/frame_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_container_background"
+        android:clipToOutline="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp">
+
+        <com.example.deckor_teamc_front.CustomScrollView
+            android:id="@+id/customScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"/>
+    </FrameLayout>
+
+</LinearLayout>
