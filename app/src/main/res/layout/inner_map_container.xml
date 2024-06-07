@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:elevation="100dp"
+            android:elevation="5dp"
             android:background="#FDFDFD">
 
             <ImageView
@@ -25,13 +25,16 @@
                 android:layout_marginRight="20dp" />
 
             <TextView
+                android:id="@+id/building_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="고려대학교 서울캠퍼스 애기능생활관"
+                android:text="테스트 텍스트"
                 android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/dark_gray"
                 android:textSize="18sp" />
         </LinearLayout>
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -40,7 +43,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -135,10 +138,34 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/includedMap"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="bottom|start">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="@dimen/frame_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_container_background"
+                    android:clipToOutline="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="30dp">
+
+                    <com.example.deckor_teamc_front.CustomScrollView
+                        android:id="@+id/customScrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"/>
+                </FrameLayout>
+
+            </LinearLayout>
+
 
             <include
                 layout="@layout/modal_sheet"
                 android:id="@+id/includedModal" />
-        </FrameLayout>
+            </FrameLayout>
     </LinearLayout>
 </layout>
