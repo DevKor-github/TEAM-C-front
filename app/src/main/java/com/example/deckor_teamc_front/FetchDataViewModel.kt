@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.floor
 
 class FetchDataViewModel : ViewModel() {
     private val _buildingItems = MutableLiveData<List<BuildingItem>>()
@@ -78,8 +79,8 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
-    fun fetchRoomList(buildingId: Int) {
-        service.searchBuildingFloor(buildingId).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
+    fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
+        service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
             override fun onResponse(call: Call<ApiResponse<RoomListResponse>>, response: Response<ApiResponse<RoomListResponse>>) {
                 if (response.isSuccessful) {
                     _roomList.value = response.body()?.data?.roomList ?: emptyList()

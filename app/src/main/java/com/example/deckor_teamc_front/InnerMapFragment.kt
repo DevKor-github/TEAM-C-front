@@ -10,10 +10,12 @@ import android.widget.FrameLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.example.myapplication.InnerMapTouchHandler
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
@@ -29,22 +31,33 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     private var selectedBuildingId: Int? = null
     private var selectedBuildingName: String? = null
-    private var selectedBuildingFloor: Int? = null
+    private var selectedBuildingTotalFloor: Int? = null
 
     private var innermapCurrentFloor: Int? = 1
 
     // 초기 colorMap
     private var colorMap = mutableMapOf<Int, String>()
 
+    private var isScrollVisible = true
+
+    private var floorRoomList: List<RoomList> = emptyList()
+
+    private lateinit var modalView : CoordinatorLayout
+
+    private lateinit var standardBottomSheet : FrameLayout
+    private lateinit var standardBottomSheetBehavior : BottomSheetBehavior<FrameLayout>
+    private lateinit var customScrollView : CustomScrollView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             selectedBuildingName = it.getString("selectedBuildingName")
-            selectedBuildingFloor = it.getInt("selectedBuildingFloor")
+            selectedBuildingTotalFloor = it.getInt("selectedBuildingTotalFloor")
             selectedBuildingId = it.getInt("selectedBuildingId")
         }
         // JSON 파일에서 데이터 읽어오기
         readJsonAndUpdateColorMap()
+
     }
 
     override fun onCreateView(
@@ -54,68 +67,105 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         _binding = InnerMapContainerBinding.inflate(inflater, container, false)
 
+        modalView = binding.includedModal.root
+
+        standardBottomSheet = binding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+
+        customScrollView = binding.customScrollView
+
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
         fetchData()
 
         closeModal()
 
-        val imageView: ImageView = binding.includedMap.innermapMask
-
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.innermap_1_1_mask)
-        imageView.setImageBitmap(bitmap)
-
-        // 터치 핸들러 설정
-        val touchHandler = InnerMapTouchHandler(
-            context = requireContext(),
-            imageView = imageView,
-            bitmap = bitmap,
-            colorMap = colorMap
-        )
-        imageView.setOnTouchListener(touchHandler)
+        replaceInnermap()
+        replaceInnermapMask()
+        updateTouchHandler()
 
         val buildingNameTextView = binding.buildingName
         buildingNameTextView.text = "고려대학교 서울캠퍼스 " + selectedBuildingName
 
         val customScrollView = binding.customScrollView
-        selectedBuildingFloor?.let { customScrollView.setMaxNumber(it) } // 최대 숫자를 설정 (예: 7)
+        selectedBuildingTotalFloor?.let { customScrollView.setMaxNumber(it) } // 최대 숫자를 설정 (예: 7)
         customScrollView.setOnFloorSelectedListener(this)
 
         // Use the selectedBuildingName as needed
         Log.d("InnerMapFragment", "Selected Building Name: $selectedBuildingName")
-        Log.d("InnerMapFragment", "Selected Building Floor: $selectedBuildingFloor")
+        Log.d("InnerMapFragment", "Selected Building Floor: $selectedBuildingTotalFloor")
         Log.d("InnerMapFragment", "Selected Building Id: $selectedBuildingId")
+
+
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        hideScroll()
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        showScroll()
+                    }
+                    BottomSheetBehavior.STATE_SETTLING-> {
+                        hideScroll()
+                    }
+                    else -> {}
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        val pinOnoffButton: ImageButton = binding.pinOnoffButton
+        pinOnoffButton.setOnClickListener {
+            // 스크롤을 토글하는 로직 추가
+            if (isScrollVisible) {
+                hideScroll()
+                pinOnoffButton.setImageResource(R.drawable.pin_on_button)
+            } else {
+                showScroll()
+                pinOnoffButton.setImageResource(R.drawable.pin_off_button)
+            }
+        }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(selectedBuildingName: String, selectedBuildingFloor: Int, selectedBuildingId: Int) =
+        fun newInstance(selectedBuildingName: String, selectedBuildingTotalFloor: Int, selectedBuildingId: Int) =
             InnerMapFragment().apply {
                 arguments = Bundle().apply {
                     putString("selectedBuildingName", selectedBuildingName)
-                    putInt("selectedBuildingFloor", selectedBuildingFloor)
+                    putInt("selectedBuildingTotalFloor", selectedBuildingTotalFloor)
                     putInt("selectedBuildingId", selectedBuildingId)
                 }
             }
     }
 
     private fun fetchData() {
-        selectedBuildingId?.let { viewModel.fetchRoomList(it) }
+        selectedBuildingId?.let { innermapCurrentFloor?.let { it1 ->
+            viewModel.fetchRoomList(it,
+                it1
+            )
+        } }
     }
 
     private fun observeViewModel() {
         viewModel.roomList.observe(viewLifecycleOwner, Observer { roomList ->
             if (roomList.isNotEmpty()) {
                 // roomList를 로그로 출력
-                for (room in roomList) {
-                    Log.d("InnerMapFragment", "Room: $room")
-                }
+                Log.d("InnerMapFragment", "Room: $roomList")
+                floorRoomList = roomList
+                updateTouchHandler()
             } else {
                 Log.e("InnerMapFragment", "Room list is empty")
             }
@@ -140,7 +190,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             val assetManager = requireContext().assets
             Log.d("InnerMapFragment", "Asset Manager Initialized")
 
-            val inputStream: InputStream = assetManager.open("innermap_dict.json")
+            val inputStream: InputStream = assetManager.open("innermap_mask_index.json")
             Log.d("InnerMapFragment", "Opened building_data.json file")
 
             val jsonString = inputStream.bufferedReader().use { it.readText() }
@@ -175,6 +225,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     override fun onFloorSelected(floor: Int) {
         innermapCurrentFloor = floor
+        fetchData()
         readJsonAndUpdateColorMap()
         replaceInnermap()
         replaceInnermapMask()
@@ -211,14 +262,30 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     }
     private fun updateTouchHandler() {
+        Log.e("e","$floorRoomList")
         val imageView: ImageView = binding.includedMap.innermapMask
         val bitmap = BitmapFactory.decodeResource(resources, resources.getIdentifier("innermap_${selectedBuildingId}_${innermapCurrentFloor}_mask", "drawable", requireContext().packageName))
         val touchHandler = InnerMapTouchHandler(
             context = requireContext(),
             imageView = imageView,
             bitmap = bitmap,
-            colorMap = colorMap
+            colorMap = colorMap,
+            roomList = floorRoomList,
+            innerMapBinding = binding
+
         )
         imageView.setOnTouchListener(touchHandler)
     }
+
+    private fun showScroll() {
+        customScrollView.visibility = View.VISIBLE
+        isScrollVisible = true
+    }
+
+    private fun hideScroll() {
+        customScrollView.visibility = View.GONE
+        isScrollVisible = false
+    }
+
+
 }
