@@ -18,8 +18,11 @@ interface ApiService {
         @Query("building_id") buildingId: Int? = null
     ): Call<ApiResponse<List<BuildingItem>>>
 
-    @GET("search/buildings/{buildingId}/floor/2/rooms")//임시데이터
-    fun searchBuildingFloor(@Path("buildingId") buildingId: Int): Call<ApiResponse<RoomListResponse>>
+    @GET("search/buildings/{buildingId}/floor/{floor}/rooms")//임시데이터
+    fun searchBuildingFloor(
+        @Path("buildingId") buildingId: Int,
+        @Path("floor") floor: Int? = 1
+    ): Call<ApiResponse<RoomListResponse>>
 
     @GET("allBuildings")
     fun getAllBuildings(): Call<ApiResponse<BuildingListResponse>>
