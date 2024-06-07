@@ -52,8 +52,8 @@ class FetchDataViewModel : ViewModel() {
 
     private fun loadDummyData() {
         val dummyBuildings = listOf(
-            BuildingItem(1, "애기능생활관", "서울 성북구 안암로 73-15", 127.0274333,37.5843837, null, "Building"),
-            BuildingItem(2, "우당교양관", "서울 성북구 고려대로 104 105", 127.0313414,37.586868, null, "Building"),
+            BuildingItem(1, "애기능생활관", "서울 성북구 안암로 73-15", 127.0274333,37.5843837, 7, "Building"),
+            BuildingItem(2, "우당교양관", "서울 성북구 고려대로 104 105", 127.0313414,37.586868, 4, "Building"),
         )
         _buildingList.value = dummyBuildings
     }
