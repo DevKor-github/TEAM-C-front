@@ -46,14 +46,24 @@
             app:layout_constraintEnd_toStartOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toTopOf="@id/guideline_top">
+
+                <ImageView
+                    android:id="@+id/innermap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/innermap_1_1"
+                    android:translationZ="1dp"/>
+
+                <ImageView
+                    android:id="@+id/innermap_mask"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:alpha="0"/>
+
         </FrameLayout>
-        <Button
-            android:id="@+id/button_refresh"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Button"
-            tools:layout_editor_absoluteX="193dp"
-            tools:layout_editor_absoluteY="664dp"
-            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
