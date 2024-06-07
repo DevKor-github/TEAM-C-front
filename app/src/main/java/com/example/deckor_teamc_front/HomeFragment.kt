@@ -53,6 +53,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         set(value) {
             field = value ?: 1
         }
+    private var selectedBuildingId: Int? = 1
+        get() = field ?: 1
+        set(value) {
+            field = value ?: 1
+        }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -198,7 +203,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private fun navigateToInnerMapFragment() {
         val innerMapFragment =
-            selectedBuildingFloor?.let { InnerMapFragment.newInstance(selectedBuildingName, it) }
+            selectedBuildingFloor?.let { selectedBuildingId?.let { it1 ->
+                InnerMapFragment.newInstance(selectedBuildingName, it,
+                    it1
+                )
+            } }
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         if (innerMapFragment != null) {
             transaction.add(R.id.main_container, innerMapFragment)
@@ -274,6 +283,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             buildingAddress.text = building.address
             selectedBuildingName = building.name
             selectedBuildingFloor = building.floor
+            selectedBuildingId = building.id
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }

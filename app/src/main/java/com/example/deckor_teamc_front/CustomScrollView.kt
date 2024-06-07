@@ -21,9 +21,20 @@ class CustomScrollView @JvmOverloads constructor(
     private var selectedLayout: LinearLayout? = null
     private var selectedFloor: Int = 0
 
+    // 콜백 인터페이스 정의
+    interface OnFloorSelectedListener {
+        fun onFloorSelected(floor: Int)
+    }
+
+    private var onFloorSelectedListener: OnFloorSelectedListener? = null
+
     init {
         LayoutInflater.from(context).inflate(R.layout.view_custom_scroll, this, true)
         container = findViewById(R.id.container)
+    }
+
+    fun setOnFloorSelectedListener(listener: OnFloorSelectedListener) {
+        onFloorSelectedListener = listener
     }
 
     fun setMaxNumber(maxNumber: Int) {
@@ -49,6 +60,8 @@ class CustomScrollView @JvmOverloads constructor(
             // 클릭 리스너 설정
             itemLayout.setOnClickListener {
                 changeLayoutStyle(itemLayout, textView)
+                // 콜백 호출
+                onFloorSelectedListener?.onFloorSelected(i)
             }
 
             container.addView(itemLayout)
@@ -59,7 +72,7 @@ class CustomScrollView @JvmOverloads constructor(
 
         // 마지막 항목으로 스크롤
         post {
-            fullScroll(ScrollView.FOCUS_DOWN)
+            scrollTo(0, bottom)
         }
     }
 

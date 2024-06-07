@@ -166,7 +166,6 @@
             <include
                 layout="@layout/modal_sheet"
                 android:id="@+id/includedModal" />
-
             </FrameLayout>
     </LinearLayout>
 </layout>
