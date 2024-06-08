@@ -64,7 +64,7 @@ class SearchBuildingFragment : Fragment() {
 
         binding.searchListRecyclerview.adapter = adapter
 
-        viewModel.buildingItems.observe(viewLifecycleOwner, Observer { buildingItems ->
+        viewModel.buildingSearchItems.observe(viewLifecycleOwner, Observer { buildingItems ->
             adapter.setBuildingList(buildingItems)
         })
 

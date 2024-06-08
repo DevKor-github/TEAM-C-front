@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -22,6 +21,18 @@ import java.io.IOException
 import java.io.InputStream
 
 class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
+    companion object {
+        @JvmStatic
+        fun newInstance(selectedBuildingName: String, selectedBuildingTotalFloor: Int, selectedBuildingId: Int) =
+            InnerMapFragment().apply {
+                arguments = Bundle().apply {
+                    putString("selectedBuildingName", selectedBuildingName)
+                    putInt("selectedBuildingTotalFloor", selectedBuildingTotalFloor)
+                    putInt("selectedBuildingId", selectedBuildingId)
+                }
+            }
+    }
+
     private var _binding: InnerMapContainerBinding? = null
     private val binding get() = _binding!!
 
@@ -119,6 +130,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         })
 
+
         return binding.root
     }
 
@@ -137,21 +149,16 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 pinOnoffButton.setImageResource(R.drawable.pin_off_button)
             }
         }
+        binding.backToHomeButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(selectedBuildingName: String, selectedBuildingTotalFloor: Int, selectedBuildingId: Int) =
-            InnerMapFragment().apply {
-                arguments = Bundle().apply {
-                    putString("selectedBuildingName", selectedBuildingName)
-                    putInt("selectedBuildingTotalFloor", selectedBuildingTotalFloor)
-                    putInt("selectedBuildingId", selectedBuildingId)
-                }
-            }
-    }
 
     private fun fetchData() {
+
+        Log.d("aaaant", "Room: $selectedBuildingId $innermapCurrentFloor")
         selectedBuildingId?.let { innermapCurrentFloor?.let { it1 ->
             viewModel.fetchRoomList(it,
                 it1

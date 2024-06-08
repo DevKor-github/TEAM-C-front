@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchListAdapter(
-    private var buildingList: List<BuildingItem>,
-    private val itemClick: (BuildingItem) -> Unit  // 클릭 리스너를 위한 함수 타입 매개변수 추가
+    private var buildingList: List<BuildingSearchItem>,
+    private val itemClick: (BuildingSearchItem) -> Unit  // 클릭 리스너를 위한 함수 타입 매개변수 추가
 ) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,14 +30,14 @@ class SearchListAdapter(
         private val buildingNameTextView: TextView = itemView.findViewById(R.id.building_name)
         private val buildingAddressTextView: TextView = itemView.findViewById(R.id.building_address)
 
-        fun bind(building: BuildingItem) {
+        fun bind(building: BuildingSearchItem) {
             buildingNameTextView.text = building.name
             buildingAddressTextView.text = building.address
         }
     }
 
     // 새로운 건물 목록을 설정하여 RecyclerView를 업데이트하는 메서드
-    fun setBuildingList(newList: List<BuildingItem>) {
+    fun setBuildingList(newList: List<BuildingSearchItem>) {
         buildingList = newList
         notifyDataSetChanged()
     }

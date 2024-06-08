@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.launch
 
-fun openLocationModal(activity: FragmentActivity, place: BuildingItem) {
+fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
 
     try {
         // FragmentManager를 통해 HomeFragment를 찾거나 새로 생성
