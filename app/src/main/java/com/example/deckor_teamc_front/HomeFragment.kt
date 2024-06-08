@@ -172,7 +172,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
-        //viewModel.fetchBuildingList()
+        viewModel.fetchBuildingList()
         // API 제공 될 때 까지 임시로 제거
 
     }
@@ -189,7 +189,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -197,7 +197,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, getDirectionsFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -212,7 +212,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         if (innerMapFragment != null) {
             transaction.add(R.id.main_container, innerMapFragment)
         }
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -283,7 +283,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             buildingAddress.text = building.address
             selectedBuildingName = building.name
             selectedBuildingFloor = building.floor
-            selectedBuildingId = building.id
+            selectedBuildingId = building.buildingId
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }

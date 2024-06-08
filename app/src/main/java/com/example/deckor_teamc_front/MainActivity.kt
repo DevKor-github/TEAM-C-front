@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {

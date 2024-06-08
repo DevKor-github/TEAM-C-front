@@ -2,6 +2,7 @@ package com.example.deckor_teamc_front
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -9,12 +10,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet.Layout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.FragmentTransitionImpl
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
-import com.example.deckor_teamc_front.databinding.InnerMapsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.fragment.app.FragmentActivity
 
 class InnerMapTouchHandler(
     private val context: Context,
@@ -88,13 +86,46 @@ class InnerMapTouchHandler(
         }
 
 
+        // 해당하는 건물명을 가져와 길찾기 프래그먼트에 전달
+        val originalBuildingName = innerMapBinding.root.findViewById<TextView>(R.id.building_name).text.toString()
+        val modifiedBuildingName = originalBuildingName.replace(Constants.KU_PREFIX, "")
+
         val standardBottomSheet = innerMapBinding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
-        standardBottomSheet.findViewById<TextView>(R.id.building_name).text = matchingRoom?.name
+        val modifiedRoomName = modifiedBuildingName + " " + matchingRoom?.name
+
+        standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
 
         standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+
+
+
+
+        standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
+            navigateToGetDirectionsFragment(true,modifiedRoomName)
+        }
+
+        standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
+            navigateToGetDirectionsFragment(false,modifiedRoomName)
+        }
+    }
+
+
+    private fun navigateToGetDirectionsFragment(isStartingPoint: Boolean, buildingName: String) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+            }
+        }
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }
