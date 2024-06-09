@@ -156,7 +156,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>
 

@@ -104,6 +104,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             isImageOneDisplayed = !isImageOneDisplayed
         }
+
+        setHorizontalScrollViewButtonListeners()
     }
 
     private fun initMapView() {
@@ -130,12 +132,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        val cameraUpdate = CameraUpdate.zoomTo(17.0)
+        val cameraUpdate = CameraUpdate.zoomTo(16.0)
         naverMap.moveCamera(cameraUpdate)
 
         if(cameraPosition!=null){
             moveCameraToPosition(cameraPosition!!)
-
         }
 
         val includedLayout = binding.includedLayout.root
@@ -216,6 +217,38 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         transaction.commit()
     }
 
+    private fun setHorizontalScrollViewButtonListeners() {
+        val buttonIds = listOf(
+            binding.cafeButton,
+            binding.cafeteriaButton,
+            binding.convenienceStoreButton,
+            binding.readingRoomButton,
+            binding.studyRoomButton,
+            binding.restAreaButton,
+            binding.waterPurifierButton,
+            binding.printerButton,
+            binding.vendingMachineButton,
+            binding.smokingAreaButton,
+            binding.sleepingRoomButton
+        )
+
+        for (button in buttonIds) {
+            button.setOnClickListener {
+                val idString = resources.getResourceEntryName(it.id)
+                val keyword = idString.replace("_button", "").uppercase()
+                navigateToPinSearchFragment(keyword)
+            }
+        }
+    }
+
+    private fun navigateToPinSearchFragment(keyword: String) {
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword)
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, pinSearchFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -288,7 +321,4 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             true
         }
     }
-
-
-
 }
