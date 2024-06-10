@@ -66,77 +66,77 @@
 
             <ImageButton
                 android:id="@+id/cafe_button"
-                android:src="@drawable/cafe_button"
+                android:src="@drawable/button_cafe"
                 android:layout_width="62.6dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp"/>
 
             <ImageButton
                 android:id="@+id/cafeteria_button"
-                android:src="@drawable/cafeteria_button"
+                android:src="@drawable/button_cafeteria"
                 android:layout_width="62.6dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp"/>
 
             <ImageButton
-                android:id="@+id/printer_button"
-                android:src="@drawable/printer_button"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-            <ImageButton
-                android:id="@+id/purifier_button"
-                android:src="@drawable/purifier_button"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-            <ImageButton
                 android:id="@+id/convenience_store_button"
-                android:src="@drawable/convenience_store_button"
+                android:src="@drawable/button_convenience_store"
                 android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-            <ImageButton
-                android:id="@+id/rest_area_button"
-                android:src="@drawable/rest_area_button"
-                android:layout_width="83dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
                 android:id="@+id/reading_room_button"
-                android:src="@drawable/reading_room_button"
+                android:src="@drawable/button_reading_room"
                 android:layout_width="70dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
                 android:id="@+id/study_room_button"
-                android:src="@drawable/study_room_button"
+                android:src="@drawable/button_study_room"
                 android:layout_width="80dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
-                android:id="@+id/smoking_area_button"
-                android:src="@drawable/smoking_area_button"
-                android:layout_width="80dp"
+                android:id="@+id/rest_area_button"
+                android:src="@drawable/button_rest_area"
+                android:layout_width="83dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
-                android:id="@+id/vending_machine_button"
-                android:src="@drawable/vending_machine_button"
+                android:id="@+id/water_purifier_button"
+                android:src="@drawable/button_water_purifier"
                 android:layout_width="70dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
+                android:id="@+id/printer_button"
+                android:src="@drawable/button_printer"
+                android:layout_width="70dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="5dp" />
+
+            <ImageButton
+                android:id="@+id/vending_machine_button"
+                android:src="@drawable/button_vending_machine"
+                android:layout_width="70dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="5dp" />
+
+            <ImageButton
+                android:id="@+id/smoking_area_button"
+                android:src="@drawable/button_smoking_area"
+                android:layout_width="80dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="5dp" />
+
+            <ImageButton
                 android:id="@+id/sleeping_room_button"
-                android:src="@drawable/sleeping_room_button"
+                android:src="@drawable/button_sleeping_room"
                 android:layout_width="70dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
@@ -155,7 +155,6 @@
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>
