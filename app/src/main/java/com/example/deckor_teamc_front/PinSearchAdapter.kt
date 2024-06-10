@@ -30,7 +30,6 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
         fun bind(facility: FacilityItem) {
             binding.facilityName.text = facility.name
             binding.facilityOperatingStatus.text = if (facility.availability) "운영 중" else "마감"
-            // Additional binding can be done here if needed
         }
     }
 }
