@@ -18,17 +18,16 @@ class FetchDataViewModel : ViewModel() {
     private val _buildingDetailList = MutableLiveData<List<BuildingDetailItem>>()
     val buildingDetailList: LiveData<List<BuildingDetailItem>> get() = _buildingDetailList
 
-    private val _facilityList = MutableLiveData<Map<String, List<FacilityItem>>>()
-    val facilityList: LiveData<Map<String, List<FacilityItem>>> get() = _facilityList
+    private val _facilityList = MutableLiveData<Map<Int, List<FacilityItem>>>()
+    val facilityList: LiveData<Map<Int, List<FacilityItem>>> get() = _facilityList
 
     private val _roomList = MutableLiveData<List<RoomList>>()
     val roomList: LiveData<List<RoomList>> get() = _roomList
 
     private val service = RetrofitClient.instance
 
-    // 임시 데이터
+    // Temporary data
     init {
-        // 임시 데이터 설정
         loadDummyData()
     }
 
@@ -45,9 +44,6 @@ class FetchDataViewModel : ViewModel() {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
                 if (response.isSuccessful) {
                     _buildingList.value = response.body()?.data?.buildingList ?: emptyList()
-                    _buildingList.value?.forEach { building ->
-                        Log.d("FetchDataViewModel", "Building: $building")
-                    }
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -86,10 +82,6 @@ class FetchDataViewModel : ViewModel() {
             override fun onResponse(call: Call<ApiResponse<RoomListResponse>>, response: Response<ApiResponse<RoomListResponse>>) {
                 if (response.isSuccessful) {
                     _roomList.value = response.body()?.data?.roomList ?: emptyList()
-                    // 로그 출력
-                    _roomList.value?.forEach { room ->
-                        Log.d("com.example.deckor_teamc_front.FetchDataViewModel", "Room: $room")
-                    }
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -106,9 +98,6 @@ class FetchDataViewModel : ViewModel() {
             override fun onResponse(call: Call<ApiResponse<BuildingDetailListResponse>>, response: Response<ApiResponse<BuildingDetailListResponse>>) {
                 if (response.isSuccessful) {
                     _buildingDetailList.value = response.body()?.data?.buildingList ?: emptyList()
-                    _buildingDetailList.value?.forEach { building ->
-                        Log.d("FetchDataViewModel", "Building: $building")
-                    }
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -124,12 +113,10 @@ class FetchDataViewModel : ViewModel() {
         service.getFacilities(buildingId, type).enqueue(object : Callback<ApiResponse<FacilityListResponse>> {
             override fun onResponse(call: Call<ApiResponse<FacilityListResponse>>, response: Response<ApiResponse<FacilityListResponse>>) {
                 if (response.isSuccessful) {
-                    _facilityList.value = response.body()?.data?.facilities ?: emptyMap()
-                    _facilityList.value?.forEach { (floor, facilities) ->
-                        facilities.forEach { facility ->
-                            Log.d("FetchDataViewModel", "Facility: $facility on floor $floor")
-                        }
-                    }
+                    val facilities = response.body()?.data?.facilities ?: emptyMap()
+                    val updatedFacilitiesMap = _facilityList.value.orEmpty().toMutableMap()
+                    updatedFacilitiesMap[buildingId] = facilities.values.flatten()
+                    _facilityList.value = updatedFacilitiesMap
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -141,3 +128,4 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 }
+

@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,9 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var pinSearchAdapter: PinSearchAdapter
 
+    // To hold facilities for each building
+    private val facilitiesMap = mutableMapOf<Int, List<FacilityItem>>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,9 +70,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         viewModel.buildingDetailList.observe(viewLifecycleOwner, { buildingList ->
             if (buildingList.isNotEmpty()) {
-                val buildingDetailItem = buildingList[0]
                 updateMarkers(buildingList)
-                observeViewModel(buildingDetailItem)
             }
         })
         viewModel.searchFacilities(facilityType)
@@ -79,6 +81,18 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         pinSearchAdapter = PinSearchAdapter()
         binding.pinsearchIncludedLayout.pinSearchListRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.pinsearchIncludedLayout.pinSearchListRecyclerview.adapter = pinSearchAdapter
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.peekHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250f, resources.displayMetrics).toInt()
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // Handle on slide events if needed
+            }
+        })
     }
 
     private fun getFacilityNameInKorean(facilityType: String): String {
@@ -107,40 +121,34 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
-    private fun observeViewModel(building: BuildingDetailItem) {
-        viewModel.facilityList.observe(viewLifecycleOwner, { facilityMap ->
-            val facilityItems = facilityMap.values.flatten()
-            pinSearchAdapter.submitList(facilityItems)
+    private fun updateMarkers(buildingList: List<BuildingDetailItem>) {
+        markers.clear()
+        buildingList.forEach { building ->
+            viewModel.getFacilities(building.buildingId, facilityType)
+        }
 
-            markers.forEach { marker ->
-                val maxFloor = building.floor
-                var count = 0
-                for (floor in 1..maxFloor!!) {
-                    count += facilityMap[floor.toString()]?.size ?: 0
+        // Observe the facilityList to update markers once data is fetched
+        viewModel.facilityList.observe(viewLifecycleOwner, { facilityMap ->
+            facilityMap.forEach { (buildingId, facilities) ->
+                facilitiesMap[buildingId] = facilities
+                val count = facilities.size
+                val building = buildingList.find { it.buildingId == buildingId }
+                if (building != null) {
+                    addMarker(building, count)
                 }
-                val drawableResId = resources.getIdentifier("pin_${facilityType.lowercase()}", "drawable", requireContext().packageName)
-                marker.icon = OverlayImage.fromBitmap(createDrawableWithText(drawableResId, count.toString()))
+            }
+            if (::naverMap.isInitialized) {
+                showMarkersOnMap()
             }
         })
     }
 
-    private fun updateMarkers(buildingList: List<BuildingDetailItem>) {
-        markers.clear()
-        buildingList.forEach { building ->
-            addMarker(building)
-            viewModel.getFacilities(building.buildingId, facilityType)
-        }
-        if (::naverMap.isInitialized) {
-            showMarkersOnMap()
-        }
-    }
-
-    private fun addMarker(building: BuildingDetailItem) {
+    private fun addMarker(building: BuildingDetailItem, count: Int) {
         val drawableName = "pin_${facilityType.lowercase()}"
         val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
         val marker = Marker().apply {
             position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
-            icon = OverlayImage.fromResource(drawableResId)
+            icon = OverlayImage.fromBitmap(createDrawableWithText(drawableResId, count.toString()))
             tag = building.buildingId
         }
         marker.setOnClickListener {
@@ -152,7 +160,8 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
     private fun onMarkerClick(marker: Marker) {
         val buildingId = marker.tag as Int
-        viewModel.getFacilities(buildingId, facilityType)
+        val facilities = facilitiesMap[buildingId] ?: emptyList()
+        pinSearchAdapter.submitList(facilities)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
