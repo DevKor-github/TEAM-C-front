@@ -272,16 +272,21 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         Log.e("e","$floorRoomList")
         val imageView: ImageView = binding.includedMap.innermapMask
         val bitmap = BitmapFactory.decodeResource(resources, resources.getIdentifier("innermap_${selectedBuildingId}_${innermapCurrentFloor}_mask", "drawable", requireContext().packageName))
-        val touchHandler = InnerMapTouchHandler(
-            context = requireContext(),
-            imageView = imageView,
-            bitmap = bitmap,
-            colorMap = colorMap,
-            roomList = floorRoomList,
-            innerMapBinding = binding
+        try {
+            val touchHandler = InnerMapTouchHandler(
+                context = requireContext(),
+                imageView = imageView,
+                bitmap = bitmap,
+                colorMap = colorMap,
+                roomList = floorRoomList,
+                innerMapBinding = binding
 
-        )
-        imageView.setOnTouchListener(touchHandler)
+            )
+            imageView.setOnTouchListener(touchHandler)
+        }
+        catch (e: Exception ) {
+            Log.e("InnerMapFragment", "Error creating touch handler: ${e.message}")
+        }
     }
 
     private fun showScroll() {

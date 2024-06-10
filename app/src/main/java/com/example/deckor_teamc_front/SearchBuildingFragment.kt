@@ -50,7 +50,7 @@ class SearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.placeType == "BUILDING") {
+            if (buildingItem.placeType == "TAG") {
                 // 건물을 선택했을 때 태그 추가
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
@@ -72,7 +72,7 @@ class SearchBuildingFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val searchText = s.toString().trim()
+                val searchText = s.toString().trim().replace("${Constants.TAG_SUFFIX} ", "")
                 if (searchText.isNotBlank()) {
                     viewModel.searchBuildings(searchText, taggedBuildingId)
                 } else {
@@ -105,7 +105,7 @@ class SearchBuildingFragment : Fragment() {
         val tagView = LayoutInflater.from(context).inflate(R.layout.tag_item, tagContainer, false) as LinearLayout
         val tagText = tagView.findViewById<TextView>(R.id.tag_text)
         val removeButton = tagView.findViewById<ImageButton>(R.id.remove_button)
-        tagText.text = tag
+        tagText.text = tag.replace(" ${Constants.TAG_SUFFIX}", "")
 
         removeButton.setOnClickListener {
             tagContainer.removeView(tagView)
