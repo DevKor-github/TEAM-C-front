@@ -54,7 +54,7 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.placeType == "BUILDING") {
+            if (buildingItem.placeType == "TAG") {
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
@@ -112,7 +112,7 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         val tagView = LayoutInflater.from(context).inflate(R.layout.tag_item, tagContainer, false) as LinearLayout
         val tagText = tagView.findViewById<TextView>(R.id.tag_text)
         val removeButton = tagView.findViewById<ImageButton>(R.id.remove_button)
-        tagText.text = tag
+        tagText.text = tag.replace(" ${Constants.TAG_SUFFIX}", "")
 
         removeButton.setOnClickListener {
             tagContainer.removeView(tagView)

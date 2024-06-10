@@ -43,12 +43,12 @@ data class BuildingItem(
 )
 
 data class BuildingSearchItem(
-    val id: Int?,
+    val id: Int,
     val name: String,
     val address: String?,
     val longitude: Double?,
     val latitude: Double?,
-    val floor: Int?,
+    val floor: Int,
     val placeType: String
 )
 
