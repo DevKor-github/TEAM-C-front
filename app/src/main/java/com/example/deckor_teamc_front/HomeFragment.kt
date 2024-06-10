@@ -15,6 +15,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
@@ -171,9 +172,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
+        val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
+
+        modalDepartButton.setOnClickListener {
+            putBuildingDirectionsFragment(true, selectedBuildingName)
+            closeModal()
+        }
+
+        val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
+
+        modalArriveButton.setOnClickListener {
+            putBuildingDirectionsFragment(false, selectedBuildingName)
+            closeModal()
+        }
+
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
-        //viewModel.fetchBuildingList()
+        viewModel.fetchBuildingList()
         // API 제공 될 때 까지 임시로 제거
 
     }
@@ -190,7 +205,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -198,7 +213,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, getDirectionsFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -213,7 +228,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         if (innerMapFragment != null) {
             transaction.add(R.id.main_container, innerMapFragment)
         }
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -316,9 +331,39 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             buildingAddress.text = building.address
             selectedBuildingName = building.name
             selectedBuildingFloor = building.floor
-            selectedBuildingId = building.id
+            selectedBuildingId = building.buildingId
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }
     }
+
+    fun updateSelectedBuilding(id: Int) {
+        selectedBuildingId = id
+        Log.e("updateSelectedBuilding", "$selectedBuildingId")
+
+        // buildingList 중에 id가 같은 데이터를 찾아 selectedBuildingName, selectedBuildingFloor를 갱신
+        val building = viewModel.buildingList.value?.find { it.buildingId == id }
+        if (building != null) {
+            selectedBuildingName = building.name
+            selectedBuildingFloor = building.floor
+            Log.d("updateSelectedBuilding", "Selected building name: $selectedBuildingName, floor: $selectedBuildingFloor")
+        } else {
+            Log.e("updateSelectedBuilding", "Building with id $id not found")
+        }
+    }
+
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+            }
+        }
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment)
+            ?.addToBackStack("HomeFragment")
+            ?.commit()
+    }
+
 }
