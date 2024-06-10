@@ -11,28 +11,28 @@
       android:pathData="M22.321,17.5H29.187C29.461,17.5 29.682,17.721 29.682,17.995V27.485C29.682,27.759 29.461,27.98 29.187,27.98H22.321C21.591,27.98 21,27.389 21,26.659V18.821C21,18.091 21.591,17.5 22.321,17.5Z"
       android:strokeLineJoin="round"
       android:fillColor="#00000000"
-      android:strokeColor="#F85C5C"
+      android:strokeColor="#61BE41"
       android:strokeLineCap="round"/>
   <path
       android:strokeWidth="1"
       android:pathData="M29.589,25.622H22.359C21.608,25.622 21,26.117 21,26.728"
       android:strokeLineJoin="round"
       android:fillColor="#00000000"
-      android:strokeColor="#F85C5C"
+      android:strokeColor="#61BE41"
       android:strokeLineCap="round"/>
   <path
       android:strokeWidth="1"
       android:pathData="M22.214,26.854H29.456"
       android:strokeLineJoin="round"
       android:fillColor="#00000000"
-      android:strokeColor="#F85C5C"
+      android:strokeColor="#61BE41"
       android:strokeLineCap="round"/>
   <path
       android:strokeWidth="1"
       android:pathData="M28.25,17.594H27.005H26.916H25.671V20.951L26.961,19.714L28.25,20.951V17.594Z"
       android:strokeLineJoin="round"
       android:fillColor="#00000000"
-      android:strokeColor="#F85C5C"
+      android:strokeColor="#61BE41"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M41.613,19.066C41.619,20.854 43.658,22.441 45.469,22.781L45.047,23.555C43.471,23.191 41.818,22.072 41.145,20.543C40.465,22.072 38.818,23.185 37.242,23.555L36.82,22.781C38.625,22.435 40.646,20.859 40.652,19.066V18.27H41.613V19.066ZM36.422,26.531V25.77H45.961V26.531H36.422ZM55.11,17.531V27.973H54.196V22.23H51.993V21.469H54.196V17.531H55.11ZM46.953,25.453V18.492H51.817V19.254H47.879V21.422H51.36V22.172H47.879V24.691C49.789,24.685 51.02,24.633 52.45,24.375L52.555,25.137C51.037,25.383 49.766,25.453 47.75,25.453H46.953ZM65.114,17.531V27.973H64.188V17.531H65.114ZM57.204,25.383V18.527H62.161V19.301H58.13V24.586C60.157,24.586 61.487,24.527 63.051,24.246L63.145,25.02C61.528,25.307 60.157,25.377 58.048,25.383H57.204ZM76.103,22.828V23.578H71.778V24.668H74.872V27.809H67.864V24.668H70.876V23.578H66.563V22.828H76.103ZM67.771,18.504V17.789H74.872V20.227H68.72V21.27H75.095V22.008H67.806V19.547H73.946V18.504H67.771ZM68.767,27.059H73.97V25.406H68.767V27.059Z"
