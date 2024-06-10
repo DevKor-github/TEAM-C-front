@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/search_list_item_border"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="#FFFFFF"
+            android:src="@drawable/yellow_tiger_icon"/>
+
+        <TextView
+            android:id="@+id/building_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고려대학교 서울캠퍼스애기능생활관"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="47dp">
+
+        <TextView
+            android:id="@+id/building_address"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="서울 성북구 안암로 73-15"
+            android:textSize="11dp"
+            android:textColor="#B0B0B0"/>
+
+        <TextView
+            android:id="@+id/building_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="503m"
+            android:textSize="11dp"
+            android:textColor="#B0B0B0"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -9,8 +9,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FetchDataViewModel : ViewModel() {
-    private val _buildingItems = MutableLiveData<List<BuildingItem>>()
-    val buildingItems: LiveData<List<BuildingItem>> get() = _buildingItems
+    private val _buildingSearchItems = MutableLiveData<List<BuildingSearchItem>>()
+    val buildingSearchItems: LiveData<List<BuildingSearchItem>> get() = _buildingSearchItems
 
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
@@ -19,16 +19,16 @@ class FetchDataViewModel : ViewModel() {
             service.search(keyword)
         }
 
-        call.enqueue(object : Callback<ApiResponse<List<BuildingItem>>> {
-            override fun onResponse(call: Call<ApiResponse<List<BuildingItem>>>, response: Response<ApiResponse<List<BuildingItem>>>) {
+        call.enqueue(object : Callback<ApiResponse<List<BuildingSearchItem>>> {
+            override fun onResponse(call: Call<ApiResponse<List<BuildingSearchItem>>>, response: Response<ApiResponse<List<BuildingSearchItem>>>) {
                 if (response.isSuccessful) {
-                    _buildingItems.value = response.body()?.data ?: emptyList()
+                    _buildingSearchItems.value = response.body()?.data ?: emptyList()
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<List<BuildingItem>>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<List<BuildingSearchItem>>>, t: Throwable) {
                 Log.e("FetchDataViewModel", "Failure: ${t.message}")
             }
         })
@@ -38,13 +38,16 @@ class FetchDataViewModel : ViewModel() {
     private val _buildingList = MutableLiveData<List<BuildingItem>>()
     val buildingList: LiveData<List<BuildingItem>> get() = _buildingList
 
+    private val _buildingSearchList = MutableLiveData<List<BuildingSearchItem>>()
+    val buildingSearchList: LiveData<List<BuildingSearchItem>> get() = _buildingSearchList
+
     private val _roomList = MutableLiveData<List<RoomList>>()
     val roomList: LiveData<List<RoomList>> get() = _roomList
 
     private val service = RetrofitClient.instance
 
 
-    //임시데이터
+    /*임시데이터
     init {
         // 임시 데이터 설정
         loadDummyData()
@@ -57,8 +60,7 @@ class FetchDataViewModel : ViewModel() {
         )
         _buildingList.value = dummyBuildings
     }
-    //Init 부터 여기 까지 임시 데이터
-
+    */
     fun fetchBuildingList() {
         service.getAllBuildings().enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
@@ -78,8 +80,8 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
-    fun fetchRoomList(buildingId: Int) {
-        service.searchBuildingFloor(buildingId).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
+    fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
+        service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
             override fun onResponse(call: Call<ApiResponse<RoomListResponse>>, response: Response<ApiResponse<RoomListResponse>>) {
                 if (response.isSuccessful) {
                     _roomList.value = response.body()?.data?.roomList ?: emptyList()

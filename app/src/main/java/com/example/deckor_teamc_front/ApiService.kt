@@ -16,12 +16,15 @@ interface ApiService {
     fun search(
         @Query("keyword") keyword: String,
         @Query("building_id") buildingId: Int? = null
-    ): Call<ApiResponse<List<BuildingItem>>>
+    ): Call<ApiResponse<List<BuildingSearchItem>>>
 
-    @GET("search/buildings/{buildingId}/floor/2/rooms")//임시데이터
-    fun searchBuildingFloor(@Path("buildingId") buildingId: Int): Call<ApiResponse<RoomListResponse>>
+    @GET("search/buildings/{buildingId}/floor/{floor}/rooms")//임시데이터
+    fun searchBuildingFloor(
+        @Path("buildingId") buildingId: Int,
+        @Path("floor") floor: Int? = 1
+    ): Call<ApiResponse<RoomListResponse>>
 
-    @GET("allBuildings")
+    @GET("search/buildings")
     fun getAllBuildings(): Call<ApiResponse<BuildingListResponse>>
 }
 
@@ -29,14 +32,23 @@ data class BuildingListResponse(
     val buildingList: List<BuildingItem>
 )
 
-
 data class BuildingItem(
-    val id: Int?,
+    val buildingId: Int?,
     val name: String,
     val address: String?,
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int?,
+    val placeType: String
+)
+
+data class BuildingSearchItem(
+    val id: Int,
+    val name: String,
+    val address: String?,
+    val longitude: Double?,
+    val latitude: Double?,
+    val floor: Int,
     val placeType: String
 )
 

@@ -21,11 +21,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.fragment_home -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.main_container, HomeFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_container, HomeFragment(),"HomeFragment").commit()
                     item.setIcon(R.drawable.home_button)
                     true
                 }

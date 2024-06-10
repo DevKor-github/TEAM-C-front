@@ -7,7 +7,7 @@ import org.junit.Assert.*
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
- * See [testing documentation](http://innermap_dict.json.android.com/tools/testing).
+ * See [testing documentation](http://innermap_mask_index.json.android.com/tools/testing).
  */
 class ExampleUnitTest {
     @Test
