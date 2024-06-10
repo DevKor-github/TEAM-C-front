@@ -8,9 +8,11 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import com.example.deckor_teamc_front.databinding.FragmentGetDirectionsBinding
 import com.naver.maps.geometry.LatLng
@@ -29,7 +31,30 @@ class GetDirectionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentGetDirectionsBinding.inflate(inflater, container, false)
+
+        val isStartingPointAssgined = arguments?.getBoolean("isStartingPoint") ?: true
+        val buildingName = arguments?.getString("buildingName")
+
+        if (isStartingPointAssgined) {
+            startingPointHint = buildingName
+            if (buildingName != null) {
+                setHintWithStyle(binding.searchStartingPointBar, buildingName)
+            }
+        } else {
+            arrivalPointHint = buildingName
+            if (buildingName != null) {
+                setHintWithStyle(binding.searchArrivalPointBar, buildingName)
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().supportFragmentManager.popBackStack("HomeFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            }
+        })
+
         return binding.root
     }
 
@@ -67,7 +92,7 @@ class GetDirectionsFragment : Fragment() {
         }
 
         binding.backToHomeButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.popBackStack("HomeFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         binding.switchButton.setOnClickListener {
@@ -82,6 +107,7 @@ class GetDirectionsFragment : Fragment() {
         arrivalPointHint?.let {
             setHintWithStyle(binding.searchArrivalPointBar, it)
         }
+
     }
 
     private fun switchHints() {
@@ -123,7 +149,7 @@ class GetDirectionsFragment : Fragment() {
             putBoolean("isStartingPoint", isStartingPoint)
         }
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, getDirectionsSearchBuildingFragment)
+        transaction.add(R.id.main_container, getDirectionsSearchBuildingFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
