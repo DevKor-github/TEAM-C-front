@@ -6,4 +6,6 @@
     <string name="building_adress">서울 성북구 안암로 73-15</string>
     <string name="action">1</string>
     <string name="switch_label">ㄴㄴ</string>
+    <string name="KU_prefix">고려대학교 서울캠퍼스</string>
+
 </resources>
