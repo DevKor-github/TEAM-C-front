@@ -59,13 +59,7 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
             } else {
-                buildingItem.latitude?.let {
-                    buildingItem.longitude?.let { it1 ->
-                        returnToGetDirectionsFragment(buildingItem.name,
-                            it, it1
-                        )
-                    }
-                }
+                returnToGetDirectionsFragment(buildingItem.name, buildingItem.placeType, buildingItem.id)
             }
             taggedBuildingId = buildingItem.id
         }
@@ -125,12 +119,12 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         tagContainer.addView(tagView)
     }
 
-    private fun returnToGetDirectionsFragment(buildingName: String, latitude: Double, longitude: Double) {
+    private fun returnToGetDirectionsFragment(buildingName: String, placeType: String, id: Int) {
         setFragmentResult("requestKey", Bundle().apply {
-            putString("bundleKey", buildingName)
+            putString("buildingName", buildingName)
             putBoolean("isStartingPoint", isStartingPoint)
-            putDouble("latitude", latitude)
-            putDouble("longitude", longitude)
+            putString("placeType", placeType)
+            putInt("id", id)
         })
         requireActivity().supportFragmentManager.popBackStack()
     }
