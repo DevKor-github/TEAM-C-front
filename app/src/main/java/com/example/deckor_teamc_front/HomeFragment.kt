@@ -175,14 +175,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
 
         modalDepartButton.setOnClickListener {
-            putBuildingDirectionsFragment(true, selectedBuildingName)
+            putBuildingDirectionsFragment(true, selectedBuildingName, "BUILDING", selectedBuildingId)
             closeModal()
         }
 
         val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
 
         modalArriveButton.setOnClickListener {
-            putBuildingDirectionsFragment(false, selectedBuildingName)
+            putBuildingDirectionsFragment(false, selectedBuildingName, "BUILDING", selectedBuildingId)
             closeModal()
         }
 
@@ -352,11 +352,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String) {
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
         val getDirectionsFragment = GetDirectionsFragment().apply {
             arguments = Bundle().apply {
                 putBoolean("isStartingPoint", isStartingPoint)
                 putString("buildingName", buildingName)
+                putString("placeType", placeType)
+                if (id != null) {
+                    putInt("id", id)
+                }
             }
         }
         val activity = context as? FragmentActivity

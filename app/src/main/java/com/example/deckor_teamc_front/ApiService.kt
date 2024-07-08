@@ -37,6 +37,19 @@ interface ApiService {
         @Path("buildingId") buildingId: Int,
         @Query("type") type: String
     ): Call<ApiResponse<FacilityListResponse>>
+
+    @GET("routes")
+    fun getRoutes(
+        @Query("startType") startType: String,
+        @Query("startId") startId: Int? = null,
+        @Query("startLat") startLat: Double? = null,
+        @Query("startLong") startLong: Double? = null,
+        @Query("endType") endType: String,
+        @Query("endId") endId: Int? = null,
+        @Query("endLat") endLat: Double? = null,
+        @Query("endLong") endLong: Double? = null,
+        @Query("barrierFree") barrierFree: String? = null
+    ): Call<ApiResponse<RouteResponse>>
 }
 
 data class BuildingListResponse(
@@ -107,7 +120,7 @@ data class FacilityListResponse(
     val facilities: Map<String, List<FacilityItem>>
 )
 
-    data class FacilityItem(
+data class FacilityItem(
     val facilityId: Int,
     val name: String,
     val availability: Boolean,
@@ -115,4 +128,17 @@ data class FacilityListResponse(
     val latitude: Double,
     val xcoord: Int,
     val ycoord: Int
+)
+
+data class RouteResponse(
+    val duration: Int,
+    val path: List<RoutePath>
+)
+
+data class RoutePath(
+    val inOut: Boolean,
+    val buildingId: Int?,
+    val floor: Int?,
+    val route: List<List<Double>>,
+    val info: String
 )

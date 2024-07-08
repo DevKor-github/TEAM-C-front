@@ -17,19 +17,21 @@ class FetchDataViewModel : ViewModel() {
 
     private val _facilityList = MutableLiveData<Map<Int, List<FacilityItem>>>()
     val facilityList: LiveData<Map<Int, List<FacilityItem>>> get() = _facilityList
-  
+
     private val _buildingList = MutableLiveData<List<BuildingItem>>()
     val buildingList: LiveData<List<BuildingItem>> get() = _buildingList
 
     private val _buildingSearchList = MutableLiveData<List<BuildingSearchItem>>()
     val buildingSearchList: LiveData<List<BuildingSearchItem>> get() = _buildingSearchList
 
-
     private val _roomList = MutableLiveData<List<RoomList>>()
     val roomList: LiveData<List<RoomList>> get() = _roomList
 
+    private val _routeResponse = MutableLiveData<RouteResponse>()
+    val routeResponse: LiveData<RouteResponse> get() = _routeResponse
+
     private val service = RetrofitClient.instance
-  
+
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
             service.search(keyword, buildingId)
@@ -52,21 +54,6 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
-    /*임시데이터
-    init {
-        loadDummyData()
-    }
-
-    private fun loadDummyData() {
-        val dummyBuildings = listOf(
-            BuildingItem(1, "애기능생활관", "서울 성북구 안암로 73-15", 127.0274333, 37.5843837, 7, "Building"),
-            BuildingItem(2, "우당교양관", "서울 성북구 고려대로 104 105", 127.0313414, 37.586868, 4, "Building")
-        )
-        _buildingList.value = dummyBuildings
-    }
-
-    */
-
     fun fetchBuildingList() {
         service.getAllBuildings().enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
@@ -85,7 +72,6 @@ class FetchDataViewModel : ViewModel() {
 
     fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
         service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
-
             override fun onResponse(call: Call<ApiResponse<RoomListResponse>>, response: Response<ApiResponse<RoomListResponse>>) {
                 if (response.isSuccessful) {
                     _roomList.value = response.body()?.data?.roomList ?: emptyList()
@@ -134,5 +120,31 @@ class FetchDataViewModel : ViewModel() {
             }
         })
     }
-}
 
+    fun getRoutes(
+        startType: String,
+        startId: Int? = null,
+        startLat: Double? = null,
+        startLong: Double? = null,
+        endType: String,
+        endId: Int? = null,
+        endLat: Double? = null,
+        endLong: Double? = null,
+        barrierFree: String? = null
+    ) {
+        service.getRoutes(startType, startId, startLat, startLong, endType, endId, endLat, endLong, barrierFree)
+            .enqueue(object : Callback<ApiResponse<RouteResponse>> {
+                override fun onResponse(call: Call<ApiResponse<RouteResponse>>, response: Response<ApiResponse<RouteResponse>>) {
+                    if (response.isSuccessful) {
+                        _routeResponse.value = response.body()?.data
+                    } else {
+                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<RouteResponse>>, t: Throwable) {
+                    Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                }
+            })
+    }
+}
