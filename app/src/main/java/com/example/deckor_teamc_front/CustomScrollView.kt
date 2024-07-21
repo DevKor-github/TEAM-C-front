@@ -37,19 +37,20 @@ class CustomScrollView @JvmOverloads constructor(
         onFloorSelectedListener = listener
     }
 
-    fun setMaxNumber(maxNumber: Int) {
+    fun setFloors(minNumber: Int, maxNumber: Int) {
         container.removeAllViews()
-        if (maxNumber <= 1) {
+        if (minNumber >= 0 && maxNumber <= 1) {
             this.isVisible = false
             return
         } else {
             this.isVisible = true
         }
 
-        for (i in maxNumber downTo 1) {  // 역순으로 추가
+        for (i in maxNumber downTo minNumber) {
+            if (i == 0) continue // 0층은 무시
             val itemLayout = LayoutInflater.from(context).inflate(R.layout.custom_scroll_item_layout, container, false) as LinearLayout
             val textView = itemLayout.findViewById<TextView>(R.id.item_text)
-            textView.text = i.toString()
+            textView.text = if (i < 0) "B${-i}" else i.toString()
 
             // 폰트 설정
             textView.setTypeface(ResourcesCompat.getFont(context, R.font.pretendard_regular))
@@ -68,20 +69,28 @@ class CustomScrollView @JvmOverloads constructor(
         }
 
         // 레이아웃 크기 조정
-        adjustLayoutSize(maxNumber)
+        adjustLayoutSize(maxNumber - minNumber)
 
-        // 마지막 항목으로 스크롤
+        // 1층을 기본 선택 및 스크롤 위치 설정
         post {
-            scrollTo(0, bottom)
+            val itemHeight = context.resources.getDimensionPixelSize(R.dimen.item_height)
+            scrollTo(0, (maxNumber - 5) * itemHeight)
+            container.getChildAt(maxNumber - 1)?.let {
+                if (it is LinearLayout) {
+                    val textView = it.findViewById<TextView>(R.id.item_text)
+                    changeLayoutStyle(it, textView)
+                    onFloorSelectedListener?.onFloorSelected(1)
+                }
+            }
         }
     }
 
-    private fun adjustLayoutSize(maxNumber: Int) {
+    private fun adjustLayoutSize(floorCount: Int) {
         val itemHeight = context.resources.getDimensionPixelSize(R.dimen.item_height)
         val maxVisibleItems = 5
         val params = this.layoutParams
-        params.height = if (maxNumber <= maxVisibleItems) {
-            itemHeight * maxNumber
+        params.height = if (floorCount <= maxVisibleItems) {
+            itemHeight * floorCount
         } else {
             itemHeight * maxVisibleItems
         }
@@ -105,6 +114,6 @@ class CustomScrollView @JvmOverloads constructor(
 
         // 클릭된 텍스트 로그로 반환
         Log.d("CustomTextView", "Clicked text: ${textView.text}")
-        selectedFloor = textView.text.toString().toInt()
+        selectedFloor = textView.text.toString().toIntOrNull() ?: 1 // "B1"과 같은 텍스트는 무시하고 기본값으로 1 설정
     }
 }
