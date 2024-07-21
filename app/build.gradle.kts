@@ -62,4 +62,5 @@ dependencies {
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("com.caverock:androidsvg:1.4")
+    implementation("com.otaliastudios:zoomlayout:1.9.0")
 }

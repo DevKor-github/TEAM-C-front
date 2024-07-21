@@ -59,12 +59,18 @@ data class BuildingListResponse(
 data class BuildingItem(
     val buildingId: Int?,
     val name: String,
+    val imageUrl: String,
+    val detail: String,
     val address: String?,
+    val operatingTime: String,
+    val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int?,
-    val placeType: String
+    val underFloor: Int?,
+    val placeType: String  // This field seems to be missing in the JSON, verify if needed
 )
+
 
 data class BuildingSearchItem(
     val id: Int,
