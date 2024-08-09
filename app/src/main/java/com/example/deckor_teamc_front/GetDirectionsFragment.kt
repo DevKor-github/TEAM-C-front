@@ -1,6 +1,7 @@
 package com.example.deckor_teamc_front
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,17 +51,26 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         mapView.getMapAsync(this)
 
         val isStartingPointAssigned = arguments?.getBoolean("isStartingPoint") ?: true
-        val buildingName = arguments?.getString("buildingName")
+        val buildingName = arguments?.getString("buildingName") ?: "" // 기본값을 설정
+        val roomId = arguments?.getInt("placeId") ?: -1 // 기본값 -1, 실제로 존재하지 않는 ID로 설정
+        val roomType = arguments?.getString("placeType") ?: "CLASSROOM" // 기본값 설정
+
 
         if (isStartingPointAssigned) {
             startingPointHint = buildingName
             if (buildingName != null) {
                 binding.searchStartingPointBar.text = buildingName
+                startingPointId = roomId
+                startingPointPlaceType = roomType
+                Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
             }
         } else {
             arrivalPointHint = buildingName
             if (buildingName != null) {
                 binding.searchArrivalPointBar.text = buildingName
+                arrivalPointId = roomId
+                arrivalPointPlaceType = roomType
+                Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
             }
         }
 
@@ -98,7 +108,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 }
             }
 
+
             if (startingPointHint != null && arrivalPointHint != null) {
+                Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
                 getRoutes()
             }
         }

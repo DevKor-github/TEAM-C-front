@@ -16,7 +16,7 @@ interface ApiService {
     fun search(
         @Query("keyword") keyword: String,
         @Query("building_id") buildingId: Int? = null
-    ): Call<ApiResponse<List<BuildingSearchItem>>>
+    ): Call<ApiResponse<BuildingSearchResponse>>
 
     @GET("search/buildings/{buildingId}/floor/{floor}/rooms")//임시데이터
     fun searchBuildingFloor(
@@ -55,11 +55,30 @@ interface ApiService {
         @Query("endLong") endLong: Double? = null,
         @Query("barrierFree") barrierFree: String? = null
     ): Call<ApiResponse<RouteResponse>>
+
+    @GET("search/buildings/{id}/floor/{floor}/mask/{redValue}")
+    fun getMaskInfo(
+        @Path("id") id: Int,
+        @Path("floor") floor: Int,
+        @Path("redValue") redValue: Int,
+        @Query("type") type: String
+    ): Call<ApiResponse<MaskInfoResponse>>
+
+    @GET("search/place/{roomid}")
+    fun getPlaceInfo(
+        @Path("roomid") roomId: Int,
+        @Query("placeType") placeType: String
+    ): Call<ApiResponse<PlaceInfoResponse>>
 }
 
 data class BuildingListResponse(
     val list: List<BuildingItem>
 )
+
+data class BuildingSearchResponse(
+    val list: List<BuildingSearchItem>
+)
+
 
 data class BuildingItem(
     val buildingId: Int,
@@ -160,4 +179,28 @@ data class RoutePath(
     val floor: Int?,
     val route: List<List<Double>>,
     val info: String
+)
+
+data class MaskInfoResponse(
+    val placeType: String,
+    val placeId: Int
+)
+
+data class PlaceInfoResponse(
+    val type: String,
+    val id: Int,
+    val name: String,
+    val detail: String,
+    val availability: Boolean,
+    val plugAvailability: Boolean,
+    val imageUrl: String?,
+    val operatingTime: String,
+    val longitude: Double?,
+    val latitude: Double?,
+    val maskIndex: Int,
+    val bookmarked: Boolean,
+    val nextPlaceTime: String,
+    val xcoord: Int,
+    val ycoord: Int,
+    val operating: Boolean
 )
