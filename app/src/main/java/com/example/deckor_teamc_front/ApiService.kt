@@ -27,10 +27,15 @@ interface ApiService {
     @GET("search/buildings")
     fun getAllBuildings(): Call<ApiResponse<BuildingListResponse>>
 
+    @GET("search/buildings/{buildingId}")
+    fun getBuildingDetail(
+        @Path("buildingId") buildingId: Int
+    ): Call<ApiResponse<BuildingDetailItem>>
+
     @GET("search/facilities")
     fun searchFacilities(
         @Query("type") type: String
-    ): Call<ApiResponse<BuildingDetailListResponse>>
+    ): Call<ApiResponse<BuildingListResponse>>
 
     @GET("search/buildings/{buildingId}/facilities")
     fun getFacilities(
@@ -57,20 +62,41 @@ data class BuildingListResponse(
 )
 
 data class BuildingItem(
-    val buildingId: Int?,
+    val buildingId: Int,
     val name: String,
     val imageUrl: String,
     val detail: String,
     val address: String?,
-    val operatingTime: String,
+    val operatingTime:String,
     val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int?,
-    val underFloor: Int?,
+    val underFloor: Int,
     val nextBuildingTime: String,
     val facilityTypes: List<String>,
     val operating: Boolean
+)
+
+data class BuildingDetailItem(
+    val buildingId: Int,
+    val name: String,
+    val address: String?,
+    val imageUrl: String?,
+    val operatingTime: String?,
+    val details: String?,
+    val bookmarked: Boolean,
+    val existTypes: List<String>,
+    val nextBuildingTime: String,
+    val mainFacilityList: List<BuildingDetailMainFacilityList>,
+    val operating: Boolean
+)
+
+data class BuildingDetailMainFacilityList(
+    val name: String,
+    val type: String,
+    val placeId: Int,
+    val imageUrl: String?
 )
 
 
@@ -104,23 +130,6 @@ data class RoomList(
     val ycoord: Int
 )
 
-data class BuildingDetailListResponse(
-    val list: List<BuildingDetailItem>
-)
-
-data class BuildingDetailItem(
-    val buildingId: Int,
-    val name: String,
-    val address: String?,
-    val longitude: Double?,
-    val latitude: Double?,
-    val floor: Int?,
-    val imageUrl: String?,
-    val detail: String?,
-    val operatingTime: String?,
-    val needStudentCard: Boolean?
-)
-
 data class FacilityListResponse(
     val buildingId: Int,
     val buildingName: String,
@@ -132,10 +141,12 @@ data class FacilityItem(
     val facilityId: Int,
     val name: String,
     val availability: Boolean,
+    val operatingTime: String,
     val longitude: Double,
     val latitude: Double,
     val xcoord: Int,
-    val ycoord: Int
+    val ycoord: Int,
+    val operating: Boolean
 )
 
 data class RouteResponse(

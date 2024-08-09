@@ -45,16 +45,14 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
                 }
 
                 val nameTextView = includedLayout.findViewById<TextView>(R.id.building_name)
-                val typeTextView = includedLayout.findViewById<TextView>(R.id.building_class)
                 val addressTextView = includedLayout.findViewById<TextView>(R.id.building_address)
 
-                if (nameTextView == null || typeTextView == null || addressTextView == null) {
+                if (nameTextView == null || addressTextView == null) {
                     Log.e("openLocationModal", "One of the TextViews not found")
                     return@post
                 }
 
                 nameTextView.text = place.name
-                typeTextView.text = place.placeType
                 addressTextView.text = place.address
             }
         }
