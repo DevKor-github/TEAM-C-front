@@ -53,7 +53,7 @@ interface ApiService {
 }
 
 data class BuildingListResponse(
-    val buildingList: List<BuildingItem>
+    val list: List<BuildingItem>
 )
 
 data class BuildingItem(
@@ -68,7 +68,9 @@ data class BuildingItem(
     val latitude: Double?,
     val floor: Int?,
     val underFloor: Int?,
-    val placeType: String  // This field seems to be missing in the JSON, verify if needed
+    val nextBuildingTime: String,
+    val facilityTypes: List<String>,
+    val operating: Boolean
 )
 
 
@@ -103,7 +105,7 @@ data class RoomList(
 )
 
 data class BuildingDetailListResponse(
-    val buildingList: List<BuildingDetailItem>
+    val list: List<BuildingDetailItem>
 )
 
 data class BuildingDetailItem(
