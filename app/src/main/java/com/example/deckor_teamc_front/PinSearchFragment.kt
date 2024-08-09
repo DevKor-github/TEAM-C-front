@@ -68,7 +68,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         initMapView()
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
-        viewModel.buildingDetailList.observe(viewLifecycleOwner, { buildingList ->
+        viewModel.buildingList.observe(viewLifecycleOwner, { buildingList ->
             if (buildingList.isNotEmpty()) {
                 updateMarkers(buildingList)
             }
@@ -121,7 +121,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
-    private fun updateMarkers(buildingList: List<BuildingDetailItem>) {
+    private fun updateMarkers(buildingList: List<BuildingItem>) {
         markers.clear()
         buildingList.forEach { building ->
             viewModel.getFacilities(building.buildingId, facilityType)
@@ -143,7 +143,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         })
     }
 
-    private fun addMarker(building: BuildingDetailItem, count: Int) {
+    private fun addMarker(building: BuildingItem, count: Int) {
         val drawableName = "pin_${facilityType.lowercase()}"
         val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
         val marker = Marker().apply {
