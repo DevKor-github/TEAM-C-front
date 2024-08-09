@@ -99,6 +99,7 @@ data class BuildingDetailMainFacilityList(
     val imageUrl: String?
 )
 
+
 data class BuildingSearchItem(
     val id: Int,
     val name: String,
@@ -128,8 +129,6 @@ data class RoomList(
     val xcoord: Int,
     val ycoord: Int
 )
-
-
 
 data class FacilityListResponse(
     val buildingId: Int,

@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 class FetchDataViewModel : ViewModel() {
     private val _buildingSearchItems = MutableLiveData<List<BuildingSearchItem>>()
@@ -55,16 +57,20 @@ class FetchDataViewModel : ViewModel() {
     }
 
     fun fetchBuildingList() {
+        Log.d("FetchBuildingList","Done")
         service.getAllBuildings().enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
                 if (response.isSuccessful) {
                     _buildingList.value = response.body()?.data?.list ?: emptyList()
                 } else {
-                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    // 응답 실패 시, 에러 로그 출력
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("FetchDataViewModel", "Error response: $errorBody")
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse<BuildingListResponse>>, t: Throwable) {
+                // 네트워크 실패 시 로그 출력
                 Log.e("FetchDataViewModel", "Failure: ${t.message}")
             }
         })
@@ -95,8 +101,6 @@ class FetchDataViewModel : ViewModel() {
             }
         })
     }
-
-
 
     fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
         service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
