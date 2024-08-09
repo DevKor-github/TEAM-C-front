@@ -328,7 +328,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
             buildingName.text = building.name
-            buildingClass.text = building.placeType
+            buildingClass.text = building.facilityTypes.toString()
             buildingAddress.text = building.address
             selectedBuildingName = building.name
             selectedBuildingAboveFloor = building.floor
