@@ -53,18 +53,26 @@ interface ApiService {
 }
 
 data class BuildingListResponse(
-    val buildingList: List<BuildingItem>
+    val list: List<BuildingItem>
 )
 
 data class BuildingItem(
     val buildingId: Int?,
     val name: String,
+    val imageUrl: String,
+    val detail: String,
     val address: String?,
+    val operatingTime: String,
+    val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int?,
-    val placeType: String
+    val underFloor: Int?,
+    val nextBuildingTime: String,
+    val facilityTypes: List<String>,
+    val operating: Boolean
 )
+
 
 data class BuildingSearchItem(
     val id: Int,
@@ -97,7 +105,7 @@ data class RoomList(
 )
 
 data class BuildingDetailListResponse(
-    val buildingList: List<BuildingDetailItem>
+    val list: List<BuildingDetailItem>
 )
 
 data class BuildingDetailItem(

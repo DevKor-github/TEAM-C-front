@@ -49,16 +49,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private val markers = mutableListOf<Marker>()
 
     private lateinit var selectedBuildingName: String
-    private var selectedBuildingFloor: Int? = 1
-        get() = field ?: 1
-        set(value) {
-            field = value ?: 1
-        }
     private var selectedBuildingId: Int? = 1
         get() = field ?: 1
         set(value) {
             field = value ?: 1
         }
+    private var selectedBuildingAboveFloor: Int? = null
+    private var selectedBuildingUnderFloor: Int? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -218,19 +215,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun navigateToInnerMapFragment() {
-        val innerMapFragment =
-            selectedBuildingFloor?.let { selectedBuildingId?.let { it1 ->
-                InnerMapFragment.newInstance(selectedBuildingName, it,
-                    it1
-                )
-            } }
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        if (innerMapFragment != null) {
+        if (selectedBuildingAboveFloor != null && selectedBuildingUnderFloor != null && selectedBuildingId != null && selectedBuildingName != null) {
+            val innerMapFragment = InnerMapFragment.newInstance(
+                selectedBuildingName!!,
+                selectedBuildingAboveFloor!!,
+                selectedBuildingUnderFloor!!,
+                selectedBuildingId!!
+            )
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.add(R.id.main_container, innerMapFragment)
+            transaction.addToBackStack("HomeFragment")
+            transaction.commit()
+        } else {
+            Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
         }
-        transaction.addToBackStack("HomeFragment")
-        transaction.commit()
     }
+
 
     private fun setHorizontalScrollViewButtonListeners() {
         val buttonIds = listOf(
@@ -327,10 +328,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
             buildingName.text = building.name
-            buildingClass.text = building.placeType
+            buildingClass.text = building.facilityTypes.toString()
             buildingAddress.text = building.address
             selectedBuildingName = building.name
-            selectedBuildingFloor = building.floor
+            selectedBuildingAboveFloor = building.floor
+            selectedBuildingUnderFloor = building.underFloor
             selectedBuildingId = building.buildingId
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
@@ -345,8 +347,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val building = viewModel.buildingList.value?.find { it.buildingId == id }
         if (building != null) {
             selectedBuildingName = building.name
-            selectedBuildingFloor = building.floor
-            Log.d("updateSelectedBuilding", "Selected building name: $selectedBuildingName, floor: $selectedBuildingFloor")
+            selectedBuildingAboveFloor = building.floor
+            selectedBuildingUnderFloor = building.underFloor
+            Log.d("updateSelectedBuilding", "Selected building name: $selectedBuildingName")
         } else {
             Log.e("updateSelectedBuilding", "Building with id $id not found")
         }
