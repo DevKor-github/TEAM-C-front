@@ -29,7 +29,8 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
     inner class PinSearchViewHolder(private val binding: PinSearchListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(facility: FacilityItem) {
             binding.facilityName.text = facility.name
-            binding.facilityOperatingStatus.text = if (facility.availability) "운영 중" else "마감"
+            binding.facilityOperatingTime.text = facility.operatingTime
+            binding.facilityOperatingStatus.text = if (facility.operating) "운영 중" else "마감"
         }
     }
 }

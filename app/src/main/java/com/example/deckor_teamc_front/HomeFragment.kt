@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
@@ -145,8 +146,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-        val buildingName = includedLayout.findViewById<TextView>(R.id.building_name)
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -303,8 +302,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun observeViewModel() {
         viewModel.buildingList.observe(viewLifecycleOwner, Observer { buildingList ->
             buildingList.forEach { building ->
-                // 여기서 UI 업데이트 또는 로그 출력
-                Log.d("ExampleFragment", "Building: $building")
                 setMarker(building)
             }
         })
@@ -320,18 +317,39 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         markers.add(marker) // 마커 리스트에 추가
 
         marker.setOnClickListener {
-            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.building_name)
-            val buildingClass = binding.includedLayout.root.findViewById<TextView>(R.id.building_class)
-            val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.building_address)
+            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+            val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+            val buildingOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+            val buildingNextOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
             val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
             val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
             buildingName.text = building.name
-            buildingClass.text = building.placeType
             buildingAddress.text = building.address
+            if (building.operating) {
+                buildingOperating.text = "운영 중"
+            } else {
+                buildingOperating.text = "운영 종료"
+            }
+            buildingNextOperating.text = building.nextBuildingTime
             selectedBuildingName = building.name
             selectedBuildingFloor = building.floor
             selectedBuildingId = building.buildingId
+
+            val facilityTypesRecyclerView = binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+            val adapter = FacilityTypeAdapter(building.facilityTypes)
+            facilityTypesRecyclerView.adapter = adapter
+
+            buildingName.setOnClickListener {
+                selectedBuildingId?.let { id ->
+                    val fragment = BuildingDetailFragment.newInstance(id)
+                    val transaction = parentFragmentManager.beginTransaction()
+                    transaction.replace(R.id.main_container, fragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+            }
+
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }
