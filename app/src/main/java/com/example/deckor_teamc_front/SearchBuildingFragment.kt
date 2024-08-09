@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,14 +52,18 @@ class SearchBuildingFragment : Fragment() {
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
             if (buildingItem.placeType == "TAG") {
-                // 건물을 선택했을 때 태그 추가
+                // 건물 태그를 선택했을 때 태그 추가
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
-            } else {
-                // 건물이 아닌 것을 선택했을 때 OpenModal 함수 호출
+            } else if (buildingItem.placeType == "BUILDING") {
+                // 건물을 선택했을 때 OpenModal 함수 호출
                 openLocationModal(requireActivity(), buildingItem)
+            } else if (buildingItem.placeType == "CLASSROOM") {
+                // 장소을 선택했을 때 OpenModal 함수 호출
+                //TODO navigateToInnerMapFragment(buildingItem.abo)
             }
+            else Log.e("SearchBuildingFragment","No mating type")
             taggedBuildingId = buildingItem.id
         }
 
@@ -117,5 +122,21 @@ class SearchBuildingFragment : Fragment() {
         }
 
         tagContainer.addView(tagView)
+    }
+
+    private fun navigateToInnerMapFragment(selectedBuildingAboveFloor: Int,
+                                           selectedBuildingUnderFloor: Int,
+                                           selectedBuildingId: Int,
+                                           selectedBuildingName: String,
+                                           selectedRoomFloor: Int,
+                                           selectedRoomMask: Int) {
+        val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+            selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+            selectedBuildingId, selectedRoomFloor, selectedRoomMask)
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, innerMapFragment)
+        // transaction.addToBackStack("HomeFragment")
+        transaction.commit()
     }
 }

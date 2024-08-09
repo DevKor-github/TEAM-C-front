@@ -9,21 +9,26 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.FragmentActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class InnerMapTouchHandler(
     private val context: Context,
     private val imageView: ImageView,
     private val bitmap: Bitmap,
     private val colorMap: Map<Int, String>,
-    private val roomList: List<RoomList>,
-    private val innerMapBinding: InnerMapContainerBinding
+    private val innerMapBinding: InnerMapContainerBinding,
+    private val floor: Int,
+    private val id: Int,
+    private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
-    private var fileName: String? = null
+    private var fileName: String = "" // obsolete
+    private var maskIndex: Int = 0
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         event?.let {
@@ -70,74 +75,120 @@ class InnerMapTouchHandler(
                     // 픽셀 값에서 R 값을 추출
                     val redValue = (pixel shr 16) and 0xFF
 
+                    maskIndex = redValue
+
                     // 로그로 디버깅
                     Log.d("InnerMapTouchHandler", "Touched pixel at ($bitmapX, $bitmapY) with red value: $redValue")
 
                     // 딕셔너리에서 R값에 해당하는 파일명을 검색
-                    fileName = colorMap[redValue]
+                    fileName = colorMap[redValue].toString()
 
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
-                    if (fileName != null) {
-                        Toast.makeText(context, "File: $fileName", Toast.LENGTH_SHORT).show()
-                        openInnermapModal()
-                    } else {
-                        // 파일명이 존재하지 않으면 알림 메시지 표시
-                        Toast.makeText(context, "No matching file for R value: $redValue", Toast.LENGTH_SHORT).show()
-                    }
+                    openInnermapModal()
+                    replaceInnermapCallback(fileName)
                 }
             }
         }
         return true
     }
-
     private fun openInnermapModal() {
-        /*
-        roomList.forEach {
-            Log.d("InnerMapTouchHandler", "RoomList name: ${it.name}")
-        }
-        val matchingRoom = roomList.find { it.name == fileName }
-        if (matchingRoom != null) {
-            Log.d("InnerMapTouchHandler", "Matching Room: $matchingRoom")
-        } else {
-            Log.e("InnerMapTouchHandler", "No matching room found for file name: $fileName $roomList" )
-        }
-        */
-        // 임시 파일명 추후 인덱스에 해당하는 실제 건물 명으로 변경예정 + ID 값 첨부
-        val matchingRoom = fileName
-        Log.d("InnerMapTouchHandler", "Matching Room: $matchingRoom")
+        Log.d("InnerMapTouchHandler", "Matching Room: $fileName")
 
-
-        // 해당하는 건물명을 가져와 길찾기 프래그먼트에 전달
         val originalBuildingName = innerMapBinding.root.findViewById<TextView>(R.id.building_name).text.toString()
-        val modifiedBuildingName = originalBuildingName.replace(Constants.KU_PREFIX, "")
+        // val modifiedBuildingName = originalBuildingName.replace(Constants.KU_PREFIX, "")
 
         val standardBottomSheet = innerMapBinding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
-        val modifiedRoomName = modifiedBuildingName + " " + matchingRoom//?.name
+        // 첫 번째 API 호출: MaskInfo를 가져옴
+        fetchMaskInfo(id, floor, maskIndex, "CLASSROOM") { roomId ->
+            if (roomId != null) {
+                // 두 번째 API 호출: Place 정보 가져오기
+                fetchPlaceInfo(roomId) { placeName ->
+                    if (placeName != null && maskIndex != 0) {
+                        val modifiedRoomName = "$placeName"
 
-        standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
+                        standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
+                        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
+                        standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
+                        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
-        standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                        standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
+                            navigateToGetDirectionsFragment(true, modifiedRoomName, roomId, "CLASSROOM")
+                        }
 
-
-        standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
-            navigateToGetDirectionsFragment(true,modifiedRoomName)
-        }
-
-        standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
-            navigateToGetDirectionsFragment(false,modifiedRoomName)
+                        standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
+                            navigateToGetDirectionsFragment(false, modifiedRoomName, roomId, "CLASSROOM")
+                        }
+                    } else {
+                        Log.e("InnerMapTouchHandler", "Failed to fetch place name")
+                    }
+                }
+            } else {
+                Log.e("InnerMapTouchHandler", "Failed to fetch room info")
+            }
         }
     }
 
+    // 첫 번째 API 호출: MaskInfo를 가져옴
+    private fun fetchMaskInfo(id: Int, floor: Int, redValue: Int, type: String, callback: (Int?) -> Unit) {
+        RetrofitClient.instance.getMaskInfo(id, floor, redValue, type).enqueue(object : Callback<ApiResponse<MaskInfoResponse>> {
+            override fun onResponse(
+                call: Call<ApiResponse<MaskInfoResponse>>,
+                response: Response<ApiResponse<MaskInfoResponse>>
+            ) {
+                if (response.isSuccessful && response.body()?.statusCode == 0) {
+                    val roomId = response.body()?.data?.placeId
+                    Log.d("InnerMapTouchHandler", "Fetched Place ID: $roomId")
+                    callback(roomId)
+                } else {
+                    Log.e("InnerMapTouchHandler", "Failed to fetch place info: ${response.errorBody()?.string()}")
+                    callback(null)
+                }
+            }
 
-    private fun navigateToGetDirectionsFragment(isStartingPoint: Boolean, buildingName: String) {
+            override fun onFailure(call: Call<ApiResponse<MaskInfoResponse>>, t: Throwable) {
+                Log.e("InnerMapTouchHandler", "$id $floor $redValue call failed: ${t.message}")
+                callback(null)
+            }
+        })
+    }
+
+    // 두 번째 API 호출: Place 정보 가져오기
+    private fun fetchPlaceInfo(roomId: Int, callback: (String?) -> Unit) {
+        RetrofitClient.instance.getPlaceInfo(roomId, "CLASSROOM").enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
+            override fun onResponse(
+                call: Call<ApiResponse<PlaceInfoResponse>>,
+                response: Response<ApiResponse<PlaceInfoResponse>>
+            ) {
+                if (response.isSuccessful && response.body()?.statusCode == 0) {
+                    val placeName = response.body()?.data?.name
+                    Log.d("InnerMapTouchHandler", "Fetched Place Name: $placeName")
+                    callback(placeName)
+                } else {
+                    Log.e("InnerMapTouchHandler", "Failed to fetch place name: ${response.errorBody()?.string()}")
+                    callback(null)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<PlaceInfoResponse>>, t: Throwable) {
+                Log.e("InnerMapTouchHandler", "API call failed: ${t.message}")
+                callback(null)
+            }
+        })
+    }
+
+
+
+
+    private fun navigateToGetDirectionsFragment(isStartingPoint: Boolean, buildingName: String, roomId: Int, roomType: String) {
+
         val getDirectionsFragment = GetDirectionsFragment().apply {
             arguments = Bundle().apply {
                 putBoolean("isStartingPoint", isStartingPoint)
                 putString("buildingName", buildingName)
+                putInt("placeId", roomId)
+                putString("placeType", roomType)
             }
         }
         val activity = context as? FragmentActivity
@@ -146,4 +197,7 @@ class InnerMapTouchHandler(
             ?.addToBackStack(null)
             ?.commit()
     }
+
+
+
 }
