@@ -169,17 +169,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
+        val prefix = "고려대학교 서울캠퍼스"
+
+
+
         val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
 
         modalDepartButton.setOnClickListener {
-            putBuildingDirectionsFragment(true, selectedBuildingName, "BUILDING", selectedBuildingId)
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(true, cleanedBuildingName, "BUILDING", selectedBuildingId)
             closeModal()
         }
 
         val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
 
         modalArriveButton.setOnClickListener {
-            putBuildingDirectionsFragment(false, selectedBuildingName, "BUILDING", selectedBuildingId)
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(false, cleanedBuildingName, "BUILDING", selectedBuildingId)
             closeModal()
         }
 
@@ -362,7 +368,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 putString("buildingName", buildingName)
                 putString("placeType", placeType)
                 if (id != null) {
-                    putInt("id", id)
+                    putInt("placeId", id)
                 }
             }
         }

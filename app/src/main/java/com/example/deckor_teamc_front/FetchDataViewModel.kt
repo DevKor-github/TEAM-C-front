@@ -8,7 +8,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class FetchDataViewModel : ViewModel() {
     private val _buildingSearchItems = MutableLiveData<List<BuildingSearchItem>>()
@@ -41,19 +40,23 @@ class FetchDataViewModel : ViewModel() {
             service.search(keyword)
         }
 
-        call.enqueue(object : Callback<ApiResponse<List<BuildingSearchItem>>> {
-            override fun onResponse(call: Call<ApiResponse<List<BuildingSearchItem>>>, response: Response<ApiResponse<List<BuildingSearchItem>>>) {
+        call.enqueue(object : Callback<ApiResponse<BuildingSearchResponse>> {
+            override fun onResponse(
+                call: Call<ApiResponse<BuildingSearchResponse>>,
+                response: Response<ApiResponse<BuildingSearchResponse>>
+            ) {
                 if (response.isSuccessful) {
-                    _buildingSearchItems.value = response.body()?.data ?: emptyList()
+                    _buildingSearchItems.value = response.body()?.data?.list ?: emptyList()
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<List<BuildingSearchItem>>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<BuildingSearchResponse>>, t: Throwable) {
                 Log.e("FetchDataViewModel", "Failure: ${t.message}")
             }
         })
+
     }
 
     fun fetchBuildingList() {
