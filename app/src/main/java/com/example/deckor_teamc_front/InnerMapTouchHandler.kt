@@ -109,14 +109,9 @@ class InnerMapTouchHandler(
                         val modifiedRoomName = "$placeName"
 
                         standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
-                        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
+                        // standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
                         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
                         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
-
-//        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
-        standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                         standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
                             navigateToGetDirectionsFragment(true, modifiedRoomName, roomId, "CLASSROOM")
