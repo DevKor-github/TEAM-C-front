@@ -1,6 +1,8 @@
 package com.example.deckor_teamc_front
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +15,8 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.caverock.androidsvg.SVG
+import com.caverock.androidsvg.SVGParseException
 import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
@@ -23,11 +27,12 @@ import java.io.InputStream
 class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     companion object {
         @JvmStatic
-        fun newInstance(selectedBuildingName: String, selectedBuildingTotalFloor: Int, selectedBuildingId: Int) =
+        fun newInstance(selectedBuildingName: String, selectedBuildingAboveFloor: Int, selectedBuildingUnderFloor: Int, selectedBuildingId: Int) =
             InnerMapFragment().apply {
                 arguments = Bundle().apply {
                     putString("selectedBuildingName", selectedBuildingName)
-                    putInt("selectedBuildingTotalFloor", selectedBuildingTotalFloor)
+                    putInt("selectedBuildingAboveFloor", selectedBuildingAboveFloor)
+                    putInt("selectedBuildingUnderFloor", selectedBuildingUnderFloor)
                     putInt("selectedBuildingId", selectedBuildingId)
                 }
             }
@@ -42,7 +47,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     private var selectedBuildingId: Int? = null
     private var selectedBuildingName: String? = null
-    private var selectedBuildingTotalFloor: Int? = null
+    private var selectedBuildingAboveFloor: Int? = null
+    private var selectedBuildingUnderFloor: Int? = null
 
     private var innermapCurrentFloor: Int? = 1
 
@@ -63,7 +69,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         super.onCreate(savedInstanceState)
         arguments?.let {
             selectedBuildingName = it.getString("selectedBuildingName")
-            selectedBuildingTotalFloor = it.getInt("selectedBuildingTotalFloor")
+            selectedBuildingAboveFloor = it.getInt("selectedBuildingAboveFloor")
+            selectedBuildingUnderFloor = it.getInt("selectedBuildingUnderFloor")
             selectedBuildingId = it.getInt("selectedBuildingId")
         }
         // JSON 파일에서 데이터 읽어오기
@@ -75,7 +82,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = InnerMapContainerBinding.inflate(inflater, container, false)
 
         modalView = binding.includedModal.root
@@ -98,41 +104,36 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         val buildingNameTextView = binding.buildingName
         buildingNameTextView.text = "고려대학교 서울캠퍼스 " + selectedBuildingName
 
-        val customScrollView = binding.customScrollView
-        selectedBuildingTotalFloor?.let { customScrollView.setMaxNumber(it) } // 최대 숫자를 설정 (예: 7)
+        selectedBuildingAboveFloor?.let { aboveFloor ->
+            selectedBuildingUnderFloor?.let { underFloor ->
+                customScrollView.setFloors(-underFloor, aboveFloor)
+            }
+        }
         customScrollView.setOnFloorSelectedListener(this)
 
-        // Use the selectedBuildingName as needed
         Log.d("InnerMapFragment", "Selected Building Name: $selectedBuildingName")
-        Log.d("InnerMapFragment", "Selected Building Floor: $selectedBuildingTotalFloor")
+        Log.d("InnerMapFragment", "Selected Building Above Floor: $selectedBuildingAboveFloor")
+        Log.d("InnerMapFragment", "Selected Building Under Floor: $selectedBuildingUnderFloor")
         Log.d("InnerMapFragment", "Selected Building Id: $selectedBuildingId")
-
 
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        hideScroll()
-                    }
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                        showScroll()
-                    }
-                    BottomSheetBehavior.STATE_SETTLING-> {
-                        hideScroll()
-                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {}
+                    BottomSheetBehavior.STATE_EXPANDED -> hideScroll()
+                    BottomSheetBehavior.STATE_HIDDEN -> showScroll()
+                    BottomSheetBehavior.STATE_SETTLING -> hideScroll()
                     else -> {}
                 }
             }
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
-
 
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -197,38 +198,30 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             val assetManager = requireContext().assets
             Log.d("InnerMapFragment", "Asset Manager Initialized")
 
-            val inputStream: InputStream = assetManager.open("innermap_mask_index.json")
-            Log.d("InnerMapFragment", "Opened building_data.json file")
+            val inputStream: InputStream = assetManager.open("${selectedBuildingId}/${innermapCurrentFloor}/data.json")
+            Log.d("InnerMapFragment", "Opened data.json file")
 
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Log.d("InnerMapFragment", "JSON data: $jsonString")
 
-            val buildingDataType = object : TypeToken<Map<String, Map<String, List<List<Any>>>>>() {}.type
-            val buildings: Map<String, Map<String, List<List<Any>>>> = Gson().fromJson(jsonString, buildingDataType)
+            val areaDataType = object : TypeToken<List<List<Any>>>() {}.type
+            val areas: List<List<Any>> = Gson().fromJson(jsonString, areaDataType)
             Log.d("InnerMapFragment", "Parsed JSON data successfully")
 
-            if (selectedBuildingId != null && innermapCurrentFloor != null) {
-                val buildingKey = "Building $selectedBuildingId"
-                val floorKey = "Floor $innermapCurrentFloor"
-                val buildingFloors = buildings[buildingKey]
-                val areas = buildingFloors?.get(floorKey)
-                Log.d("InnerMapFragment", "Areas for $buildingKey, $floorKey: $areas")
-
-                areas?.forEach { area ->
-                    val svgFile = area[0] as String
-                    val id = (area[1] as Double).toInt() // Gson이 숫자를 Double로 파싱하기 때문에 Int로 변환
-                    colorMap[id] = svgFile
-                    Log.d("InnerMapFragment", "Added to colorMap: id=$id, svgFile=$svgFile")
-                }
-            } else {
-                Log.e("InnerMapFragment", "Building ID or current floor is null")
+            areas.forEach { area ->
+                val svgFile = area[0] as String
+                val id = (area[1] as Double).toInt() // Gson이 숫자를 Double로 파싱하기 때문에 Int로 변환
+                colorMap[id] = svgFile
+                Log.d("InnerMapFragment", "Added to colorMap: id=$id, svgFile=$svgFile")
             }
+
         } catch (e: IOException) {
             Log.e("InnerMapFragment", "Error reading JSON file: ${e.message}")
         } catch (e: Exception) {
             Log.e("InnerMapFragment", "Error parsing JSON file: ${e.message}")
         }
     }
+
 
     override fun onFloorSelected(floor: Int) {
         innermapCurrentFloor = floor
@@ -241,37 +234,59 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     private fun replaceInnermapMask() {
-        val resourceName = "innermap_${selectedBuildingId}_${innermapCurrentFloor}_mask"
-        val resourceId =
-            resources.getIdentifier(resourceName, "drawable", requireContext().packageName)
-
-        if (resourceId != 0) {
-            val bitmap = BitmapFactory.decodeResource(resources, resourceId)
+        val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
+        try {
+            // 리소스가 assets 폴더에 있는지 확인하고 로드
+            val assetManager = requireContext().assets
+            val inputStream: InputStream = assetManager.open(resourceName)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
             binding.includedMap.innermapMask.setImageBitmap(bitmap)
             Log.d("InnerMapFragment", "Bitmap replaced with resource: $resourceName")
-        } else {
+        } catch (e: IOException) {
+            e.printStackTrace()
             Log.e("InnerMapFragment", "Resource not found: $resourceName")
         }
     }
 
 
     private fun replaceInnermap() {
-        val resourceName = "innermap_${selectedBuildingId}_${innermapCurrentFloor}"
-        val resourceId =
-            resources.getIdentifier(resourceName, "drawable", requireContext().packageName)
+        val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/inner_map.svg"
+        try {
+            // 리소스가 assets 폴더에 있는지 확인하고 로드
+            val assetManager = requireContext().assets
+            val inputStream: InputStream = assetManager.open(resourceName)
+            val svg = SVG.getFromInputStream(inputStream)
+            val drawable = PictureDrawable(svg.renderToPicture())
 
-        if (resourceId != 0) {
-            binding.includedMap.innermap.setImageResource(resourceId)
+            // ImageView에 SVG 렌더링
+            binding.includedMap.innermap.setImageDrawable(drawable)
             Log.d("InnerMapFragment", "Resource replaced with: $resourceName")
-        } else {
+        } catch (e: IOException) {
+            e.printStackTrace()
             Log.e("InnerMapFragment", "Resource not found: $resourceName")
+        } catch (e: SVGParseException) {
+            e.printStackTrace()
+            Log.e("InnerMapFragment", "Error parsing SVG: ${e.message}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
         }
-
     }
+
     private fun updateTouchHandler() {
         Log.e("e","$floorRoomList")
         val imageView: ImageView = binding.includedMap.innermapMask
-        val bitmap = BitmapFactory.decodeResource(resources, resources.getIdentifier("innermap_${selectedBuildingId}_${innermapCurrentFloor}_mask", "drawable", requireContext().packageName))
+        val filePath = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
+        val assetManager = context?.assets
+
+        val bitmap: Bitmap
+
+            val inputStream = assetManager?.open(filePath)
+            bitmap = BitmapFactory.decodeStream(inputStream)
+        inputStream?.close()
+
+
+
         try {
             val touchHandler = InnerMapTouchHandler(
                 context = requireContext(),
