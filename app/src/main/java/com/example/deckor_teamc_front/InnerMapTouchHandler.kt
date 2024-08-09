@@ -97,7 +97,7 @@ class InnerMapTouchHandler(
 
         standardBottomSheet.findViewById<TextView>(R.id.building_name).text = modifiedRoomName
 
-        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
+//        standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 

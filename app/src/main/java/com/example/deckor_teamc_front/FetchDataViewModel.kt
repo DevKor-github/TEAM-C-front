@@ -12,8 +12,8 @@ class FetchDataViewModel : ViewModel() {
     private val _buildingSearchItems = MutableLiveData<List<BuildingSearchItem>>()
     val buildingSearchItems: LiveData<List<BuildingSearchItem>> get() = _buildingSearchItems
 
-    private val _buildingDetailList = MutableLiveData<List<BuildingDetailItem>>()
-    val buildingDetailList: LiveData<List<BuildingDetailItem>> get() = _buildingDetailList
+    private val _buildingDetail = MutableLiveData<BuildingDetailItem?>()
+    val buildingDetail: MutableLiveData<BuildingDetailItem?> get() = _buildingDetail
 
     private val _facilityList = MutableLiveData<Map<Int, List<FacilityItem>>>()
     val facilityList: LiveData<Map<Int, List<FacilityItem>>> get() = _facilityList
@@ -58,7 +58,7 @@ class FetchDataViewModel : ViewModel() {
         service.getAllBuildings().enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
                 if (response.isSuccessful) {
-                    _buildingList.value = response.body()?.data?.buildingList ?: emptyList()
+                    _buildingList.value = response.body()?.data?.list ?: emptyList()
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
@@ -69,6 +69,34 @@ class FetchDataViewModel : ViewModel() {
             }
         })
     }
+
+    fun fetchBuildingDetail(buildingId: Int) {
+        Log.d("FetchDataViewModel", "Starting fetch for buildingId: $buildingId")
+
+        service.getBuildingDetail(buildingId).enqueue(object : Callback<ApiResponse<BuildingDetailItem>> {
+            override fun onResponse(call: Call<ApiResponse<BuildingDetailItem>>, response: Response<ApiResponse<BuildingDetailItem>>) {
+                if (response.isSuccessful) {
+                    val buildingDetail = response.body()?.data
+                    Log.d("FetchDataViewModel", "Response: $response")
+
+                    if (buildingDetail != null) {
+                        _buildingDetail.value = buildingDetail
+                        Log.d("FetchDataViewModel", "Received building detail: $buildingDetail")
+                    } else {
+                        Log.e("FetchDataViewModel", "Received null building detail.")
+                    }
+                } else {
+                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<BuildingDetailItem>>, t: Throwable) {
+                Log.e("FetchDataViewModel", "API call failed: ${t.message}")
+            }
+        })
+    }
+
+
 
     fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
         service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
@@ -87,16 +115,16 @@ class FetchDataViewModel : ViewModel() {
     }
 
     fun searchFacilities(type: String) {
-        service.searchFacilities(type).enqueue(object : Callback<ApiResponse<BuildingDetailListResponse>> {
-            override fun onResponse(call: Call<ApiResponse<BuildingDetailListResponse>>, response: Response<ApiResponse<BuildingDetailListResponse>>) {
+        service.searchFacilities(type).enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
+            override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
                 if (response.isSuccessful) {
-                    _buildingDetailList.value = response.body()?.data?.buildingList ?: emptyList()
+                    _buildingList.value = response.body()?.data?.list ?: emptyList()
                 } else {
                     Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<BuildingDetailListResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<BuildingListResponse>>, t: Throwable) {
                 Log.e("FetchDataViewModel", "Failure: ${t.message}")
             }
         })
