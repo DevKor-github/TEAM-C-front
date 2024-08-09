@@ -63,4 +63,6 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("com.caverock:androidsvg:1.4")
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.otaliastudios:zoomlayout:1.9.0")
+
 }
