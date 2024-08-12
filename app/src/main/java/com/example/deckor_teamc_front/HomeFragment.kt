@@ -199,6 +199,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         super.onPause()
         // 화면이 꺼질 때 실행하고 싶은 함수 호출
         closeModal()
+        Log.d("MyFragment", "Screen is turned off, function executed.")
     }
 
     private fun hideMarkers() {
