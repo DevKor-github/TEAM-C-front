@@ -223,6 +223,12 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         _binding = null
     }
 
+    override fun onPause() {
+        super.onPause()
+        // 화면이 꺼질 때 실행하고 싶은 함수 호출
+        closeModal()
+    }
+
     private fun closeModal() {
         val includedLayout = binding.includedModal.root
         val standardBottomSheet =
