@@ -145,8 +145,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
 
+        val routeView = binding.includedMap.routeView
 
-        extractCoordinatesForCurrentFloor(searchedRoute, innermapCurrentFloor)
+        drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
 
 
         Log.e("InnerMapFragment","${innermapCurrentFloor} Floor")
@@ -432,23 +433,32 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         isScrollVisible = false
     }
 
-    fun extractCoordinatesForCurrentFloor(searchedRoute: RouteResponse?, innermapCurrentFloor: Int) {
+    fun drawRouteForCurrentFloor(
+        routeView: RouteView,
+        searchedRoute: RouteResponse?,
+        innermapCurrentFloor: Int
+    ) {
         searchedRoute?.let { routeResponse ->
             // 현재 층과 일치하는 경로만 필터링
             val matchingRoutes = routeResponse.path.filter { it.floor == innermapCurrentFloor }
 
             // 필터링된 경로에서 좌표를 추출하여 튜플로 저장
             val coordinates = matchingRoutes.flatMap { route ->
-                route.route.map { Pair(it[0], it[1]) }
+                route.route.map { Pair(it[0].toFloat(), it[1].toFloat()) }
             }
 
             // 디버깅을 위한 출력
             Log.d("RouteDebug", "Coordinates for floor $innermapCurrentFloor: $coordinates")
+
+            // 루트 좌표를 설정하여 그리기 (비율 조정 포함)
+            routeView.setRouteCoordinates(coordinates)
         } ?: run {
             // 예외 처리 또는 로그
             Log.e("RouteDebug", "searchedRoute is null")
         }
     }
+
+
 
 
 
