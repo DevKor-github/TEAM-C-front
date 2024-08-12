@@ -195,6 +195,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        // 화면이 꺼질 때 실행하고 싶은 함수 호출
+        closeModal()
+    }
+
     private fun hideMarkers() {
         markers.forEach { it.map = null }
     }
