@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -207,4 +206,10 @@ class FetchDataViewModel : ViewModel() {
                 }
             })
     }
+
+    // RouteResponse를 업데이트할 때 사용하는 메서드
+    fun updateSplitedRoute(route: RouteResponse) {
+        DirectionSearchRouteDataHolder.splitedRoute = route
+    }
+
 }

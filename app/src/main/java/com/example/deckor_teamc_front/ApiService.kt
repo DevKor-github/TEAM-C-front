@@ -1,5 +1,7 @@
 package com.example.deckor_teamc_front
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
