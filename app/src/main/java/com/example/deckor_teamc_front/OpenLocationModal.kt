@@ -44,8 +44,8 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
                     return@post
                 }
 
-                val nameTextView = includedLayout.findViewById<TextView>(R.id.building_name)
-                val addressTextView = includedLayout.findViewById<TextView>(R.id.building_address)
+                val nameTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_name)
+                val addressTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_address)
 
                 if (nameTextView == null || addressTextView == null) {
                     Log.e("openLocationModal", "One of the TextViews not found")
