@@ -122,7 +122,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         }
 
         binding.backToHomeButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack("HomeFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
         binding.switchButton.setOnClickListener {
