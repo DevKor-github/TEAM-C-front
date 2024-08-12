@@ -40,6 +40,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private var naverMap: NaverMap? = null
     private var pendingRouteResponse: RouteResponse? = null
 
+    private val pathOverlays = mutableListOf<PathOverlay>()
+    private val markers = mutableListOf<Marker>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,11 +77,6 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                requireActivity().supportFragmentManager.popBackStack("HomeFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            }
-        })
 
         return binding.root
     }
@@ -212,20 +210,24 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             return
         }
 
+        removeAllOverlays()
+
         val coords = routeResponse.path.filter { !it.inOut }
             .flatMap { it.route }
             .map { LatLng(it[0], it[1]) }
 
         if (coords.isNotEmpty()) {
-            val path = PathOverlay()
-            path.coords = coords
-            path.color = ContextCompat.getColor(requireContext(), R.color.red)
-//            path.patternImage = OverlayImage.fromResource(R.drawable.button_switch)
-//            path.patternInterval = 50
-            path.width = 20
-            path.outlineWidth = 5
-            path.outlineColor = ContextCompat.getColor(requireContext(), R.color.red)
-            path.map = naverMap
+            val path = PathOverlay().apply {
+                this.coords = coords
+                this.color = ContextCompat.getColor(requireContext(), R.color.red)
+                this.width = 20
+                this.outlineWidth = 5
+                this.outlineColor = ContextCompat.getColor(requireContext(), R.color.red)
+                this.map = naverMap
+            }
+
+            // PathOverlay를 리스트에 추가
+            pathOverlays.add(path)
 
             val startLatLng = coords.first()
             val endLatLng = coords.last()
@@ -242,6 +244,10 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 map = naverMap
             }
 
+            // Marker를 리스트에 추가
+            markers.add(startMarker)
+            markers.add(endMarker)
+
             val bounds = LatLngBounds.Builder()
                 .include(startLatLng)
                 .include(endLatLng)
@@ -251,6 +257,19 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             naverMap?.moveCamera(cameraUpdate)
         }
     }
+
+
+    private fun removeAllOverlays() {
+        // 저장된 PathOverlay 제거
+        pathOverlays.forEach { it.map = null }
+        pathOverlays.clear()
+
+        // 저장된 Marker 제거
+        markers.forEach { it.map = null }
+        markers.clear()
+    }
+
+
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map
