@@ -86,6 +86,7 @@ class InnerMapTouchHandler(
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
                     openInnermapModal()
                     replaceInnermapCallback(fileName)
+                    Log.e("InnerMapTouchHandler","Replace callback")
                 }
             }
         }

@@ -33,8 +33,8 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private var arrivalPointHint: String? = null
     private var startingPointPlaceType: String? = null
     private var arrivalPointPlaceType: String? = null
-    private var startingPointId: Int? = null
-    private var arrivalPointId: Int? = null
+    private var startingPointId: Int = 0
+    private var arrivalPointId: Int = 0
 
     private lateinit var mapView: MapView
     private var naverMap: NaverMap? = null
@@ -210,6 +210,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             return
         }
 
+        // 모든 오버레이 및 마커 제거
         removeAllOverlays()
 
         val coords = routeResponse.path.filter { !it.inOut }
@@ -217,6 +218,41 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             .map { LatLng(it[0], it[1]) }
 
         if (coords.isNotEmpty()) {
+            val startLatLng = coords.first()
+            val endLatLng = coords.last()
+
+            // 앞쪽 경로와 뒤쪽 경로를 분할
+            val (startRoute, endRoute) = splitRouteByInOut(routeResponse)
+
+            // Start Marker 설정
+            val startMarker = Marker().apply {
+                position = startLatLng
+                icon = OverlayImage.fromResource(R.drawable.icon_start_point)
+                map = naverMap
+                if (startingPointPlaceType != "BUILDING") {
+                    setOnClickListener {
+                        navigateToInnerMapFragment(startingPointId, startRoute)
+                        true
+                    }
+                }
+            }
+            markers.add(startMarker) // Marker 리스트에 추가
+
+            // End Marker 설정
+            val endMarker = Marker().apply {
+                position = endLatLng
+                icon = OverlayImage.fromResource(R.drawable.icon_arrive_point)
+                map = naverMap
+                if (arrivalPointPlaceType != "BUILDING") {
+                    setOnClickListener {
+                        navigateToInnerMapFragment(arrivalPointId, endRoute)
+                        true
+                    }
+                }
+            }
+            markers.add(endMarker) // Marker 리스트에 추가
+
+            // PathOverlay 생성 및 지도에 추가
             val path = PathOverlay().apply {
                 this.coords = coords
                 this.color = ContextCompat.getColor(requireContext(), R.color.red)
@@ -225,29 +261,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 this.outlineColor = ContextCompat.getColor(requireContext(), R.color.red)
                 this.map = naverMap
             }
+            pathOverlays.add(path) // PathOverlay 리스트에 추가
 
-            // PathOverlay를 리스트에 추가
-            pathOverlays.add(path)
-
-            val startLatLng = coords.first()
-            val endLatLng = coords.last()
-
-            val startMarker = Marker().apply {
-                position = startLatLng
-                icon = OverlayImage.fromResource(R.drawable.icon_start_point)
-                map = naverMap
-            }
-
-            val endMarker = Marker().apply {
-                position = endLatLng
-                icon = OverlayImage.fromResource(R.drawable.icon_arrive_point)
-                map = naverMap
-            }
-
-            // Marker를 리스트에 추가
-            markers.add(startMarker)
-            markers.add(endMarker)
-
+            // 카메라 업데이트
             val bounds = LatLngBounds.Builder()
                 .include(startLatLng)
                 .include(endLatLng)
@@ -257,6 +273,63 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             naverMap?.moveCamera(cameraUpdate)
         }
     }
+
+
+    private fun splitRouteByInOut(routeResponse: RouteResponse): Pair<RouteResponse, RouteResponse> {
+        // inOut이 false인 첫 번째 경로를 찾음
+        val splitIndex = routeResponse.path.indexOfFirst { !it.inOut }
+
+        if (splitIndex == -1) {
+            // 만약 inOut이 false인 경로가 없으면 전체 루트를 반환
+            return Pair(routeResponse, routeResponse)
+        }
+
+        // 앞쪽 경로 (시작 루트)
+        val startRoute = routeResponse.copy(path = routeResponse.path.take(splitIndex + 1))
+
+        // 뒤쪽 경로 (끝 루트)
+        val endRoute = routeResponse.copy(path = routeResponse.path.drop(splitIndex + 1))
+
+        return Pair(startRoute, endRoute)
+    }
+
+
+
+    private fun navigateToInnerMapFragment(roomId: Int, route: RouteResponse) {
+        viewModel.updateSplitedRoute(route)  // RouteResponse를 ViewModel에 저장
+
+        viewModel.fetchPlaceInfo(roomId, "CLASSROOM") { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
+
+                if (buildingItem != null) {
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask, true
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
+        }
+    }
+
+
 
 
     private fun removeAllOverlays() {

@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.compose.ui.graphics.Color
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
@@ -28,7 +27,12 @@ import java.io.InputStream
 class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     companion object {
         @JvmStatic
-        fun newInstance(selectedBuildingName: String, selectedBuildingAboveFloor: Int, selectedBuildingUnderFloor: Int, selectedBuildingId: Int) =
+        fun newInstance(
+            selectedBuildingName: String,
+            selectedBuildingAboveFloor: Int,
+            selectedBuildingUnderFloor: Int,
+            selectedBuildingId: Int
+        ) =
             InnerMapFragment().apply {
                 arguments = Bundle().apply {
                     putString("selectedBuildingName", selectedBuildingName)
@@ -37,13 +41,17 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     putInt("selectedBuildingId", selectedBuildingId)
                 }
             }
+
         @JvmStatic
-        fun newInstanceFromSearch(selectedBuildingName: String,
-                                  selectedBuildingAboveFloor: Int,
-                                  selectedBuildingUnderFloor: Int,
-                                  selectedBuildingId: Int,
-                                  selectedRoomFloor: Int,
-                                  selectedRoomMask: Int) =
+        fun newInstanceFromSearch(
+            selectedBuildingName: String,
+            selectedBuildingAboveFloor: Int,
+            selectedBuildingUnderFloor: Int,
+            selectedBuildingId: Int,
+            selectedRoomFloor: Int,
+            selectedRoomMask: Int,
+            hasDirection: Boolean
+        ) =
             InnerMapFragment().apply {
                 arguments = Bundle().apply {
                     putString("selectedBuildingName", selectedBuildingName)
@@ -52,9 +60,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     putInt("selectedBuildingId", selectedBuildingId)
                     putInt("selectedRoomFloor", selectedRoomFloor)
                     putInt("selectedRoomMask", selectedRoomMask)
+                    putBoolean("hasDirection", hasDirection)
                 }
             }
-
     }
 
     private var _binding: InnerMapContainerBinding? = null
@@ -83,7 +91,11 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private lateinit var customScrollView : CustomScrollView
 
     private var searchedFloor : Int = 1
-    private var searchedMask : Int = 1
+    private var searchedMask : Int = 0
+
+    private var searchedRoute : RouteResponse? = null
+
+    private var hasDirection : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,13 +108,15 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             searchedFloor = it.getInt("selectedRoomFloor")
             searchedMask = it.getInt("selectedRoomMask")
 
+            hasDirection = it.getBoolean("hasDirection")
 
             if (searchedFloor != 0) innermapCurrentFloor = searchedFloor
-            Log.e("kkkkk","kkkkk $innermapCurrentFloor")
 
         }
         // JSON 파일에서 데이터 읽어오기
         readJsonAndUpdateColorMap()
+
+
 
     }
 
@@ -122,22 +136,27 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
 
-        /*
+        if (hasDirection) {
+            try {
+                searchedRoute = DirectionSearchRouteDataHolder.splitedRoute
+                Log.e("InnerMapFragment", "searchedRoute is set successfully ${searchedRoute}")
+            } catch (e: UninitializedPropertyAccessException) {
+                Log.e("InnerMapFragment", "splitedRoute is not initialized: ${e.message}")
+            }
+        }
 
-        fetchData()
 
-        closeModal()
-
-        replaceInnermap()
-        replaceInnermapMask()
-        updateTouchHandler()
-
-
-         */
+        extractCoordinatesForCurrentFloor(searchedRoute, innermapCurrentFloor)
 
 
         Log.e("InnerMapFragment","${innermapCurrentFloor} Floor")
         onFloorSelected(innermapCurrentFloor)
+
+        val layerName = colorMap[searchedMask] // 선택된 마스크를 레이어명으로 변환
+        if (layerName != null) {
+            Log.d("InnerMapFragment", "Filename for id $searchedMask: $layerName")
+            replaceInnermap(layerName) // 검색에서 진입 할 시 장소의 색상을 변경하는 로직
+        }
 
 
         val buildingNameTextView = binding.buildingName
@@ -297,6 +316,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     fun replaceInnermap(groupIdToChange: String? = null) {
+        if (groupIdToChange != null)
+            Log.e("1","groupIdToChange 1")
+        else
+            Log.e("1","groupIdToChange 0")
         val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/inner_map.svg"
         try {
             // 리소스가 assets 폴더에 있는지 확인하고 로드
@@ -326,6 +349,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             e.printStackTrace()
             Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
         }
+
+
     }
 
     private fun changeElementFillColor(svgContent: String, elementId: String): String {
@@ -406,6 +431,26 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         customScrollView.visibility = View.GONE
         isScrollVisible = false
     }
+
+    fun extractCoordinatesForCurrentFloor(searchedRoute: RouteResponse?, innermapCurrentFloor: Int) {
+        searchedRoute?.let { routeResponse ->
+            // 현재 층과 일치하는 경로만 필터링
+            val matchingRoutes = routeResponse.path.filter { it.floor == innermapCurrentFloor }
+
+            // 필터링된 경로에서 좌표를 추출하여 튜플로 저장
+            val coordinates = matchingRoutes.flatMap { route ->
+                route.route.map { Pair(it[0], it[1]) }
+            }
+
+            // 디버깅을 위한 출력
+            Log.d("RouteDebug", "Coordinates for floor $innermapCurrentFloor: $coordinates")
+        } ?: run {
+            // 예외 처리 또는 로그
+            Log.e("RouteDebug", "searchedRoute is null")
+        }
+    }
+
+
 
 
 }
