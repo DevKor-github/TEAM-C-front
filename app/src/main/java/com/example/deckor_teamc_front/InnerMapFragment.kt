@@ -334,7 +334,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 changeElementFillColor(svgContent, it)
             } ?: svgContent
 
-            val svg = SVG.getFromString(modifiedSvgContent)
+            // SVG 내용에서 글꼴 변경
+            val updatedSvgContent = replaceFontInSvg(modifiedSvgContent, "나눔스퀘어 네오", "extrabold")
+
+            val svg = SVG.getFromString(updatedSvgContent)
+            // **여기서 SVGExternalFileResolver를 설정합니다.** 폰트 임포트
+            val fontResolver = SVGFontResolver(requireContext())
+            SVG.registerExternalFileResolver(fontResolver)
 
             // SVG를 PictureDrawable로 렌더링하여 ImageView에 설정
             val drawable = PictureDrawable(svg.renderToPicture())
@@ -457,6 +463,28 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             Log.e("RouteDebug", "searchedRoute is null")
         }
     }
+
+
+    fun replaceFontInSvg(svgContent: String, fontFamily: String, fontWeight: String): String {
+        // 모든 font-family 속성을 "나눔스퀘어 네오"로 변경
+        var updatedContent = svgContent.replace(Regex("""font-family="[^"]*"""")) { matchResult ->
+            val originalValue = matchResult.value
+            val newValue = """font-family="$fontFamily""""
+            Log.d("FontReplacement", "font-family 변경: $originalValue -> $newValue")
+            newValue
+        }
+
+        // 모든 font-weight 속성을 "extrabold"로 변경
+        updatedContent = updatedContent.replace(Regex("""font-weight="[^"]*"""")) { matchResult ->
+            val originalValue = matchResult.value
+            val newValue = """font-weight="$fontWeight""""
+            Log.d("FontReplacement", "font-weight 변경: $originalValue -> $newValue")
+            newValue
+        }
+
+        return updatedContent
+    }
+
 
 
 
