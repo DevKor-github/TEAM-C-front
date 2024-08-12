@@ -48,7 +48,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:translationZ="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,7 +144,8 @@
                 android:background="#00000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pin_off_button"/>
+                android:src="@drawable/pin_off_button"
+                android:translationZ="1dp"/>
 
             <include
                 layout="@layout/inner_maps"
