@@ -187,20 +187,23 @@ data class MaskInfoResponse(
 )
 
 data class PlaceInfoResponse(
+    val buildingId: Int,
+    val floor: Int,
     val type: String,
-    val id: Int,
+    val placeId: Int,
+    val facilityType: String,
     val name: String,
     val detail: String,
     val availability: Boolean,
     val plugAvailability: Boolean,
     val imageUrl: String?,
     val operatingTime: String,
-    val longitude: Double?,
-    val latitude: Double?,
+    val longitude: Double,
+    val latitude: Double,
     val maskIndex: Int,
     val bookmarked: Boolean,
     val nextPlaceTime: String,
+    val operating: Boolean,
     val xcoord: Int,
-    val ycoord: Int,
-    val operating: Boolean
+    val ycoord: Int
 )

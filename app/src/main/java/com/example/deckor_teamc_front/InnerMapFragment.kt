@@ -82,6 +82,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private lateinit var standardBottomSheetBehavior : BottomSheetBehavior<FrameLayout>
     private lateinit var customScrollView : CustomScrollView
 
+    private var searchedFloor : Int = 1
+    private var searchedMask : Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -89,6 +92,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             selectedBuildingAboveFloor = it.getInt("selectedBuildingAboveFloor")
             selectedBuildingUnderFloor = it.getInt("selectedBuildingUnderFloor")
             selectedBuildingId = it.getInt("selectedBuildingId")
+
+            searchedFloor = it.getInt("selectedRoomFloor")
+            searchedMask = it.getInt("selectedRoomMask")
+
+
+            if (searchedFloor != 0) innermapCurrentFloor = searchedFloor
+            Log.e("kkkkk","kkkkk $innermapCurrentFloor")
+
         }
         // JSON 파일에서 데이터 읽어오기
         readJsonAndUpdateColorMap()
@@ -110,6 +121,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
+
+        /*
+
         fetchData()
 
         closeModal()
@@ -118,12 +132,20 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         replaceInnermapMask()
         updateTouchHandler()
 
+
+         */
+
+
+        Log.e("InnerMapFragment","${innermapCurrentFloor} Floor")
+        onFloorSelected(innermapCurrentFloor)
+
+
         val buildingNameTextView = binding.buildingName
         buildingNameTextView.text = selectedBuildingName
 
         selectedBuildingAboveFloor?.let { aboveFloor ->
             selectedBuildingUnderFloor?.let { underFloor ->
-                customScrollView.setFloors(-underFloor, aboveFloor)
+                customScrollView.setFloors(-underFloor, aboveFloor, innermapCurrentFloor)
             }
         }
         customScrollView.setOnFloorSelectedListener(this)
@@ -240,6 +262,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     override fun onFloorSelected(floor: Int) {
+        Log.e("innermapfragment","Now on $floor")
+        if(floor == 0) return
+
         innermapCurrentFloor = floor
         fetchData()
         readJsonAndUpdateColorMap()

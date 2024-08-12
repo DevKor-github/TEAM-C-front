@@ -61,7 +61,7 @@ class SearchBuildingFragment : Fragment() {
                 openLocationModal(requireActivity(), buildingItem)
             } else if (buildingItem.placeType == "CLASSROOM") {
                 // 장소을 선택했을 때 OpenModal 함수 호출
-                //TODO navigateToInnerMapFragment(buildingItem.abo)
+                navigateToInnerMapFragment(buildingItem.id)
             }
             else Log.e("SearchBuildingFragment","No mating type")
             taggedBuildingId = buildingItem.id
@@ -124,19 +124,40 @@ class SearchBuildingFragment : Fragment() {
         tagContainer.addView(tagView)
     }
 
-    private fun navigateToInnerMapFragment(selectedBuildingAboveFloor: Int,
-                                           selectedBuildingUnderFloor: Int,
-                                           selectedBuildingId: Int,
-                                           selectedBuildingName: String,
-                                           selectedRoomFloor: Int,
-                                           selectedRoomMask: Int) {
-        val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
-            selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
-            selectedBuildingId, selectedRoomFloor, selectedRoomMask)
+    private fun navigateToInnerMapFragment(roomId: Int) {
+        viewModel.fetchPlaceInfo(roomId, "CLASSROOM") { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
 
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, innerMapFragment)
-        // transaction.addToBackStack("HomeFragment")
-        transaction.commit()
+                if (buildingItem != null) {
+                    // 캐시된 BuildingItem의 정보를 사용
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    requireActivity().supportFragmentManager.popBackStack() // SearchFragment 제거
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                // placeInfo가 null인 경우 오류 처리
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
+        }
     }
+
 }
