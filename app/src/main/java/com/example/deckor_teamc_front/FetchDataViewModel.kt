@@ -33,6 +33,9 @@ class FetchDataViewModel : ViewModel() {
 
     private val service = RetrofitClient.instance
 
+    private val _placeInfoResponse = MutableLiveData<PlaceInfoResponse?>()
+    val placeInfoResponse: LiveData<PlaceInfoResponse?> get() = _placeInfoResponse
+
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
             service.search(keyword, buildingId)
@@ -179,6 +182,28 @@ class FetchDataViewModel : ViewModel() {
 
                 override fun onFailure(call: Call<ApiResponse<RouteResponse>>, t: Throwable) {
                     Log.e("FetchDataViewModel", "Failure: ${t.message}")
+                }
+            })
+    }
+
+    fun fetchPlaceInfo(roomId: Int, placeType: String, callback: (PlaceInfoResponse?) -> Unit) {
+        service.getPlaceInfo(roomId, placeType)
+            .enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<PlaceInfoResponse>>,
+                    response: Response<ApiResponse<PlaceInfoResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        callback(response.body()?.data)
+                    } else {
+                        Log.d("FetchDataViewModel", "API response unsuccessful. Code: ${response.code()}, Message: ${response.message()}")
+                        callback(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<PlaceInfoResponse>>, t: Throwable) {
+                    Log.d("FetchDataViewModel", "API call failed: ${t.message}")
+                    callback(null)
                 }
             })
     }

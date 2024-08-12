@@ -207,7 +207,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
-        transaction.addToBackStack("HomeFragment")
+        transaction.addToBackStack("SearchFragment")
         transaction.commit()
     }
 
@@ -215,7 +215,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, getDirectionsFragment)
-        transaction.addToBackStack("HomeFragment")
+        transaction.addToBackStack("DirectionFragment")
         transaction.commit()
     }
 
@@ -230,7 +230,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.add(R.id.main_container, innerMapFragment)
-            transaction.addToBackStack("HomeFragment")
+            transaction.addToBackStack("InnerMapFragment")
             transaction.commit()
         } else {
             Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
@@ -309,10 +309,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun observeViewModel() {
         viewModel.buildingList.observe(viewLifecycleOwner, Observer { buildingList ->
             buildingList.forEach { building ->
+                // BuildingCache에 저장
+                BuildingCache.put(building.buildingId, building)
+
+                // 캐시된 정보를 사용하거나 새로운 정보를 추가
                 setMarker(building)
             }
         })
     }
+
 
     private fun setMarker(building: BuildingItem) {
         val marker = Marker().apply {
@@ -393,7 +398,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val activity = context as? FragmentActivity
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.main_container, getDirectionsFragment)
-            ?.addToBackStack("HomeFragment")
+            ?.addToBackStack("DirectionFragment")
             ?.commit()
     }
 
