@@ -80,7 +80,7 @@ class CustomScrollView @JvmOverloads constructor(
                 if (it is LinearLayout) {
                     val textView = it.findViewById<TextView>(R.id.item_text)
                     changeLayoutStyle(it, textView)
-                    onFloorSelectedListener?.onFloorSelected(floor)
+                    //onFloorSelectedListener?.onFloorSelected(floor)
                 }
             }
         }
