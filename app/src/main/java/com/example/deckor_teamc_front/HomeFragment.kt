@@ -43,6 +43,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
+
+    private val initCameraPosition: LatLng = LatLng(37.59, 127.03)
     private var cameraPosition: LatLng? = null
 
     private lateinit var viewModel: FetchDataViewModel
@@ -131,12 +133,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        val cameraUpdate = CameraUpdate.zoomTo(16.0)
-        naverMap.moveCamera(cameraUpdate)
-
-        if(cameraPosition!=null){
-            moveCameraToPosition(cameraPosition!!)
-        }
+        val cameraZoomUpdate = CameraUpdate.zoomTo(14.3)
+        val cameraScrollUpdate = CameraUpdate.scrollTo(initCameraPosition)
+        naverMap.moveCamera(cameraZoomUpdate)
+        naverMap.moveCamera(cameraScrollUpdate)
 
         val includedLayout = binding.includedLayout.root
 
