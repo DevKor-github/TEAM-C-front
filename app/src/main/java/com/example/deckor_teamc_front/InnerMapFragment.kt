@@ -473,7 +473,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         isScrollVisible = false
     }
 
-    fun drawRouteForCurrentFloor(
+    private fun drawRouteForCurrentFloor(
         routeView: RouteView,
         searchedRoute: RouteResponse?,
         innermapCurrentFloor: Int
@@ -498,7 +498,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-    fun updateTextTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+    private fun updateTextTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
         var updatedContent = svgContent
 
         // <text> 태그 내의 모든 내용을 찾아서 처리
@@ -517,7 +517,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         return updatedContent
     }
-    fun updateStyleTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+    private fun updateStyleTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
         // <style> 태그의 내용 찾기
         val styleTagRegex = Regex("""<style[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
 
@@ -544,7 +544,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-    fun updateSvgFont(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+    private fun updateSvgFont(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
         var updatedContent = svgContent
 
         // 1. <text> 태그의 속성 변경

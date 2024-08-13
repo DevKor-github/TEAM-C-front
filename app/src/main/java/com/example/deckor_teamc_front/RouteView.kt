@@ -1,10 +1,7 @@
 package com.example.deckor_teamc_front
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -14,26 +11,45 @@ class RouteView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val path = Path()
+
+    // 네온 효과를 위한 Paint
+    private val neonPaint = Paint().apply {
+        color = Color.RED
+        strokeWidth = 6f  // 선의 두께를 더 줄임
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        strokeCap = Paint.Cap.ROUND  // 선 끝을 둥글게 설정
+        setShadowLayer(6f, 0f, 0f, Color.parseColor("#FF8A80")) // 네온 효과의 크기도 줄임
+    }
+
+    // 경로를 그릴 기본 Paint
     private val paint = Paint().apply {
         color = Color.RED
-        strokeWidth = 5f
+        strokeWidth = 3f  // 기본 선의 두께를 더 줄임
         style = Paint.Style.STROKE
+        isAntiAlias = true
+        strokeCap = Paint.Cap.ROUND  // 선 끝을 둥글게 설정
+    }
+
+    // 출발지와 도착지 원을 그릴 Paint
+    private val circlePaint = Paint().apply {
+        color = Color.RED
+        style = Paint.Style.FILL
         isAntiAlias = true
     }
 
-    private val scalePaint = Paint().apply {
-        color = Color.BLACK
-        strokeWidth = 2f
-        style = Paint.Style.STROKE
+    // 네온 효과용 투명 원 Paint
+    private val neonCirclePaint = Paint().apply {
+        color = Color.parseColor("#FF8A80")
+        style = Paint.Style.FILL
         isAntiAlias = true
-        textSize = 30f
     }
 
     private var coordinates: List<Pair<Float, Float>> = emptyList()
 
     fun setRouteCoordinates(coordinates: List<Pair<Float, Float>>) {
-        // y축에 300을 더한 새로운 좌표 리스트를 생성
-        this.coordinates = coordinates.map { Pair(it.first, it.second + 370f) }
+        // 좌표 리스트를 그대로 사용
+        this.coordinates = coordinates
         invalidate() // 뷰를 다시 그리도록 요청
     }
 
@@ -45,48 +61,49 @@ class RouteView @JvmOverloads constructor(
         val viewWidth = width.toFloat()
         val viewHeight = height.toFloat()
 
-        // 가로는 1680으로 고정
-        val scaleFactorX = viewWidth / 1680f
+        // 원본 크기 1680x1680
+        val originalSize = 1680f
+
+        // 가로 또는 세로 중 긴 쪽을 기준으로 스케일을 계산
+        val scaleFactor = minOf(viewWidth / originalSize, viewHeight / originalSize)
+
+        // 중심 정렬을 위한 오프셋 계산
+        val offsetX = (viewWidth - originalSize * scaleFactor) / 2
+        val offsetY = (viewHeight - originalSize * scaleFactor) / 2
 
         path.rewind()
 
         val firstPoint = coordinates.first()
         path.moveTo(
-            firstPoint.first * scaleFactorX,
-            firstPoint.second * scaleFactorX // 이미 y축에 300이 더해져 있음
+            offsetX + firstPoint.first * scaleFactor,
+            offsetY + firstPoint.second * scaleFactor
         )
-        Log.d("com.example.deckor_teamc_front.RouteView", "Point: (${firstPoint.first * scaleFactorX}, ${firstPoint.second * scaleFactorX})")
 
         for (point in coordinates.drop(1)) {
             path.lineTo(
-                point.first * scaleFactorX,
-                point.second * scaleFactorX // 이미 y축에 300이 더해져 있음
+                offsetX + point.first * scaleFactor,
+                offsetY + point.second * scaleFactor
             )
-            Log.d("com.example.deckor_teamc_front.RouteView", "Point: (${point.first * scaleFactorX}, ${point.second * scaleFactorX})")
         }
 
-        // 경로를 그리기 전에 축적을 100 단위로 표시
-        drawScale(canvas, scaleFactorX, viewWidth, viewHeight)
+        // 네온 효과를 위한 경로를 먼저 그림
+        canvas.drawPath(path, neonPaint)
 
-        // 경로를 Canvas에 그리기
+        // 경로를 기본 Paint로 다시 그림
         canvas.drawPath(path, paint)
+
+        // 출발지 원 그리기 (네온 효과 원 + 강조 원)
+        drawCircleWithNeonEffect(canvas, offsetX + firstPoint.first * scaleFactor, offsetY + firstPoint.second * scaleFactor)
+
+        // 도착지 원 그리기 (네온 효과 원 + 강조 원)
+        val lastPoint = coordinates.last()
+        drawCircleWithNeonEffect(canvas, offsetX + lastPoint.first * scaleFactor, offsetY + lastPoint.second * scaleFactor)
     }
 
-    private fun drawScale(canvas: Canvas, scaleFactorX: Float, viewWidth: Float, viewHeight: Float) {
-        val scaleInterval = 100f * scaleFactorX
-
-        var x = 0f
-        while (x <= viewWidth) {
-            canvas.drawLine(x, viewHeight - 50f, x, viewHeight - 20f, scalePaint)
-            canvas.drawText("${(x / scaleFactorX).toInt()}m", x, viewHeight - 60f, scalePaint)
-            x += scaleInterval
-        }
-
-        var y = 0f
-        while (y <= viewHeight) {
-            canvas.drawLine(50f, y, 20f, y, scalePaint)
-            canvas.drawText("${(y / scaleFactorX).toInt()}m", 60f, y + 10f, scalePaint)
-            y += scaleInterval
-        }
+    private fun drawCircleWithNeonEffect(canvas: Canvas, cx: Float, cy: Float) {
+        // 네온 효과 원 크기 줄임
+        canvas.drawCircle(cx, cy, 10f, neonCirclePaint)  // 네온 효과의 반경을 더 줄임
+        // 강조 원 크기 줄임
+        canvas.drawCircle(cx, cy, 6f, circlePaint)  // 강조 원의 반경을 더 줄임
     }
 }
