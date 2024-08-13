@@ -3,12 +3,18 @@ package com.example.deckor_teamc_front
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.deckor_teamc_front.databinding.ActivityMainBinding
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+    private var backPressedTime: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -18,6 +24,24 @@ class MainActivity : AppCompatActivity() {
         // 앱 초기 실행 시 홈화면으로 설정
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_home
+        }
+    }
+    override fun onBackPressed() {
+        val fragmentManager: FragmentManager = supportFragmentManager
+
+        // 백스택에 아무것도 없는지 확인
+        if (fragmentManager.backStackEntryCount == 0) {
+            // 마지막 뒤로가기 버튼 클릭 후 2초 이내에 다시 클릭 시 종료
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed()
+                return
+            } else {
+                Toast.makeText(this, "한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
+            }
+            backPressedTime = System.currentTimeMillis()
+        } else {
+            // 백스택에 항목이 있으면 일반적인 뒤로가기 동작 수행
+            fragmentManager.popBackStack()
         }
     }
 
