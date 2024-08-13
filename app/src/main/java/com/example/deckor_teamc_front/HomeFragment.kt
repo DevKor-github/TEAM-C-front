@@ -133,6 +133,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
+        naverMap.addOnCameraChangeListener { reason, animated ->
+            val currentZoom = naverMap.cameraPosition.zoom
+            updateMarkersVisibility(currentZoom)
+        }
+
         val cameraZoomUpdate = CameraUpdate.zoomTo(14.3)
         val cameraScrollUpdate = CameraUpdate.scrollTo(initCameraPosition)
         naverMap.moveCamera(cameraZoomUpdate)
@@ -329,6 +334,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                 // 캐시된 정보를 사용하거나 새로운 정보를 추가
                 setMarker(building)
+                val currentZoom = naverMap.cameraPosition.zoom
+                updateMarkersVisibility(currentZoom)
             }
         })
     }
@@ -339,6 +346,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
             map = naverMap
             icon = OverlayImage.fromResource(R.drawable.spot)
+            tag = building.buildingId
         }
 
         markers.add(marker) // 마커 리스트에 추가
@@ -380,6 +388,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
+        }
+    }
+
+    private fun updateMarkersVisibility(zoom: Double) {
+        for (marker in markers) {
+            val buildingId = marker.tag as? Int
+            if (buildingId != null) {
+                // ID에 해당하는 줌 임계값을 가져옴
+                val threshold = MarkerZoomLevelThreshold.getThresholdForId(buildingId)
+
+                if (zoom >= threshold) {
+                    marker.map = naverMap // 줌 값이 임계값 이상이면 마커 표시
+                } else {
+                    marker.map = null // 줌 값이 임계값 이하이면 마커 숨김
+                }
+            }
         }
     }
 

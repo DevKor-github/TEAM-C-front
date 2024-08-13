@@ -85,18 +85,18 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     private var floorRoomList: List<RoomList> = emptyList()
 
-    private lateinit var modalView : CoordinatorLayout
+    private lateinit var modalView: CoordinatorLayout
 
-    private lateinit var standardBottomSheet : FrameLayout
-    private lateinit var standardBottomSheetBehavior : BottomSheetBehavior<FrameLayout>
-    private lateinit var customScrollView : CustomScrollView
+    private lateinit var standardBottomSheet: FrameLayout
+    private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    private lateinit var customScrollView: CustomScrollView
 
-    private var searchedFloor : Int = 1
-    private var searchedMask : Int = 0
+    private var searchedFloor: Int = 1
+    private var searchedMask: Int = 0
 
-    private var searchedRoute : RouteResponse? = null
+    private var searchedRoute: RouteResponse? = null
 
-    private var hasDirection : Boolean = false
+    private var hasDirection: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,7 +118,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         readJsonAndUpdateColorMap()
 
 
-
     }
 
     override fun onCreateView(
@@ -129,7 +128,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         modalView = binding.includedModal.root
 
-        standardBottomSheet = binding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        standardBottomSheet =
+            binding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         customScrollView = binding.customScrollView
@@ -151,7 +151,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
 
 
-        Log.e("InnerMapFragment","${innermapCurrentFloor} Floor")
+        Log.e("InnerMapFragment", "${innermapCurrentFloor} Floor")
         onFloorSelected(innermapCurrentFloor)
 
         val layerName = colorMap[searchedMask] // 선택된 마스크를 레이어명으로 변환
@@ -177,7 +177,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         Log.d("InnerMapFragment", "Selected Building Id: $selectedBuildingId")
 
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        standardBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {}
@@ -187,12 +188,12 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     else -> {}
                 }
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
 
         return binding.root
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -214,18 +215,20 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
 
 
-
     }
 
 
     private fun fetchData() {
 
         Log.d("aaaant", "Room: $selectedBuildingId $innermapCurrentFloor")
-        selectedBuildingId?.let { innermapCurrentFloor?.let { it1 ->
-            viewModel.fetchRoomList(it,
-                it1
-            )
-        } }
+        selectedBuildingId?.let {
+            innermapCurrentFloor?.let { it1 ->
+                viewModel.fetchRoomList(
+                    it,
+                    it1
+                )
+            }
+        }
     }
 
     private fun observeViewModel() {
@@ -271,7 +274,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             val assetManager = requireContext().assets
             Log.d("InnerMapFragment", "Asset Manager Initialized")
 
-            val inputStream: InputStream = assetManager.open("${selectedBuildingId}/${innermapCurrentFloor}/data.json")
+            val inputStream: InputStream =
+                assetManager.open("${selectedBuildingId}/${innermapCurrentFloor}/data.json")
             Log.d("InnerMapFragment", "Opened data.json file")
 
             val jsonString = inputStream.bufferedReader().use { it.readText() }
@@ -297,8 +301,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     override fun onFloorSelected(floor: Int) {
-        Log.e("innermapfragment","Now on $floor")
-        if(floor == 0) return
+        Log.e("innermapfragment", "Now on $floor")
+        if (floor == 0) return
 
         innermapCurrentFloor = floor
         fetchData()
@@ -306,7 +310,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         replaceInnermap()
         replaceInnermapMask()
         updateTouchHandler()
-        Log.d("InnerMapFragment", "Floor selected: $floor, innermapCurrentFloor updated: $innermapCurrentFloor")
+        Log.d(
+            "InnerMapFragment",
+            "Floor selected: $floor, innermapCurrentFloor updated: $innermapCurrentFloor"
+        )
     }
 
     private fun replaceInnermapMask() {
@@ -327,9 +334,9 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     fun replaceInnermap(groupIdToChange: String? = null) {
         if (groupIdToChange != null)
-            Log.e("1","groupIdToChange 1")
+            Log.e("1", "groupIdToChange 1")
         else
-            Log.e("1","groupIdToChange 0")
+            Log.e("1", "groupIdToChange 0")
         val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/inner_map.svg"
         try {
             // 리소스가 assets 폴더에 있는지 확인하고 로드
@@ -338,7 +345,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             val svgContent = inputStream.bufferedReader().use { it.readText() }
 
             // groupIdToChange가 null이 아니면 해당 그룹의 fill 색상을 변경
-            Log.e("InnerMapFragment","$groupIdToChange")
+            Log.e("InnerMapFragment", "$groupIdToChange")
             val modifiedSvgContent = groupIdToChange?.let {
                 changeElementFillColor(svgContent, it)
             } ?: svgContent
@@ -381,18 +388,17 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
 
             // 그룹 내부에서 <text> 태그의 fill 속성은 #FFFFFF로 변경
-            groupContent = groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
-                matchResult.value.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}""""), """fill="#FFFFFF"""")
-            }
+            groupContent =
+                groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
+                    matchResult.value.replace(
+                        Regex("""fill="#[0-9A-Fa-f]{3,6}""""),
+                        """fill="#FFFFFF""""
+                    )
+                }
 
             groupContent
         }
     }
-
-
-
-
-
 
 
     private fun updateTouchHandler() {
@@ -493,11 +499,4 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         return updatedContent
     }
-
-
-
-
-
-
-
 }
