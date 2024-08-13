@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_x36_" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.69 867.01">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fcf2f2;
+        stroke-width: 10px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #e68b8b;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-width: 3px;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        font-size: 11px;
+      }
+
+      .cls-5, .cls-6 {
+        fill: #221f20;
+        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+      }
+
+      .cls-6 {
+        font-size: 12px;
+      }
+
+      .cls-7 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-8 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-9 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-10 {
+        letter-spacing: 0em;
+      }
+
+      .cls-11 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        fill: #f3cdcf;
+      }
+    </style>
+  </defs>
+  <g id="Layer_x5F_border-8" data-name="Layer_x5F_border">
+    <rect class="cls-1" x="90.96" y="188.88" width="1175.42" height="517.29"/>
+    <g>
+      <rect class="cls-2" x="1266.38" y="539.19" width="4.62" height="28.35"/>
+      <rect class="cls-2" x="1271" y="539.19" width="4.8" height="28.35"/>
+      <rect class="cls-2" x="1275.8" y="539.19" width="5.54" height="28.35"/>
+      <rect class="cls-2" x="1281.34" y="539.19" width="4.43" height="28.35"/>
+      <rect class="cls-2" x="1285.78" y="539.19" width="5.54" height="28.35"/>
+      <rect class="cls-2" x="1291.32" y="539.19" width="3.97" height="28.35"/>
+      <rect class="cls-2" x="1295.29" y="539.19" width="6" height="28.35"/>
+      <rect class="cls-2" x="1301.3" y="539.19" width="5.54" height="28.35"/>
+      <rect class="cls-2" x="1306.84" y="539.19" width="4.8" height="28.35"/>
+      <rect class="cls-2" x="1311.64" y="539.19" width="4.8" height="28.35"/>
+    </g>
+  </g>
+  <g id="Layer_202">
+    <polygon class="cls-3" points="352.12 323.6 427.03 323.6 427.03 188.88 324.1 188.88 323.56 305.61 352.12 305.61 352.12 323.6"/>
+    <text class="cls-6" transform="translate(362.62 244.82)"><tspan x="0" y="0">623</tspan><tspan x="-10.08" y="14.4">재료공학</tspan><tspan x="-4.39" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_203">
+    <polygon class="cls-3" points="1137.57 323.6 1137.57 305.61 1166.21 305.61 1166.21 188.88 1058.31 188.88 1058.31 323.6 1137.57 323.6"/>
+    <text class="cls-6" transform="translate(1099.32 244.82)"><tspan x="0" y="0">630</tspan><tspan x="-22.67" y="14.4">정보소자재료 </tspan><tspan x="-7.09" y="28.8">실험실1</tspan></text>
+  </g>
+  <g id="Layer_210">
+    <polygon class="cls-3" points="1194.86 323.6 1266.38 323.6 1266.38 188.88 1166.21 188.88 1166.21 305.61 1194.86 305.61 1194.86 323.6"/>
+    <text class="cls-6" transform="translate(1204.86 244.82)"><tspan x="0" y="0">6</tspan><tspan class="cls-9" x="8.53" y="0">3</tspan><tspan x="16.94" y="0">1</tspan><tspan x="-24.17" y="14.4">정보소자재료 </tspan><tspan x="-9.76" y="28.8">실험실2</tspan></text>
+  </g>
+  <g id="Layer_204">
+    <polygon class="cls-3" points="982.91 323.6 1058.31 323.6 1058.31 188.88 955.31 188.88 955.31 305.61 982.91 305.61 982.91 323.6"/>
+    <text class="cls-6" transform="translate(994.13 244.82)"><tspan x="0" y="0">629</tspan><tspan x="-28.63" y="14.4">반도체 나노소재</tspan><tspan x="-4.39" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_205">
+    <polygon class="cls-3" points="927.7 323.6 927.7 305.61 955.31 305.61 955.31 188.88 846.31 188.88 846.31 323.6 927.7 323.6"/>
+    <text class="cls-6" transform="translate(888.01 244.82)"><tspan x="0" y="0">628</tspan><tspan x="-24.31" y="14.4">광소재 및 소자</tspan><tspan x="-4.27" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_206">
+    <polygon class="cls-3" points="772.47 323.6 846.31 323.6 846.31 188.88 742.25 188.88 742.25 305.61 772.47 305.61 772.47 323.6"/>
+    <text class="cls-6" transform="translate(782.09 237.62)"><tspan x="0" y="0">627</tspan><tspan x="-10.56" y="14.4">환경중심</tspan><tspan x="-16.25" y="28.8">신소재공정</tspan><tspan x="-4.87" y="43.2">연구실</tspan></text>
+  </g>
+  <g id="Layer_207">
+    <polygon class="cls-3" points="716.5 323.6 716.5 305.61 742.25 305.61 742.25 188.88 637.89 188.88 637.89 323.6 716.5 323.6"/>
+    <text class="cls-6" transform="translate(677.4 244.82)"><tspan x="0" y="0">626</tspan><tspan x="-30.12" y="14.4">나노소재 및 소자</tspan><tspan x="-4.39" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_208">
+    <polygon class="cls-3" points="562.43 323.6 637.89 323.6 637.89 188.88 534.2 188.88 534.2 305.61 562.43 305.61 562.43 323.6"/>
+    <text class="cls-6" transform="translate(573.49 244.82)"><tspan x="0" y="0">625</tspan><tspan x="-21.58" y="14.4">나노복합재료</tspan><tspan x="-4.51" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_209">
+    <polygon class="cls-3" points="505.97 323.6 427.03 323.6 427.03 188.88 534.2 188.88 534.2 305.61 505.97 305.61 505.97 323.6"/>
+    <text class="cls-6" transform="translate(468.09 244.82)"><tspan x="0" y="0">6</tspan><tspan class="cls-7" x="8.53" y="0">2</tspan><tspan class="cls-4" x="16.45" y="0">4</tspan><tspan x="-21.61" y="14.4">미세조직제어</tspan><tspan x="-4.54" y="28.8">실험실</tspan></text>
+  </g>
+  <g id="Layer_187">
+    <rect class="cls-3" x="742.25" y="567.54" width="104.86" height="138.63"/>
+    <text class="cls-6" transform="translate(781.86 625.44)"><tspan x="0" y="0">605</tspan><tspan x="-17.11" y="14.4">나노텍 응용</tspan><tspan x="-4.24" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_188">
+    <rect class="cls-3" x="847.11" y="567.54" width="105.43" height="138.63"/>
+    <text class="cls-6" transform="translate(886.86 625.44)"><tspan x="0" y="0">604</tspan><tspan x="-26.84" y="14.4">나노바이오소재</tspan><tspan x="-4.09" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_189">
+    <rect class="cls-3" x="952.7" y="567.54" width="105.93" height="138.63"/>
+    <text class="cls-6" transform="translate(992.73 625.44)"><tspan x="0" y="0">603</tspan><tspan x="-35.54" y="14.4">기능성 고분자 소재</tspan><tspan x="-4.12" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_190">
+    <rect class="cls-3" x="1058.48" y="567.54" width="105.74" height="138.63"/>
+    <text class="cls-6" transform="translate(1098.53 625.44)"><tspan x="0" y="0">602</tspan><tspan x="-34.18" y="14.4">나노결정 전자소재</tspan><tspan x="-4.25" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_191">
+    <rect class="cls-3" x="1164.22" y="567.54" width="102.16" height="138.63"/>
+    <text class="cls-6" transform="translate(1203.66 625.44)"><tspan x="0" y="0">601</tspan><tspan x="-29.66" y="14.4">동적 나노바이오</tspan><tspan x="-18.28" y="28.8">공학 실험실</tspan></text>
+  </g>
+  <g id="Layer_192">
+    <rect class="cls-3" x="1228.08" y="352.75" width="38.3" height="94.78"/>
+    <text class="cls-5" transform="translate(1235.62 383.07)"><tspan x="0" y="0">632</tspan><tspan x="1.19" y="13.2">여자</tspan><tspan x="-4.03" y="26.4">탈의실</tspan><tspan x="-4.03" y="39.6">샤워실</tspan></text>
+  </g>
+  <g id="Layer_193">
+    <rect class="cls-3" x="1227.95" y="447.53" width="38.44" height="91.66"/>
+    <text class="cls-5" transform="translate(1235.43 476.29)"><tspan x="0" y="0">636</tspan><tspan x="1.3" y="13.2">남자</tspan><tspan x="-3.91" y="26.4">탈의실</tspan><tspan x="-3.91" y="39.6">샤워실</tspan></text>
+  </g>
+  <g id="Layer_194">
+    <polygon class="cls-2" points="1005.22 539.19 1005.22 514.6 1092.3 514.6 1092.3 401.35 985.11 401.35 985.11 539.19 1005.22 539.19"/>
+  </g>
+  <g id="Layer_195">
+    <rect class="cls-3" x="480.32" y="354.3" width="164.23" height="92.54"/>
+    <text class="cls-6" transform="translate(549.64 389.15)"><tspan x="0" y="0">633</tspan><tspan x="-47.06" y="14.4">에너지저장 및 변환재료</tspan><tspan x="-4.27" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_196">
+    <rect class="cls-3" x="480.32" y="446.84" width="164.23" height="93.92"/>
+    <text class="cls-6" transform="translate(549.75 482.38)"><tspan x="0" y="0">635</tspan><tspan x="-28.63" y="14.4">태양에너지 변환</tspan><tspan x="-4.39" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_197">
+    <polygon class="cls-2" points="280.48 400.17 280.48 515.98 354.73 515.98 354.73 538.37 376.59 538.37 376.59 455.7 334.11 455.7 334.11 400.17 280.48 400.17"/>
+  </g>
+  <g id="Layer_198">
+    <rect class="cls-3" x="204.72" y="350.06" width="75.75" height="146.97"/>
+    <text class="cls-6" transform="translate(229.77 426.53)"><tspan x="0" y="0">634</tspan></text>
+  </g>
+  <g id="Layer_199">
+    <rect class="cls-3" x="204.72" y="497.03" width="75.75" height="41.34"/>
+    <text class="cls-6" transform="translate(214.16 520.68)"><tspan x="0" y="0">교수화장실</tspan></text>
+  </g>
+  <g id="Layer_200">
+    <rect class="cls-3" x="204.72" y="188.88" width="57.16" height="134.71"/>
+    <text class="cls-6" transform="translate(221.93 237.62)"><tspan x="0" y="0">621</tspan><tspan x="-7.18" y="14.4">나노텍 </tspan><tspan x="0" y="28.8">응용</tspan><tspan x="-5.69" y="43.2">연구실</tspan></text>
+  </g>
+  <g id="Layer_201">
+    <polygon class="cls-3" points="261.88 323.6 308.93 323.6 308.93 305.61 323.82 305.61 324.1 188.88 261.88 188.88 261.88 323.6"/>
+    <text class="cls-6" transform="translate(280.45 237.62)"><tspan x="0" y="0">622</tspan><tspan x="-11.69" y="14.4">나노결정 </tspan><tspan x="-10.21" y="28.8">전자소자</tspan><tspan x="-4.52" y="43.2">연구실</tspan></text>
+  </g>
+  <g id="Layer_x5F_others-8" data-name="Layer_x5F_others">
+    <rect class="cls-3" x="1108.99" y="352.75" width="119.09" height="186.44"/>
+    <rect class="cls-3" x="1092.3" y="352.75" width="16.69" height="186.44"/>
+    <rect class="cls-2" x="936.71" y="352.75" width="126.24" height="48.59"/>
+    <rect class="cls-2" x="936.71" y="401.35" width="48.41" height="137.84"/>
+    <rect class="cls-3" x="936.71" y="407.2" width="48.41" height="48.41"/>
+    <rect class="cls-3" x="936.71" y="462.45" width="48.41" height="41.99"/>
+    <rect class="cls-3" x="1005.22" y="514.6" width="87.07" height="24.59"/>
+    <g>
+      <rect class="cls-2" x="969.86" y="352.75" width="8.59" height="22.73"/>
+      <rect class="cls-2" x="978.45" y="352.75" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="987.38" y="352.75" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="997.68" y="352.75" width="8.24" height="22.73"/>
+      <rect class="cls-2" x="1005.93" y="352.75" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="1016.23" y="352.75" width="7.38" height="22.73"/>
+      <rect class="cls-2" x="1023.62" y="352.75" width="11.16" height="22.73"/>
+      <rect class="cls-2" x="1034.78" y="352.75" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="1045.08" y="352.75" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="1054.01" y="352.75" width="8.93" height="22.73"/>
+    </g>
+    <g>
+      <rect class="cls-2" x="969.69" y="377.05" width="8.59" height="22.73"/>
+      <rect class="cls-2" x="978.28" y="377.05" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="987.21" y="377.05" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="997.51" y="377.05" width="8.24" height="22.73"/>
+      <rect class="cls-2" x="1005.75" y="377.05" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="1016.06" y="377.05" width="7.38" height="22.73"/>
+      <rect class="cls-2" x="1023.44" y="377.05" width="11.16" height="22.73"/>
+      <rect class="cls-2" x="1034.61" y="377.05" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="1044.91" y="377.05" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="1053.84" y="377.05" width="8.93" height="22.73"/>
+    </g>
+    <rect class="cls-2" x="1062.94" y="352.75" width="29.35" height="48.59"/>
+    <rect class="cls-2" x="280.48" y="515.98" width="74.26" height="22.39"/>
+    <rect class="cls-3" x="389.63" y="467.59" width="42.04" height="42.04"/>
+    <rect class="cls-2" x="309.52" y="350.06" width="124.9" height="50.11"/>
+    <rect class="cls-3" x="334.11" y="400.17" width="55.52" height="55.52"/>
+    <polygon class="cls-2" points="389.63 455.7 389.63 509.63 431.67 509.63 431.67 538.37 376.59 538.37 376.59 455.7 389.63 455.7"/>
+    <g>
+      <rect class="cls-2" x="311.05" y="351.91" width="8.59" height="25.11"/>
+      <rect class="cls-2" x="319.64" y="351.91" width="8.93" height="25.11"/>
+      <rect class="cls-2" x="328.57" y="351.91" width="10.3" height="25.11"/>
+      <rect class="cls-2" x="338.87" y="351.91" width="8.24" height="25.11"/>
+      <rect class="cls-2" x="347.11" y="351.91" width="10.3" height="25.11"/>
+      <rect class="cls-2" x="357.42" y="351.91" width="7.38" height="25.11"/>
+      <rect class="cls-2" x="364.8" y="351.91" width="11.16" height="25.11"/>
+      <rect class="cls-2" x="375.97" y="351.91" width="10.3" height="25.11"/>
+      <rect class="cls-2" x="386.27" y="351.91" width="8.93" height="25.11"/>
+      <rect class="cls-2" x="395.2" y="351.91" width="8.93" height="25.11"/>
+    </g>
+    <g>
+      <rect class="cls-2" x="310.91" y="376.73" width="8.59" height="22.73"/>
+      <rect class="cls-2" x="319.49" y="376.73" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="328.43" y="376.73" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="338.73" y="376.73" width="8.24" height="22.73"/>
+      <rect class="cls-2" x="346.97" y="376.73" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="357.28" y="376.73" width="7.38" height="22.73"/>
+      <rect class="cls-2" x="364.66" y="376.73" width="11.16" height="22.73"/>
+      <rect class="cls-2" x="375.82" y="376.73" width="10.3" height="22.73"/>
+      <rect class="cls-2" x="386.13" y="376.73" width="8.93" height="22.73"/>
+      <rect class="cls-2" x="395.06" y="376.73" width="8.93" height="22.73"/>
+    </g>
+    <rect class="cls-2" x="280.48" y="350.06" width="29.04" height="50.11"/>
+    <rect class="cls-3" x="1137.57" y="305.61" width="57.3" height="17.99"/>
+    <rect class="cls-3" x="927.7" y="305.61" width="55.21" height="17.99"/>
+    <rect class="cls-3" x="716.5" y="305.61" width="55.96" height="17.99"/>
+    <rect class="cls-3" x="505.97" y="305.61" width="56.46" height="17.99"/>
+    <rect class="cls-3" x="295" y="305.61" width="57.13" height="17.99"/>
+    <rect class="cls-2" x="644.55" y="369.93" width="195.41" height="153.79"/>
+  </g>
+  <g id="Layer_172">
+    <rect class="cls-3" x="90.96" y="188.88" width="77.8" height="59.92"/>
+    <text class="cls-6" transform="translate(117.05 214.62)"><tspan x="0" y="0">620</tspan><tspan x="-15.62" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_173">
+    <rect class="cls-3" x="90.96" y="248.8" width="77.8" height="54.76"/>
+    <text class="cls-6" transform="translate(118.42 271.96)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">19</tspan><tspan x="-17" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_174">
+    <rect class="cls-3" x="90.96" y="303.56" width="77.8" height="57.3"/>
+    <text class="cls-6" transform="translate(118.29 327.99)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">18</tspan><tspan x="-16.87" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_175">
+    <rect class="cls-3" x="90.96" y="360.85" width="77.8" height="57.1"/>
+    <text class="cls-6" transform="translate(118.9 385.18)"><tspan class="cls-11" x="0" y="0">6</tspan><tspan x="8.41" y="0">17</tspan><tspan x="-17.48" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_176">
+    <rect class="cls-3" x="90.96" y="417.95" width="77.8" height="55.69"/>
+    <text class="cls-6" transform="translate(118.42 441.58)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">16</tspan><tspan x="-17" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_177">
+    <rect class="cls-3" x="90.96" y="473.64" width="77.8" height="56.22"/>
+    <text class="cls-6" transform="translate(118.54 497.54)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">15</tspan><tspan x="-17.12" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_178">
+    <rect class="cls-3" x="90.96" y="529.86" width="77.8" height="56.48"/>
+    <text class="cls-6" transform="translate(118.39 553.88)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">14</tspan><tspan x="-16.97" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_179">
+    <rect class="cls-3" x="90.96" y="586.34" width="77.8" height="56.39"/>
+    <text class="cls-6" transform="translate(118.42 610.32)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">13</tspan><tspan x="-17" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_180">
+    <rect class="cls-3" x="90.96" y="642.73" width="77.8" height="63.44"/>
+    <text class="cls-6" transform="translate(118.55 670.24)"><tspan class="cls-8" x="0" y="0">6</tspan><tspan x="8.41" y="0">12</tspan><tspan x="-17.12" y="14.4">교수연구실</tspan></text>
+  </g>
+  <g id="Layer_181">
+    <rect class="cls-3" x="204.72" y="567.54" width="60.8" height="138.63"/>
+    <text class="cls-5" transform="translate(225.82 625.44)"><tspan class="cls-10" x="0" y="0">6</tspan><tspan x="7.71" y="0">11</tspan><tspan x="-12.92" y="13.2">나노소재 </tspan><tspan x="4.09" y="26.4">및</tspan><tspan x="-18.13" y="39.6">소자 연구실</tspan></text>
+  </g>
+  <g id="Layer_182">
+    <rect class="cls-3" x="265.52" y="567.54" width="54.11" height="138.63"/>
+    <text class="cls-6" transform="translate(280.99 618.24)"><tspan class="cls-11" x="0" y="0">6</tspan><tspan x="8.41" y="0">10</tspan><tspan x=".21" y="14.4">나노</tspan><tspan x="-11.17" y="28.8">복합재료</tspan><tspan x="-5.48" y="43.2">연구실</tspan></text>
+  </g>
+  <g id="Layer_183">
+    <rect class="cls-3" x="319.64" y="567.54" width="107.39" height="138.63"/>
+    <text class="cls-6" transform="translate(360.39 625.44)"><tspan x="0" y="0">609</tspan><tspan x="-9.81" y="14.4">태양전지</tspan><tspan x="-4.12" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_184">
+    <rect class="cls-3" x="427.03" y="567.54" width="106.25" height="138.63"/>
+    <text class="cls-6" transform="translate(467.08 632.64)"><tspan x="0" y="0">608</tspan><tspan x="-16.86" y="14.4">합동 연구실</tspan></text>
+  </g>
+  <g id="Layer_185">
+    <rect class="cls-3" x="533.27" y="567.54" width="104.61" height="138.63"/>
+    <text class="cls-6" transform="translate(573.12 625.44)"><tspan x="0" y="0">607</tspan><tspan x="-21.67" y="14.4">정보소자재료</tspan><tspan x="-4.6" y="28.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_186">
+    <rect class="cls-3" x="637.89" y="567.54" width="104.36" height="138.63"/>
+    <text class="cls-6" transform="translate(677.13 632.64)"><tspan x="0" y="0">606</tspan><tspan x="-16.99" y="14.4">합동 연구실</tspan></text>
+  </g>
+</svg>
