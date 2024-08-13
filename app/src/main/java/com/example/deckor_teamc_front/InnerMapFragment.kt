@@ -330,51 +330,70 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             Log.e("InnerMapFragment", "Resource not found: $resourceName")
         }
     }
-
-
-    fun replaceInnermap(groupIdToChange: String? = null) {
-        if (groupIdToChange != null)
-            Log.e("1", "groupIdToChange 1")
-        else
-            Log.e("1", "groupIdToChange 0")
+    private fun initInnermap(): String? {
         val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/inner_map.svg"
-        try {
+
+        return try {
             // 리소스가 assets 폴더에 있는지 확인하고 로드
             val assetManager = requireContext().assets
             val inputStream: InputStream = assetManager.open(resourceName)
             val svgContent = inputStream.bufferedReader().use { it.readText() }
 
-            // groupIdToChange가 null이 아니면 해당 그룹의 fill 색상을 변경
-            Log.e("InnerMapFragment", "$groupIdToChange")
-            val modifiedSvgContent = groupIdToChange?.let {
-                changeElementFillColor(svgContent, it)
-            } ?: svgContent
-
-            // SVG 내용에서 글꼴 변경
-            val updatedSvgContent = replaceFontInSvg(modifiedSvgContent, "나눔스퀘어 네오", "extrabold")
-
-            val svg = SVG.getFromString(updatedSvgContent)
             // **여기서 SVGExternalFileResolver를 설정합니다.** 폰트 임포트
             val fontResolver = SVGFontResolver(requireContext())
             SVG.registerExternalFileResolver(fontResolver)
 
-            // SVG를 PictureDrawable로 렌더링하여 ImageView에 설정
-            val drawable = PictureDrawable(svg.renderToPicture())
-            binding.includedMap.innermap.setImageDrawable(drawable)
-            Log.d("InnerMapFragment", "Resource replaced with: $resourceName")
+            // SVG 내용에서 글꼴과 색상 기본값으로 변경
+            val modifiedSvgContent = updateSvgFont(svgContent, "Pretendard", "#424242")
+
+            // 변경된 SVG 콘텐츠 반환
+            modifiedSvgContent
         } catch (e: IOException) {
             e.printStackTrace()
             Log.e("InnerMapFragment", "Resource not found: $resourceName")
+            null
         } catch (e: SVGParseException) {
             e.printStackTrace()
             Log.e("InnerMapFragment", "Error parsing SVG: ${e.message}")
+            null
         } catch (e: Exception) {
             e.printStackTrace()
             Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
+            null
         }
-
-
     }
+
+
+
+    fun replaceInnermap(groupIdToChange: String? = null) {
+        // `initInnermap` 함수에서 수정된 SVG 콘텐츠를 가져옴
+        val modifiedSvgContent = initInnermap()
+
+        if (modifiedSvgContent != null) {
+            try {
+                // groupIdToChange가 null이 아니면 해당 그룹의 fill 색상을 변경
+                val remodifiedSvgContent = groupIdToChange?.let {
+                    changeElementFillColor(modifiedSvgContent, it)
+                } ?: modifiedSvgContent
+
+                val svg = SVG.getFromString(remodifiedSvgContent)
+
+                // SVG를 PictureDrawable로 렌더링하여 ImageView에 설정
+                val drawable = PictureDrawable(svg.renderToPicture())
+                binding.includedMap.innermap.setImageDrawable(drawable)
+                Log.d("InnerMapFragment", "Resource replaced successfully")
+            } catch (e: SVGParseException) {
+                e.printStackTrace()
+                Log.e("InnerMapFragment", "Error parsing SVG: ${e.message}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
+            }
+        } else {
+            Log.e("InnerMapFragment", "Failed to initialize innermap")
+        }
+    }
+
 
     private fun changeElementFillColor(svgContent: String, elementId: String): String {
         // 특정 그룹 요소 안에 있는 자식 요소들의 스타일을 변경
@@ -479,24 +498,62 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
+    fun updateTextTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+        var updatedContent = svgContent
 
-    fun replaceFontInSvg(svgContent: String, fontFamily: String, fontWeight: String): String {
-        // 모든 font-family 속성을 "나눔스퀘어 네오"로 변경
-        var updatedContent = svgContent.replace(Regex("""font-family="[^"]*"""")) { matchResult ->
-            val originalValue = matchResult.value
-            val newValue = """font-family="$fontFamily""""
-            Log.d("FontReplacement", "font-family 변경: $originalValue -> $newValue")
-            newValue
-        }
+        // <text> 태그 내의 모든 내용을 찾아서 처리
+        val textTagContentRegex = Regex("""<text[^>]*>.*?</text>""", RegexOption.DOT_MATCHES_ALL)
+        updatedContent = textTagContentRegex.replace(updatedContent) { matchResult ->
+            var tagContent = matchResult.value
 
-        // 모든 font-weight 속성을 "extrabold"로 변경
-        updatedContent = updatedContent.replace(Regex("""font-weight="[^"]*"""")) { matchResult ->
-            val originalValue = matchResult.value
-            val newValue = """font-weight="$fontWeight""""
-            Log.d("FontReplacement", "font-weight 변경: $originalValue -> $newValue")
-            newValue
+            // font-family 속성 변경
+            tagContent = tagContent.replace(Regex("""font-family\s*=\s*["'][^"']*["']"""), """font-family="$targetFontFamily"""")
+
+            // fill 속성 변경
+            tagContent = tagContent.replace(Regex("""fill\s*=\s*["']#[0-9a-fA-F]{3,6}["']"""), """fill="$targetFillColor"""")
+
+            tagContent
         }
 
         return updatedContent
     }
+    fun updateStyleTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+        // <style> 태그의 내용 찾기
+        val styleTagRegex = Regex("""<style[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
+
+        return styleTagRegex.replace(svgContent) { matchResult ->
+            val styleContent = matchResult.groups[1]?.value ?: ""
+            // 각 CSS 규칙을 찾아서 처리
+            val updatedStyleContent = styleContent.replace(Regex("""([^{]+)\{([^}]+)\}""")) { cssMatch ->
+                val selectors = cssMatch.groups[1]?.value?.trim() ?: ""
+                var properties = cssMatch.groups[2]?.value ?: ""
+
+                // font-family 속성이 있는 블록만 처리
+                if (properties.contains(Regex("""font-family\s*:"""))) {
+                    // font-family 변경
+                    properties = properties.replace(Regex("""font-family\s*:\s*[^;]+;"""), """font-family: $targetFontFamily;""")
+
+                    // fill 속성 변경
+                    properties = properties.replace(Regex("""fill\s*:\s*[^;]+;"""), """fill: $targetFillColor;""")
+                }
+
+                "$selectors {\n$properties\n}"
+            }
+
+            "<style>\n$updatedStyleContent\n</style>"
+        }
+    }
+
+    fun updateSvgFont(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
+        var updatedContent = svgContent
+
+        // 1. <text> 태그의 속성 변경
+        updatedContent = updateTextTagContent(updatedContent, targetFontFamily, targetFillColor)
+
+        // 2. <style> 태그의 속성 변경
+        updatedContent = updateStyleTagContent(updatedContent, targetFontFamily, targetFillColor)
+
+        return updatedContent
+    }
+
 }
