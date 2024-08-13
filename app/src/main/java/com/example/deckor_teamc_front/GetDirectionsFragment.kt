@@ -187,8 +187,11 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             )
         }
 
+        Log.e("","hh")
+
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
+                Log.e("","notnulleeeee")
                 binding.getDirectionsMapLayout.visibility = View.VISIBLE
                 if (naverMap != null) {
                     drawRoute(routeResponse)
@@ -197,6 +200,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                     pendingRouteResponse = routeResponse
                 }
             }
+            else Log.e("","eeeee")
         }
     }
 

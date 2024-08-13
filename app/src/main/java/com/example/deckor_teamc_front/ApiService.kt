@@ -54,9 +54,8 @@ interface ApiService {
         @Query("endType") endType: String,
         @Query("endId") endId: Int? = null,
         @Query("endLat") endLat: Double? = null,
-        @Query("endLong") endLong: Double? = null,
-        @Query("barrierFree") barrierFree: String? = null
-    ): Call<ApiResponse<RouteResponse>>
+        @Query("endLong") endLong: Double? = null
+    ): Call<ApiResponse<List<RouteResponse>>>  // List<RouteResponse>로 반환 타입 변경
 
     @GET("search/buildings/{id}/floor/{floor}/mask/{redValue}")
     fun getMaskInfo(
