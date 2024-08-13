@@ -37,23 +37,53 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/frameLayoutContainer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/guideline_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toTopOf="@id/guideline_top">
-        </FrameLayout>
-        <Button
-            android:id="@+id/button_refresh"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Button"
-            tools:layout_editor_absoluteX="193dp"
-            tools:layout_editor_absoluteY="664dp"
-            tools:ignore="MissingConstraints" />
+        <com.otaliastudios.zoom.ZoomLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:transformation="centerInside"
+            app:transformationGravity="auto"
+            app:alignment="center"
+            app:overScrollHorizontal="true"
+            app:overScrollVertical="true"
+            app:overPinchable="true"
+            app:horizontalPanEnabled="true"
+            app:verticalPanEnabled="true"
+            app:zoomEnabled="true"
+            app:flingEnabled="false"
+            app:scrollEnabled="true"
+            app:oneFingerScrollEnabled="true"
+            app:twoFingersScrollEnabled="true"
+            app:threeFingersScrollEnabled="true"
+            app:minZoom="1"
+            app:minZoomType="zoom"
+            app:maxZoom="2.5"
+            app:maxZoomType="zoom"
+            app:animationDuration="100"
+            app:hasClickableChildren="true">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/innermapMask"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"/>
+
+                <ImageView
+                    android:id="@+id/innermap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter" />
+
+                <ImageView
+                    android:id="@+id/routeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+        </com.otaliastudios.zoom.ZoomLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

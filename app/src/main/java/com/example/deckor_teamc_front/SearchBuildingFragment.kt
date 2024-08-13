@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,21 +51,25 @@ class SearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.placeType == "BUILDING") {
-                // 건물을 선택했을 때 태그 추가
+            if (buildingItem.placeType == "TAG") {
+                // 건물 태그를 선택했을 때 태그 추가
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
-            } else {
-                // 건물이 아닌 것을 선택했을 때 OpenModal 함수 호출
+            } else if (buildingItem.placeType == "BUILDING") {
+                // 건물을 선택했을 때 OpenModal 함수 호출
                 openLocationModal(requireActivity(), buildingItem)
+            } else if (buildingItem.placeType == "CLASSROOM") {
+                // 장소을 선택했을 때 OpenModal 함수 호출
+                //TODO navigateToInnerMapFragment(buildingItem.abo)
             }
+            else Log.e("SearchBuildingFragment","No mating type")
             taggedBuildingId = buildingItem.id
         }
 
         binding.searchListRecyclerview.adapter = adapter
 
-        viewModel.buildingItems.observe(viewLifecycleOwner, Observer { buildingItems ->
+        viewModel.buildingSearchItems.observe(viewLifecycleOwner, Observer { buildingItems ->
             adapter.setBuildingList(buildingItems)
         })
 
@@ -72,7 +77,7 @@ class SearchBuildingFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val searchText = s.toString().trim()
+                val searchText = s.toString().trim().replace("${Constants.TAG_SUFFIX} ", "")
                 if (searchText.isNotBlank()) {
                     viewModel.searchBuildings(searchText, taggedBuildingId)
                 } else {
@@ -105,7 +110,7 @@ class SearchBuildingFragment : Fragment() {
         val tagView = LayoutInflater.from(context).inflate(R.layout.tag_item, tagContainer, false) as LinearLayout
         val tagText = tagView.findViewById<TextView>(R.id.tag_text)
         val removeButton = tagView.findViewById<ImageButton>(R.id.remove_button)
-        tagText.text = tag
+        tagText.text = tag.replace(" ${Constants.TAG_SUFFIX}", "")
 
         removeButton.setOnClickListener {
             tagContainer.removeView(tagView)
@@ -117,5 +122,21 @@ class SearchBuildingFragment : Fragment() {
         }
 
         tagContainer.addView(tagView)
+    }
+
+    private fun navigateToInnerMapFragment(selectedBuildingAboveFloor: Int,
+                                           selectedBuildingUnderFloor: Int,
+                                           selectedBuildingId: Int,
+                                           selectedBuildingName: String,
+                                           selectedRoomFloor: Int,
+                                           selectedRoomMask: Int) {
+        val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+            selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+            selectedBuildingId, selectedRoomFloor, selectedRoomMask)
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, innerMapFragment)
+        // transaction.addToBackStack("HomeFragment")
+        transaction.commit()
     }
 }

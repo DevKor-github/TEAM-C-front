@@ -13,12 +13,12 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.example.deckor_teamc_front.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
@@ -26,10 +26,6 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -44,9 +40,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    private lateinit var marker1: Marker
-    private lateinit var marker2: Marker
-
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
@@ -56,9 +49,20 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private val markers = mutableListOf<Marker>()
 
+    private lateinit var selectedBuildingName: String
+    private var selectedBuildingId: Int? = 1
+        get() = field ?: 1
+        set(value) {
+            field = value ?: 1
+        }
+    private var selectedBuildingAboveFloor: Int? = null
+    private var selectedBuildingUnderFloor: Int? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        closeModal()
+
         return binding.root
     }
 
@@ -99,6 +103,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             isImageOneDisplayed = !isImageOneDisplayed
         }
+
+        setHorizontalScrollViewButtonListeners()
     }
 
     private fun initMapView() {
@@ -125,12 +131,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        val cameraUpdate = CameraUpdate.zoomTo(17.0)
+        val cameraUpdate = CameraUpdate.zoomTo(16.0)
         naverMap.moveCamera(cameraUpdate)
 
         if(cameraPosition!=null){
             moveCameraToPosition(cameraPosition!!)
-
         }
 
         val includedLayout = binding.includedLayout.root
@@ -138,9 +143,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-        val buildingName = includedLayout.findViewById<TextView>(R.id.building_name)
-        var selectedBuilding = 0
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -150,7 +152,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     BottomSheetBehavior.STATE_EXPANDED -> {
                     }
                     BottomSheetBehavior.STATE_HIDDEN -> {
-                        selectedBuilding = 0
                     }
                     else -> {}
                 }
@@ -167,9 +168,29 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
+        val prefix = "고려대학교 서울캠퍼스"
+
+
+
+        val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
+
+        modalDepartButton.setOnClickListener {
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(true, cleanedBuildingName, "BUILDING", selectedBuildingId)
+            closeModal()
+        }
+
+        val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
+
+        modalArriveButton.setOnClickListener {
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(false, cleanedBuildingName, "BUILDING", selectedBuildingId)
+            closeModal()
+        }
+
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
-        //viewModel.fetchBuildingList()
+        viewModel.fetchBuildingList()
         // API 제공 될 때 까지 임시로 제거
 
     }
@@ -186,7 +207,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
@@ -194,14 +215,57 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, getDirectionsFragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack("HomeFragment")
         transaction.commit()
     }
 
     private fun navigateToInnerMapFragment() {
-        val innerMapFragment = InnerMapFragment()
+        if (selectedBuildingAboveFloor != null && selectedBuildingUnderFloor != null && selectedBuildingId != null && selectedBuildingName != null) {
+            val innerMapFragment = InnerMapFragment.newInstance(
+                selectedBuildingName!!,
+                selectedBuildingAboveFloor!!,
+                selectedBuildingUnderFloor!!,
+                selectedBuildingId!!
+            )
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.add(R.id.main_container, innerMapFragment)
+            transaction.addToBackStack("HomeFragment")
+            transaction.commit()
+        } else {
+            Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
+        }
+    }
+
+
+    private fun setHorizontalScrollViewButtonListeners() {
+        val buttonIds = listOf(
+            binding.cafeButton,
+            binding.cafeteriaButton,
+            binding.convenienceStoreButton,
+            binding.readingRoomButton,
+            binding.studyRoomButton,
+            binding.restAreaButton,
+            binding.waterPurifierButton,
+            binding.printerButton,
+            binding.vendingMachineButton,
+            binding.smokingAreaButton,
+            binding.sleepingRoomButton
+        )
+
+        for (button in buttonIds) {
+            button.setOnClickListener {
+                val idString = resources.getResourceEntryName(it.id)
+                val keyword = idString.replace("_button", "").uppercase()
+                navigateToPinSearchFragment(keyword)
+            }
+        }
+    }
+
+    private fun navigateToPinSearchFragment(keyword: String) {
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, innerMapFragment)
+        transaction.add(R.id.main_container, pinSearchFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -245,8 +309,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun observeViewModel() {
         viewModel.buildingList.observe(viewLifecycleOwner, Observer { buildingList ->
             buildingList.forEach { building ->
-                // 여기서 UI 업데이트 또는 로그 출력
-                Log.d("ExampleFragment", "Building: $building")
                 setMarker(building)
             }
         })
@@ -262,16 +324,77 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         markers.add(marker) // 마커 리스트에 추가
 
         marker.setOnClickListener {
-            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.building_name)
+            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+            val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+            val buildingOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+            val buildingNextOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
             val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
             val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
             buildingName.text = building.name
+            buildingAddress.text = building.address
+            if (building.operating) {
+                buildingOperating.text = "운영 중"
+            } else {
+                buildingOperating.text = "운영 종료"
+            }
+            buildingNextOperating.text = building.nextBuildingTime
+            selectedBuildingName = building.name
+            selectedBuildingAboveFloor = building.floor
+            selectedBuildingUnderFloor = building.underFloor
+            selectedBuildingId = building.buildingId
+
+            val facilityTypesRecyclerView = binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+            val adapter = FacilityTypeAdapter(building.facilityTypes)
+            facilityTypesRecyclerView.adapter = adapter
+
+            buildingName.setOnClickListener {
+                selectedBuildingId?.let { id ->
+                    val fragment = BuildingDetailFragment.newInstance(id)
+                    val transaction = parentFragmentManager.beginTransaction()
+                    transaction.replace(R.id.main_container, fragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+            }
+
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             true
         }
     }
 
+    fun updateSelectedBuilding(id: Int) {
+        selectedBuildingId = id
+        Log.e("updateSelectedBuilding", "$selectedBuildingId")
 
+        // buildingList 중에 id가 같은 데이터를 찾아 selectedBuildingName, selectedBuildingFloor를 갱신
+        val building = viewModel.buildingList.value?.find { it.buildingId == id }
+        if (building != null) {
+            selectedBuildingName = building.name
+            selectedBuildingAboveFloor = building.floor
+            selectedBuildingUnderFloor = building.underFloor
+            Log.d("updateSelectedBuilding", "Selected building name: $selectedBuildingName")
+        } else {
+            Log.e("updateSelectedBuilding", "Building with id $id not found")
+        }
+    }
+
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+                putString("placeType", placeType)
+                if (id != null) {
+                    putInt("placeId", id)
+                }
+            }
+        }
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment)
+            ?.addToBackStack("HomeFragment")
+            ?.commit()
+    }
 
 }

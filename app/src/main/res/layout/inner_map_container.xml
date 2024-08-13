@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,10 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:elevation="100dp"
+            android:elevation="5dp"
             android:background="#FDFDFD">
 
             <ImageView
+                android:id="@id/back_to_home_button"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,13 +27,16 @@
                 android:layout_marginRight="20dp" />
 
             <TextView
+                android:id="@+id/building_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="고려대학교 서울캠퍼스 애기능생활관"
+                android:text="테스트 텍스트"
                 android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/dark_gray"
                 android:textSize="18sp" />
         </LinearLayout>
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -40,7 +45,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -51,77 +56,77 @@
 
                     <ImageButton
                         android:id="@+id/cafe_button"
-                        android:src="@drawable/cafe_button"
+                        android:src="@drawable/button_cafe"
                         android:layout_width="62.6dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp"/>
 
                     <ImageButton
                         android:id="@+id/cafeteria_button"
-                        android:src="@drawable/cafeteria_button"
+                        android:src="@drawable/button_cafeteria"
                         android:layout_width="62.6dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp"/>
 
                     <ImageButton
-                        android:id="@+id/printer_button"
-                        android:src="@drawable/printer_button"
-                        android:layout_width="70dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="5dp" />
-
-                    <ImageButton
-                        android:id="@+id/purifier_button"
-                        android:src="@drawable/purifier_button"
-                        android:layout_width="70dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="5dp" />
-
-                    <ImageButton
                         android:id="@+id/convenience_store_button"
-                        android:src="@drawable/convenience_store_button"
+                        android:src="@drawable/button_convenience_store"
                         android:layout_width="70dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="5dp" />
-
-                    <ImageButton
-                        android:id="@+id/rest_area_button"
-                        android:src="@drawable/rest_area_button"
-                        android:layout_width="83dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
                         android:id="@+id/reading_room_button"
-                        android:src="@drawable/reading_room_button"
+                        android:src="@drawable/button_reading_room"
                         android:layout_width="70dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
                         android:id="@+id/study_room_button"
-                        android:src="@drawable/study_room_button"
+                        android:src="@drawable/button_study_room"
                         android:layout_width="80dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
-                        android:id="@+id/smoking_area_button"
-                        android:src="@drawable/smoking_area_button"
-                        android:layout_width="80dp"
+                        android:id="@+id/rest_area_button"
+                        android:src="@drawable/button_rest_area"
+                        android:layout_width="83dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
-                        android:id="@+id/vending_machine_button"
-                        android:src="@drawable/vending_machine_button"
+                        android:id="@+id/water_purifier_button"
+                        android:src="@drawable/button_water_purifier"
                         android:layout_width="70dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
+                        android:id="@+id/printer_button"
+                        android:src="@drawable/button_printer"
+                        android:layout_width="70dp"
+                        android:layout_height="29dp"
+                        android:layout_marginEnd="5dp" />
+
+                    <ImageButton
+                        android:id="@+id/vending_machine_button"
+                        android:src="@drawable/button_vending_machine"
+                        android:layout_width="70dp"
+                        android:layout_height="29dp"
+                        android:layout_marginEnd="5dp" />
+
+                    <ImageButton
+                        android:id="@+id/smoking_area_button"
+                        android:src="@drawable/button_smoking_area"
+                        android:layout_width="80dp"
+                        android:layout_height="29dp"
+                        android:layout_marginEnd="5dp" />
+
+                    <ImageButton
                         android:id="@+id/sleeping_room_button"
-                        android:src="@drawable/sleeping_room_button"
+                        android:src="@drawable/button_sleeping_room"
                         android:layout_width="70dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
@@ -130,15 +135,49 @@
 
             </HorizontalScrollView>
 
+            <ImageButton
+                android:id="@+id/pin_onoff_button"
+                android:layout_marginTop="55dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="end"
+                android:background="#00000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pin_off_button"/>
+
             <include
                 layout="@layout/inner_maps"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/includedMap"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="bottom|start">
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="@dimen/frame_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_container_background"
+                    android:clipToOutline="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="30dp">
+
+                    <com.example.deckor_teamc_front.CustomScrollView
+                        android:id="@+id/customScrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"/>
+                </FrameLayout>
+
+            </LinearLayout>
+
 
             <include
                 layout="@layout/modal_sheet"
                 android:id="@+id/includedModal" />
-        </FrameLayout>
+            </FrameLayout>
     </LinearLayout>
 </layout>

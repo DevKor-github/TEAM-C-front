@@ -50,6 +50,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("com.google.ar.sceneform:filament-android:1.17.1")
+    implementation ("com.google.code.gson:gson:2.8.6")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("androidx.compose.ui:ui-graphics-android:1.6.8")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -60,4 +63,7 @@ dependencies {
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("com.caverock:androidsvg:1.4")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.otaliastudios:zoomlayout:1.9.0")
+
 }
