@@ -306,11 +306,19 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-    private fun closeModal() {
+    fun closeModal() {
         val includedLayout = binding.includedLayout.root
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    // BottomSheet의 확장 상태를 확인하는 메서드
+    fun isBottomSheetExpanded(): Boolean {
+        val includedLayout = binding.includedLayout.root
+        val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+        return standardBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun observeViewModel() {
