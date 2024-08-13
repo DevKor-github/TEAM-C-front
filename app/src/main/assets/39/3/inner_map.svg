@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_x33_" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #f48589;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #facbcf;
+      }
+
+      .cls-3 {
+        fill: #231f20;
+        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+        font-size: 12px;
+      }
+
+      .cls-4 {
+        fill: #fef2f2;
+      }
+
+      .cls-5 {
+        fill: #f48589;
+      }
+    </style>
+  </defs>
+  <g id="Layer_x5F_border-4" data-name="Layer_x5F_border">
+    <g>
+      <polygon class="cls-4" points="526.92 680.55 526.92 629.29 43.72 629.29 43.72 331.55 953.78 331.55 953.78 629.29 628.98 629.29 628.98 680.55 526.92 680.55"/>
+      <path class="cls-5" d="M949.78,335.55v289.73h-324.8v51.26h-94.06v-51.26H47.72v-289.73h902.06M957.78,327.55H39.72v305.73h483.2v51.26h110.06v-51.26h324.8v-305.73h0Z"/>
+    </g>
+  </g>
+  <g id="Layer_46">
+    <rect class="cls-2" x="209.12" y="335.55" width="69.39" height="53.81"/>
+    <text class="cls-3" transform="translate(232.45 359.71)"><tspan x="0" y="0">307</tspan><tspan x="-4.6" y="14.4">준비실</tspan></text>
+  </g>
+  <g id="Layer_47">
+    <rect class="cls-2" x="209.12" y="389.37" width="69.39" height="53.81"/>
+    <text class="cls-3" transform="translate(230.87 412.05)"><tspan x="0" y="0">306</tspan><tspan x="1.57" y="14.4">창고</tspan></text>
+  </g>
+  <g id="Layer_48">
+    <rect class="cls-2" x="278.51" y="335.55" width="87.49" height="107.62"/>
+    <text class="cls-3" transform="translate(308.8 381.03)"><tspan x="0" y="0">308</tspan><tspan x="-15.37" y="14.4">국제교육팀</tspan><tspan x="-15.37" y="28.8">문서보관실</tspan></text>
+  </g>
+  <g id="Layer_49">
+    <polygon class="cls-1" points="366 443.18 434.63 443.18 434.63 414.77 416.17 414.77 416.17 401.15 447.38 401.15 447.38 335.55 366 335.55 366 443.18"/>
+  </g>
+  <g id="Layer_50">
+    <polygon class="cls-1" points="468.48 443.18 468.48 414.34 489.58 414.34 489.58 400.27 457.05 400.27 457.05 335.55 536.26 335.55 536.26 443.18 468.48 443.18"/>
+  </g>
+  <g id="Layer_51">
+    <rect class="cls-2" x="718.77" y="335.48" width="73.47" height="80.92"/>
+    <text class="cls-3" transform="translate(739.22 375.94)"><tspan x="0" y="0">301C</tspan><tspan x="-.78" y="14.4">상담실</tspan></text>
+  </g>
+  <g id="Layer_52">
+    <rect class="cls-2" x="718.77" y="416.4" width="73.47" height="81.22"/>
+    <text class="cls-3" transform="translate(739.34 453.25)"><tspan x="0" y="0">301B</tspan><tspan x="-.9" y="14.4">상담실</tspan></text>
+  </g>
+  <g id="Layer_53">
+    <polygon class="cls-2" points="718.77 542.54 819.87 542.54 819.87 625.29 949.78 625.29 949.78 335.55 792.24 335.55 792.24 497.62 718.77 497.62 718.77 542.54"/>
+    <text class="cls-3" transform="translate(860.3 480.42)"><tspan x="0" y="0">301</tspan><tspan x="-16.79" y="14.4">국제교육팀</tspan></text>
+  </g>
+  <g id="Layer_54">
+    <polygon class="cls-2" points="624.98 676.55 624.98 625.29 819.87 625.29 819.87 542.54 530.92 542.54 530.92 676.55 624.98 676.55"/>
+    <text class="cls-3" transform="translate(647.38 583.34)"><tspan x="0" y="0">301A</tspan><tspan x="-12.08" y="14.4">국제교육팀</tspan></text>
+  </g>
+  <g id="Layer_55">
+    <rect class="cls-2" x="409.16" y="488.23" width="121.76" height="137.05"/>
+    <text class="cls-3" transform="translate(457.22 552.54)"><tspan x="0" y="0">302</tspan><tspan x="-15.62" y="14.4">멘토상담실</tspan></text>
+  </g>
+  <g id="Layer_56">
+    <rect class="cls-2" x="278.51" y="488.23" width="130.65" height="137.05"/>
+    <text class="cls-3" transform="translate(330.89 552.54)"><tspan x="0" y="0">303</tspan><tspan x="-35.54" y="14.4">글로벌 리더십 센터</tspan></text>
+  </g>
+  <g id="Layer_57">
+    <rect class="cls-2" x="209.12" y="488.23" width="69.39" height="137.05"/>
+    <text class="cls-3" transform="translate(230.84 552.54)"><tspan x="0" y="0">304</tspan><tspan x="-15.47" y="14.4">국제처장실</tspan></text>
+  </g>
+  <g id="Layer_58">
+    <rect class="cls-2" x="47.72" y="496.95" width="161.4" height="128.34"/>
+    <text class="cls-3" transform="translate(110.74 549.7)"><tspan x="0" y="0">304A</tspan><tspan x=".62" y="14.4">국제부</tspan><tspan x=".62" y="28.8">처장실</tspan></text>
+  </g>
+  <g id="Layer_59">
+    <rect class="cls-2" x="47.72" y="335.55" width="161.4" height="161.4"/>
+    <text class="cls-3" transform="translate(115.6 412.06)"><tspan x="0" y="0">305</tspan><tspan x="-22.79" y="14.4">김재철 라운지</tspan></text>
+  </g>
+  <g id="Layer_x5F_others-4" data-name="Layer_x5F_others">
+    <rect class="cls-2" x="621.78" y="335.55" width="70.69" height="60.47"/>
+    <g>
+      <rect class="cls-1" x="536.26" y="335.68" width="41.69" height="9.92"/>
+      <rect class="cls-1" x="536.26" y="345.59" width="41.69" height="10.31"/>
+      <rect class="cls-1" x="536.26" y="355.91" width="41.69" height="11.9"/>
+      <rect class="cls-1" x="536.26" y="367.81" width="41.69" height="9.52"/>
+      <rect class="cls-1" x="536.26" y="377.33" width="41.69" height="11.9"/>
+      <rect class="cls-1" x="536.26" y="389.23" width="41.69" height="8.53"/>
+      <rect class="cls-1" x="536.26" y="397.76" width="41.69" height="12.89"/>
+      <rect class="cls-1" x="536.26" y="410.65" width="41.69" height="11.9"/>
+      <rect class="cls-1" x="536.26" y="422.55" width="41.69" height="10.31"/>
+      <rect class="cls-1" x="536.26" y="432.86" width="41.69" height="10.31"/>
+    </g>
+    <g>
+      <rect class="cls-1" x="577.95" y="335.48" width="43.83" height="9.92"/>
+      <rect class="cls-1" x="577.95" y="345.39" width="43.83" height="10.31"/>
+      <rect class="cls-1" x="577.95" y="355.71" width="43.83" height="11.9"/>
+      <rect class="cls-1" x="577.95" y="367.61" width="43.83" height="9.52"/>
+      <rect class="cls-1" x="577.95" y="377.13" width="43.83" height="11.9"/>
+      <rect class="cls-1" x="577.95" y="389.03" width="43.83" height="8.53"/>
+      <rect class="cls-1" x="577.95" y="397.56" width="43.83" height="12.89"/>
+      <rect class="cls-1" x="577.95" y="410.45" width="43.83" height="11.9"/>
+      <rect class="cls-1" x="577.95" y="422.35" width="43.83" height="10.31"/>
+      <rect class="cls-1" x="577.95" y="432.66" width="43.83" height="10.31"/>
+    </g>
+    <rect class="cls-1" x="692.47" y="335.55" width="26.3" height="60.47"/>
+  </g>
+</svg>

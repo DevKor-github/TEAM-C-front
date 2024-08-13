@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fed0d0;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #ea8b8b;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3 {
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #fef3f2;
+        stroke-width: 8px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+      }
+
+      .cls-4 {
+        stroke: #dc8e8c;
+      }
+
+      .cls-5 {
+        font-size: 12px;
+      }
+
+      .cls-5, .cls-6, .cls-7 {
+        fill: #000;
+        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+      }
+
+      .cls-6 {
+        font-size: 6px;
+      }
+
+      .cls-7 {
+        font-size: 10px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_border">
+    <polygon class="cls-2" points="883.9 474.2 883.9 545.8 862.6 545.8 862.6 444 314 444 314 226.6 154.7 226.6 154.7 444.2 99.1 444 99.1 685.4 862.6 685.4 862.6 585.7 924.2 585.7 924.2 474.2 883.9 474.2"/>
+  </g>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-1" x="584.8" y="585.7" width="69" height="99.8"/>
+    <text class="cls-5" transform="translate(602.7 626.5)"><tspan x="0" y="0">104A</tspan><tspan x="-12.1" y="14.4">영어교육과</tspan><tspan x="-.7" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_16" data-name="Layer 16">
+    <rect class="cls-1" x="653.8" y="585.7" width="68.4" height="99.8"/>
+    <text class="cls-5" transform="translate(676.5 626.2)"><tspan x="0" y="0">105</tspan><tspan x="-16.9" y="14.4">지리교육과</tspan><tspan x="-5.5" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_17" data-name="Layer 17">
+    <rect class="cls-1" x="722.2" y="585.7" width="69.4" height="99.8"/>
+    <text class="cls-5" transform="translate(745.2 625.5)"><tspan x="0" y="0">106</tspan><tspan x="-16.8" y="14.4">역사교육과</tspan><tspan x="-5.4" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_18" data-name="Layer 18">
+    <rect class="cls-1" x="791.5" y="585.7" width="71" height="99.8"/>
+    <text class="cls-5" transform="translate(810.7 627)"><tspan x="0" y="0">106A</tspan><tspan x="-17.8" y="14.4">독서프로그램</tspan><tspan x="-.7" y="28.8">연구소</tspan></text>
+  </g>
+  <g id="Layer_19" data-name="Layer 19">
+    <rect class="cls-1" x="791.5" y="444" width="71" height="101.9"/>
+    <text class="cls-5" transform="translate(815.9 494.9)"><tspan x="0" y="0">107</tspan><tspan x="-17.3" y="14.4">교육신문사</tspan></text>
+  </g>
+  <g id="Layer_20" data-name="Layer 20">
+    <rect class="cls-1" x="722.2" y="444" width="69.4" height="102"/>
+    <text class="cls-5" transform="translate(748 485.1)"><tspan x="0" y="0">108</tspan><tspan x="-16.7" y="14.4">교육대학원</tspan><tspan x="-11" y="28.8">학생회실</tspan></text>
+  </g>
+  <g id="Layer_21" data-name="Layer 21">
+    <rect class="cls-1" x="679.5" y="502.3" width="42.6" height="43.6"/>
+    <text class="cls-5" transform="translate(684.5 526.1)"><tspan x="0" y="0">109A</tspan></text>
+  </g>
+  <g id="Layer_22" data-name="Layer 22">
+    <rect class="cls-1" x="679.5" y="444" width="42.6" height="58.3"/>
+    <text class="cls-7" transform="translate(682.5 476.1)"><tspan x="0" y="0">109A-1</tspan></text>
+  </g>
+  <g id="Layer_23" data-name="Layer 23">
+    <rect class="cls-1" x="584.8" y="444" width="94.7" height="102"/>
+    <text class="cls-5" transform="translate(620.5 495)"><tspan x="0" y="0">109</tspan></text>
+  </g>
+  <g id="Layer_24" data-name="Layer 24">
+    <rect class="cls-1" x="516.1" y="444" width="68.7" height="102"/>
+    <text class="cls-5" transform="translate(540.1 481)"><tspan x="0" y="0">110</tspan><tspan x="-12.4" y="14.4">신체구성</tspan><tspan x="-6.7" y="28.8">측정실</tspan></text>
+  </g>
+  <g id="Layer_25" data-name="Layer 25">
+    <rect class="cls-3" x="378.7" y="444" width="68" height="102"/>
+  </g>
+  <g id="Layer_26" data-name="Layer 26">
+    <rect class="cls-3" x="314" y="444" width="64.8" height="102"/>
+  </g>
+  <g id="Layer_3" data-name="Layer 3">
+    <polygon class="cls-1" points="503.9 647.8 516.1 647.8 516.1 585.7 584.8 585.7 584.8 685.4 503.9 685.4 503.9 647.8"/>
+    <text class="cls-5" transform="translate(538.8 627)"><tspan x="0" y="0">104</tspan><tspan x="-16.8" y="14.4">국어교육과</tspan><tspan x="-5.4" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_4" data-name="Layer 4">
+    <polygon class="cls-1" points="446.7 585.7 447.7 648.2 458.6 647.8 459.6 685.4 378.7 685.4 378.7 585.7 446.7 585.7"/>
+    <text class="cls-5" transform="translate(401.1 632)"><tspan x="0" y="0">103</tspan><tspan x="-16.8" y="14.4">본관당직실</tspan></text>
+  </g>
+  <g id="Layer_5" data-name="Layer 5">
+    <rect class="cls-1" x="310.4" y="585.7" width="68.4" height="99.8"/>
+    <text class="cls-5" transform="translate(327.3 625.5)"><tspan x="0" y="0">102A</tspan><tspan x="-12.2" y="14.4">수학교육과</tspan><tspan x="-.8" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_6" data-name="Layer 6">
+    <rect class="cls-1" x="240.7" y="585.7" width="69.7" height="99.8"/>
+    <text class="cls-5" transform="translate(263.2 627)"><tspan x="0" y="0">102</tspan><tspan x="-16.9" y="14.4">가정교육과</tspan><tspan x="-5.5" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_7" data-name="Layer 7">
+    <rect class="cls-1" x="200.8" y="585.7" width="39.9" height="99.8"/>
+    <text class="cls-7" transform="translate(208.5 627.7)"><tspan x="0" y="0">101B</tspan><tspan x="2.9" y="12">진로</tspan><tspan x="-1.8" y="24">상담실</tspan></text>
+  </g>
+  <g id="Layer_8" data-name="Layer 8">
+    <rect class="cls-1" x="163.9" y="585.7" width="36.9" height="99.8"/>
+    <text class="cls-6" transform="translate(174.8 628.9)"><tspan x="0" y="0">101A</tspan><tspan x="-7.5" y="7.2">진로상담실,</tspan><tspan x="-6.7" y="14.4">논문지도실</tspan></text>
+  </g>
+  <g id="Layer_9" data-name="Layer 9">
+    <rect class="cls-1" x="99.1" y="585.7" width="64.8" height="99.8"/>
+    <text class="cls-5" transform="translate(121.3 625.5)"><tspan x="0" y="0">101</tspan><tspan x="-12.4" y="14.4">교육학과</tspan><tspan x="-6.7" y="28.8">사무실</tspan></text>
+  </g>
+  <g id="Layer_10" data-name="Layer 10">
+    <rect class="cls-1" x="187.6" y="444" width="86.6" height="102"/>
+    <text class="cls-5" transform="translate(220.6 483.7)"><tspan x="0" y="0">114</tspan><tspan x="-6.8" y="14.4">대학원</tspan><tspan x="-12.5" y="28.8">세미나실</tspan></text>
+  </g>
+  <g id="Layer_11" data-name="Layer 11">
+    <rect class="cls-1" x="99.1" y="444" width="88.5" height="102"/>
+    <text class="cls-5" transform="translate(128.4 489)"><tspan x="0" y="0">114A</tspan><tspan x="-2.1" y="14.4">자료실</tspan></text>
+  </g>
+  <g id="Layer_12" data-name="Layer 12">
+    <rect class="cls-1" x="233.7" y="226.6" width="37.1" height="30.9"/>
+    <text class="cls-5" transform="translate(234.8 246.7)"><tspan x="0" y="0">133A</tspan></text>
+  </g>
+  <g id="Layer_13" data-name="Layer 13">
+    <polygon class="cls-1" points="154.7 226.6 154.7 444.2 314 444 314 226.6 270.7 226.6 270.7 257.5 233.7 257.5 233.7 226.6 154.7 226.6"/>
+    <text class="cls-5" transform="translate(224.1 335.4)"><tspan x="0" y="0">113</tspan><tspan x="-35.3" y="14.4">멀티미디어강의실</tspan></text>
+  </g>
+  <g id="Layer_others">
+    <rect class="cls-3" x="458.6" y="647.8" width="44.3" height="37.6"/>
+    <rect class="cls-3" x="446.7" y="444" width="69.4" height="102"/>
+    <g>
+      <path class="cls-4" d="M462,546h-.4M500,503.6h-.4"/>
+      <path class="cls-4" d="M499,503.6h-36.5"/>
+      <path class="cls-4" d="M462,503.6h-.4M500,489h-.4"/>
+      <path class="cls-4" d="M499,489h-36.5"/>
+      <path class="cls-4" d="M462,489h-.4"/>
+      <path class="cls-4" d="M461.6,540.8v-37.1"/>
+      <path class="cls-4" d="M500,538v2.7M500,546h0"/>
+      <path class="cls-4" d="M500,535.4v-31.8"/>
+      <path class="cls-4" d="M461.6,489v-39.7"/>
+      <path class="cls-4" d="M500,489v-39.7"/>
+      <path class="cls-4" d="M500,538h-.4"/>
+      <path class="cls-4" d="M499,538h-36.5"/>
+      <path class="cls-4" d="M462,538h-.4M500,535.4h-.4"/>
+      <path class="cls-4" d="M499,535.4h-36.5"/>
+      <path class="cls-4" d="M462,535.4h-.4M500,532.7h-.4"/>
+      <path class="cls-4" d="M499,532.7h-36.5"/>
+      <path class="cls-4" d="M462,532.7h-.4M500,530.1h-.4"/>
+      <path class="cls-4" d="M499,530.1h-36.5"/>
+      <path class="cls-4" d="M462,530.1h-.4M500,527.4h-.4"/>
+      <path class="cls-4" d="M499,527.4h-36.5"/>
+      <path class="cls-4" d="M462,527.4h-.4M500,524.8h-.4"/>
+      <path class="cls-4" d="M499,524.8h-36.5"/>
+      <path class="cls-4" d="M462,524.8h-.4M500,522.1h-.4"/>
+      <path class="cls-4" d="M499,522.1h-36.5"/>
+      <path class="cls-4" d="M462,522.1h-.4M500,519.5h-.4"/>
+      <path class="cls-4" d="M499,519.5h-36.5"/>
+      <path class="cls-4" d="M462,519.5h-.4M500,516.7h-.4"/>
+      <path class="cls-4" d="M499,516.7h-36.5"/>
+      <path class="cls-4" d="M462,516.7h-.4M500,514.3h-.4"/>
+      <path class="cls-4" d="M499,514.3h-36.5"/>
+      <path class="cls-4" d="M462,514.3h-.4M500,511.6h-.4"/>
+      <path class="cls-4" d="M499,511.6h-36.5"/>
+      <path class="cls-4" d="M462,511.6h-.4M500,509h-.4"/>
+      <path class="cls-4" d="M499,509h-36.5"/>
+      <path class="cls-4" d="M462,509h-.4M500,506.2h-.4"/>
+      <path class="cls-4" d="M499,506.2h-36.5"/>
+      <path class="cls-4" d="M462,506.2h-.4M500,503.6h-.4"/>
+      <path class="cls-4" d="M499,503.6h-36.5"/>
+      <path class="cls-4" d="M462,503.6h-.4M500,489h-.4"/>
+      <path class="cls-4" d="M499,489h-36.5"/>
+      <path class="cls-4" d="M462,489h-.4M500,486.3h-.4"/>
+      <path class="cls-4" d="M499,486.3h-36.5"/>
+      <path class="cls-4" d="M462,486.3h-.4M500,483.7h-.4"/>
+      <path class="cls-4" d="M499,483.7h-36.5"/>
+      <path class="cls-4" d="M462,483.7h-.4M500,481h-.4"/>
+      <path class="cls-4" d="M499,481h-36.5"/>
+      <path class="cls-4" d="M462,481h-.4M500,478.4h-.4"/>
+      <path class="cls-4" d="M499,478.4h-36.5"/>
+      <path class="cls-4" d="M462,478.4h-.4M500,475.7h-.4"/>
+      <path class="cls-4" d="M499,475.7h-36.5"/>
+      <path class="cls-4" d="M462,475.7h-.4M500,473.1h-.4"/>
+      <path class="cls-4" d="M499,473.1h-36.5"/>
+      <path class="cls-4" d="M462,473.1h-.4M500,470.3h-.4"/>
+      <path class="cls-4" d="M499,470.3h-36.5"/>
+      <path class="cls-4" d="M462,470.3h-.4M500,467.7h-.4"/>
+      <path class="cls-4" d="M499,467.7h-36.5"/>
+      <path class="cls-4" d="M462,467.7h-.4M500,465.1h-.4"/>
+      <path class="cls-4" d="M499,465.1h-36.5"/>
+      <path class="cls-4" d="M462,465.1h-.4M500,462.5h-.4"/>
+      <path class="cls-4" d="M499,462.5h-36.5"/>
+      <path class="cls-4" d="M462,462.5h-.4M500,460h-.4"/>
+      <path class="cls-4" d="M499,460h-36.5"/>
+      <path class="cls-4" d="M462,460h-.4M500,457.2h-.4"/>
+      <path class="cls-4" d="M499,457.2h-36.5"/>
+      <path class="cls-4" d="M462,457.2h-.4M500,454.6h-.4"/>
+      <path class="cls-4" d="M499,454.6h-36.5"/>
+      <path class="cls-4" d="M462,454.6h-.4M500,451.9h-.4"/>
+      <path class="cls-4" d="M499,451.9h-36.5"/>
+      <path class="cls-4" d="M462,451.9h-.4M500,538h-.4"/>
+      <path class="cls-4" d="M499,538h-36.5"/>
+      <path class="cls-4" d="M462,538h-.4M500,535.4h-.4"/>
+      <path class="cls-4" d="M499,535.4h-36.5"/>
+      <path class="cls-4" d="M462,535.4h-.4M500,532.7h-.4"/>
+      <path class="cls-4" d="M499,532.7h-36.5"/>
+      <path class="cls-4" d="M462,532.7h-.4M500,530.1h-.4"/>
+      <path class="cls-4" d="M499,530.1h-36.5"/>
+      <path class="cls-4" d="M462,530.1h-.4M500,527.4h-.4"/>
+      <path class="cls-4" d="M499,527.4h-36.5"/>
+      <path class="cls-4" d="M462,527.4h-.4M500,524.8h-.4"/>
+      <path class="cls-4" d="M499,524.8h-36.5"/>
+      <path class="cls-4" d="M462,524.8h-.4M500,522.1h-.4"/>
+      <path class="cls-4" d="M499,522.1h-36.5"/>
+      <path class="cls-4" d="M462,522.1h-.4M500,519.5h-.4"/>
+      <path class="cls-4" d="M499,519.5h-36.5"/>
+      <path class="cls-4" d="M462,519.5h-.4M500,516.7h-.4"/>
+      <path class="cls-4" d="M499,516.7h-36.5"/>
+      <path class="cls-4" d="M462,516.7h-.4M500,514.3h-.4"/>
+      <path class="cls-4" d="M499,514.3h-36.5"/>
+      <path class="cls-4" d="M462,514.3h-.4M500,511.6h-.4"/>
+      <path class="cls-4" d="M499,511.6h-36.5"/>
+      <path class="cls-4" d="M462,511.6h-.4M500,509h-.4"/>
+      <path class="cls-4" d="M499,509h-36.5"/>
+      <path class="cls-4" d="M462,509h-.4M500,506.2h-.4"/>
+      <path class="cls-4" d="M499,506.2h-36.5"/>
+      <path class="cls-4" d="M462,506.2h-.4M500,486.3h-.4"/>
+      <path class="cls-4" d="M499,486.3h-36.5"/>
+      <path class="cls-4" d="M462,486.3h-.4M500,483.7h-.4"/>
+      <path class="cls-4" d="M499,483.7h-36.5"/>
+      <path class="cls-4" d="M462,483.7h-.4M500,481h-.4"/>
+      <path class="cls-4" d="M499,481h-36.5"/>
+      <path class="cls-4" d="M462,481h-.4M500,478.4h-.4"/>
+      <path class="cls-4" d="M499,478.4h-36.5"/>
+      <path class="cls-4" d="M462,478.4h-.4M500,475.7h-.4"/>
+      <path class="cls-4" d="M499,475.7h-36.5"/>
+      <path class="cls-4" d="M462,475.7h-.4M500,473.1h-.4"/>
+      <path class="cls-4" d="M499,473.1h-36.5"/>
+      <path class="cls-4" d="M462,473.1h-.4M500,470.3h-.4"/>
+      <path class="cls-4" d="M499,470.3h-36.5"/>
+      <path class="cls-4" d="M462,470.3h-.4M500,467.7h-.4"/>
+      <path class="cls-4" d="M499,467.7h-36.5"/>
+      <path class="cls-4" d="M462,467.7h-.4M500,465.1h-.4"/>
+      <path class="cls-4" d="M499,465.1h-36.5"/>
+      <path class="cls-4" d="M462,465.1h-.4M500,462.5h-.4"/>
+      <path class="cls-4" d="M499,462.5h-36.5"/>
+      <path class="cls-4" d="M462,462.5h-.4M500,460h-.4"/>
+      <path class="cls-4" d="M499,460h-36.5"/>
+      <path class="cls-4" d="M462,460h-.4M500,457.2h-.4"/>
+      <path class="cls-4" d="M499,457.2h-36.5"/>
+      <path class="cls-4" d="M462,457.2h-.4M500,454.6h-.4"/>
+      <path class="cls-4" d="M499,454.6h-36.5"/>
+      <path class="cls-4" d="M462,454.6h-.4M500,451.9h-.4"/>
+      <path class="cls-4" d="M499,451.9h-36.5"/>
+      <path class="cls-4" d="M462,451.9h-.4"/>
+      <path class="cls-4" d="M462,546h.4v-102h-.4"/>
+      <path class="cls-4" d="M462,546v-102"/>
+      <path class="cls-4" d="M499,546h.4v-102h-.4"/>
+      <path class="cls-4" d="M499,546v-102"/>
+      <path class="cls-4" d="M478.6,446l2.3-2,2.1,2"/>
+      <path class="cls-4" d="M478.6,446l.6.4M483,446l-.6.4"/>
+      <path class="cls-4" d="M479.2,446.4l1.6-1.5,1.5,1.5"/>
+      <path class="cls-4" d="M500,449.3h-.4"/>
+      <path class="cls-4" d="M499,449.3h-36.5"/>
+      <path class="cls-4" d="M462,449.3h-.4M500,449.3h-.4"/>
+      <path class="cls-4" d="M499,449.3h-36.5"/>
+      <path class="cls-4" d="M462,449.3h-.4M500,446.6h-.4"/>
+      <path class="cls-4" d="M499,446.6h-36.5"/>
+      <path class="cls-4" d="M462,446.6h-.4M500,446.6h-.4"/>
+      <path class="cls-4" d="M499,446.6h-36.5"/>
+      <path class="cls-4" d="M462,446.6h-.4M500,444h-.4"/>
+      <path class="cls-4" d="M499,444h-36.5"/>
+      <path class="cls-4" d="M462,444h-.4M500,444h-.4"/>
+      <path class="cls-4" d="M499,444h-36.5"/>
+      <path class="cls-4" d="M462,444h-.4M461.6,446.6v2.7M500,446.6v2.7M461.6,444v2.7M500,444v2.7M500,540.8h-.4"/>
+      <path class="cls-4" d="M499,540.8h-36.5"/>
+      <path class="cls-4" d="M462,540.8h-.4M500,540.8h-.4"/>
+      <path class="cls-4" d="M499,540.8h-36.5"/>
+      <path class="cls-4" d="M500,540.8v2.7h-.4"/>
+      <path class="cls-4" d="M499,543.4h-36.5"/>
+      <path class="cls-4" d="M462,543.4h-.4M500,543.4h-.4"/>
+      <path class="cls-4" d="M499,543.4h-36.5"/>
+      <path class="cls-4" d="M462,543.4h-.4v2.5"/>
+      <path class="cls-4" d="M499.2,444h0"/>
+      <path class="cls-4" d="M499.2,444h0"/>
+      <path class="cls-4" d="M462.4,444h0"/>
+      <path class="cls-4" d="M462.4,444h0"/>
+    </g>
+    <g>
+      <path class="cls-4" d="M903,561.9h-.2M924.2,525h-.2"/>
+      <path class="cls-4" d="M923.7,525h-20.3"/>
+      <path class="cls-4" d="M903,525h-.2M924.2,512.3h-.2"/>
+      <path class="cls-4" d="M923.7,512.3h-20.3"/>
+      <path class="cls-4" d="M903,512.3h-.2"/>
+      <path class="cls-4" d="M902.8,557.4v-32.3"/>
+      <path class="cls-4" d="M924.2,555v2.4M924.2,561.9h0"/>
+      <path class="cls-4" d="M924.2,552.7v-27.7"/>
+      <path class="cls-4" d="M902.8,512.3v-34.6"/>
+      <path class="cls-4" d="M924.2,512.3v-34.6"/>
+      <path class="cls-4" d="M924.2,555h-.2"/>
+      <path class="cls-4" d="M923.7,555h-20.3"/>
+      <path class="cls-4" d="M903,555h-.2M924.2,552.7h-.2"/>
+      <path class="cls-4" d="M923.7,552.7h-20.3"/>
+      <path class="cls-4" d="M903,552.7h-.2M924.2,550.3h-.2"/>
+      <path class="cls-4" d="M923.7,550.3h-20.3"/>
+      <path class="cls-4" d="M903,550.3h-.2M924.2,548.1h-.2"/>
+      <path class="cls-4" d="M923.7,548.1h-20.3"/>
+      <path class="cls-4" d="M903,548.1h-.2M924.2,545.7h-.2"/>
+      <path class="cls-4" d="M923.7,545.7h-20.3"/>
+      <path class="cls-4" d="M903,545.7h-.2M924.2,543.5h-.2"/>
+      <path class="cls-4" d="M923.7,543.5h-20.3"/>
+      <path class="cls-4" d="M903,543.5h-.2M924.2,541.1h-.2"/>
+      <path class="cls-4" d="M923.7,541.1h-20.3"/>
+      <path class="cls-4" d="M903,541.1h-.2M924.2,538.8h-.2"/>
+      <path class="cls-4" d="M923.7,538.8h-20.3"/>
+      <path class="cls-4" d="M903,538.8h-.2M924.2,536.4h-.2"/>
+      <path class="cls-4" d="M923.7,536.4h-20.3"/>
+      <path class="cls-4" d="M903,536.4h-.2M924.2,534.3h-.2"/>
+      <path class="cls-4" d="M923.7,534.3h-20.3"/>
+      <path class="cls-4" d="M903,534.3h-.2M924.2,531.9h-.2"/>
+      <path class="cls-4" d="M923.7,531.9h-20.3"/>
+      <path class="cls-4" d="M903,531.9h-.2M924.2,529.7h-.2"/>
+      <path class="cls-4" d="M923.7,529.7h-20.3"/>
+      <path class="cls-4" d="M903,529.7h-.2M924.2,527.3h-.2"/>
+      <path class="cls-4" d="M923.7,527.3h-20.3"/>
+      <path class="cls-4" d="M903,527.3h-.2M924.2,525h-.2"/>
+      <path class="cls-4" d="M923.7,525h-20.3"/>
+      <path class="cls-4" d="M903,525h-.2M924.2,512.3h-.2"/>
+      <path class="cls-4" d="M923.7,512.3h-20.3"/>
+      <path class="cls-4" d="M903,512.3h-.2M924.2,510h-.2"/>
+      <path class="cls-4" d="M923.7,510h-20.3"/>
+      <path class="cls-4" d="M903,510h-.2M924.2,507.7h-.2"/>
+      <path class="cls-4" d="M923.7,507.7h-20.3"/>
+      <path class="cls-4" d="M903,507.7h-.2M924.2,505.3h-.2"/>
+      <path class="cls-4" d="M923.7,505.3h-20.3"/>
+      <path class="cls-4" d="M903,505.3h-.2M924.2,503.1h-.2"/>
+      <path class="cls-4" d="M923.7,503.1h-20.3"/>
+      <path class="cls-4" d="M903,503.1h-.2M924.2,500.7h-.2"/>
+      <path class="cls-4" d="M923.7,500.7h-20.3"/>
+      <path class="cls-4" d="M903,500.7h-.2M924.2,498.4h-.2"/>
+      <path class="cls-4" d="M923.7,498.4h-20.3"/>
+      <path class="cls-4" d="M903,498.4h-.2M924.2,496.1h-.2"/>
+      <path class="cls-4" d="M923.7,496.1h-20.3"/>
+      <path class="cls-4" d="M903,496.1h-.2M924.2,493.8h-.2"/>
+      <path class="cls-4" d="M923.7,493.8h-20.3"/>
+      <path class="cls-4" d="M903,493.8h-.2M924.2,491.6h-.2"/>
+      <path class="cls-4" d="M923.7,491.6h-20.3"/>
+      <path class="cls-4" d="M903,491.6h-.2M924.2,489.3h-.2"/>
+      <path class="cls-4" d="M923.7,489.3h-20.3"/>
+      <path class="cls-4" d="M903,489.3h-.2M924.2,487h-.2"/>
+      <path class="cls-4" d="M923.7,487h-20.3"/>
+      <path class="cls-4" d="M903,487h-.2M924.2,484.7h-.2"/>
+      <path class="cls-4" d="M923.7,484.7h-20.3"/>
+      <path class="cls-4" d="M903,484.7h-.2M924.2,482.4h-.2"/>
+      <path class="cls-4" d="M923.7,482.4h-20.3"/>
+      <path class="cls-4" d="M903,482.4h-.2M924.2,480h-.2"/>
+      <path class="cls-4" d="M923.7,480h-20.3"/>
+      <path class="cls-4" d="M903,480h-.2M924.2,555h-.2"/>
+      <path class="cls-4" d="M923.7,555h-20.3"/>
+      <path class="cls-4" d="M903,555h-.2M924.2,552.7h-.2"/>
+      <path class="cls-4" d="M923.7,552.7h-20.3"/>
+      <path class="cls-4" d="M903,552.7h-.2M924.2,550.3h-.2"/>
+      <path class="cls-4" d="M923.7,550.3h-20.3"/>
+      <path class="cls-4" d="M903,550.3h-.2M924.2,548.1h-.2"/>
+      <path class="cls-4" d="M923.7,548.1h-20.3"/>
+      <path class="cls-4" d="M903,548.1h-.2M924.2,545.7h-.2"/>
+      <path class="cls-4" d="M923.7,545.7h-20.3"/>
+      <path class="cls-4" d="M903,545.7h-.2M924.2,543.5h-.2"/>
+      <path class="cls-4" d="M923.7,543.5h-20.3"/>
+      <path class="cls-4" d="M903,543.5h-.2M924.2,541.1h-.2"/>
+      <path class="cls-4" d="M923.7,541.1h-20.3"/>
+      <path class="cls-4" d="M903,541.1h-.2M924.2,538.8h-.2"/>
+      <path class="cls-4" d="M923.7,538.8h-20.3"/>
+      <path class="cls-4" d="M903,538.8h-.2M924.2,536.4h-.2"/>
+      <path class="cls-4" d="M923.7,536.4h-20.3"/>
+      <path class="cls-4" d="M903,536.4h-.2M924.2,534.3h-.2"/>
+      <path class="cls-4" d="M923.7,534.3h-20.3"/>
+      <path class="cls-4" d="M903,534.3h-.2M924.2,531.9h-.2"/>
+      <path class="cls-4" d="M923.7,531.9h-20.3"/>
+      <path class="cls-4" d="M903,531.9h-.2M924.2,529.7h-.2"/>
+      <path class="cls-4" d="M923.7,529.7h-20.3"/>
+      <path class="cls-4" d="M903,529.7h-.2M924.2,527.3h-.2"/>
+      <path class="cls-4" d="M923.7,527.3h-20.3"/>
+      <path class="cls-4" d="M903,527.3h-.2M924.2,510h-.2"/>
+      <path class="cls-4" d="M923.7,510h-20.3"/>
+      <path class="cls-4" d="M903,510h-.2M924.2,507.7h-.2"/>
+      <path class="cls-4" d="M923.7,507.7h-20.3"/>
+      <path class="cls-4" d="M903,507.7h-.2M924.2,505.3h-.2"/>
+      <path class="cls-4" d="M923.7,505.3h-20.3"/>
+      <path class="cls-4" d="M903,505.3h-.2M924.2,503.1h-.2"/>
+      <path class="cls-4" d="M923.7,503.1h-20.3"/>
+      <path class="cls-4" d="M903,503.1h-.2M924.2,500.7h-.2"/>
+      <path class="cls-4" d="M923.7,500.7h-20.3"/>
+      <path class="cls-4" d="M903,500.7h-.2M924.2,498.4h-.2"/>
+      <path class="cls-4" d="M923.7,498.4h-20.3"/>
+      <path class="cls-4" d="M903,498.4h-.2M924.2,496.1h-.2"/>
+      <path class="cls-4" d="M923.7,496.1h-20.3"/>
+      <path class="cls-4" d="M903,496.1h-.2M924.2,493.8h-.2"/>
+      <path class="cls-4" d="M923.7,493.8h-20.3"/>
+      <path class="cls-4" d="M903,493.8h-.2M924.2,491.6h-.2"/>
+      <path class="cls-4" d="M923.7,491.6h-20.3"/>
+      <path class="cls-4" d="M903,491.6h-.2M924.2,489.3h-.2"/>
+      <path class="cls-4" d="M923.7,489.3h-20.3"/>
+      <path class="cls-4" d="M903,489.3h-.2M924.2,487h-.2"/>
+      <path class="cls-4" d="M923.7,487h-20.3"/>
+      <path class="cls-4" d="M903,487h-.2M924.2,484.7h-.2"/>
+      <path class="cls-4" d="M923.7,484.7h-20.3"/>
+      <path class="cls-4" d="M903,484.7h-.2M924.2,482.4h-.2"/>
+      <path class="cls-4" d="M923.7,482.4h-20.3"/>
+      <path class="cls-4" d="M903,482.4h-.2M924.2,480h-.2"/>
+      <path class="cls-4" d="M923.7,480h-20.3"/>
+      <path class="cls-4" d="M903,480h-.2"/>
+      <path class="cls-4" d="M903,561.9h.2v-88.7h-.2"/>
+      <path class="cls-4" d="M903,561.9v-88.7"/>
+      <path class="cls-4" d="M923.7,561.9h.2v-88.7h-.2"/>
+      <path class="cls-4" d="M923.7,561.9v-88.7"/>
+      <path class="cls-4" d="M912.3,474.9l1.3-1.8,1.2,1.8"/>
+      <path class="cls-4" d="M912.3,474.9l.4.4M914.8,474.9l-.4.4"/>
+      <path class="cls-4" d="M912.6,475.3l.9-1.3.8,1.3"/>
+      <path class="cls-4" d="M924.2,477.8h-.2"/>
+      <path class="cls-4" d="M923.7,477.8h-20.3"/>
+      <path class="cls-4" d="M903,477.8h-.2M924.2,477.8h-.2"/>
+      <path class="cls-4" d="M923.7,477.8h-20.3"/>
+      <path class="cls-4" d="M903,477.8h-.2M924.2,475.4h-.2"/>
+      <path class="cls-4" d="M923.7,475.4h-20.3"/>
+      <path class="cls-4" d="M903,475.4h-.2M924.2,475.4h-.2"/>
+      <path class="cls-4" d="M923.7,475.4h-20.3"/>
+      <path class="cls-4" d="M903,475.4h-.2M924.2,473.1h-.2"/>
+      <path class="cls-4" d="M923.7,473.1h-20.3"/>
+      <path class="cls-4" d="M903,473.1h-.2M924.2,473.1h-.2"/>
+      <path class="cls-4" d="M923.7,473.1h-20.3"/>
+      <path class="cls-4" d="M903,473.1h-.2M902.8,475.4v2.4M924.2,475.4v2.4M902.8,473.1v2.4M924.2,473.1v2.4M924.2,557.4h-.2"/>
+      <path class="cls-4" d="M923.7,557.4h-20.3"/>
+      <path class="cls-4" d="M903,557.4h-.2M924.2,557.4h-.2"/>
+      <path class="cls-4" d="M923.7,557.4h-20.3"/>
+      <path class="cls-4" d="M924.2,557.4v2.4h-.2"/>
+      <path class="cls-4" d="M923.7,559.6h-20.3"/>
+      <path class="cls-4" d="M903,559.6h-.2M924.2,559.6h-.2"/>
+      <path class="cls-4" d="M923.7,559.6h-20.3"/>
+      <path class="cls-4" d="M903,559.6h-.2v2.1"/>
+      <path class="cls-4" d="M923.8,473.1h0"/>
+      <path class="cls-4" d="M923.8,473.1h0"/>
+      <path class="cls-4" d="M903.2,473.1h0"/>
+      <path class="cls-4" d="M903.2,473.1h0"/>
+    </g>
+  </g>
+</svg>
