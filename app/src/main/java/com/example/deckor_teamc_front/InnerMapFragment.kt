@@ -407,17 +407,29 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
 
             // 그룹 내부에서 <text> 태그의 fill 속성은 #FFFFFF로 변경
-            groupContent =
-                groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
-                    matchResult.value.replace(
-                        Regex("""fill="#[0-9A-Fa-f]{3,6}""""),
-                        """fill="#FFFFFF""""
-                    )
+            groupContent = groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
+                matchResult.value.replace(
+                    Regex("""fill="#[0-9A-Fa-f]{3,6}""""),
+                    """fill="#FFFFFF""""
+                )
+            }
+
+            // 그룹 내부에서 <style> 태그의 fill 속성을 #F85C5C로 변경
+            groupContent = groupContent.replace(Regex("""<style[^>]*>.*?<\/style>""", RegexOption.DOT_MATCHES_ALL)) { matchResult ->
+                var styleContent = matchResult.value
+
+                // <style> 태그 내에서 fill 속성만 변경 (폰트 패밀리는 변경하지 않음)
+                styleContent = styleContent.replace(Regex("""fill\s*:\s*#[0-9A-Fa-f]{3,6}""")) { _ ->
+                    """fill: #FFFFFF"""
                 }
+
+                styleContent
+            }
 
             groupContent
         }
     }
+
 
 
     private fun updateTouchHandler() {
