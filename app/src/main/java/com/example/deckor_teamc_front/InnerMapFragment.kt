@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
@@ -212,6 +213,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             requireActivity().onBackPressed()
         }
 
+
+
     }
 
 
@@ -249,7 +252,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         closeModal()
     }
 
-    private fun closeModal() {
+    // BottomSheet의 확장 상태를 확인하는 메서드
+    fun isBottomSheetExpanded(): Boolean {
+        return ::standardBottomSheetBehavior.isInitialized &&
+                standardBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    fun closeModal() {
         val includedLayout = binding.includedModal.root
         val standardBottomSheet =
             includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
