@@ -367,31 +367,37 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     fun replaceInnermap(groupIdToChange: String? = null) {
-        // `initInnermap` 함수에서 수정된 SVG 콘텐츠를 가져옴
-        val modifiedSvgContent = initInnermap()
+        if(initInnermap() != null){
+            // `initInnermap` 함수에서 수정된 SVG 콘텐츠를 가져옴
+            val modifiedSvgContent = initInnermap()
+            var svg = SVG.getFromString(modifiedSvgContent)
+            if (modifiedSvgContent != null) {
+                try {
+                    // groupIdToChange가 border나 other이 아니면 해당 그룹의 fill 색상을 변경
+                    if (groupIdToChange != null) {
+                        if (!groupIdToChange.contains(Regex(".*(border|other).*", RegexOption.IGNORE_CASE))) {
+                            val remodifiedSvgContent = groupIdToChange?.let {
+                                changeElementFillColor(modifiedSvgContent, it)
+                            } ?: modifiedSvgContent
 
-        if (modifiedSvgContent != null) {
-            try {
-                // groupIdToChange가 null이 아니면 해당 그룹의 fill 색상을 변경
-                val remodifiedSvgContent = groupIdToChange?.let {
-                    changeElementFillColor(modifiedSvgContent, it)
-                } ?: modifiedSvgContent
+                            svg = SVG.getFromString(remodifiedSvgContent)
+                        }
+                    }
 
-                val svg = SVG.getFromString(remodifiedSvgContent)
-
-                // SVG를 PictureDrawable로 렌더링하여 ImageView에 설정
-                val drawable = PictureDrawable(svg.renderToPicture())
-                binding.includedMap.innermap.setImageDrawable(drawable)
-                Log.d("InnerMapFragment", "Resource replaced successfully")
-            } catch (e: SVGParseException) {
-                e.printStackTrace()
-                Log.e("InnerMapFragment", "Error parsing SVG: ${e.message}")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
+                    // SVG를 PictureDrawable로 렌더링하여 ImageView에 설정
+                    val drawable = PictureDrawable(svg.renderToPicture())
+                    binding.includedMap.innermap.setImageDrawable(drawable)
+                    Log.d("InnerMapFragment", "Resource replaced successfully")
+                } catch (e: SVGParseException) {
+                    e.printStackTrace()
+                    Log.e("InnerMapFragment", "Error parsing SVG: ${e.message}")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.e("InnerMapFragment", "Unexpected error: ${e.message}")
+                }
+            } else {
+                Log.e("InnerMapFragment", "Failed to initialize innermap")
             }
-        } else {
-            Log.e("InnerMapFragment", "Failed to initialize innermap")
         }
     }
 
@@ -403,7 +409,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         return svgContent.replace(groupRegex) { groupMatchResult ->
             var groupContent = groupMatchResult.value
 
-            // 기존 배경 fill 속성 변경
+            // 기존 fill 속성 변경
             groupContent = groupContent.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}"""")) { _ ->
                 """fill="#F85C5C""""
             }
@@ -415,14 +421,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 )
             }
 
-            // 1. <text> 태그 처리
-            val textRegex = Regex("""<text[^>]*>.*?</text>""", RegexOption.DOT_MATCHES_ALL)
-            groupContent = groupContent.replace(textRegex) { textMatch ->
-                var textContent = textMatch.value
+            // 1. <text> 및 <tspan> 태그 처리
+            val textAndTspanRegex = Regex("""<(text|tspan)[^>]*>.*?</(text|tspan)>""", RegexOption.DOT_MATCHES_ALL)
+            groupContent = groupContent.replace(textAndTspanRegex) { elementMatch ->
+                var elementContent = elementMatch.value
 
                 // 클래스 추출 및 스타일 적용
                 val classRegex = Regex("""class="([^"]+)"""")
-                val classMatch = classRegex.find(textContent)
+                val classMatch = classRegex.find(elementContent)
 
                 if (classMatch != null) {
                     val originalClass = classMatch.groupValues[1]
@@ -457,7 +463,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                         }
                     }
 
-                    // 병합된 스타일을 인라인 속성으로 text 요소에 적용
+                    // 병합된 스타일을 인라인 속성으로 text 및 tspan 요소에 적용
                     val inlineStyle = combinedStyles.flatMap { (attrName, attrValue) ->
                         attrValue.split(";").map { it.trim() }.filter { it.isNotEmpty() }.map { property ->
                             val (key, value) = property.split(":").map { it.trim() }
@@ -468,11 +474,11 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     }
 
                     // fill 속성을 흰색으로 변경하고 인라인 스타일에 추가
-                    textContent = textContent
+                    elementContent = elementContent
                         .replace(classRegex, "")
-                        .replace("<text", """<text $inlineStyle fill="#FFFFFF"""")
+                        .replace("<${elementMatch.groupValues[1]}", """<${elementMatch.groupValues[1]} $inlineStyle fill="#FFFFFF"""")
                 }
-                textContent
+                elementContent
             }
 
             // 2. <rect> 및 <polygon> 태그 처리
@@ -537,6 +543,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             groupContent
         }
     }
+
 
 
     private fun updateTouchHandler() {
