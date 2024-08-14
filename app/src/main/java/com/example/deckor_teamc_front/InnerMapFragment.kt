@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.activity.FullyDrawnReporter
 import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.caverock.androidsvg.SVG
@@ -394,19 +395,19 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-
+    // SVG 강의 실 클릭 시 색변화 글씨 변화 주는 함수
+    // 심연이니 건드리지 마시오
     private fun changeElementFillColor(svgContent: String, elementId: String): String {
-        // 특정 그룹 요소 안에 있는 자식 요소들의 스타일을 변경
-        val regex = Regex("""(<g[^>]*id="$elementId"[^>]*>.*?</g>)""", RegexOption.DOT_MATCHES_ALL)
-        return svgContent.replace(regex) { matchResult ->
-            var groupContent = matchResult.value
+        val groupRegex = Regex("""(<g[^>]*id="$elementId"[^>]*>.*?</g>)""", RegexOption.DOT_MATCHES_ALL)
 
-            // 그룹 내부에서 일반 fill 속성은 #F85C5C로 변경
+        return svgContent.replace(groupRegex) { groupMatchResult ->
+            var groupContent = groupMatchResult.value
+
+            // 기존 배경 fill 속성 변경
             groupContent = groupContent.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}"""")) { _ ->
                 """fill="#F85C5C""""
             }
-
-            // 그룹 내부에서 <text> 태그의 fill 속성은 #FFFFFF로 변경
+            // 기존 글씨 fill 속성 변경
             groupContent = groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
                 matchResult.value.replace(
                     Regex("""fill="#[0-9A-Fa-f]{3,6}""""),
@@ -414,22 +415,128 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 )
             }
 
-            // 그룹 내부에서 <style> 태그의 fill 속성을 #F85C5C로 변경
-            groupContent = groupContent.replace(Regex("""<style[^>]*>.*?<\/style>""", RegexOption.DOT_MATCHES_ALL)) { matchResult ->
-                var styleContent = matchResult.value
+            // 1. <text> 태그 처리
+            val textRegex = Regex("""<text[^>]*>.*?</text>""", RegexOption.DOT_MATCHES_ALL)
+            groupContent = groupContent.replace(textRegex) { textMatch ->
+                var textContent = textMatch.value
 
-                // <style> 태그 내에서 fill 속성만 변경 (폰트 패밀리는 변경하지 않음)
-                styleContent = styleContent.replace(Regex("""fill\s*:\s*#[0-9A-Fa-f]{3,6}""")) { _ ->
-                    """fill: #FFFFFF"""
+                // 클래스 추출 및 스타일 적용
+                val classRegex = Regex("""class="([^"]+)"""")
+                val classMatch = classRegex.find(textContent)
+
+                if (classMatch != null) {
+                    val originalClass = classMatch.groupValues[1]
+                    val styleRegex = Regex("""<style\b[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
+                    val styleMatch = styleRegex.find(svgContent)
+
+                    val combinedStyles = mutableMapOf<String, String>()
+
+                    if (styleMatch != null) {
+                        val styleContent = styleMatch.groupValues[1]
+
+                        // .cls-3 등 클래스를 포함하는 모든 스타일 블록을 찾는 정규식
+                        val classStyleRegex = Regex("""\.([^\s,{}]+(?:\s*,\s*[^\s,{}]+)*)\s*\{([^}]+)\}""")
+                        val classStyleMatches = classStyleRegex.findAll(styleContent)
+
+                        // 해당 클래스에 대한 스타일 추출
+                        for (match in classStyleMatches) {
+                            val classNames = match.groupValues[1].split(",").map { it.trim().removePrefix(".") }
+                            val styleProperties = match.groupValues[2].trim()
+
+                            if (classNames.contains(originalClass)) {
+                                val propertiesList = styleProperties.split(";").map { it.trim() }.filter { it.isNotEmpty() }
+
+                                for (property in propertiesList) {
+                                    if (combinedStyles.containsKey(originalClass)) {
+                                        combinedStyles[originalClass] = combinedStyles[originalClass] + " " + property + ";"
+                                    } else {
+                                        combinedStyles[originalClass] = property + ";"
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 병합된 스타일을 인라인 속성으로 text 요소에 적용
+                    val inlineStyle = combinedStyles.flatMap { (attrName, attrValue) ->
+                        attrValue.split(";").map { it.trim() }.filter { it.isNotEmpty() }.map { property ->
+                            val (key, value) = property.split(":").map { it.trim() }
+                            key to value
+                        }
+                    }.joinToString(" ") { (key, value) ->
+                        """$key="$value""""
+                    }
+
+                    // fill 속성을 흰색으로 변경하고 인라인 스타일에 추가
+                    textContent = textContent
+                        .replace(classRegex, "")
+                        .replace("<text", """<text $inlineStyle fill="#FFFFFF"""")
                 }
+                textContent
+            }
 
-                styleContent
+            // 2. <rect> 및 <polygon> 태그 처리
+            val shapeRegex = Regex("""<(rect|polygon)[^>]*>""")
+            groupContent = groupContent.replace(shapeRegex) { shapeMatch ->
+                var shapeContent = shapeMatch.value
+
+                val classRegex = Regex("""class="([^"]+)"""")
+                val classMatch = classRegex.find(shapeContent)
+
+                if (classMatch != null) {
+                    val originalClass = classMatch.groupValues[1]
+                    val styleRegex = Regex("""<style\b[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
+                    val styleMatch = styleRegex.find(svgContent)
+
+                    val combinedStyles = mutableMapOf<String, String>()
+
+                    if (styleMatch != null) {
+                        val styleContent = styleMatch.groupValues[1]
+
+                        // .cls-6을 포함하는 모든 스타일 블록을 찾는 정규식
+                        val classStyleRegex = Regex("""\.([^\s,{}]+(?:\s*,\s*[^\s,{}]+)*)\s*\{([^}]+)\}""")
+                        val classStyleMatches = classStyleRegex.findAll(styleContent)
+
+                        // 해당 클래스에 대한 스타일 추출
+                        for (match in classStyleMatches) {
+                            val classNames = match.groupValues[1].split(",").map { it.trim().removePrefix(".") }
+                            val styleProperties = match.groupValues[2].trim()
+
+                            if (classNames.contains(originalClass)) {
+                                val propertiesList = styleProperties.split(";").map { it.trim() }.filter { it.isNotEmpty() }
+
+                                for (property in propertiesList) {
+                                    if (combinedStyles.containsKey(originalClass)) {
+                                        combinedStyles[originalClass] = combinedStyles[originalClass] + " " + property + ";"
+                                    } else {
+                                        combinedStyles[originalClass] = property + ";"
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 병합된 스타일을 인라인 속성으로 rect 및 polygon 요소에 적용
+                    val inlineStyle = combinedStyles.flatMap { (attrName, attrValue) ->
+                        attrValue.split(";").map { it.trim() }.filter { it.isNotEmpty() }.map { property ->
+                            val (key, value) = property.split(":").map { it.trim() }
+                            key to value
+                        }
+                    }.joinToString(" ") { (key, value) ->
+                        """$key="$value""""
+                    }
+
+                    // fill 속성을 지정된 색상으로 변경하고 인라인 스타일에 추가
+                    shapeContent = shapeContent
+                        .replace(classRegex, "")
+                        .replace("<${shapeMatch.groupValues[1]}", """<${shapeMatch.groupValues[1]} $inlineStyle fill="#F85C5C"""")
+                }
+                shapeContent
             }
 
             groupContent
         }
     }
-
 
 
     private fun updateTouchHandler() {
