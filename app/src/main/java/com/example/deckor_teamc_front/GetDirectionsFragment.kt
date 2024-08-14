@@ -122,7 +122,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         }
 
         binding.backToHomeButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.popBackStack("HomeFragment", 0)
         }
 
         binding.switchButton.setOnClickListener {
@@ -136,6 +136,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         arrivalPointHint?.let {
             binding.searchArrivalPointBar.text = it
         }
+
     }
 
     private fun switchHints() {

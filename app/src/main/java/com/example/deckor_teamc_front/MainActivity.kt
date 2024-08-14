@@ -49,7 +49,10 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "expanded")
                 return
             }
-        } else {
+        } else if (currentFragment is GetDirectionsFragment) {
+            fragmentManager.popBackStack("HomeFragment", 0)
+                return
+            } else {
             Log.e("MainActivity", "Doesn't have modal")
         }
 
@@ -76,7 +79,9 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.fragment_home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, HomeFragment(), "HomeFragment").commit()
+                        .replace(R.id.main_container, HomeFragment(), "HomeFragment")
+                        .addToBackStack("HomeFragment")  // 백 스택에 추가
+                        .commit()
                     item.setIcon(R.drawable.home_button)
                     true
                 }
