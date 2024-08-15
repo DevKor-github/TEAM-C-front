@@ -23,7 +23,7 @@ class InnerMapTouchHandler(
     private val colorMap: Map<Int, String>,
     private val innerMapBinding: InnerMapContainerBinding,
     private val floor: Int,
-    private val id: Int,
+    private val buildingId: Int,
     private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
@@ -84,7 +84,7 @@ class InnerMapTouchHandler(
                     fileName = colorMap[redValue].toString()
 
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
-                    openInnermapModal()
+                    openInnermapModal(maskIndex)
                     replaceInnermapCallback(fileName)
                     Log.e("InnerMapTouchHandler","Replace callback")
                 }
@@ -92,7 +92,7 @@ class InnerMapTouchHandler(
         }
         return true
     }
-    private fun openInnermapModal() {
+    fun openInnermapModal(maskIndex: Int) {
         Log.d("InnerMapTouchHandler", "Matching Room: $fileName")
 
         val originalBuildingName = innerMapBinding.root.findViewById<TextView>(R.id.building_name).text.toString()
@@ -102,7 +102,7 @@ class InnerMapTouchHandler(
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         // 첫 번째 API 호출: MaskInfo를 가져옴
-        fetchMaskInfo(id, floor, maskIndex, "CLASSROOM") { roomId ->
+        fetchMaskInfo(buildingId, floor, maskIndex, "CLASSROOM") { roomId ->
             if (roomId != null) {
                 // 두 번째 API 호출: Place 정보 가져오기
                 fetchPlaceInfo(roomId) { placeName ->

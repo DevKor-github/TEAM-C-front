@@ -12,11 +12,8 @@ import android.widget.FrameLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
-import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.activity.FullyDrawnReporter
-import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
@@ -102,6 +99,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     private var hasDirection: Boolean = false
 
+    private lateinit var routeView: RouteView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -133,13 +132,15 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         modalView = binding.includedModal.root
 
         standardBottomSheet =
-            binding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+            binding.includedModal.root.findViewById(R.id.standard_bottom_sheet)
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         customScrollView = binding.customScrollView
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
+
+        routeView = binding.includedMap.routeView
 
         if (hasDirection) {
             try {
@@ -150,7 +151,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
 
-        val routeView = binding.includedMap.routeView
 
         drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
 
@@ -162,6 +162,20 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         if (layerName != null) {
             Log.d("InnerMapFragment", "Filename for id $searchedMask: $layerName")
             replaceInnermap(layerName) // 검색에서 진입 할 시 장소의 색상을 변경하는 로직
+
+            val touchHandler = InnerMapTouchHandler(
+                context = requireContext(),
+                imageView = ImageView(context), // 임시 이미지
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888), // 임시 비트맵
+                colorMap = colorMap,
+                innerMapBinding = binding,
+                floor = innermapCurrentFloor,
+                buildingId = selectedBuildingId,
+                replaceInnermapCallback = { groupId ->
+                    replaceInnermap(groupId)
+                }
+            )
+            touchHandler.openInnermapModal(searchedMask)
         }
 
 
@@ -403,6 +417,12 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 Log.e("InnerMapFragment", "Failed to initialize innermap")
             }
         }
+        try{
+            drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
+        }
+        catch (e: Exception){
+            Log.e("InnerMapFragment", "Route is null")
+        }
     }
 
     // SVG 강의 실 클릭 시 색변화 글씨 변화 주는 함수
@@ -582,7 +602,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 colorMap = colorMap,
                 innerMapBinding = binding,
                 floor = innermapCurrentFloor,
-                id = selectedBuildingId,
+                buildingId = selectedBuildingId,
                 replaceInnermapCallback = { groupId ->
                     replaceInnermap(groupId)
                 }
@@ -705,6 +725,5 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         })
 
     }
-
 
 }
