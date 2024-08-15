@@ -33,7 +33,7 @@ class InnerMapTouchHandler(
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         event?.let {
             // 터치 이벤트가 ACTION_DOWN일 때만 처리
-            if (it.action == MotionEvent.ACTION_DOWN) {
+            if (it.action == MotionEvent.ACTION_UP) {
                 val imageViewWidth = imageView.width.toFloat()
                 val imageViewHeight = imageView.height.toFloat()
                 val bitmapWidth = bitmap.width.toFloat()
