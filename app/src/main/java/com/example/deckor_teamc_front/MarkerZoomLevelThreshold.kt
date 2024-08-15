@@ -15,4 +15,8 @@ object MarkerZoomLevelThreshold {
             .firstOrNull { it.value.contains(id) }
             ?.key ?: 0.0 // ID가 없으면 0 값을 반환
     }
+
+    val availableBuildingList: List<Int> = listOf(
+        1, 2, 3, 10, 13, 14, 15, 17, 21, 25, 26, 29, 32, 33, 39, 42, 44, 45, 46, 49, 50, 53, 55, 56
+    )
 }
