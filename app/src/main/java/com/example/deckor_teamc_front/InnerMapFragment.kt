@@ -433,10 +433,15 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         return svgContent.replace(groupRegex) { groupMatchResult ->
             var groupContent = groupMatchResult.value
 
-            // 기존 fill 속성 변경
-            groupContent = groupContent.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}"""")) { _ ->
-                """fill="#F85C5C""""
+            // 기존 fill 속성 변경, fill="#424142"는 제외
+            groupContent = groupContent.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
+                if (matchResult.value == """fill="#424142"""") {
+                    matchResult.value  // 그대로 유지(애기능 생활관 예외처리)
+                } else {
+                    """fill="#F85C5C""""  // 다른 색상은 변경
+                }
             }
+
             // 기존 글씨 fill 속성 변경
             groupContent = groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
                 matchResult.value.replace(
@@ -445,7 +450,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 )
             }
 
-            // 1. <text> 및 <tspan> 태그 처리
+            // fill="#424142"를 모두 fill="#FFFFFF"로 변경(애기능 생활관 예외처리)
+            groupContent = groupContent.replace("""fill="#424142"""", """fill="#FFFFFF"""")
+
+            groupContent
+
+
+
+        // 1. <text> 및 <tspan> 태그 처리
             val textAndTspanRegex = Regex("""<(text|tspan)[^>]*>.*?</(text|tspan)>""", RegexOption.DOT_MATCHES_ALL)
             groupContent = groupContent.replace(textAndTspanRegex) { elementMatch ->
                 var elementContent = elementMatch.value
