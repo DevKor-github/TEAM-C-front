@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
+import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.FullyDrawnReporter
@@ -23,6 +24,8 @@ import com.example.deckor_teamc_front.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.otaliastudios.zoom.OverPanRangeProvider
+import com.otaliastudios.zoom.ZoomEngine
 import java.io.IOException
 import java.io.InputStream
 
@@ -215,6 +218,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             requireActivity().onBackPressed()
         }
 
+        enableVerticalOverScroll()
 
     }
 
@@ -547,6 +551,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     private fun updateTouchHandler() {
+
         Log.e("e", "$floorRoomList")
         val imageView: ImageView = binding.includedMap.innermapMask
         val filePath = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
@@ -586,6 +591,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         } catch (e: Exception) {
             Log.e("InnerMapFragment", "Error creating touch handler: ${e.message}")
         }
+
+
+
+
     }
 
 
@@ -681,5 +690,21 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         return updatedContent
     }
+
+    private fun enableVerticalOverScroll() {
+        binding.includedMap.zoomLayout.setOverScrollHorizontal(true)
+        binding.includedMap.zoomLayout.setOverScrollVertical(true)
+        binding.includedMap.zoomLayout.setOverPanRange(object : OverPanRangeProvider {
+            override fun getOverPan(engine: ZoomEngine, horizontal: Boolean): Float {
+                return if (horizontal) {
+                    1000f // 가로 오버팬 범위
+                } else {
+                    1000f // 세로 오버팬 범위
+                }
+            }
+        })
+
+    }
+
 
 }
