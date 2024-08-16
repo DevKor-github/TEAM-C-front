@@ -52,15 +52,16 @@ class MainActivity : AppCompatActivity() {
         } else if (currentFragment is GetDirectionsFragment) {
             fragmentManager.popBackStack("HomeFragment", 0)
                 return
-            } else {
+        } else {
             Log.e("MainActivity", "Doesn't have modal")
         }
 
         // 백스택에 아무것도 없는지 확인
-        if (fragmentManager.backStackEntryCount == 0) {
+        if (fragmentManager.backStackEntryCount == 0 || currentFragment is HomeFragment) {
             // 마지막 뒤로가기 버튼 클릭 후 2초 이내에 다시 클릭 시 종료
             if (backPressedTime + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed()
+                finish() // 액티비티 종료
+                // super.onBackPressed()
                 return
             } else {
                 Toast.makeText(this, "한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
@@ -76,42 +77,56 @@ class MainActivity : AppCompatActivity() {
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.main_container)
             when (item.itemId) {
                 R.id.fragment_home -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, HomeFragment(), "HomeFragment")
-                        .addToBackStack("HomeFragment")  // 백 스택에 추가
-                        .commit()
-                    item.setIcon(R.drawable.home_button)
+                    if (currentFragment !is HomeFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_container, HomeFragment(), "HomeFragment")
+                            .addToBackStack("HomeFragment")  // 백 스택에 추가
+                            .commit()
+                        item.setIcon(R.drawable.home_button)
+                    }
                     true
                 }
 
                 R.id.fragment_bus -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, BusFragment()).commit()
-                    item.setIcon(R.drawable.bus_button)
+                    if (currentFragment !is BusFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_container, BusFragment())
+                            .commit()
+                        item.setIcon(R.drawable.bus_button)
+                    }
                     true
                 }
 
                 R.id.fragment_community -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, CommunityFragment()).commit()
-                    item.setIcon(R.drawable.community_button)
+                    if (currentFragment !is CommunityFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_container, CommunityFragment())
+                            .commit()
+                        item.setIcon(R.drawable.community_button)
+                    }
                     true
                 }
 
                 R.id.fragment_favorites -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, FavoritesFragment()).commit()
-                    item.setIcon(R.drawable.favorites_button)
+                    if (currentFragment !is FavoritesFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_container, FavoritesFragment())
+                            .commit()
+                        item.setIcon(R.drawable.favorites_button)
+                    }
                     true
                 }
 
                 R.id.fragment_mypage -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_container, MypageFragment()).commit()
-                    item.setIcon(R.drawable.mypage_button)
-
+                    if (currentFragment !is MypageFragment) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_container, MypageFragment())
+                            .commit()
+                        item.setIcon(R.drawable.mypage_button)
+                    }
                     true
                 }
 
@@ -119,4 +134,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
