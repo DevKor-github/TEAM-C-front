@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,10 +27,13 @@ class FetchDataViewModel : ViewModel() {
     private val _roomList = MutableLiveData<List<RoomList>>()
     val roomList: LiveData<List<RoomList>> get() = _roomList
 
-    private val _routeResponse = MutableLiveData<RouteResponse>()
-    val routeResponse: LiveData<RouteResponse> get() = _routeResponse
+    private val _routeResponse = MutableLiveData<RouteResponse?>()
+    val routeResponse: MutableLiveData<RouteResponse?> get() = _routeResponse
 
     private val service = RetrofitClient.instance
+
+    private val _placeInfoResponse = MutableLiveData<PlaceInfoResponse?>()
+    val placeInfoResponse: LiveData<PlaceInfoResponse?> get() = _placeInfoResponse
 
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
@@ -165,21 +167,65 @@ class FetchDataViewModel : ViewModel() {
         endId: Int? = null,
         endLat: Double? = null,
         endLong: Double? = null,
-        barrierFree: String? = null
+        barrierFree: Boolean? = null
     ) {
-        service.getRoutes(startType, startId, startLat, startLong, endType, endId, endLat, endLong, barrierFree)
-            .enqueue(object : Callback<ApiResponse<RouteResponse>> {
-                override fun onResponse(call: Call<ApiResponse<RouteResponse>>, response: Response<ApiResponse<RouteResponse>>) {
+        service.getRoutes(startType, startId, startLat, startLong, endType, endId, endLat, endLong)
+            .enqueue(object : Callback<ApiResponse<List<RouteResponse>>> {
+                override fun onResponse(call: Call<ApiResponse<List<RouteResponse>>>, response: Response<ApiResponse<List<RouteResponse>>>) {
                     if (response.isSuccessful) {
-                        _routeResponse.value = response.body()?.data
+                        val routeResponses = response.body()?.data
+
+                        if (!routeResponses.isNullOrEmpty()) {
+                            // barrierFree 값에 따라 첫 번째 또는 두 번째 RouteResponse를 선택
+                            val selectedRouteResponse = if (barrierFree == null || barrierFree == false) {
+                                routeResponses[0]  // barrierFree가 false이면 첫 번째 원소 선택
+                            } else {
+                                routeResponses[1]  // barrierFree가 true
+                            }
+
+                            // 선택된 RouteResponse를 LiveData에 설정
+                            _routeResponse.value = selectedRouteResponse
+                        } else {
+                            Log.e("FetchDataViewModel", "No routes found in response")
+                        }
                     } else {
                         Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                     }
                 }
 
-                override fun onFailure(call: Call<ApiResponse<RouteResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<ApiResponse<List<RouteResponse>>>, t: Throwable) {
                     Log.e("FetchDataViewModel", "Failure: ${t.message}")
                 }
             })
     }
+
+
+
+    fun fetchPlaceInfo(roomId: Int, placeType: String, callback: (PlaceInfoResponse?) -> Unit) {
+        service.getPlaceInfo(roomId, placeType)
+            .enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<PlaceInfoResponse>>,
+                    response: Response<ApiResponse<PlaceInfoResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        callback(response.body()?.data)
+                    } else {
+                        Log.d("FetchDataViewModel", "API response unsuccessful. Code: ${response.code()}, Message: ${response.message()}")
+                        callback(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<PlaceInfoResponse>>, t: Throwable) {
+                    Log.d("FetchDataViewModel", "API call failed: ${t.message}")
+                    callback(null)
+                }
+            })
+    }
+
+    // RouteResponse를 업데이트할 때 사용하는 메서드
+    fun updateSplitedRoute(route: RouteResponse) {
+        DirectionSearchRouteDataHolder.splitedRoute = route
+    }
+
 }

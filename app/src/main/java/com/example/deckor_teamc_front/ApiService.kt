@@ -1,5 +1,7 @@
 package com.example.deckor_teamc_front
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -52,9 +54,8 @@ interface ApiService {
         @Query("endType") endType: String,
         @Query("endId") endId: Int? = null,
         @Query("endLat") endLat: Double? = null,
-        @Query("endLong") endLong: Double? = null,
-        @Query("barrierFree") barrierFree: String? = null
-    ): Call<ApiResponse<RouteResponse>>
+        @Query("endLong") endLong: Double? = null
+    ): Call<ApiResponse<List<RouteResponse>>>  // List<RouteResponse>로 반환 타입 변경
 
     @GET("search/buildings/{id}/floor/{floor}/mask/{redValue}")
     fun getMaskInfo(
@@ -187,20 +188,23 @@ data class MaskInfoResponse(
 )
 
 data class PlaceInfoResponse(
+    val buildingId: Int,
+    val floor: Int,
     val type: String,
-    val id: Int,
+    val placeId: Int,
+    val facilityType: String,
     val name: String,
     val detail: String,
     val availability: Boolean,
     val plugAvailability: Boolean,
     val imageUrl: String?,
     val operatingTime: String,
-    val longitude: Double?,
-    val latitude: Double?,
+    val longitude: Double,
+    val latitude: Double,
     val maskIndex: Int,
     val bookmarked: Boolean,
     val nextPlaceTime: String,
+    val operating: Boolean,
     val xcoord: Int,
-    val ycoord: Int,
-    val operating: Boolean
+    val ycoord: Int
 )

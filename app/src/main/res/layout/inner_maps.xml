@@ -38,6 +38,7 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <com.otaliastudios.zoom.ZoomLayout
+            android:id="@+id/zoomLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:transformation="centerInside"
@@ -52,11 +53,11 @@
             app:flingEnabled="false"
             app:scrollEnabled="true"
             app:oneFingerScrollEnabled="true"
-            app:twoFingersScrollEnabled="true"
-            app:threeFingersScrollEnabled="true"
+            app:twoFingersScrollEnabled="false"
+            app:threeFingersScrollEnabled="false"
             app:minZoom="1"
             app:minZoomType="zoom"
-            app:maxZoom="2.5"
+            app:maxZoom="5"
             app:maxZoomType="zoom"
             app:animationDuration="100"
             app:hasClickableChildren="true">
@@ -77,7 +78,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter" />
 
-                <ImageView
+                <com.example.deckor_teamc_front.RouteView
                     android:id="@+id/routeView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

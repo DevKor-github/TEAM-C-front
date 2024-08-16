@@ -43,6 +43,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var isImageOneDisplayed = true
     private var areMarkersVisible = true
 
+
+    private val initCameraPosition: LatLng = LatLng(37.59, 127.03)
     private var cameraPosition: LatLng? = null
 
     private lateinit var viewModel: FetchDataViewModel
@@ -131,12 +133,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        val cameraUpdate = CameraUpdate.zoomTo(16.0)
-        naverMap.moveCamera(cameraUpdate)
-
-        if(cameraPosition!=null){
-            moveCameraToPosition(cameraPosition!!)
+        naverMap.addOnCameraChangeListener { reason, animated ->
+            val currentZoom = naverMap.cameraPosition.zoom
+            updateMarkersVisibility(currentZoom)
         }
+
+        val cameraZoomUpdate = CameraUpdate.zoomTo(14.3)
+        val cameraScrollUpdate = CameraUpdate.scrollTo(initCameraPosition)
+        naverMap.moveCamera(cameraZoomUpdate)
+        naverMap.moveCamera(cameraScrollUpdate)
 
         val includedLayout = binding.includedLayout.root
 
@@ -195,6 +200,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        // 화면이 꺼질 때 실행하고 싶은 함수 호출
+        closeModal()
+        Log.d("MyFragment", "Screen is turned off, function executed.")
+    }
+
     private fun hideMarkers() {
         markers.forEach { it.map = null }
     }
@@ -207,7 +219,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val searchBuildingFragment = SearchBuildingFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, searchBuildingFragment)
-        transaction.addToBackStack("HomeFragment")
+        transaction.addToBackStack("SearchFragment")
         transaction.commit()
     }
 
@@ -215,7 +227,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, getDirectionsFragment)
-        transaction.addToBackStack("HomeFragment")
+        transaction.addToBackStack("DirectionFragment")
         transaction.commit()
     }
 
@@ -230,7 +242,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.add(R.id.main_container, innerMapFragment)
-            transaction.addToBackStack("HomeFragment")
+            transaction.addToBackStack("InnerMapFragment")
             transaction.commit()
         } else {
             Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
@@ -299,67 +311,107 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-    private fun closeModal() {
+    fun closeModal() {
         val includedLayout = binding.includedLayout.root
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
+    // BottomSheet의 확장 상태를 확인하는 메서드
+    fun isBottomSheetExpanded(): Boolean {
+        val includedLayout = binding.includedLayout.root
+        val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+        return standardBottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN
+    }
+
     private fun observeViewModel() {
         viewModel.buildingList.observe(viewLifecycleOwner, Observer { buildingList ->
             buildingList.forEach { building ->
+                // BuildingCache에 저장
+                BuildingCache.put(building.buildingId, building)
+
+                // 캐시된 정보를 사용하거나 새로운 정보를 추가
                 setMarker(building)
+                val currentZoom = naverMap.cameraPosition.zoom
+                updateMarkersVisibility(currentZoom)
             }
         })
     }
 
+
     private fun setMarker(building: BuildingItem) {
-        val marker = Marker().apply {
-            position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
-            map = naverMap
-            icon = OverlayImage.fromResource(R.drawable.spot)
-        }
-
-        markers.add(marker) // 마커 리스트에 추가
-
-        marker.setOnClickListener {
-            val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
-            val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
-            val buildingOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
-            val buildingNextOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
-            val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
-            val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
-
-            buildingName.text = building.name
-            buildingAddress.text = building.address
-            if (building.operating) {
-                buildingOperating.text = "운영 중"
-            } else {
-                buildingOperating.text = "운영 종료"
+        if (building.buildingId in MarkerZoomLevelThreshold.availableBuildingList) {
+            val marker = Marker().apply {
+                position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
+                map = naverMap
+                icon = OverlayImage.fromResource(R.drawable.spot)
+                tag = building.buildingId
             }
-            buildingNextOperating.text = building.nextBuildingTime
-            selectedBuildingName = building.name
-            selectedBuildingAboveFloor = building.floor
-            selectedBuildingUnderFloor = building.underFloor
-            selectedBuildingId = building.buildingId
 
-            val facilityTypesRecyclerView = binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
-            val adapter = FacilityTypeAdapter(building.facilityTypes)
-            facilityTypesRecyclerView.adapter = adapter
+            markers.add(marker) // 마커 리스트에 추가
 
-            buildingName.setOnClickListener {
-                selectedBuildingId?.let { id ->
-                    val fragment = BuildingDetailFragment.newInstance(id)
-                    val transaction = parentFragmentManager.beginTransaction()
-                    transaction.replace(R.id.main_container, fragment)
-                    transaction.addToBackStack(null)
-                    transaction.commit()
+            marker.setOnClickListener {
+                val buildingName =
+                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+                val buildingAddress =
+                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+                val buildingOperating =
+                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+                val buildingNextOperating =
+                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
+                val standardBottomSheet =
+                    binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+                val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+
+                buildingName.text = building.name
+                buildingAddress.text = building.address
+                if (building.operating) {
+                    buildingOperating.text = "운영 중"
+                } else {
+                    buildingOperating.text = "운영 종료"
+                }
+                buildingNextOperating.text = building.nextBuildingTime
+                selectedBuildingName = building.name
+                selectedBuildingAboveFloor = building.floor
+                selectedBuildingUnderFloor = building.underFloor
+                selectedBuildingId = building.buildingId
+
+                val facilityTypesRecyclerView =
+                    binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+                val adapter = FacilityTypeAdapter(building.facilityTypes)
+                facilityTypesRecyclerView.adapter = adapter
+
+                buildingName.setOnClickListener {
+                    selectedBuildingId?.let { id ->
+                        val fragment = BuildingDetailFragment.newInstance(id)
+                        val transaction = parentFragmentManager.beginTransaction()
+                        transaction.replace(R.id.main_container, fragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                    }
+                }
+
+                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                true
+            }
+        }
+    }
+
+    private fun updateMarkersVisibility(zoom: Double) {
+        for (marker in markers) {
+            val buildingId = marker.tag as? Int
+            if (buildingId != null) {
+                // ID에 해당하는 줌 임계값을 가져옴
+                val threshold = MarkerZoomLevelThreshold.getThresholdForId(buildingId)
+
+                if (zoom >= threshold) {
+                    marker.map = naverMap // 줌 값이 임계값 이상이면 마커 표시
+                } else {
+                    marker.map = null // 줌 값이 임계값 이하이면 마커 숨김
                 }
             }
-
-            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            true
         }
     }
 
@@ -393,7 +445,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val activity = context as? FragmentActivity
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.main_container, getDirectionsFragment)
-            ?.addToBackStack("HomeFragment")
+            ?.addToBackStack("DirectionFragment")
             ?.commit()
     }
 
