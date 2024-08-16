@@ -162,7 +162,7 @@
                 android:layout_marginLeft="30dp">
 
                 <FrameLayout
-                    android:id="@+id/frameLayout"
+                    android:id="@+id/customScrollViewLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_container_background"

@@ -91,6 +91,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private lateinit var standardBottomSheet: FrameLayout
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var customScrollView: CustomScrollView
+    private lateinit var customScrollViewLayout: FrameLayout
 
     private var searchedFloor: Int = 1
     private var searchedMask: Int = 0
@@ -136,6 +137,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         customScrollView = binding.customScrollView
+        customScrollViewLayout = binding.customScrollViewLayout
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
@@ -631,11 +633,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     private fun showScroll() {
+        customScrollViewLayout.visibility = View.VISIBLE
         customScrollView.visibility = View.VISIBLE
         isScrollVisible = true
     }
 
     private fun hideScroll() {
+        customScrollViewLayout.visibility = View.GONE
         customScrollView.visibility = View.GONE
         isScrollVisible = false
     }
