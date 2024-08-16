@@ -19,7 +19,6 @@ class CustomScrollView @JvmOverloads constructor(
 
     private val container: LinearLayout
     private var selectedLayout: LinearLayout? = null
-    private var selectedFloor: Int = 0
 
     // 콜백 인터페이스 정의
     interface OnFloorSelectedListener {
@@ -37,7 +36,7 @@ class CustomScrollView @JvmOverloads constructor(
         onFloorSelectedListener = listener
     }
 
-    fun setFloors(minNumber: Int, maxNumber: Int) {
+    fun setFloors(minNumber: Int, maxNumber: Int, floor: Int) {
         container.removeAllViews()
         if (minNumber >= 0 && maxNumber <= 1) {
             this.isVisible = false
@@ -71,15 +70,17 @@ class CustomScrollView @JvmOverloads constructor(
         // 레이아웃 크기 조정
         adjustLayoutSize(maxNumber - minNumber)
 
-        // 1층을 기본 선택 및 스크롤 위치 설정
+        // 입력된 층을 기본 선택 및 스크롤 위치 설정
         post {
             val itemHeight = context.resources.getDimensionPixelSize(R.dimen.item_height)
-            scrollTo(0, (maxNumber - 5) * itemHeight)
-            container.getChildAt(maxNumber - 1)?.let {
+            val modifiedFloor = if (floor > 0) floor else floor + 1 // Floor에 맞게 스크롤의 초기 위치와 색 변환을 수행하기 위한 로직
+
+            scrollTo(0, (((maxNumber - 5) - (modifiedFloor - 1)) * itemHeight))
+            container.getChildAt((maxNumber - 1) - (modifiedFloor -1))?.let {
                 if (it is LinearLayout) {
                     val textView = it.findViewById<TextView>(R.id.item_text)
                     changeLayoutStyle(it, textView)
-                    onFloorSelectedListener?.onFloorSelected(1)
+                    //onFloorSelectedListener?.onFloorSelected(floor)
                 }
             }
         }
@@ -114,6 +115,5 @@ class CustomScrollView @JvmOverloads constructor(
 
         // 클릭된 텍스트 로그로 반환
         Log.d("CustomTextView", "Clicked text: ${textView.text}")
-        selectedFloor = textView.text.toString().toIntOrNull() ?: 1 // "B1"과 같은 텍스트는 무시하고 기본값으로 1 설정
     }
 }

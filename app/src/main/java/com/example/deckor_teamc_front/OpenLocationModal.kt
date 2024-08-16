@@ -23,12 +23,12 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
         // HomeFragment가 이미 존재하면 popBackStack을 통해 해당 프래그먼트로 이동
         if (homeFragment.isAdded) {
             Log.d("openLocationModal", "HomeFragment already exists")
-            fragmentManager.popBackStack("HomeFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            fragmentManager.popBackStack("SearchFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
         } else {
             // 존재하지 않으면 HomeFragment를 추가
             fragmentManager.beginTransaction()
                 .replace(R.id.main_container, homeFragment, HomeFragment::class.java.simpleName)
-                .addToBackStack(HomeFragment::class.java.simpleName)
+                .addToBackStack("HomeFragment")
                 .commit()
             fragmentManager.executePendingTransactions()
         }
@@ -44,8 +44,8 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
                     return@post
                 }
 
-                val nameTextView = includedLayout.findViewById<TextView>(R.id.building_name)
-                val addressTextView = includedLayout.findViewById<TextView>(R.id.building_address)
+                val nameTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_name)
+                val addressTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_address)
 
                 if (nameTextView == null || addressTextView == null) {
                     Log.e("openLocationModal", "One of the TextViews not found")

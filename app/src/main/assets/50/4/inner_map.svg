@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <g id="Layer_x5F_border">
+    <g>
+      <polygon points="491.5 706.5 491.5 373.5 1057.5 373.5 1057.5 410.5 1428.5 410.5 1428.5 706.5 491.5 706.5" fill="#fff"/>
+      <path d="M1052.5,378.5v37h371v286H496.5v-323h556M1062.5,368.5H486.5v343h947v-306h-371v-37h0Z" fill="#e18686"/>
+    </g>
+  </g>
+  <g id="Layer_x5F_others">
+    <g>
+      <g>
+        <line x1="535.03" y1="650.81" x2="498.1" y2="650.81" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="535.03" y1="643.32" x2="498.1" y2="643.32" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="535.03" y1="658.29" x2="498.1" y2="658.29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="535.03" y1="665.78" x2="498.1" y2="665.78" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <rect x="498.21" y="636.12" width="36.34" height="37.29" transform="translate(1171.15 138.38) rotate(90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+      <g>
+        <line x1="572" y1="635.83" x2="534.7" y2="635.83" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="572" y1="650.81" x2="535.07" y2="650.81" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="572" y1="643.32" x2="535.07" y2="643.32" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="572" y1="658.29" x2="535.07" y2="658.29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="572" y1="665.78" x2="535.07" y2="665.78" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <rect x="527.34" y="628.27" width="52.03" height="37.29" transform="translate(1200.27 93.56) rotate(90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="572" y1="628.53" x2="534.7" y2="628.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+      <rect x="475.31" y="604.27" width="118.84" height="74.31" transform="translate(1176.16 106.69) rotate(90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    </g>
+    <line x1="497.58" y1="581.47" x2="497.58" y2="531.67" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_rounge1">
+    <rect x="1051.23" y="416.86" width="372.27" height="283.64" transform="translate(2474.73 1117.36) rotate(180)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_405">
+    <g>
+      <rect x="497.58" y="379.98" width="329.92" height="152.51" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(636.79 452.22)" fill="#434142"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="24"><tspan x="0" y="0">405</tspan></tspan><tspan font-family="DotumChe, DotumChe" font-size="12"><tspan x="-4.07" y="24">公先私後園</tspan></tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_404">
+    <g>
+      <rect x="827.08" y="379.98" width="223.92" height="152.51" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(913.09 449.44)" fill="#434142"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="24"><tspan x="0" y="0">404</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="-13.68" y="28.8">교육문제연구소</tspan></tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_403">
+    <g>
+      <rect x="941.5" y="582.01" width="109.5" height="118.49" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(978.01 637.66)" fill="#434142"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">403</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-6.89" y="19.2">수업행동분석실</tspan></tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_402">
+    <g>
+      <rect x="679.63" y="582.01" width="261.59" height="118.49" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(791.11 637.66)" fill="#434142"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">402</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-7.1" y="19.2">수업행동분석실</tspan></tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_401">
+    <g>
+      <rect x="571.91" y="582.01" width="107.32" height="118.49" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(607.91 637.66)" fill="#434142"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">401</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="6.41" y="19.2">사도원</tspan></tspan></text>
+    </g>
+  </g>
+</svg>
