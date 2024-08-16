@@ -6,9 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/splashbackground">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/image_splash"/>
+        android:src="@drawable/image_splash" />
 </LinearLayout>
