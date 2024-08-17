@@ -2,966 +2,199 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
   <g id="Layer_border">
     <g>
-      <polygon
-        points="1312.57 967.54 1312.57 925.04 1288.07 925.04 1288.07 902.54 754.57 902.54 754.57 902.04 715.07 902.04 715.07 939.04 622.07 939.04 622.07 902.04 438.07 902.04 438.07 676.04 564.07 676.04 564.07 393.04 755.07 393.04 755.07 753.04 812.57 753.04 812.57 716.54 882.57 716.54 882.57 753.04 904.07 753.04 909.07 753 1078 753 1078 753.04 1225.07 753.04 1225.07 582.04 1225.1 582.04 1225.1 523.06 1435.1 523.06 1435.1 628.06 1435.07 628.06 1435.07 750.04 1463.07 750.04 1463.07 925.04 1432.57 925.04 1432.57 967.54 1312.57 967.54"
-        fill="#fff"
-        stroke-width="0"
-      />
-      <path
-        d="M750.07,398.04v360h67.5v-36.5h60v36.5h31.5v-.04h164v.04h157v-171h.02v-58.98h200v95h-.02v131.98h28v165h-30.5v42.5h-110v-42.5h-24.5v-27h-9.5v4.5h-524v-4.5h-9.5v4h-40v37h-83v-37h-184v-216h126v-283h181M760.07,388.04h-201v283h-126v236h184v37h103v-37h29.5v.5h533.5v22.5h24.5v42.5h130v-42.5h30.5v-185h-28v-111.98l.02-10v-105h-220v58.98l-.02,10v161h-137l-10-.04h-174v.04h-11.5v-36.5h-80v36.5h-47.5v-360h0Z"
-        fill="#e18686"
-        stroke-width="0"
-      />
+      <polygon points="1312.57 967.54 1312.57 925.04 1288.07 925.04 1288.07 902.54 754.57 902.54 754.57 902.04 715.07 902.04 715.07 939.04 622.07 939.04 622.07 902.04 438.07 902.04 438.07 676.04 564.07 676.04 564.07 393.04 755.07 393.04 755.07 753.04 812.57 753.04 812.57 716.54 882.57 716.54 882.57 753.04 904.07 753.04 909.07 753 1078 753 1078 753.04 1225.07 753.04 1225.07 582.04 1225.1 582.04 1225.1 523.06 1435.1 523.06 1435.1 628.06 1435.07 628.06 1435.07 750.04 1463.07 750.04 1463.07 925.04 1432.57 925.04 1432.57 967.54 1312.57 967.54" fill="#fff" stroke-width="0"/>
+      <path d="M750.07,398.04v360h67.5v-36.5h60v36.5h31.5v-.04h164v.04h157v-171h.02v-58.98h200v95h-.02v131.98h28v165h-30.5v42.5h-110v-42.5h-24.5v-27h-9.5v4.5h-524v-4.5h-9.5v4h-40v37h-83v-37h-184v-216h126v-283h181M760.07,388.04h-201v283h-126v236h184v37h103v-37h29.5v.5h533.5v22.5h24.5v42.5h130v-42.5h30.5v-185h-28v-111.98l.02-10v-105h-220v58.98l-.02,10v161h-137l-10-.04h-174v.04h-11.5v-36.5h-80v36.5h-47.5v-360h0Z" fill="#e18686" stroke-width="0"/>
     </g>
-    <line
-      x1="1230"
-      y1="753"
-      x2="1431"
-      y2="753"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="10"
-    />
-    <line
-      x1="1313"
-      y1="924.86"
-      x2="1431.5"
-      y2="924.86"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="10"
-    />
-    <line
-      x1="625"
-      y1="901.43"
-      x2="712"
-      y2="901.43"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="10"
-    />
+    <line x1="1230" y1="753" x2="1431" y2="753" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="10"/>
+    <line x1="1313" y1="924.86" x2="1431.5" y2="924.86" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="10"/>
+    <line x1="625" y1="901.43" x2="712" y2="901.43" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="10"/>
   </g>
   <g id="Layer_others">
     <g>
-      <line
-        x1="685.86"
-        y1="698.57"
-        x2="685.86"
-        y2="748.5"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="702.26"
-        y1="698.57"
-        x2="702.26"
-        y2="748.01"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="694.06"
-        y1="698.57"
-        x2="694.06"
-        y2="748.01"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="710.46"
-        y1="698.57"
-        x2="710.46"
-        y2="748.01"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="718.66"
-        y1="698.57"
-        x2="718.66"
-        y2="748.01"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <rect
-        x="669.5"
-        y="698.57"
-        width="57"
-        height="49.92"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="677.86"
-        y1="698.57"
-        x2="677.86"
-        y2="748.5"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
+      <line x1="685.86" y1="698.57" x2="685.86" y2="748.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="702.26" y1="698.57" x2="702.26" y2="748.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="694.06" y1="698.57" x2="694.06" y2="748.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="710.46" y1="698.57" x2="710.46" y2="748.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="718.66" y1="698.57" x2="718.66" y2="748.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <rect x="669.5" y="698.57" width="57" height="49.92" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="677.86" y1="698.57" x2="677.86" y2="748.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
     </g>
-    <line
-      x1="649.46"
-      y1="748.5"
-      x2="669.46"
-      y2="748.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="569.5"
-      y1="748"
-      x2="569.5"
-      y2="757.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <line x1="649.46" y1="748.5" x2="669.46" y2="748.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="569.5" y1="748" x2="569.5" y2="757.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
     <g>
-      <rect
-        x="1375.13"
-        y="756.25"
-        width="82.5"
-        height="35"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <rect
-        x="1375.13"
-        y="791.04"
-        width="82.5"
-        height="35"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1384.74"
-        y1="755.76"
-        x2="1384.74"
-        y2="790.89"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1401.14"
-        y1="755.76"
-        x2="1401.14"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1392.94"
-        y1="755.76"
-        x2="1392.94"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1409.34"
-        y1="755.76"
-        x2="1409.34"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1425.74"
-        y1="755.76"
-        x2="1425.74"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1417.54"
-        y1="755.76"
-        x2="1417.54"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1432.74"
-        y1="755.76"
-        x2="1432.74"
-        y2="790.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1401.14"
-        y1="790.76"
-        x2="1401.14"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1409.34"
-        y1="790.76"
-        x2="1409.34"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1425.74"
-        y1="790.76"
-        x2="1425.74"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1417.54"
-        y1="790.76"
-        x2="1417.54"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1432.74"
-        y1="790.76"
-        x2="1432.74"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1384.74"
-        y1="790.76"
-        x2="1384.74"
-        y2="825.89"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <line
-        x1="1392.94"
-        y1="790.76"
-        x2="1392.94"
-        y2="825.54"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
+      <rect x="1375.13" y="756.25" width="82.5" height="35" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <rect x="1375.13" y="791.04" width="82.5" height="35" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1384.74" y1="755.76" x2="1384.74" y2="790.89" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1401.14" y1="755.76" x2="1401.14" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1392.94" y1="755.76" x2="1392.94" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1409.34" y1="755.76" x2="1409.34" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1425.74" y1="755.76" x2="1425.74" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1417.54" y1="755.76" x2="1417.54" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1432.74" y1="755.76" x2="1432.74" y2="790.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1401.14" y1="790.76" x2="1401.14" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1409.34" y1="790.76" x2="1409.34" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1425.74" y1="790.76" x2="1425.74" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1417.54" y1="790.76" x2="1417.54" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1432.74" y1="790.76" x2="1432.74" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1384.74" y1="790.76" x2="1384.74" y2="825.89" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <line x1="1392.94" y1="790.76" x2="1392.94" y2="825.54" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
     </g>
-    <rect
-      x="1269.5"
-      y="773.5"
-      width="21.42"
-      height="18.48"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="1269.5" y="773.5" width="21.42" height="18.48" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_515">
     <g>
-      <rect
-        x="1393.5"
-        y="873.35"
-        width="63.48"
-        height="47.15"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(1410.34 900.85)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="16"
-      >
-        <tspan x="0" y="0" letter-spacing="-.01em">5</tspan>
-        <tspan x="11.02" y="0">15</tspan>
-      </text>
+      <rect x="1393.5" y="873.35" width="63.48" height="47.15" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1410.34 900.85)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0" letter-spacing="-.01em">5</tspan><tspan x="11.02" y="0">15</tspan></text>
     </g>
   </g>
   <g id="Layer_514">
     <g>
-      <rect
-        x="1393.5"
-        y="826.35"
-        width="63.48"
-        height="47.15"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(1410.15 854.72)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="16"
-      >
-        <tspan x="0" y="0" letter-spacing="-.01em">5</tspan>
-        <tspan x="11.02" y="0">14</tspan>
-      </text>
+      <rect x="1393.5" y="826.35" width="63.48" height="47.15" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1410.15 854.72)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0" letter-spacing="-.01em">5</tspan><tspan x="11.02" y="0">14</tspan></text>
     </g>
   </g>
   <g id="Layer_513">
     <g>
-      <polygon
-        points="1341.43 826.5 1341.43 773.5 1290.7 773.5 1290.7 826.5 1290.5 826.5 1290.5 919.5 1356.5 919.5 1356.5 826.5 1341.43 826.5"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1307.6 850.8)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="16"
-        >
-          <tspan x="0" y="0" letter-spacing="-.01em">5</tspan>
-          <tspan x="11.02" y="0">13</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-11.14" y="19.2">영미문화연구소</tspan>
-        </tspan>
-      </text>
+      <polygon points="1341.43 826.5 1341.43 773.5 1290.7 773.5 1290.7 826.5 1290.5 826.5 1290.5 919.5 1356.5 919.5 1356.5 826.5 1341.43 826.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1307.6 850.8)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0" letter-spacing="-.01em">5</tspan><tspan x="11.02" y="0">13</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-11.14" y="19.2">영미문화연구소 </tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_512">
     <g>
-      <rect
-        x="669.5"
-        y="648.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(692.38 679.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0" letter-spacing="0em">5</tspan>
-        <tspan x="12.4" y="0">12</tspan>
-      </text>
+      <rect x="669.5" y="648.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(692.38 679.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0" letter-spacing="0em">5</tspan><tspan x="12.4" y="0">12</tspan></text>
     </g>
   </g>
   <g id="Layer_511">
     <g>
-      <rect
-        x="669.5"
-        y="598.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(694.05 629.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0" letter-spacing="0em">5</tspan>
-        <tspan x="12.4" y="0">11</tspan>
-      </text>
+      <rect x="669.5" y="598.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(694.05 629.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0" letter-spacing="0em">5</tspan><tspan x="12.4" y="0">11</tspan></text>
     </g>
   </g>
   <g id="Layer_510B">
     <g>
-      <rect
-        x="669.5"
-        y="548.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(686.01 579.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0" letter-spacing="0em">5</tspan>
-        <tspan x="12.4" y="0">10B</tspan>
-      </text>
+      <rect x="669.5" y="548.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(686.01 579.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0" letter-spacing="0em">5</tspan><tspan x="12.4" y="0">10B</tspan></text>
     </g>
   </g>
   <g id="Layer_510A">
     <g>
-      <rect
-        x="669.5"
-        y="498.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(686.17 529.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0" letter-spacing="0em">5</tspan>
-        <tspan x="12.4" y="0">10A</tspan>
-      </text>
+      <rect x="669.5" y="498.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(686.17 529.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0" letter-spacing="0em">5</tspan><tspan x="12.4" y="0">10A</tspan></text>
     </g>
   </g>
   <g id="Layer_509">
     <g>
-      <rect
-        x="669.5"
-        y="448.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(690.01 479.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">509</tspan>
-      </text>
+      <rect x="669.5" y="448.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(690.01 479.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">509</tspan></text>
     </g>
   </g>
   <g id="Layer_508">
     <g>
-      <rect
-        x="669.5"
-        y="398.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(689.84 429.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">508</tspan>
-      </text>
+      <rect x="669.5" y="398.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(689.84 429.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">508</tspan></text>
     </g>
   </g>
   <g id="Layer_507">
     <g>
-      <rect
-        x="569.5"
-        y="698.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590.82 729.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">507</tspan>
-      </text>
+      <rect x="569.5" y="698.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590.82 729.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">507</tspan></text>
     </g>
   </g>
   <g id="Layer_506">
     <g>
-      <rect
-        x="569.5"
-        y="648.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590.01 679.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">506</tspan>
-      </text>
+      <rect x="569.5" y="648.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590.01 679.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">506</tspan></text>
     </g>
   </g>
   <g id="Layer_505">
     <g>
-      <rect
-        x="569.5"
-        y="598.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590.2 629.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">505</tspan>
-      </text>
+      <rect x="569.5" y="598.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590.2 629.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">505</tspan></text>
     </g>
   </g>
   <g id="Layer_504">
     <g>
-      <rect
-        x="569.5"
-        y="548.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590.05 579.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">504</tspan>
-      </text>
+      <rect x="569.5" y="548.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590.05 579.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">504</tspan></text>
     </g>
   </g>
   <g id="Layer_503">
     <g>
-      <rect
-        x="569.5"
-        y="498.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590 529.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">503</tspan>
-      </text>
+      <rect x="569.5" y="498.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590 529.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">503</tspan></text>
     </g>
   </g>
   <g id="Layer_502">
     <g>
-      <rect
-        x="569.5"
-        y="448.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(590.2 479.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">502</tspan>
-      </text>
+      <rect x="569.5" y="448.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(590.2 479.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">502</tspan></text>
     </g>
   </g>
   <g id="Layer_501">
     <g>
-      <rect
-        x="569.5"
-        y="398.5"
-        width="80"
-        height="50"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(591.87 429.62)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">501</tspan>
-      </text>
+      <rect x="569.5" y="398.5" width="80" height="50" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(591.87 429.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">501</tspan></text>
     </g>
   </g>
   <g id="Layer_407">
     <g>
-      <rect
-        x="649.77"
-        y="843.5"
-        width="37.73"
-        height="53.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(655.68 862.94)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">407</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="6.87" y="14.4">응용</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-1.66" y="21.6">문화연구소</tspan>
-        </tspan>
-      </text>
+      <rect x="649.77" y="843.5" width="37.73" height="53.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(655.68 862.94)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">407</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="6.87" y="14.4">응용</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-1.66" y="21.6">문화연구소</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_406C">
     <g>
-      <rect
-        x="1137.72"
-        y="791.93"
-        width="50.73"
-        height="104.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1145.27 836.86)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">406C</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="9.28" y="14.4">대학원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="1.34" y="21.6">연구지원실C</tspan>
-        </tspan>
-      </text>
+      <rect x="1137.72" y="791.93" width="50.73" height="104.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1145.27 836.86)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">406C</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="9.28" y="14.4">대학원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="1.34" y="21.6">연구지원실C</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_406B">
     <g>
-      <rect
-        x="1188.72"
-        y="791.93"
-        width="50.73"
-        height="104.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1196.42 836.86)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">406B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="9.13" y="14.4">대학원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="1.15" y="21.6">연구지원실D</tspan>
-        </tspan>
-      </text>
+      <rect x="1188.72" y="791.93" width="50.73" height="104.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1196.42 836.86)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">406B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="9.13" y="14.4">대학원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="1.15" y="21.6">연구지원실D</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_406A">
     <g>
-      <rect
-        x="1239.72"
-        y="791.93"
-        width="50.73"
-        height="104.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1247.19 836.86)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">406A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="9.35" y="14.4">대학원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="1.77" y="21.6">연구지원실E</tspan>
-        </tspan>
-      </text>
+      <rect x="1239.72" y="791.93" width="50.73" height="104.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1247.19 836.86)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">406A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="9.35" y="14.4">대학원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="1.77" y="21.6">연구지원실E</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_405B">
     <g>
-      <rect
-        x="1035.72"
-        y="791.93"
-        width="50.73"
-        height="104.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1043.55 836.86)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">405B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="9" y="14.4">대학원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="1.04" y="21.6">연구지원실A</tspan>
-        </tspan>
-      </text>
+      <rect x="1035.72" y="791.93" width="50.73" height="104.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1043.55 836.86)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">405B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="9" y="14.4">대학원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="1.04" y="21.6">연구지원실A</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_405A">
     <g>
-      <rect
-        x="1086.72"
-        y="791.93"
-        width="50.73"
-        height="104.25"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1094.33 836.86)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="12"
-        >
-          <tspan x="0" y="0">405A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="9.22" y="14.4">대학원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="1.33" y="21.6">연구지원실B</tspan>
-        </tspan>
-      </text>
+      <rect x="1086.72" y="791.93" width="50.73" height="104.25" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1094.33 836.86)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">405A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="9.22" y="14.4">대학원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="1.33" y="21.6">연구지원실B</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_404">
     <g>
-      <rect
-        x="919.77"
-        y="791.93"
-        width="116.17"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(958.26 849.74)"
-        fill="#000"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">404</tspan>
-      </text>
+      <rect x="919.77" y="791.93" width="116.17" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(958.26 849.74)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">404</tspan></text>
     </g>
   </g>
   <g id="Layer_403">
     <g>
-      <rect
-        x="803.77"
-        y="791.93"
-        width="116.17"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(842.2 849.74)"
-        fill="#000"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">403</tspan>
-      </text>
+      <rect x="803.77" y="791.93" width="116.17" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(842.2 849.74)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">403</tspan></text>
     </g>
   </g>
   <g id="Layer_402">
     <g>
-      <rect
-        x="687.77"
-        y="791.93"
-        width="116.17"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(726.41 849.74)"
-        fill="#000"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="18"
-      >
-        <tspan x="0" y="0">402</tspan>
-      </text>
+      <rect x="687.77" y="791.93" width="116.17" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(726.41 849.74)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">402</tspan></text>
     </g>
   </g>
   <g id="Layer_401">
     <g>
-      <rect
-        x="470.62"
-        y="757.25"
-        width="178.88"
-        height="139.5"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(535.63 832.36)"
-        fill="#434142"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="24.17"
-      >
-        <tspan x="0" y="0">401</tspan>
-      </text>
+      <rect x="470.62" y="757.25" width="178.88" height="139.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(535.63 832.36)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="24.17"><tspan x="0" y="0">401</tspan></text>
     </g>
   </g>
 </svg>

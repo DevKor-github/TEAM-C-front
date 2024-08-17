@@ -2,1617 +2,294 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
   <g id="Layer_border">
     <g>
-      <polygon
-        points="1322 1013 1322 970.5 1297.5 970.5 1297.5 948 764 948 764 947.5 724.5 947.5 724.5 984.5 631.5 984.5 631.5 947.5 447.5 947.5 447.5 721.5 573.5 721.5 573.5 438.5 764.5 438.5 764.5 798.5 822 798.5 822 762 892 762 892 798.5 913.5 798.5 913.5 514.5 949.5 514.5 949.5 495.5 1050.5 495.5 1050.5 514.5 1087.5 514.5 1087.5 798.5 1234.5 798.5 1234.5 627.5 1444.5 627.5 1444.5 795.5 1472.5 795.5 1472.5 970.5 1442 970.5 1442 1013 1322 1013"
-        fill="#fff"
-        stroke-width="0"
-      />
-      <path
-        d="M759.5,443.5v360h67.5v-36.5h60v36.5h31.5v-284h36v-19h91v19h37v284h157v-171h200v168h28v165h-30.5v42.5h-110v-42.5h-24.5v-27h-9.5v4.5h-524v-4.5h-9.5v4h-40v37h-83v-37h-184v-216h126v-283h181M769.5,433.5h-201v283h-126v236h184v37h103v-37h29.5v.5h533.5v22.5h24.5v42.5h130v-42.5h30.5v-185h-28v-168h-220v171h-137v-284h-37v-19h-111v19h-36v284h-11.5v-36.5h-80v36.5h-47.5v-360h0Z"
-        fill="#e18686"
-        stroke-width="0"
-      />
+      <polygon points="1322 1013 1322 970.5 1297.5 970.5 1297.5 948 764 948 764 947.5 724.5 947.5 724.5 984.5 631.5 984.5 631.5 947.5 447.5 947.5 447.5 721.5 573.5 721.5 573.5 438.5 764.5 438.5 764.5 798.5 822 798.5 822 762 892 762 892 798.5 913.5 798.5 913.5 514.5 949.5 514.5 949.5 495.5 1050.5 495.5 1050.5 514.5 1087.5 514.5 1087.5 798.5 1234.5 798.5 1234.5 627.5 1444.5 627.5 1444.5 795.5 1472.5 795.5 1472.5 970.5 1442 970.5 1442 1013 1322 1013" fill="#fff" stroke-width="0"/>
+      <path d="M759.5,443.5v360h67.5v-36.5h60v36.5h31.5v-284h36v-19h91v19h37v284h157v-171h200v168h28v165h-30.5v42.5h-110v-42.5h-24.5v-27h-9.5v4.5h-524v-4.5h-9.5v4h-40v37h-83v-37h-184v-216h126v-283h181M769.5,433.5h-201v283h-126v236h184v37h103v-37h29.5v.5h533.5v22.5h24.5v42.5h130v-42.5h30.5v-185h-28v-168h-220v171h-137v-284h-37v-19h-111v19h-36v284h-11.5v-36.5h-80v36.5h-47.5v-360h0Z" fill="#e18686" stroke-width="0"/>
     </g>
     <g>
       <g>
-        <polygon
-          points="1221 594 1221 523 1165 523 1165 373 1221 373 1221 57 1437 57 1437 594 1221 594"
-          fill="#fdf3f2"
-          stroke-width="0"
-        />
-        <path
-          d="M1432,62v527h-206v-71h-56v-140h56V62h206M1442,52h-226v316h-56v160h56v71h226V52h0Z"
-          fill="#e18686"
-          stroke-width="0"
-        />
+        <polygon points="1221 594 1221 523 1165 523 1165 373 1221 373 1221 57 1437 57 1437 594 1221 594" fill="#fdf3f2" stroke-width="0"/>
+        <path d="M1432,62v527h-206v-71h-56v-140h56V62h206M1442,52h-226v316h-56v160h56v71h226V52h0Z" fill="#e18686" stroke-width="0"/>
       </g>
-      <line
-        x1="1221"
-        y1="378"
-        x2="1221"
-        y2="519"
-        fill="none"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="10"
-      />
+      <line x1="1221" y1="378" x2="1221" y2="519" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="10"/>
     </g>
   </g>
   <g id="Layer_others">
-    <line
-      x1="696.5"
-      y1="755.5"
-      x2="696.5"
-      y2="803"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(961 492)"
-      fill="#000"
-      font-family="AdobeMyungjoStd-Medium-KSCpc-EUC-H, 'Adobe Myungjo Std'"
-      font-size="12"
-      font-weight="500"
-    >
-      <tspan x="0" y="0">10 px</tspan>
-    </text>
-    <line
-      x1="712.9"
-      y1="755.5"
-      x2="712.9"
-      y2="802.53"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="704.7"
-      y1="755.5"
-      x2="704.7"
-      y2="802.53"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="721.1"
-      y1="755.5"
-      x2="721.1"
-      y2="802.53"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="737.5"
-      y1="755.5"
-      x2="737.5"
-      y2="802.53"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="729.3"
-      y1="755.5"
-      x2="729.3"
-      y2="802.53"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1384"
-      y="801.5"
-      width="82.5"
-      height="35"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1391.5"
-      y1="802.5"
-      x2="1391.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1399.5"
-      y1="803"
-      x2="1399.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1407.5"
-      y1="803"
-      x2="1407.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1415.5"
-      y1="803"
-      x2="1415.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1423.5"
-      y1="803"
-      x2="1423.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1384"
-      y="836.5"
-      width="82.5"
-      height="35"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1257.5"
-      y="522.5"
-      width="42"
-      height="32"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1266.5"
-      y1="523"
-      x2="1266.5"
-      y2="555"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1274.5"
-      y1="523"
-      x2="1274.5"
-      y2="555"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1283.5"
-      y1="523"
-      x2="1283.5"
-      y2="555"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1291.5"
-      y1="523"
-      x2="1291.5"
-      y2="555"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1171.5"
-      y="419.5"
-      width="27"
-      height="80"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="426.5"
-      x2="1198.5"
-      y2="426.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="434.75"
-      x2="1198.5"
-      y2="434.75"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="443"
-      x2="1198.5"
-      y2="443"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="451.25"
-      x2="1198.5"
-      y2="451.25"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="459.5"
-      x2="1198.5"
-      y2="459.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="467.75"
-      x2="1198.5"
-      y2="467.75"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="476"
-      x2="1198.5"
-      y2="476"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="484.25"
-      x2="1198.5"
-      y2="484.25"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1171.5"
-      y1="492.5"
-      x2="1198.5"
-      y2="492.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1257.5"
-      y="62.5"
-      width="43"
-      height="39"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1264.5"
-      y1="62.5"
-      x2="1264.5"
-      y2="101.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1272"
-      y1="62.5"
-      x2="1272"
-      y2="101.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1279.5"
-      y1="62.5"
-      x2="1279.5"
-      y2="101.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1287"
-      y1="62.5"
-      x2="1287"
-      y2="101.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1294.5"
-      y1="62.5"
-      x2="1294.5"
-      y2="101.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1430.5"
-      y1="803"
-      x2="1430.5"
-      y2="837.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="680.72"
-      y="755.5"
-      width="80"
-      height="47"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="941.5"
-      y="771.5"
-      width="140.31"
-      height="28"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="919.81"
-      y="771.5"
-      width="21.62"
-      height="28"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="942.5"
-      y1="778.5"
-      x2="1080.5"
-      y2="778.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="942.5"
-      y1="792.5"
-      x2="1080.5"
-      y2="792.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="942.5"
-      y1="785.5"
-      x2="1080.5"
-      y2="785.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1391.5"
-      y1="837.5"
-      x2="1391.5"
-      y2="871.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1399.5"
-      y1="837.5"
-      x2="1399.5"
-      y2="871.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <line
-      x1="1430.5"
-      y1="837.5"
-      x2="1430.5"
-      y2="871.5"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1227"
-      y="522.5"
-      width="30.5"
-      height="66"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1401"
-      y="522.5"
-      width="30.5"
-      height="66"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1171"
-      y="379.5"
-      width="27.5"
-      height="17"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1227"
-      y="62.5"
-      width="30.5"
-      height="55"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <rect
-      x="1400"
-      y="62.5"
-      width="30.5"
-      height="55"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <line x1="696.5" y1="755.5" x2="696.5" y2="803" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(961 492)" fill="#000" font-family="AdobeMyungjoStd-Medium-KSCpc-EUC-H, &apos;Adobe Myungjo Std&apos;" font-size="12" font-weight="500"><tspan x="0" y="0">10 px</tspan></text>
+    <line x1="712.9" y1="755.5" x2="712.9" y2="802.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="704.7" y1="755.5" x2="704.7" y2="802.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="721.1" y1="755.5" x2="721.1" y2="802.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="737.5" y1="755.5" x2="737.5" y2="802.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="729.3" y1="755.5" x2="729.3" y2="802.53" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1384" y="801.5" width="82.5" height="35" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1391.5" y1="802.5" x2="1391.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1399.5" y1="803" x2="1399.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1407.5" y1="803" x2="1407.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1415.5" y1="803" x2="1415.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1423.5" y1="803" x2="1423.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1384" y="836.5" width="82.5" height="35" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1257.5" y="522.5" width="42" height="32" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1266.5" y1="523" x2="1266.5" y2="555" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1274.5" y1="523" x2="1274.5" y2="555" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1283.5" y1="523" x2="1283.5" y2="555" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1291.5" y1="523" x2="1291.5" y2="555" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1171.5" y="419.5" width="27" height="80" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="426.5" x2="1198.5" y2="426.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="434.75" x2="1198.5" y2="434.75" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="443" x2="1198.5" y2="443" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="451.25" x2="1198.5" y2="451.25" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="459.5" x2="1198.5" y2="459.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="467.75" x2="1198.5" y2="467.75" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="476" x2="1198.5" y2="476" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="484.25" x2="1198.5" y2="484.25" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1171.5" y1="492.5" x2="1198.5" y2="492.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1257.5" y="62.5" width="43" height="39" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1264.5" y1="62.5" x2="1264.5" y2="101.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1272" y1="62.5" x2="1272" y2="101.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1279.5" y1="62.5" x2="1279.5" y2="101.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1287" y1="62.5" x2="1287" y2="101.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1294.5" y1="62.5" x2="1294.5" y2="101.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1430.5" y1="803" x2="1430.5" y2="837.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="680.72" y="755.5" width="80" height="47" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="941.5" y="771.5" width="140.31" height="28" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="919.81" y="771.5" width="21.62" height="28" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="942.5" y1="778.5" x2="1080.5" y2="778.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="942.5" y1="792.5" x2="1080.5" y2="792.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="942.5" y1="785.5" x2="1080.5" y2="785.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1391.5" y1="837.5" x2="1391.5" y2="871.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1399.5" y1="837.5" x2="1399.5" y2="871.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <line x1="1430.5" y1="837.5" x2="1430.5" y2="871.5" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1227" y="522.5" width="30.5" height="66" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1401" y="522.5" width="30.5" height="66" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1171" y="379.5" width="27.5" height="17" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1227" y="62.5" width="30.5" height="55" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <rect x="1400" y="62.5" width="30.5" height="55" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_rounge">
-    <rect
-      x="1301.5"
-      y="871.5"
-      width="165"
-      height="93"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="1301.5" y="871.5" width="165" height="93" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_toilet_4">
-    <rect
-      x="1367.15"
-      y="478.5"
-      width="64.35"
-      height="44"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="1367.15" y="478.5" width="64.35" height="44" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_toilet_3">
-    <rect
-      x="1239.5"
-      y="688.5"
-      width="81"
-      height="113"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="1239.5" y="688.5" width="81" height="113" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_toilet_2">
-    <rect
-      x="1239.5"
-      y="632.5"
-      width="81"
-      height="56"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="1239.5" y="632.5" width="81" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_toilet_1">
-    <rect
-      x="578.72"
-      y="755.5"
-      width="80"
-      height="51"
-      fill="none"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
+    <rect x="578.72" y="755.5" width="80" height="51" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
   </g>
   <g id="Layer_132">
     <g>
-      <rect
-        x="919.81"
-        y="519.5"
-        width="162"
-        height="252"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text
-        transform="translate(977.59 653.03)"
-        fill="#000"
-        font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-        font-size="24"
-      >
-        <tspan x="0" y="0">132</tspan>
-      </text>
+      <rect x="919.81" y="519.5" width="162" height="252" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(977.59 653.03)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="24"><tspan x="0" y="0">132</tspan></text>
     </g>
   </g>
   <g id="Layer_129B">
     <g>
-      <rect
-        x="1357.32"
-        y="631.5"
-        width="81.24"
-        height="55.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1373.68 651.94)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">129B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="9.09" y="19.2">문과대학</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="5.29" y="28.8">기록자료실</tspan>
-        </tspan>
-      </text>
+      <rect x="1357.32" y="631.5" width="81.24" height="55.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1373.68 651.94)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">129B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="9.09" y="19.2">문과대학</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="5.29" y="28.8">기록자료실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_129A">
     <g>
-      <rect
-        x="1357.32"
-        y="686.76"
-        width="81.24"
-        height="57.56"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1373.35 711.94)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">129A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="1.84" y="19.2">학습기자재실</tspan>
-        </tspan>
-      </text>
+      <rect x="1357.32" y="686.76" width="81.24" height="57.56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1373.35 711.94)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">129A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="1.84" y="19.2">학습기자재실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_128">
     <g>
-      <rect
-        x="1357.35"
-        y="743.76"
-        width="81.24"
-        height="57.56"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1380.4 768.94)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">128</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-1.38" y="19.2">미화원쉼터</tspan>
-        </tspan>
-      </text>
+      <rect x="1357.35" y="743.76" width="81.24" height="57.56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1380.4 768.94)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">128</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-1.38" y="19.2">미화원쉼터</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_127">
     <g>
-      <rect
-        x="1243.67"
-        y="836.94"
-        width="58.07"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1256.11 885.75)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">127</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="5.22" y="19.2">안내실</tspan>
-        </tspan>
-      </text>
+      <rect x="1243.67" y="836.94" width="58.07" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1256.11 885.75)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">127</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="5.22" y="19.2">안내실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_126">
     <g>
-      <rect
-        x="1072.43"
-        y="836.94"
-        width="171.07"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1141.04 885.75)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">126</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-13.05" y="19.2">문과대학 행정실B</tspan>
-        </tspan>
-      </text>
+      <rect x="1072.43" y="836.94" width="171.07" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1141.04 885.75)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">126</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-13.05" y="19.2">문과대학 행정실B</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_125">
     <g>
-      <rect
-        x="942.43"
-        y="836.94"
-        width="130.07"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(991.24 885.75)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">125</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-13.34" y="19.2">문과대학 행정실A</tspan>
-        </tspan>
-      </text>
+      <rect x="942.43" y="836.94" width="130.07" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(991.24 885.75)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">125</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-13.34" y="19.2">문과대학 행정실A</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_124">
     <g>
-      <rect
-        x="810.43"
-        y="836.94"
-        width="132.07"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(859.36 885.75)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">1</tspan>
-          <tspan x="9.25" y="0" letter-spacing="-.03em">2</tspan>
-          <tspan x="21.29" y="0">4</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-1.87" y="19.2">교수휴게실</tspan>
-        </tspan>
-      </text>
+      <rect x="810.43" y="836.94" width="132.07" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(859.36 885.75)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">1</tspan><tspan x="9.25" y="0" letter-spacing="-.03em">2</tspan><tspan x="21.29" y="0">4</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-1.87" y="19.2">교수휴게실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_123">
     <g>
-      <rect
-        x="694.43"
-        y="836.94"
-        width="116.17"
-        height="104.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(735.1 885.75)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="18"
-        >
-          <tspan x="0" y="0">123</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="8"
-        >
-          <tspan x="-10.1" y="19.2">문과대학 학장실</tspan>
-        </tspan>
-      </text>
+      <rect x="694.43" y="836.94" width="116.17" height="104.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(735.1 885.75)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">123</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="-10.1" y="19.2">문과대학 학장실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_122">
-    <rect
-      x="680.72"
-      y="702.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(703.51 734.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">122</tspan>
-    </text>
+    <rect x="680.72" y="702.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(703.51 734.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">122</tspan></text>
   </g>
   <g id="Layer_121">
-    <rect
-      x="680.72"
-      y="651.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(705.18 683.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">121</tspan>
-    </text>
+    <rect x="680.72" y="651.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(705.18 683.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">121</tspan></text>
   </g>
   <g id="Layer_120">
-    <rect
-      x="680.72"
-      y="599.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(703.09 631.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">120</tspan>
-    </text>
+    <rect x="680.72" y="599.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(703.09 631.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">120</tspan></text>
   </g>
   <g id="Layer_119">
-    <rect
-      x="680.72"
-      y="549.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(704.98 581.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">119</tspan>
-    </text>
+    <rect x="680.72" y="549.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(704.98 581.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">119</tspan></text>
   </g>
   <g id="Layer_118">
-    <rect
-      x="680.72"
-      y="496.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(704.81 528.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">118</tspan>
-    </text>
+    <rect x="680.72" y="496.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(704.81 528.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">118</tspan></text>
   </g>
   <g id="Layer_117">
-    <rect
-      x="680.72"
-      y="444.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(705.79 476.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">117</tspan>
-    </text>
+    <rect x="680.72" y="444.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(705.79 476.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">117</tspan></text>
   </g>
   <g id="Layer_116">
-    <rect
-      x="578.72"
-      y="444.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(602.98 476.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">116</tspan>
-    </text>
+    <rect x="578.72" y="444.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(602.98 476.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">116</tspan></text>
   </g>
   <g id="Layer_115">
-    <rect
-      x="578.72"
-      y="496.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(603.18 528.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">115</tspan>
-    </text>
+    <rect x="578.72" y="496.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(603.18 528.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">115</tspan></text>
   </g>
   <g id="Layer_114">
-    <rect
-      x="578.72"
-      y="549.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(603.02 581.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">114</tspan>
-    </text>
+    <rect x="578.72" y="549.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(603.02 581.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">114</tspan></text>
   </g>
   <g id="Layer_113">
-    <rect
-      x="578.72"
-      y="599.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(602.97 631.62)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="18"
-    >
-      <tspan x="0" y="0">113</tspan>
-    </text>
+    <rect x="578.72" y="599.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(602.97 631.62)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0">113</tspan></text>
   </g>
   <g id="Layer_112B">
-    <rect
-      x="578.72"
-      y="702.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(598.81 733.02)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="16"
-    >
-      <tspan x="0" y="0">112B</tspan>
-    </text>
+    <rect x="578.72" y="702.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(598.81 733.02)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">112B</tspan></text>
   </g>
   <g id="Layer_112A">
-    <rect
-      x="578.72"
-      y="651.5"
-      width="80"
-      height="53"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(598.52 682.02)"
-      fill="#434142"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="16"
-    >
-      <tspan x="0" y="0">112A</tspan>
-    </text>
+    <rect x="578.72" y="651.5" width="80" height="53" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(598.52 682.02)" fill="#434142" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">112A</tspan></text>
   </g>
   <g id="Layer_110E">
-    <rect
-      x="588.33"
-      y="806.68"
-      width="70.5"
-      height="32.5"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(606.55 827.24)"
-      fill="#000"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="14"
-    >
-      <tspan x="0" y="0">110E</tspan>
-    </text>
+    <rect x="588.33" y="806.68" width="70.5" height="32.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(606.55 827.24)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110E</tspan></text>
   </g>
   <g id="Layer_110D">
-    <rect
-      x="535.96"
-      y="806.68"
-      width="52.33"
-      height="32.5"
-      fill="#f8cdce"
-      stroke="#e18686"
-      stroke-miterlimit="10"
-      stroke-width="3"
-    />
-    <text
-      transform="translate(544.16 827.24)"
-      fill="#000"
-      font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-      font-size="14"
-    >
-      <tspan x="0" y="0">110D</tspan>
-    </text>
+    <rect x="535.96" y="806.68" width="52.33" height="32.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    <text transform="translate(544.16 827.24)" fill="#000" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110D</tspan></text>
   </g>
   <g id="Layer_110C">
     <g>
-      <rect
-        x="480.5"
-        y="806.68"
-        width="55.4"
-        height="74"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(490.59 841.84)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">110C</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="5"
-        >
-          <tspan x="-1.65" y="12">중어중문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="480.5" y="806.68" width="55.4" height="74" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(490.59 841.84)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110C</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="5"><tspan x="-1.65" y="12">중어중문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_110B">
     <g>
-      <rect
-        x="480.5"
-        y="880.76"
-        width="72"
-        height="61"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(498.26 907.99)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">110B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-8.58" y="14.4">한국사학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="480.5" y="880.76" width="72" height="61" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(498.26 907.99)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-8.58" y="14.4">한국사학과 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_110A">
     <g>
-      <rect
-        x="553.12"
-        y="866.76"
-        width="53.38"
-        height="75"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(561.7 901.71)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">110A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-5.48" y="14.4">언어학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="553.12" y="866.76" width="53.38" height="75" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(561.7 901.71)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-5.48" y="14.4">언어학과 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_110">
     <g>
-      <rect
-        x="606.12"
-        y="866.76"
-        width="51.38"
-        height="75"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(619.29 901.71)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">110</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-11.06" y="14.4">노어노문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="606.12" y="866.76" width="51.38" height="75" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(619.29 901.71)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">110</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-11.06" y="14.4">노어노문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_109C">
     <g>
-      <rect
-        x="1227.09"
-        y="387.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1265.51 406.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">109C</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-9.08" y="14.4">문과대학혁신지원사업</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="387.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1265.51 406.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">109C</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-9.08" y="14.4">문과대학혁신지원사업</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_109B">
     <g>
-      <rect
-        x="1227.09"
-        y="432.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.65 451.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">109B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-4.29" y="14.4">불어불문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="432.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.65 451.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">109B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-4.29" y="14.4">불어불문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_109A">
     <g>
-      <rect
-        x="1227.09"
-        y="477.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.39 496.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">109A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-.46" y="14.4">언어정보연구소</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="477.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.39 496.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">109A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-.46" y="14.4">언어정보연구소</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_108B">
     <g>
-      <rect
-        x="1227.09"
-        y="297.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.52 316.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">108B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-4.15" y="14.4">국어국문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="297.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.52 316.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">108B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-4.15" y="14.4">국어국문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_108A">
     <g>
-      <rect
-        x="1227.09"
-        y="342.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.26 361.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">108A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-3.9" y="14.4">사회학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="342.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.26 361.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">108A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-3.9" y="14.4">사회학과 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_107B">
     <g>
-      <rect
-        x="1227.09"
-        y="207.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1265.28 226.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">107B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-1.34" y="14.4">디지털인문센터</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="207.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1265.28 226.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">107B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-1.34" y="14.4">디지털인문센터</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_107A">
     <g>
-      <rect
-        x="1227.09"
-        y="252.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1265.02 268.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">107A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-1.08" y="14.4">인문융합연구원</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-1.08" y="21.6">디지털인문센터</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="252.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1265.02 268.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">107A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-1.08" y="14.4">인문융합연구원</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-1.08" y="21.6">디지털인문센터</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_106B">
     <g>
-      <rect
-        x="1227.09"
-        y="117.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.65 136.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">106B</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-4.29" y="14.4">독어독문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="117.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.65 136.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">106B</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-4.29" y="14.4">독어독문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_106A">
     <g>
-      <rect
-        x="1227.09"
-        y="162.43"
-        width="113.5"
-        height="44.82"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1264.39 181.81)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">106A</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-1.18" y="14.4">철학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1227.09" y="162.43" width="113.5" height="44.82" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1264.39 181.81)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">106A</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-1.18" y="14.4">철학과 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_105A">
     <g>
-      <rect
-        x="1367.15"
-        y="117.75"
-        width="64.09"
-        height="89.73"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1385.48 159.58)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">105</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-9.77" y="14.4">서어서문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1367.15" y="117.75" width="64.09" height="89.73" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1385.48 159.58)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">105</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-9.77" y="14.4">서어서문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_104A">
     <g>
-      <rect
-        x="1367.15"
-        y="207.75"
-        width="64.09"
-        height="89.73"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1385.36 249.58)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">104</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-9.65" y="14.4">한문학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1367.15" y="207.75" width="64.09" height="89.73" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1385.36 249.58)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">104</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-9.65" y="14.4">한문학과 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_103">
     <g>
-      <rect
-        x="1367.15"
-        y="297.75"
-        width="64.09"
-        height="89.73"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1385.32 339.58)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">103</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-9.61" y="14.4">일어일문 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1367.15" y="297.75" width="64.09" height="89.73" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1385.32 339.58)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">103</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-9.61" y="14.4">일어일문 세미나실</tspan></tspan></text>
     </g>
   </g>
   <g id="Layer_102">
     <g>
-      <rect
-        x="1367.15"
-        y="387.75"
-        width="64.09"
-        height="89.73"
-        fill="#f8cdce"
-        stroke="#e18686"
-        stroke-miterlimit="10"
-        stroke-width="3"
-      />
-      <text transform="translate(1385.48 429.58)" fill="#000">
-        <tspan
-          font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="14"
-        >
-          <tspan x="0" y="0">102</tspan>
-        </tspan>
-        <tspan
-          font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, 'NanumSquare Neo OTF'"
-          font-size="6"
-        >
-          <tspan x="-6.92" y="14.4">사학과 세미나실</tspan>
-        </tspan>
-      </text>
+      <rect x="1367.15" y="387.75" width="64.09" height="89.73" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1385.48 429.58)" fill="#000"><tspan font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="14"><tspan x="0" y="0">102</tspan></tspan><tspan font-family="NanumSquareNeo-bRg-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="-6.92" y="14.4">사학과 세미나실</tspan></tspan></text>
     </g>
   </g>
 </svg>
