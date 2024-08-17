@@ -1,1 +1,281 @@
-<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><g id="Layer_border"><polygon points="1262.21 540.5 1262.21 374.82 1262.5 374.82 1262.5 115.5 554.58 115.5 554.58 850.5 752.5 850.5 752.5 964.5 1262.5 964.5 1262.5 540.5 1262.21 540.5" fill="#fdf3f2" stroke="#e18686" stroke-miterlimit="10" stroke-width="5"/></g><g id="Layer_others"><rect x="932" y="118" width="92" height="176" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="130.79" x2="1024" y2="130.79" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="143.4" x2="1024" y2="143.4" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="156.01" x2="1024" y2="156.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="168.62" x2="1024" y2="168.62" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="181.23" x2="1024" y2="181.23" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="193.84" x2="1024" y2="193.84" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="206.45" x2="1024" y2="206.45" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="219.05" x2="1024" y2="219.05" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="231.66" x2="1024" y2="231.66" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="244.27" x2="1024" y2="244.27" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="256.88" x2="1024" y2="256.88" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="269.49" x2="1024" y2="269.49" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><line x1="932" y1="282.1" x2="1024" y2="282.1" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><rect x="780" y="430" width="78" height="60" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><rect x="780" y="490" width="78" height="57" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><rect x="858" y="411" width="159" height="121" transform="translate(1875 943) rotate(180)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><rect x="1091.25" y="361.25" width="187" height="154.5" transform="translate(746.25 1623.25) rotate(-90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/></g><g id="Layer_toilet1"><rect x="786" y="117" width="107" height="102" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/></g><g id="Layer_toilet2"><rect x="786" y="219" width="107" height="108" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/></g><g id="Layer_206"><rect x="1024" y="117.5" width="238" height="227" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><text transform="translate(1118.06 221.73)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">308</tspan></text><text transform="translate(1091.21 249.73)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">교수라운지</tspan></text></g><g id="Layer_301"><polygon points="858 531 858 546.5 739 546.5 739 118 557 118 557 546.5 557 562 557 848 1262 848 1262 600 1262 546.5 1262 531 858 531" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="2"/><text transform="translate(886.66 687.4)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">301</tspan></text><text transform="translate(860.35 715.4)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">제2열람실</tspan></text></g></svg>
+<?xml version="1.0" encoding="UTF-8"?><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1920 1080"
+>
+  <g id="Layer_border">
+    <polygon
+      points="1262.21 540.5 1262.21 374.82 1262.5 374.82 1262.5 115.5 554.58 115.5 554.58 850.5 752.5 850.5 752.5 964.5 1262.5 964.5 1262.5 540.5 1262.21 540.5"
+      fill="#fdf3f2"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="5"
+    />
+  </g>
+  <g id="Layer_others">
+    <rect
+      x="932"
+      y="118"
+      width="92"
+      height="176"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="130.79"
+      x2="1024"
+      y2="130.79"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="143.4"
+      x2="1024"
+      y2="143.4"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="156.01"
+      x2="1024"
+      y2="156.01"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="168.62"
+      x2="1024"
+      y2="168.62"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="181.23"
+      x2="1024"
+      y2="181.23"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="193.84"
+      x2="1024"
+      y2="193.84"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="206.45"
+      x2="1024"
+      y2="206.45"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="219.05"
+      x2="1024"
+      y2="219.05"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="231.66"
+      x2="1024"
+      y2="231.66"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="244.27"
+      x2="1024"
+      y2="244.27"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="256.88"
+      x2="1024"
+      y2="256.88"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="269.49"
+      x2="1024"
+      y2="269.49"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <line
+      x1="932"
+      y1="282.1"
+      x2="1024"
+      y2="282.1"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <rect
+      x="780"
+      y="430"
+      width="78"
+      height="60"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <rect
+      x="780"
+      y="490"
+      width="78"
+      height="57"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <rect
+      x="858"
+      y="411"
+      width="159"
+      height="121"
+      transform="translate(1875 943) rotate(180)"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <rect
+      x="1091.25"
+      y="361.25"
+      width="187"
+      height="154.5"
+      transform="translate(746.25 1623.25) rotate(-90)"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+  </g>
+  <g id="Layer_toilet1">
+    <rect
+      x="786"
+      y="117"
+      width="107"
+      height="102"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+  </g>
+  <g id="Layer_toilet2">
+    <rect
+      x="786"
+      y="219"
+      width="107"
+      height="108"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+  </g>
+  <g id="Layer_206">
+    <rect
+      x="1024"
+      y="117.5"
+      width="238"
+      height="227"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <text
+      transform="translate(1118.06 221.73)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">308</tspan>
+    </text>
+    <text
+      transform="translate(1091.21 249.73)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">교수라운지</tspan>
+    </text>
+  </g>
+  <g id="Layer_301">
+    <polygon
+      points="858 531 858 546.5 739 546.5 739 118 557 118 557 546.5 557 562 557 848 1262 848 1262 600 1262 546.5 1262 531 858 531"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="2"
+    />
+    <text
+      transform="translate(886.66 687.4)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">301</tspan>
+    </text>
+    <text
+      transform="translate(860.35 715.4)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">제2열람실</tspan>
+    </text>
+  </g>
+</svg>

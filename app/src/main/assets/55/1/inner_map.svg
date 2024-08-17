@@ -1,1 +1,784 @@
-<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><g id="Layer_border"><polygon points="273 882 273 430 705 430 705 136 1178 136 1178 430 1573 430 1573 826 1485 826 1485 882 273 882" fill="#fdf3f2"/><path d="m1173,141v294h395v386h-88v56H278v-442h432V141h463m10-10h-483v294h-432v462h1222v-56h88v-406h-395V131h0Z" fill="#e18686"/><rect x="205" y="546" width="67" height="148" fill="#fdf3f2"/><path d="m267,551v138h-57v-138h57m10-10h-77v158h77v-158h0Z" fill="#e18686"/><rect x="1578" y="552" width="35" height="190" fill="#e18686"/><rect x="1608" y="430" width="97" height="438" fill="#fdf3f2"/><path d="m1700,435v428h-87v-428h87m10-10h-107v448h107v-448h0Z" fill="#e18686"/><path d="m1568,799c-163-.33-326-.67-489-1v37.03h-26.35v-40.03h-59.65v47.09h23v34.91h-29.66l-9.67-9.67h-93.67l-10.31,10.31h-32.38v-34.14h26.69v-48.5h-57.02v35.8h-30.98v-31.74h-501" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="7"/></g><g id="Layer_others"><rect x="663.11" y="503.84" width="195.56" height="56.76" transform="translate(228.67 1293.11) rotate(-90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="586.15" x2="789.27" y2="586.15" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="570.68" x2="789.27" y2="570.68" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="555.22" x2="789.27" y2="555.22" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="539.76" x2="789.27" y2="539.76" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="524.29" x2="789.27" y2="524.29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="508.83" x2="789.27" y2="508.83" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="493.36" x2="789.27" y2="493.36" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="477.9" x2="789.27" y2="477.9" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="462.43" x2="789.27" y2="462.43" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="732.51" y1="446.97" x2="789.27" y2="446.97" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="984.5" y="499.5" width="49" height="138" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="992.5" y="550.5" width="29" height="29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="992.5" y="590.5" width="29" height="29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="789.5" y="493.5" width="93" height="137" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="169.19" y="591.17" width="139.14" height="57.59" transform="translate(858.72 381.2) rotate(90)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="562.59" x2="209.96" y2="562.59" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="574.39" x2="209.96" y2="574.39" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="586.19" x2="209.96" y2="586.19" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="598" x2="209.96" y2="598" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="609.8" x2="209.96" y2="609.8" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="621.6" x2="209.96" y2="621.6" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="633.4" x2="209.96" y2="633.4" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="645.21" x2="209.96" y2="645.21" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="657.01" x2="209.96" y2="657.01" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="668.81" x2="209.96" y2="668.81" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><line x1="267.55" y1="680.61" x2="209.96" y2="680.61" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/></g><g id="Layer_toilet1"><rect x="1154.5" y="499.5" width="62" height="138" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/></g><g id="Layer_toilet2"><rect x="1033.5" y="499.5" width="121" height="138" transform="translate(2188 1137) rotate(180)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/></g><g id="Layer_101"><rect x="709.5" y="140.5" width="230" height="294" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="5"/><text transform="translate(804.94 293.46)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">101</tspan></text></g><g id="Layer_102"><rect x="939.5" y="276.5" width="233" height="158" transform="translate(2112 711) rotate(180)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><rect x="939.5" y="141.5" width="233" height="135" transform="translate(2112 418) rotate(180)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1034.8 346.61)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">102</tspan></text><text transform="translate(1014.64 376.61)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">모의법정</tspan></text></g><g id="Layer_103"><rect x="587.5" y="434.5" width="145" height="195.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(638.65 526.46)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">103</tspan></text><text transform="translate(618.74 553.46)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">세미나실</tspan></text></g><g id="Layer_104"><rect x="445.5" y="434.5" width="142" height="195.5" transform="translate(1033 1064.5) rotate(180)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(494.72 526.46)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">104</tspan></text><text transform="translate(464.31 553.46)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">행정지원실</tspan></text></g><g id="Layer_104A"><rect x="278.5" y="434.5" width="167" height="195.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(331.94 526.46)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">104A</tspan></text><text transform="translate(331.17 553.46)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">범울터</tspan></text></g><g id="Layer_105A"><rect x="278.5" y="664.5" width="93.5" height="133" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(294.61 734.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">105A</tspan></text></g><g id="Layer_105B"><rect x="372.5" y="664.5" width="93.5" height="133" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(389.02 734.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">105B</tspan></text></g><g id="Layer_106"><rect x="465.5" y="664.5" width="125" height="133" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(506.14 734.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">106</tspan></text></g><g id="Layer_107"><rect x="590.5" y="664.5" width="67" height="133" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(603.13 734.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">107</tspan></text></g><g id="Layer_108"><rect x="657.5" y="664.5" width="67" height="133" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(668.94 734.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">108</tspan></text></g><g id="Layer_109"><rect x="723.5" y="664.5" width="67" height="83" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(735.14 716.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">109</tspan></text></g><g id="Layer_117"><rect x="723.5" y="747.5" width="67" height="52" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(738.69 780.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">117</tspan></text></g><g id="Layer_110A"><rect x="1073.5" y="670.5" width="81" height="126.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1085.64 740.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">110A</tspan></text></g><g id="Layer_110B"><rect x="1154.5" y="670.5" width="55" height="126.5" transform="translate(2364 1467.5) rotate(180)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1159.12 740.08)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="18" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">110B</tspan></text></g><g id="Layer_111A"><rect x="1209.5" y="670.5" width="358" height="126.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1370.98 740.18)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">111</tspan></text></g><g id="Layer_112"><polygon points="1567.5 435.5 1411.5 435.5 1411.5 540.5 1411.5 568.5 1411.5 637.5 1489.5 637.5 1489.5 568.5 1567.5 568.5 1567.5 435.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1470.7 511.78)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">112</tspan></text></g><g id="Layer_112A"><rect x="1489.5" y="568.5" width="78" height="69" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1500.93 608.78)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">112A</tspan></text></g><g id="Layer_113"><rect x="1216.5" y="434.5" width="195" height="203" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/><text transform="translate(1295.23 524.04)" fill="#434142" font-family="NanumSquareNeovariable-Heavy, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 900" font-weight="800"><tspan x="0" y="0">113</tspan></text><text transform="translate(1261.77 553.63)" fill="#434142" font-family="NanumSquareNeovariable-Regular, &apos;NanumSquare Neo variable&apos;" font-size="22" font-variation-settings="&apos;wght&apos; 300"><tspan x="0" y="0">행정조교실</tspan></text></g></svg>
+<?xml version="1.0" encoding="UTF-8"?><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1920 1080"
+>
+  <g id="Layer_border">
+    <polygon
+      points="273 882 273 430 705 430 705 136 1178 136 1178 430 1573 430 1573 826 1485 826 1485 882 273 882"
+      fill="#fdf3f2"
+    />
+    <path
+      d="m1173,141v294h395v386h-88v56H278v-442h432V141h463m10-10h-483v294h-432v462h1222v-56h88v-406h-395V131h0Z"
+      fill="#e18686"
+    />
+    <rect x="205" y="546" width="67" height="148" fill="#fdf3f2" />
+    <path
+      d="m267,551v138h-57v-138h57m10-10h-77v158h77v-158h0Z"
+      fill="#e18686"
+    />
+    <rect x="1578" y="552" width="35" height="190" fill="#e18686" />
+    <rect x="1608" y="430" width="97" height="438" fill="#fdf3f2" />
+    <path
+      d="m1700,435v428h-87v-428h87m10-10h-107v448h107v-448h0Z"
+      fill="#e18686"
+    />
+    <path
+      d="m1568,799c-163-.33-326-.67-489-1v37.03h-26.35v-40.03h-59.65v47.09h23v34.91h-29.66l-9.67-9.67h-93.67l-10.31,10.31h-32.38v-34.14h26.69v-48.5h-57.02v35.8h-30.98v-31.74h-501"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="7"
+    />
+  </g>
+  <g id="Layer_others">
+    <rect
+      x="663.11"
+      y="503.84"
+      width="195.56"
+      height="56.76"
+      transform="translate(228.67 1293.11) rotate(-90)"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="586.15"
+      x2="789.27"
+      y2="586.15"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="570.68"
+      x2="789.27"
+      y2="570.68"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="555.22"
+      x2="789.27"
+      y2="555.22"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="539.76"
+      x2="789.27"
+      y2="539.76"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="524.29"
+      x2="789.27"
+      y2="524.29"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="508.83"
+      x2="789.27"
+      y2="508.83"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="493.36"
+      x2="789.27"
+      y2="493.36"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="477.9"
+      x2="789.27"
+      y2="477.9"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="462.43"
+      x2="789.27"
+      y2="462.43"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="732.51"
+      y1="446.97"
+      x2="789.27"
+      y2="446.97"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="984.5"
+      y="499.5"
+      width="49"
+      height="138"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="992.5"
+      y="550.5"
+      width="29"
+      height="29"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="992.5"
+      y="590.5"
+      width="29"
+      height="29"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="789.5"
+      y="493.5"
+      width="93"
+      height="137"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="169.19"
+      y="591.17"
+      width="139.14"
+      height="57.59"
+      transform="translate(858.72 381.2) rotate(90)"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="562.59"
+      x2="209.96"
+      y2="562.59"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="574.39"
+      x2="209.96"
+      y2="574.39"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="586.19"
+      x2="209.96"
+      y2="586.19"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="598"
+      x2="209.96"
+      y2="598"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="609.8"
+      x2="209.96"
+      y2="609.8"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="621.6"
+      x2="209.96"
+      y2="621.6"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="633.4"
+      x2="209.96"
+      y2="633.4"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="645.21"
+      x2="209.96"
+      y2="645.21"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="657.01"
+      x2="209.96"
+      y2="657.01"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="668.81"
+      x2="209.96"
+      y2="668.81"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <line
+      x1="267.55"
+      y1="680.61"
+      x2="209.96"
+      y2="680.61"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+  </g>
+  <g id="Layer_toilet1">
+    <rect
+      x="1154.5"
+      y="499.5"
+      width="62"
+      height="138"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+  </g>
+  <g id="Layer_toilet2">
+    <rect
+      x="1033.5"
+      y="499.5"
+      width="121"
+      height="138"
+      transform="translate(2188 1137) rotate(180)"
+      fill="none"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+  </g>
+  <g id="Layer_101">
+    <rect
+      x="709.5"
+      y="140.5"
+      width="230"
+      height="294"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="5"
+    />
+    <text
+      transform="translate(804.94 293.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">101</tspan>
+    </text>
+  </g>
+  <g id="Layer_102">
+    <rect
+      x="939.5"
+      y="276.5"
+      width="233"
+      height="158"
+      transform="translate(2112 711) rotate(180)"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <rect
+      x="939.5"
+      y="141.5"
+      width="233"
+      height="135"
+      transform="translate(2112 418) rotate(180)"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1034.8 346.61)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">102</tspan>
+    </text>
+    <text
+      transform="translate(1014.64 376.61)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">모의법정</tspan>
+    </text>
+  </g>
+  <g id="Layer_103">
+    <rect
+      x="587.5"
+      y="434.5"
+      width="145"
+      height="195.5"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(638.65 526.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">103</tspan>
+    </text>
+    <text
+      transform="translate(618.74 553.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">세미나실</tspan>
+    </text>
+  </g>
+  <g id="Layer_104">
+    <rect
+      x="445.5"
+      y="434.5"
+      width="142"
+      height="195.5"
+      transform="translate(1033 1064.5) rotate(180)"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(494.72 526.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">104</tspan>
+    </text>
+    <text
+      transform="translate(464.31 553.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">행정지원실</tspan>
+    </text>
+  </g>
+  <g id="Layer_104A">
+    <rect
+      x="278.5"
+      y="434.5"
+      width="167"
+      height="195.5"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(331.94 526.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">104A</tspan>
+    </text>
+    <text
+      transform="translate(331.17 553.46)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">범울터</tspan>
+    </text>
+  </g>
+  <g id="Layer_105A">
+    <rect
+      x="278.5"
+      y="664.5"
+      width="93.5"
+      height="133"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(294.61 734.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">105A</tspan>
+    </text>
+  </g>
+  <g id="Layer_105B">
+    <rect
+      x="372.5"
+      y="664.5"
+      width="93.5"
+      height="133"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(389.02 734.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">105B</tspan>
+    </text>
+  </g>
+  <g id="Layer_106">
+    <rect
+      x="465.5"
+      y="664.5"
+      width="125"
+      height="133"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(506.14 734.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">106</tspan>
+    </text>
+  </g>
+  <g id="Layer_107">
+    <rect
+      x="590.5"
+      y="664.5"
+      width="67"
+      height="133"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(603.13 734.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">107</tspan>
+    </text>
+  </g>
+  <g id="Layer_108">
+    <rect
+      x="657.5"
+      y="664.5"
+      width="67"
+      height="133"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(668.94 734.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">108</tspan>
+    </text>
+  </g>
+  <g id="Layer_109">
+    <rect
+      x="723.5"
+      y="664.5"
+      width="67"
+      height="83"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(735.14 716.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">109</tspan>
+    </text>
+  </g>
+  <g id="Layer_117">
+    <rect
+      x="723.5"
+      y="747.5"
+      width="67"
+      height="52"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(738.69 780.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">117</tspan>
+    </text>
+  </g>
+  <g id="Layer_110A">
+    <rect
+      x="1073.5"
+      y="670.5"
+      width="81"
+      height="126.5"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1085.64 740.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">110A</tspan>
+    </text>
+  </g>
+  <g id="Layer_110B">
+    <rect
+      x="1154.5"
+      y="670.5"
+      width="55"
+      height="126.5"
+      transform="translate(2364 1467.5) rotate(180)"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1159.12 740.08)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="18"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">110B</tspan>
+    </text>
+  </g>
+  <g id="Layer_111A">
+    <rect
+      x="1209.5"
+      y="670.5"
+      width="358"
+      height="126.5"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1370.98 740.18)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">111</tspan>
+    </text>
+  </g>
+  <g id="Layer_112">
+    <polygon
+      points="1567.5 435.5 1411.5 435.5 1411.5 540.5 1411.5 568.5 1411.5 637.5 1489.5 637.5 1489.5 568.5 1567.5 568.5 1567.5 435.5"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1470.7 511.78)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">112</tspan>
+    </text>
+  </g>
+  <g id="Layer_112A">
+    <rect
+      x="1489.5"
+      y="568.5"
+      width="78"
+      height="69"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1500.93 608.78)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">112A</tspan>
+    </text>
+  </g>
+  <g id="Layer_113">
+    <rect
+      x="1216.5"
+      y="434.5"
+      width="195"
+      height="203"
+      fill="#f8cdce"
+      stroke="#e18686"
+      stroke-miterlimit="10"
+      stroke-width="3"
+    />
+    <text
+      transform="translate(1295.23 524.04)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Heavy, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 900"
+      font-weight="800"
+    >
+      <tspan x="0" y="0">113</tspan>
+    </text>
+    <text
+      transform="translate(1261.77 553.63)"
+      fill="#434142"
+      font-family="NanumSquareNeovariable-Regular, 'NanumSquare Neo variable'"
+      font-size="22"
+      font-variation-settings="'wght' 300"
+    >
+      <tspan x="0" y="0">행정조교실</tspan>
+    </text>
+  </g>
+</svg>

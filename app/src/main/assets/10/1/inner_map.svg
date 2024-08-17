@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1287.29 919.13">
+<svg
+  id="Layer_1"
+  data-name="Layer 1"
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  viewBox="0 0 1287.29 919.13"
+>
   <defs>
     <style>
       .cls-1 {
         fill: #fed0d0;
       }
 
-      .cls-1, .cls-2, .cls-3 {
+      .cls-1,
+      .cls-2,
+      .cls-3 {
         stroke: #ea8b8b;
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-3 {
+      .cls-1,
+      .cls-3 {
         stroke-width: 3px;
       }
 
@@ -24,9 +33,10 @@
         font-size: 14.58px;
       }
 
-      .cls-4, .cls-5 {
+      .cls-4,
+      .cls-5 {
         fill: #000;
-        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+        font-family: NanumSquareNeoTTF-dEb, "NanumSquare Neo";
       }
 
       .cls-3 {
@@ -39,207 +49,368 @@
     </style>
   </defs>
   <g id="Layer_border">
-    <path class="cls-2" d="M783.92,554.5l-.63-42.5h77l-.48-191.32h-.26c4.19-50.86-44.31-88.38-53.97-95.86-13.04-10.09-55.62-39.81-118.12-37.71-13.82.46-27.36,2.96-27.36,2.96-7.45,1.38-13.52,2.98-17.69,4.19,0,0-28.75,8.45-52.35,24.87-2.61,1.82-4.67,3.36-6.14,4.48-8.43,6.39-59.81,45.37-55.43,97.08h-.68l.49,191.32h85v43l-200-.5-.29.5-86.38-.5,1.38-322.5-79.5.12v-37.71h-100.62v37.71h-49.58v549.75l188.12.13h895.41v-227.5h-397.9Z"/>
+    <path
+      class="cls-2"
+      d="M783.92,554.5l-.63-42.5h77l-.48-191.32h-.26c4.19-50.86-44.31-88.38-53.97-95.86-13.04-10.09-55.62-39.81-118.12-37.71-13.82.46-27.36,2.96-27.36,2.96-7.45,1.38-13.52,2.98-17.69,4.19,0,0-28.75,8.45-52.35,24.87-2.61,1.82-4.67,3.36-6.14,4.48-8.43,6.39-59.81,45.37-55.43,97.08h-.68l.49,191.32h85v43l-200-.5-.29.5-86.38-.5,1.38-322.5-79.5.12v-37.71h-100.62v37.71h-49.58v549.75l188.12.13h895.41v-227.5h-397.9Z"
+    />
   </g>
   <g id="toilet">
-    <rect class="cls-3" x="97.5" y="625.5" width="99" height="43"/>
+    <rect class="cls-3" x="97.5" y="625.5" width="99" height="43" />
   </g>
   <g id="Layer_3" data-name="Layer 3">
-    <rect class="cls-1" x="98.5" y="572.5" width="98" height="53"/>
-    <text class="cls-5" transform="translate(131.61 603.7)"><tspan x="0" y="0">125</tspan></text>
+    <rect class="cls-1" x="98.5" y="572.5" width="98" height="53" />
+    <text class="cls-5" transform="translate(131.61 603.7)">
+      <tspan x="0" y="0">125</tspan>
+    </text>
   </g>
   <g id="Layer_4" data-name="Layer 4">
-    <rect class="cls-1" x="98.5" y="525.5" width="98" height="47"/>
-    <text class="cls-5" transform="translate(131.61 552.7)"><tspan x="0" y="0">124B</tspan></text>
+    <rect class="cls-1" x="98.5" y="525.5" width="98" height="47" />
+    <text class="cls-5" transform="translate(131.61 552.7)">
+      <tspan x="0" y="0">124B</tspan>
+    </text>
   </g>
   <g id="Layer_5" data-name="Layer 5">
-    <rect class="cls-1" x="98.5" y="402.5" width="98" height="123"/>
-    <text class="cls-5" transform="translate(131.61 466.7)"><tspan x="0" y="0">124A</tspan></text>
+    <rect class="cls-1" x="98.5" y="402.5" width="98" height="123" />
+    <text class="cls-5" transform="translate(131.61 466.7)">
+      <tspan x="0" y="0">124A</tspan>
+    </text>
   </g>
   <g id="Layer_6" data-name="Layer 6">
-    <rect class="cls-1" x="98.5" y="368.5" width="98" height="34"/>
-    <text class="cls-5" transform="translate(131.61 389.7)"><tspan x="0" y="0">123A</tspan></text>
+    <rect class="cls-1" x="98.5" y="368.5" width="98" height="34" />
+    <text class="cls-5" transform="translate(131.61 389.7)">
+      <tspan x="0" y="0">123A</tspan>
+    </text>
   </g>
   <g id="Layer_7" data-name="Layer 7">
-    <rect class="cls-1" x="98.5" y="233.5" width="98" height="71"/>
-    <text class="cls-5" transform="translate(131.61 273.7)"><tspan x="0" y="0">123C</tspan></text>
+    <rect class="cls-1" x="98.5" y="233.5" width="98" height="71" />
+    <text class="cls-5" transform="translate(131.61 273.7)">
+      <tspan x="0" y="0">123C</tspan>
+    </text>
   </g>
   <g id="Layer_8" data-name="Layer 8">
-    <rect class="cls-1" x="98.5" y="304.5" width="98" height="64"/>
-    <text class="cls-5" transform="translate(131.61 337.7)"><tspan x="0" y="0">123B</tspan></text>
+    <rect class="cls-1" x="98.5" y="304.5" width="98" height="64" />
+    <text class="cls-5" transform="translate(131.61 337.7)">
+      <tspan x="0" y="0">123B</tspan>
+    </text>
   </g>
   <g id="Layer_others">
     <g>
-      <rect class="cls-3" x="147.35" y="194.92" width="21.54" height="23.79"/>
-      <line class="cls-3" x1="180.35" y1="218.72" x2="180.35" y2="194.54"/>
-      <line class="cls-3" x1="192.37" y1="218.36" x2="192.37" y2="194.92"/>
-      <line class="cls-3" x1="204.29" y1="218.41" x2="204.29" y2="194.97"/>
-      <line class="cls-3" x1="214.86" y1="218.41" x2="214.86" y2="194.97"/>
-      <line class="cls-3" x1="226.6" y1="218.41" x2="226.6" y2="194.97"/>
-      <line class="cls-3" x1="238.35" y1="218.41" x2="238.35" y2="194.97"/>
-      <line class="cls-3" x1="169.29" y1="219" x2="248" y2="218.44"/>
+      <rect class="cls-3" x="147.35" y="194.92" width="21.54" height="23.79" />
+      <line class="cls-3" x1="180.35" y1="218.72" x2="180.35" y2="194.54" />
+      <line class="cls-3" x1="192.37" y1="218.36" x2="192.37" y2="194.92" />
+      <line class="cls-3" x1="204.29" y1="218.41" x2="204.29" y2="194.97" />
+      <line class="cls-3" x1="214.86" y1="218.41" x2="214.86" y2="194.97" />
+      <line class="cls-3" x1="226.6" y1="218.41" x2="226.6" y2="194.97" />
+      <line class="cls-3" x1="238.35" y1="218.41" x2="238.35" y2="194.97" />
+      <line class="cls-3" x1="169.29" y1="219" x2="248" y2="218.44" />
     </g>
-    <rect class="cls-3" x="147.5" y="194.5" width="101" height="39"/>
-    <rect class="cls-1" x="243.5" y="382.5" width="19" height="29"/>
-    <rect class="cls-3" x="253" y="610" width="99" height="57.54"/>
-    <rect class="cls-3" x="569.5" y="555.5" width="44" height="113"/>
-    <rect class="cls-1" x="569.5" y="606.5" width="44" height="33"/>
-    <rect class="cls-1" x="569.5" y="639.5" width="44" height="29"/>
-    <rect class="cls-1" x="613.5" y="512.5" width="44" height="70"/>
+    <rect class="cls-3" x="147.5" y="194.5" width="101" height="39" />
+    <rect class="cls-1" x="243.5" y="382.5" width="19" height="29" />
+    <rect class="cls-3" x="253" y="610" width="99" height="57.54" />
+    <rect class="cls-3" x="569.5" y="555.5" width="44" height="113" />
+    <rect class="cls-1" x="569.5" y="606.5" width="44" height="33" />
+    <rect class="cls-1" x="569.5" y="639.5" width="44" height="29" />
+    <rect class="cls-1" x="613.5" y="512.5" width="44" height="70" />
     <g>
-      <rect class="cls-3" x="527.5" y="374.5" width="113" height="38"/>
+      <rect class="cls-3" x="527.5" y="374.5" width="113" height="38" />
       <g>
-        <rect class="cls-3" x="519.87" y="382.63" width="37.5" height="21.23" transform="translate(145.37 931.87) rotate(-90)"/>
-        <rect class="cls-3" x="533.67" y="390.06" width="37.5" height="6.37" transform="translate(159.17 945.67) rotate(-90)"/>
-        <rect class="cls-3" x="540.04" y="390.06" width="37.5" height="6.37" transform="translate(165.54 952.04) rotate(-90)"/>
-        <rect class="cls-3" x="546.41" y="390.06" width="37.5" height="6.37" transform="translate(171.91 958.41) rotate(-90)"/>
-        <rect class="cls-3" x="552.78" y="390.06" width="37.5" height="6.37" transform="translate(178.28 964.78) rotate(-90)"/>
-        <rect class="cls-3" x="559.15" y="390.06" width="37.5" height="6.37" transform="translate(184.65 971.15) rotate(-90)"/>
-        <rect class="cls-3" x="565.52" y="390.06" width="37.5" height="6.37" transform="translate(191.02 977.52) rotate(-90)"/>
-        <rect class="cls-3" x="572.95" y="390.06" width="37.5" height="6.37" transform="translate(198.45 984.95) rotate(-90)"/>
-        <rect class="cls-3" x="579.32" y="390.06" width="37.5" height="6.37" transform="translate(204.82 991.32) rotate(-90)"/>
-        <rect class="cls-3" x="585.69" y="390.06" width="37.5" height="6.37" transform="translate(211.19 997.69) rotate(-90)"/>
-        <rect class="cls-3" x="592.07" y="390.06" width="37.5" height="6.37" transform="translate(217.57 1004.07) rotate(-90)"/>
+        <rect
+          class="cls-3"
+          x="519.87"
+          y="382.63"
+          width="37.5"
+          height="21.23"
+          transform="translate(145.37 931.87) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="533.67"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(159.17 945.67) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="540.04"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(165.54 952.04) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="546.41"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(171.91 958.41) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="552.78"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(178.28 964.78) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="559.15"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(184.65 971.15) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="565.52"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(191.02 977.52) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="572.95"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(198.45 984.95) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="579.32"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(204.82 991.32) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="585.69"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(211.19 997.69) rotate(-90)"
+        />
+        <rect
+          class="cls-3"
+          x="592.07"
+          y="390.06"
+          width="37.5"
+          height="6.37"
+          transform="translate(217.57 1004.07) rotate(-90)"
+        />
       </g>
     </g>
-    <rect class="cls-3" x="704.5" y="511.5" width="79" height="158"/>
+    <rect class="cls-3" x="704.5" y="511.5" width="79" height="158" />
     <g>
-      <rect class="cls-3" x="809.5" y="554.5" width="23" height="115"/>
+      <rect class="cls-3" x="809.5" y="554.5" width="23" height="115" />
       <g>
-        <rect class="cls-3" x="809.5" y="554.5" width="23" height="20"/>
-        <rect class="cls-3" x="809.5" y="574.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="580.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="586.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="592.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="598.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="604.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="611.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="617.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="623.5" width="23" height="6"/>
-        <rect class="cls-3" x="809.5" y="629.5" width="23" height="6"/>
+        <rect class="cls-3" x="809.5" y="554.5" width="23" height="20" />
+        <rect class="cls-3" x="809.5" y="574.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="580.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="586.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="592.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="598.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="604.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="611.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="617.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="623.5" width="23" height="6" />
+        <rect class="cls-3" x="809.5" y="629.5" width="23" height="6" />
       </g>
     </g>
-    <rect class="cls-1" x="444.5" y="700.5" width="41" height="41"/>
+    <rect class="cls-1" x="444.5" y="700.5" width="41" height="41" />
   </g>
   <g id="Layer_11" data-name="Layer 11">
-    <polygon class="cls-1" points="243.82 555.28 243.82 466.72 327 466.72 326.62 554.5 243.82 555.28"/>
-    <text class="cls-5" transform="translate(273.83 512.4)"><tspan x="0" y="0">121A</tspan></text>
+    <polygon
+      class="cls-1"
+      points="243.82 555.28 243.82 466.72 327 466.72 326.62 554.5 243.82 555.28"
+    />
+    <text class="cls-5" transform="translate(273.83 512.4)">
+      <tspan x="0" y="0">121A</tspan>
+    </text>
   </g>
   <g id="Layer_12" data-name="Layer 12">
-    <polygon class="cls-1" points="327 382.21 262.15 382.21 262.15 411.5 243.82 411.5 243.82 466.72 327 466.72 327 382.21"/>
-    <text class="cls-5" transform="translate(270.83 429.4)"><tspan x="0" y="0">121B</tspan></text>
+    <polygon
+      class="cls-1"
+      points="327 382.21 262.15 382.21 262.15 411.5 243.82 411.5 243.82 466.72 327 466.72 327 382.21"
+    />
+    <text class="cls-5" transform="translate(270.83 429.4)">
+      <tspan x="0" y="0">121B</tspan>
+    </text>
   </g>
   <g id="Layer_13" data-name="Layer 13">
-    <rect class="cls-1" x="243.5" y="334.5" width="83" height="48"/>
-    <text class="cls-5" transform="translate(271.9 358.25)"><tspan x="0" y="0">122</tspan></text>
+    <rect class="cls-1" x="243.5" y="334.5" width="83" height="48" />
+    <text class="cls-5" transform="translate(271.9 358.25)">
+      <tspan x="0" y="0">122</tspan>
+    </text>
   </g>
   <g id="Layer_14" data-name="Layer 14">
-    <rect class="cls-1" x="243.5" y="286.5" width="83" height="48"/>
-    <text class="cls-5" transform="translate(267.93 317.55)"><tspan x="0" y="0">122A</tspan></text>
+    <rect class="cls-1" x="243.5" y="286.5" width="83" height="48" />
+    <text class="cls-5" transform="translate(267.93 317.55)">
+      <tspan x="0" y="0">122A</tspan>
+    </text>
   </g>
   <g id="Layer_15" data-name="Layer 15">
-    <rect class="cls-1" x="243.5" y="233.5" width="83" height="53"/>
-    <text class="cls-5" transform="translate(267.93 263.55)"><tspan x="0" y="0">122B</tspan></text>
+    <rect class="cls-1" x="243.5" y="233.5" width="83" height="53" />
+    <text class="cls-5" transform="translate(267.93 263.55)">
+      <tspan x="0" y="0">122B</tspan>
+    </text>
   </g>
   <g id="Layer_16" data-name="Layer 16">
-    <polygon class="cls-1" points="549.64 741.5 549.64 701 485.23 700.5 485.23 741.5 549.64 741.5"/>
-    <text class="cls-5" transform="translate(502.64 725.81)"><tspan x="0" y="0">103A</tspan></text>
+    <polygon
+      class="cls-1"
+      points="549.64 741.5 549.64 701 485.23 700.5 485.23 741.5 549.64 741.5"
+    />
+    <text class="cls-5" transform="translate(502.64 725.81)">
+      <tspan x="0" y="0">103A</tspan>
+    </text>
   </g>
   <g id="Layer_17" data-name="Layer 17">
-    <rect class="cls-1" x="297.5" y="700.5" width="147" height="82"/>
-    <text class="cls-5" transform="translate(357.31 745.26)"><tspan x="0" y="0">103</tspan></text>
+    <rect class="cls-1" x="297.5" y="700.5" width="147" height="82" />
+    <text class="cls-5" transform="translate(357.31 745.26)">
+      <tspan x="0" y="0">103</tspan>
+    </text>
   </g>
   <g id="Layer_18" data-name="Layer 18">
-    <rect class="cls-1" x="195.5" y="700.5" width="102" height="82"/>
-    <text class="cls-5" transform="translate(230.31 745.26)"><tspan x="0" y="0">102</tspan></text>
+    <rect class="cls-1" x="195.5" y="700.5" width="102" height="82" />
+    <text class="cls-5" transform="translate(230.31 745.26)">
+      <tspan x="0" y="0">102</tspan>
+    </text>
   </g>
   <g id="Layer_19" data-name="Layer 19">
-    <rect class="cls-1" x="98" y="701" width="98" height="81"/>
-    <text class="cls-5" transform="translate(132.22 745.54)"><tspan x="0" y="0">101</tspan></text>
+    <rect class="cls-1" x="98" y="701" width="98" height="81" />
+    <text class="cls-5" transform="translate(132.22 745.54)">
+      <tspan x="0" y="0">101</tspan>
+    </text>
   </g>
   <g>
-    <rect class="cls-3" x="253" y="625" width="21.13" height="42.32"/>
-    <line class="cls-3" x1="285.37" y1="625" x2="285.37" y2="668"/>
-    <line class="cls-3" x1="297.17" y1="625.64" x2="297.17" y2="667.32"/>
-    <line class="cls-3" x1="308.86" y1="625.56" x2="308.86" y2="667.24"/>
-    <line class="cls-3" x1="319.23" y1="625.56" x2="319.23" y2="667.24"/>
-    <line class="cls-3" x1="330.76" y1="625.56" x2="330.76" y2="667.24"/>
-    <line class="cls-3" x1="342.29" y1="625.56" x2="342.29" y2="667.24"/>
-    <line class="cls-3" x1="274.53" y1="624.5" x2="351.75" y2="625.5"/>
+    <rect class="cls-3" x="253" y="625" width="21.13" height="42.32" />
+    <line class="cls-3" x1="285.37" y1="625" x2="285.37" y2="668" />
+    <line class="cls-3" x1="297.17" y1="625.64" x2="297.17" y2="667.32" />
+    <line class="cls-3" x1="308.86" y1="625.56" x2="308.86" y2="667.24" />
+    <line class="cls-3" x1="319.23" y1="625.56" x2="319.23" y2="667.24" />
+    <line class="cls-3" x1="330.76" y1="625.56" x2="330.76" y2="667.24" />
+    <line class="cls-3" x1="342.29" y1="625.56" x2="342.29" y2="667.24" />
+    <line class="cls-3" x1="274.53" y1="624.5" x2="351.75" y2="625.5" />
   </g>
   <g id="toilet5">
-    <rect class="cls-3" x="783.5" y="554.5" width="26" height="115"/>
+    <rect class="cls-3" x="783.5" y="554.5" width="26" height="115" />
   </g>
   <g id="Layer_21" data-name="Layer 21">
-    <rect class="cls-1" x="721.5" y="374.5" width="137" height="137"/>
-    <text class="cls-5" transform="translate(772.53 448.94)"><tspan x="0" y="0">111</tspan></text>
+    <rect class="cls-1" x="721.5" y="374.5" width="137" height="137" />
+    <text class="cls-5" transform="translate(772.53 448.94)">
+      <tspan x="0" y="0">111</tspan>
+    </text>
   </g>
   <g id="Layer_22" data-name="Layer 22">
-    <path class="cls-1" d="M719.14,188.5c-1.9,28.67.76,65.33-1.14,94,44.22,17.31,42.05,16.89,43.25,17h96.75c-1.28-10.65-17.01-38.45-47.8-67-35.61-33.02-80.14-43.24-91.06-44Z"/>
-    <text class="cls-5" transform="translate(763.57 259.27)"><tspan x="0" y="0">112</tspan></text>
+    <path
+      class="cls-1"
+      d="M719.14,188.5c-1.9,28.67.76,65.33-1.14,94,44.22,17.31,42.05,16.89,43.25,17h96.75c-1.28-10.65-17.01-38.45-47.8-67-35.61-33.02-80.14-43.24-91.06-44Z"
+    />
+    <text class="cls-5" transform="translate(763.57 259.27)">
+      <tspan x="0" y="0">112</tspan>
+    </text>
   </g>
   <g id="Layer_23" data-name="Layer 23">
-    <path class="cls-1" d="M666.86,192c1.9,28.67-.76,65.33,1.14,94-44.22,17.31-42.05,16.89-43.25,17h-96.75c1.28-10.65,17.01-38.45,47.8-67,35.61-33.02,80.14-43.24,91.06-44Z"/>
-    <text class="cls-5" transform="translate(598.21 260.85)"><tspan x="0" y="0">113</tspan></text>
+    <path
+      class="cls-1"
+      d="M666.86,192c1.9,28.67-.76,65.33,1.14,94-44.22,17.31-42.05,16.89-43.25,17h-96.75c1.28-10.65,17.01-38.45,47.8-67,35.61-33.02,80.14-43.24,91.06-44Z"
+    />
+    <text class="cls-5" transform="translate(598.21 260.85)">
+      <tspan x="0" y="0">113</tspan>
+    </text>
   </g>
   <g id="toilet4">
-    <rect class="cls-3" x="528.5" y="303.5" width="85" height="40"/>
+    <rect class="cls-3" x="528.5" y="303.5" width="85" height="40" />
   </g>
   <g id="toilet3">
-    <rect class="cls-3" x="527.5" y="343.5" width="86" height="31"/>
+    <rect class="cls-3" x="527.5" y="343.5" width="86" height="31" />
   </g>
   <g id="Layer_26" data-name="Layer 26">
-    <rect class="cls-1" x="528.5" y="411.5" width="112" height="100"/>
-    <text class="cls-5" transform="translate(566.21 464.85)"><tspan x="0" y="0">117</tspan></text>
+    <rect class="cls-1" x="528.5" y="411.5" width="112" height="100" />
+    <text class="cls-5" transform="translate(566.21 464.85)">
+      <tspan x="0" y="0">117</tspan>
+    </text>
   </g>
   <g id="toilet2">
-    <rect class="cls-3" x="528.5" y="555.5" width="41" height="113"/>
+    <rect class="cls-3" x="528.5" y="555.5" width="41" height="113" />
   </g>
   <g id="Layer_28" data-name="Layer 28">
-    <polygon class="cls-1" points="289.23 555.28 289.23 610 351.6 610 351.6 667.54 528 668.5 528 555.5 289.23 555.28"/>
-    <text class="cls-5" transform="translate(413.83 614.4)"><tspan x="0" y="0">120</tspan></text>
+    <polygon
+      class="cls-1"
+      points="289.23 555.28 289.23 610 351.6 610 351.6 667.54 528 668.5 528 555.5 289.23 555.28"
+    />
+    <text class="cls-5" transform="translate(413.83 614.4)">
+      <tspan x="0" y="0">120</tspan>
+    </text>
   </g>
   <g id="Layer_29" data-name="Layer 29">
-    <rect class="cls-1" x="786.5" y="700.5" width="46" height="41"/>
-    <text class="cls-5" transform="translate(792.77 724.86)"><tspan x="0" y="0">104B</tspan></text>
+    <rect class="cls-1" x="786.5" y="700.5" width="46" height="41" />
+    <text class="cls-5" transform="translate(792.77 724.86)">
+      <tspan x="0" y="0">104B</tspan>
+    </text>
   </g>
   <g id="Layer_37" data-name="Layer 37">
-    <rect class="cls-1" x="751.5" y="700.5" width="35" height="41"/>
-    <text class="cls-5" transform="translate(751.77 725.86)"><tspan x="0" y="0">104A</tspan></text>
+    <rect class="cls-1" x="751.5" y="700.5" width="35" height="41" />
+    <text class="cls-5" transform="translate(751.77 725.86)">
+      <tspan x="0" y="0">104A</tspan>
+    </text>
   </g>
   <g id="Layer_38" data-name="Layer 38">
-    <rect class="cls-1" x="721.5" y="700.5" width="30" height="41"/>
-    <text class="cls-5" transform="translate(725.77 724.86)"><tspan x="0" y="0">104</tspan></text>
+    <rect class="cls-1" x="721.5" y="700.5" width="30" height="41" />
+    <text class="cls-5" transform="translate(725.77 724.86)">
+      <tspan x="0" y="0">104</tspan>
+    </text>
   </g>
   <g id="Layer_30" data-name="Layer 30">
-    <rect class="cls-1" x="832.5" y="700.5" width="148" height="81"/>
-    <text class="cls-5" transform="translate(885.77 745.86)"><tspan x="0" y="0">105</tspan></text>
+    <rect class="cls-1" x="832.5" y="700.5" width="148" height="81" />
+    <text class="cls-5" transform="translate(885.77 745.86)">
+      <tspan x="0" y="0">105</tspan>
+    </text>
   </g>
   <g id="Layer_31" data-name="Layer 31">
-    <rect class="cls-1" x="980.5" y="700.5" width="201" height="81"/>
-    <text class="cls-5" transform="translate(1065.29 744.88)"><tspan x="0" y="0">106</tspan></text>
+    <rect class="cls-1" x="980.5" y="700.5" width="201" height="81" />
+    <text class="cls-5" transform="translate(1065.29 744.88)">
+      <tspan x="0" y="0">106</tspan>
+    </text>
   </g>
   <g id="Layer_32" data-name="Layer 32">
-    <rect class="cls-1" x="1080.5" y="556.43" width="102.05" height="112.29"/>
-    <text class="cls-4" transform="translate(1114.9 616.93)"><tspan x="0" y="0">107</tspan></text>
+    <rect class="cls-1" x="1080.5" y="556.43" width="102.05" height="112.29" />
+    <text class="cls-4" transform="translate(1114.9 616.93)">
+      <tspan x="0" y="0">107</tspan>
+    </text>
   </g>
   <g id="Layer_33" data-name="Layer 33">
-    <rect class="cls-1" x="1028.3" y="556.43" width="52.5" height="112.29"/>
-    <text class="cls-5" transform="translate(1043.38 616.67)"><tspan x="0" y="0">108</tspan></text>
+    <rect class="cls-1" x="1028.3" y="556.43" width="52.5" height="112.29" />
+    <text class="cls-5" transform="translate(1043.38 616.67)">
+      <tspan x="0" y="0">108</tspan>
+    </text>
   </g>
   <g id="Layer_34" data-name="Layer 34">
-    <rect class="cls-1" x="980.5" y="555.5" width="48" height="114"/>
-    <text class="cls-5" transform="translate(986.98 616.81)"><tspan x="0" y="0">109A</tspan></text>
+    <rect class="cls-1" x="980.5" y="555.5" width="48" height="114" />
+    <text class="cls-5" transform="translate(986.98 616.81)">
+      <tspan x="0" y="0">109A</tspan>
+    </text>
   </g>
   <g id="Layer_35" data-name="Layer 35">
-    <rect class="cls-1" x="885.5" y="554.5" width="95" height="115"/>
-    <text class="cls-5" transform="translate(917.98 618.81)"><tspan x="0" y="0">109B</tspan></text>
+    <rect class="cls-1" x="885.5" y="554.5" width="95" height="115" />
+    <text class="cls-5" transform="translate(917.98 618.81)">
+      <tspan x="0" y="0">109B</tspan>
+    </text>
   </g>
   <g id="Layer_36" data-name="Layer 36">
-    <rect class="cls-1" x="832.5" y="554.5" width="53" height="115"/>
-    <text class="cls-5" transform="translate(842.72 618.38)"><tspan x="0" y="0">109C</tspan></text>
+    <rect class="cls-1" x="832.5" y="554.5" width="53" height="115" />
+    <text class="cls-5" transform="translate(842.72 618.38)">
+      <tspan x="0" y="0">109C</tspan>
+    </text>
   </g>
   <g id="Layer_39" data-name="Layer 39">
-    <polygon class="cls-1" points="253 555.28 289.23 555.28 289.23 610 267.63 610 253 610 253 555.28"/>
+    <polygon
+      class="cls-1"
+      points="253 555.28 289.23 555.28 289.23 610 267.63 610 253 610 253 555.28"
+    />
   </g>
 </svg>

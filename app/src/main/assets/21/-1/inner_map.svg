@@ -2,16 +2,22 @@
 <svg id="B1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.69 867.01">
   <defs>
     <style>
-      .cls-1, .cls-2 {
+      .cls-1,
+      .cls-2 {
         fill: #fcf2f2;
       }
 
-      .cls-1, .cls-2, .cls-3, .cls-4 {
+      .cls-1,
+      .cls-2,
+      .cls-3,
+      .cls-4 {
         stroke: #e68b8b;
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-3, .cls-4 {
+      .cls-1,
+      .cls-3,
+      .cls-4 {
         stroke-width: 3px;
       }
 
@@ -23,9 +29,12 @@
         font-size: 8px;
       }
 
-      .cls-5, .cls-6, .cls-7, .cls-8 {
+      .cls-5,
+      .cls-6,
+      .cls-7,
+      .cls-8 {
         fill: #221f20;
-        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+        font-family: NanumSquareNeoTTF-dEb, "NanumSquare Neo";
       }
 
       .cls-3 {
@@ -45,19 +54,19 @@
       }
 
       .cls-9 {
-        letter-spacing: -.02em;
+        letter-spacing: -0.02em;
       }
 
       .cls-10 {
-        letter-spacing: -.01em;
+        letter-spacing: -0.01em;
       }
 
       .cls-11 {
-        letter-spacing: -.04em;
+        letter-spacing: -0.04em;
       }
 
       .cls-12 {
-        letter-spacing: -.03em;
+        letter-spacing: -0.03em;
       }
 
       .cls-13 {
@@ -70,206 +79,349 @@
     </style>
   </defs>
   <g id="Layer_x5F_border-2" data-name="Layer_x5F_border">
-    <rect class="cls-2" x="266.69" y="188.88" width="855.06" height="517.29"/>
+    <rect class="cls-2" x="266.69" y="188.88" width="855.06" height="517.29" />
   </g>
   <g id="Layer_x5F_others-2" data-name="Layer_x5F_others">
-    <rect class="cls-3" x="266.69" y="565.7" width="41.67" height="35.22"/>
-    <rect class="cls-3" x="308.35" y="565.7" width="19.29" height="35.22"/>
-    <rect class="cls-3" x="266.69" y="645.22" width="60.95" height="60.95"/>
-    <rect class="cls-3" x="266.69" y="600.92" width="60.95" height="44.3"/>
-    <rect class="cls-4" x="973.73" y="300.87" width="19.36" height="33.7"/>
-    <rect class="cls-3" x="929.83" y="418.19" width="63.25" height="15.31"/>
-    <rect class="cls-3" x="881.3" y="334.57" width="33.52" height="70.77"/>
-    <rect class="cls-4" x="881.3" y="341.56" width="33.52" height="28.4"/>
-    <rect class="cls-4" x="881.3" y="374.81" width="33.52" height="24.81"/>
-    <polygon class="cls-3" points="881.3 405.34 914.82 405.34 914.82 418.19 929.83 418.19 929.83 433.5 881.3 433.5 881.3 405.34"/>
+    <rect class="cls-3" x="266.69" y="565.7" width="41.67" height="35.22" />
+    <rect class="cls-3" x="308.35" y="565.7" width="19.29" height="35.22" />
+    <rect class="cls-3" x="266.69" y="645.22" width="60.95" height="60.95" />
+    <rect class="cls-3" x="266.69" y="600.92" width="60.95" height="44.3" />
+    <rect class="cls-4" x="973.73" y="300.87" width="19.36" height="33.7" />
+    <rect class="cls-3" x="929.83" y="418.19" width="63.25" height="15.31" />
+    <rect class="cls-3" x="881.3" y="334.57" width="33.52" height="70.77" />
+    <rect class="cls-4" x="881.3" y="341.56" width="33.52" height="28.4" />
+    <rect class="cls-4" x="881.3" y="374.81" width="33.52" height="24.81" />
+    <polygon
+      class="cls-3"
+      points="881.3 405.34 914.82 405.34 914.82 418.19 929.83 418.19 929.83 433.5 881.3 433.5 881.3 405.34"
+    />
     <g>
-      <rect class="cls-3" x="881.3" y="301.48" width="91.68" height="31.53" transform="translate(1854.28 634.48) rotate(180)"/>
+      <rect
+        class="cls-3"
+        x="881.3"
+        y="301.48"
+        width="91.68"
+        height="31.53"
+        transform="translate(1854.28 634.48) rotate(180)"
+      />
       <g>
-        <rect class="cls-3" x="965.55" y="316.04" width="6.3" height="15.79"/>
-        <rect class="cls-3" x="959" y="316.04" width="6.56" height="15.79"/>
-        <rect class="cls-3" x="951.44" y="316.04" width="7.56" height="15.79"/>
-        <rect class="cls-3" x="945.38" y="316.04" width="6.05" height="15.79"/>
-        <rect class="cls-3" x="937.82" y="316.04" width="7.56" height="15.79"/>
-        <rect class="cls-3" x="932.4" y="316.04" width="5.42" height="15.79"/>
-        <rect class="cls-3" x="924.21" y="316.04" width="8.19" height="15.79"/>
-        <rect class="cls-3" x="916.64" y="316.04" width="7.56" height="15.79"/>
-        <rect class="cls-3" x="910.09" y="316.04" width="6.56" height="15.79"/>
-        <rect class="cls-3" x="903.53" y="316.04" width="6.56" height="15.79"/>
+        <rect class="cls-3" x="965.55" y="316.04" width="6.3" height="15.79" />
+        <rect class="cls-3" x="959" y="316.04" width="6.56" height="15.79" />
+        <rect class="cls-3" x="951.44" y="316.04" width="7.56" height="15.79" />
+        <rect class="cls-3" x="945.38" y="316.04" width="6.05" height="15.79" />
+        <rect class="cls-3" x="937.82" y="316.04" width="7.56" height="15.79" />
+        <rect class="cls-3" x="932.4" y="316.04" width="5.42" height="15.79" />
+        <rect class="cls-3" x="924.21" y="316.04" width="8.19" height="15.79" />
+        <rect class="cls-3" x="916.64" y="316.04" width="7.56" height="15.79" />
+        <rect class="cls-3" x="910.09" y="316.04" width="6.56" height="15.79" />
+        <rect class="cls-3" x="903.53" y="316.04" width="6.56" height="15.79" />
       </g>
       <g>
-        <rect class="cls-3" x="965.66" y="301.92" width="6.3" height="14.3"/>
-        <rect class="cls-3" x="959.1" y="301.92" width="6.56" height="14.3"/>
-        <rect class="cls-3" x="951.54" y="301.92" width="7.56" height="14.3"/>
-        <rect class="cls-3" x="945.49" y="301.92" width="6.05" height="14.3"/>
-        <rect class="cls-3" x="937.92" y="301.92" width="7.56" height="14.3"/>
-        <rect class="cls-3" x="932.5" y="301.92" width="5.42" height="14.3"/>
-        <rect class="cls-3" x="924.31" y="301.92" width="8.19" height="14.3"/>
-        <rect class="cls-3" x="916.75" y="301.92" width="7.56" height="14.3"/>
-        <rect class="cls-3" x="910.19" y="301.92" width="6.56" height="14.3"/>
-        <rect class="cls-3" x="903.64" y="301.92" width="6.56" height="14.3"/>
+        <rect class="cls-3" x="965.66" y="301.92" width="6.3" height="14.3" />
+        <rect class="cls-3" x="959.1" y="301.92" width="6.56" height="14.3" />
+        <rect class="cls-3" x="951.54" y="301.92" width="7.56" height="14.3" />
+        <rect class="cls-3" x="945.49" y="301.92" width="6.05" height="14.3" />
+        <rect class="cls-3" x="937.92" y="301.92" width="7.56" height="14.3" />
+        <rect class="cls-3" x="932.5" y="301.92" width="5.42" height="14.3" />
+        <rect class="cls-3" x="924.31" y="301.92" width="8.19" height="14.3" />
+        <rect class="cls-3" x="916.75" y="301.92" width="7.56" height="14.3" />
+        <rect class="cls-3" x="910.19" y="301.92" width="6.56" height="14.3" />
+        <rect class="cls-3" x="903.64" y="301.92" width="6.56" height="14.3" />
       </g>
     </g>
-    <polygon class="cls-3" points="378.18 433.5 489.68 433.5 489.68 417.95 456.49 417.95 456.49 373.95 448.66 373.95 448.66 417.95 378.18 417.95 378.18 433.5"/>
-    <rect class="cls-4" x="456.49" y="373.95" width="33.19" height="44"/>
-    <rect class="cls-4" x="416.76" y="333.99" width="39.72" height="39.97"/>
-    <rect class="cls-4" x="378.18" y="300.87" width="20.21" height="33.12"/>
-    <rect class="cls-4" x="378.04" y="480.14" width="52.24" height="22.94" transform="translate(808.31 983.23) rotate(-180)"/>
+    <polygon
+      class="cls-3"
+      points="378.18 433.5 489.68 433.5 489.68 417.95 456.49 417.95 456.49 373.95 448.66 373.95 448.66 417.95 378.18 417.95 378.18 433.5"
+    />
+    <rect class="cls-4" x="456.49" y="373.95" width="33.19" height="44" />
+    <rect class="cls-4" x="416.76" y="333.99" width="39.72" height="39.97" />
+    <rect class="cls-4" x="378.18" y="300.87" width="20.21" height="33.12" />
+    <rect
+      class="cls-4"
+      x="378.04"
+      y="480.14"
+      width="52.24"
+      height="22.94"
+      transform="translate(808.31 983.23) rotate(-180)"
+    />
     <g>
-      <rect class="cls-3" x="398.39" y="300.6" width="91.43" height="33.39"/>
+      <rect class="cls-3" x="398.39" y="300.6" width="91.43" height="33.39" />
       <g>
-        <rect class="cls-3" x="399.51" y="301.83" width="6.29" height="16.73"/>
-        <rect class="cls-3" x="405.8" y="301.83" width="6.54" height="16.73"/>
-        <rect class="cls-3" x="412.34" y="301.83" width="7.54" height="16.73"/>
-        <rect class="cls-3" x="419.88" y="301.83" width="6.03" height="16.73"/>
-        <rect class="cls-3" x="425.91" y="301.83" width="7.54" height="16.73"/>
-        <rect class="cls-3" x="433.46" y="301.83" width="5.41" height="16.73"/>
-        <rect class="cls-3" x="438.86" y="301.83" width="8.17" height="16.73"/>
-        <rect class="cls-3" x="447.03" y="301.83" width="7.54" height="16.73"/>
-        <rect class="cls-3" x="454.58" y="301.83" width="6.54" height="16.73"/>
-        <rect class="cls-3" x="461.11" y="301.83" width="6.54" height="16.73"/>
+        <rect class="cls-3" x="399.51" y="301.83" width="6.29" height="16.73" />
+        <rect class="cls-3" x="405.8" y="301.83" width="6.54" height="16.73" />
+        <rect class="cls-3" x="412.34" y="301.83" width="7.54" height="16.73" />
+        <rect class="cls-3" x="419.88" y="301.83" width="6.03" height="16.73" />
+        <rect class="cls-3" x="425.91" y="301.83" width="7.54" height="16.73" />
+        <rect class="cls-3" x="433.46" y="301.83" width="5.41" height="16.73" />
+        <rect class="cls-3" x="438.86" y="301.83" width="8.17" height="16.73" />
+        <rect class="cls-3" x="447.03" y="301.83" width="7.54" height="16.73" />
+        <rect class="cls-3" x="454.58" y="301.83" width="6.54" height="16.73" />
+        <rect class="cls-3" x="461.11" y="301.83" width="6.54" height="16.73" />
       </g>
       <g>
-        <rect class="cls-3" x="399.41" y="318.37" width="6.29" height="15.14"/>
-        <rect class="cls-3" x="405.7" y="318.37" width="6.54" height="15.14"/>
-        <rect class="cls-3" x="412.23" y="318.37" width="7.54" height="15.14"/>
-        <rect class="cls-3" x="419.77" y="318.37" width="6.03" height="15.14"/>
-        <rect class="cls-3" x="425.81" y="318.37" width="7.54" height="15.14"/>
-        <rect class="cls-3" x="433.35" y="318.37" width="5.41" height="15.14"/>
-        <rect class="cls-3" x="438.76" y="318.37" width="8.17" height="15.14"/>
-        <rect class="cls-3" x="446.93" y="318.37" width="7.54" height="15.14"/>
-        <rect class="cls-3" x="454.47" y="318.37" width="6.54" height="15.14"/>
-        <rect class="cls-3" x="461.01" y="318.37" width="6.54" height="15.14"/>
+        <rect class="cls-3" x="399.41" y="318.37" width="6.29" height="15.14" />
+        <rect class="cls-3" x="405.7" y="318.37" width="6.54" height="15.14" />
+        <rect class="cls-3" x="412.23" y="318.37" width="7.54" height="15.14" />
+        <rect class="cls-3" x="419.77" y="318.37" width="6.03" height="15.14" />
+        <rect class="cls-3" x="425.81" y="318.37" width="7.54" height="15.14" />
+        <rect class="cls-3" x="433.35" y="318.37" width="5.41" height="15.14" />
+        <rect class="cls-3" x="438.76" y="318.37" width="8.17" height="15.14" />
+        <rect class="cls-3" x="446.93" y="318.37" width="7.54" height="15.14" />
+        <rect class="cls-3" x="454.47" y="318.37" width="6.54" height="15.14" />
+        <rect class="cls-3" x="461.01" y="318.37" width="6.54" height="15.14" />
       </g>
     </g>
   </g>
   <g id="Layer_311">
-    <rect class="cls-4" x="686.47" y="188.88" width="123.24" height="111.99"/>
-    <text class="cls-7" transform="translate(733.49 233.46)"><tspan x="0" y="0">B112</tspan><tspan class="cls-12" x="-32.28" y="14.4">A</tspan><tspan class="cls-13" x="-23.22" y="14.4">c</tspan><tspan x="-15.8" y="14.4">t</tspan><tspan class="cls-11" x="-10.55" y="14.4">i</tspan><tspan class="cls-12" x="-7.43" y="14.4">v</tspan><tspan x="-.41" y="14.4">e l</tspan><tspan class="cls-13" x="13.62" y="14.4">e</tspan><tspan x="21.24" y="14.4">arning</tspan><tspan x="-17.65" y="28.8">cl</tspan><tspan class="cls-9" x="-6.8" y="28.8">a</tspan><tspan x=".41" y="28.8">ss</tspan><tspan class="cls-12" x="14.66" y="28.8">r</tspan><tspan x="19.55" y="28.8">oom</tspan></text>
+    <rect class="cls-4" x="686.47" y="188.88" width="123.24" height="111.99" />
+    <text class="cls-7" transform="translate(733.49 233.46)">
+      <tspan x="0" y="0">B112</tspan>
+      <tspan class="cls-12" x="-32.28" y="14.4">A</tspan>
+      <tspan class="cls-13" x="-23.22" y="14.4">c</tspan>
+      <tspan x="-15.8" y="14.4">t</tspan>
+      <tspan class="cls-11" x="-10.55" y="14.4">i</tspan>
+      <tspan class="cls-12" x="-7.43" y="14.4">v</tspan>
+      <tspan x="-.41" y="14.4">e l</tspan>
+      <tspan class="cls-13" x="13.62" y="14.4">e</tspan>
+      <tspan x="21.24" y="14.4">arning</tspan>
+      <tspan x="-17.65" y="28.8">cl</tspan>
+      <tspan class="cls-9" x="-6.8" y="28.8">a</tspan>
+      <tspan x=".41" y="28.8">ss</tspan>
+      <tspan class="cls-12" x="14.66" y="28.8">r</tspan>
+      <tspan x="19.55" y="28.8">oom</tspan>
+    </text>
   </g>
   <g id="Layer_312">
-    <rect class="cls-4" x="560.25" y="188.88" width="126.22" height="111.99"/>
-    <text class="cls-7" transform="translate(608.49 233.46)"><tspan x="0" y="0">B110</tspan><tspan class="cls-12" x="-32.01" y="14.4">A</tspan><tspan class="cls-13" x="-22.95" y="14.4">c</tspan><tspan x="-15.53" y="14.4">t</tspan><tspan class="cls-11" x="-10.28" y="14.4">i</tspan><tspan class="cls-12" x="-7.16" y="14.4">v</tspan><tspan x="-.14" y="14.4">e l</tspan><tspan class="cls-13" x="13.89" y="14.4">e</tspan><tspan x="21.51" y="14.4">arning</tspan><tspan x="-5" y="28.8">stud</tspan><tspan class="cls-10" x="23.46" y="28.8">i</tspan><tspan x="26.88" y="28.8">o</tspan></text>
+    <rect class="cls-4" x="560.25" y="188.88" width="126.22" height="111.99" />
+    <text class="cls-7" transform="translate(608.49 233.46)">
+      <tspan x="0" y="0">B110</tspan>
+      <tspan class="cls-12" x="-32.01" y="14.4">A</tspan>
+      <tspan class="cls-13" x="-22.95" y="14.4">c</tspan>
+      <tspan x="-15.53" y="14.4">t</tspan>
+      <tspan class="cls-11" x="-10.28" y="14.4">i</tspan>
+      <tspan class="cls-12" x="-7.16" y="14.4">v</tspan>
+      <tspan x="-.14" y="14.4">e l</tspan>
+      <tspan class="cls-13" x="13.89" y="14.4">e</tspan>
+      <tspan x="21.51" y="14.4">arning</tspan>
+      <tspan x="-5" y="28.8">stud</tspan>
+      <tspan class="cls-10" x="23.46" y="28.8">i</tspan>
+      <tspan x="26.88" y="28.8">o</tspan>
+    </text>
   </g>
   <g id="Layer_313">
-    <rect class="cls-4" x="489.68" y="188.88" width="70.57" height="70.57"/>
-    <text class="cls-7" transform="translate(504.09 212.75)"><tspan x="0" y="0">B109A</tspan><tspan x="-1.88" y="14.4">공학교육</tspan><tspan x="-3.37" y="28.8">혁신 센터</tspan></text>
+    <rect class="cls-4" x="489.68" y="188.88" width="70.57" height="70.57" />
+    <text class="cls-7" transform="translate(504.09 212.75)">
+      <tspan x="0" y="0">B109A</tspan>
+      <tspan x="-1.88" y="14.4">공학교육</tspan>
+      <tspan x="-3.37" y="28.8">혁신 센터</tspan>
+    </text>
   </g>
   <g id="Layer_314">
     <g>
-      <rect class="cls-4" x="560.25" y="300.87" width="90.22" height="57.49"/>
-      <text class="cls-7" transform="translate(587.22 325.4)"><tspan x="0" y="0">B111A</tspan><tspan x="-17.48" y="14.4">남학생 수면실</tspan></text>
+      <rect class="cls-4" x="560.25" y="300.87" width="90.22" height="57.49" />
+      <text class="cls-7" transform="translate(587.22 325.4)">
+        <tspan x="0" y="0">B111A</tspan>
+        <tspan x="-17.48" y="14.4">남학생 수면실</tspan>
+      </text>
     </g>
   </g>
   <g id="Layer_315">
-    <polygon class="cls-4" points="560.25 405.34 575.95 405.34 575.95 393.52 636.74 393.52 636.74 405.34 650.46 405.34 650.46 358.36 560.25 358.36 560.25 405.34"/>
-    <text class="cls-8" transform="translate(594.17 374.64)"><tspan x="0" y="0">B111</tspan><tspan x="-18.49" y="12">남학생 휴게실</tspan></text>
+    <polygon
+      class="cls-4"
+      points="560.25 405.34 575.95 405.34 575.95 393.52 636.74 393.52 636.74 405.34 650.46 405.34 650.46 358.36 560.25 358.36 560.25 405.34"
+    />
+    <text class="cls-8" transform="translate(594.17 374.64)">
+      <tspan x="0" y="0">B111</tspan>
+      <tspan x="-18.49" y="12">남학생 휴게실</tspan>
+    </text>
   </g>
   <g id="Layer_316">
-    <polygon class="cls-4" points="560.25 502.99 641.51 502.99 641.51 436.43 650.46 436.43 650.46 405.34 636.74 405.34 636.74 393.52 575.95 393.52 575.95 405.34 560.25 405.34 560.25 502.99"/>
-    <text class="cls-7" transform="translate(590.51 444.04)"><tspan x="0" y="0">B118</tspan><tspan x="-2.21" y="14.4">강의실</tspan></text>
+    <polygon
+      class="cls-4"
+      points="560.25 502.99 641.51 502.99 641.51 436.43 650.46 436.43 650.46 405.34 636.74 405.34 636.74 393.52 575.95 393.52 575.95 405.34 560.25 405.34 560.25 502.99"
+    />
+    <text class="cls-7" transform="translate(590.51 444.04)">
+      <tspan x="0" y="0">B118</tspan>
+      <tspan x="-2.21" y="14.4">강의실</tspan>
+    </text>
   </g>
   <g id="Layer_317">
-    <rect class="cls-3" x="650.46" y="300.87" width="43.75" height="54.74"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="60.51" height="66.23"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="79.15" height="77.77"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="97.62" height="89.74"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="113.99" height="98.75"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="131.51" height="111.01"/>
-    <rect class="cls-3" x="650.46" y="300.87" width="159.24" height="132.63"/>
+    <rect class="cls-3" x="650.46" y="300.87" width="43.75" height="54.74" />
+    <rect class="cls-3" x="650.46" y="300.87" width="60.51" height="66.23" />
+    <rect class="cls-3" x="650.46" y="300.87" width="79.15" height="77.77" />
+    <rect class="cls-3" x="650.46" y="300.87" width="97.62" height="89.74" />
+    <rect class="cls-3" x="650.46" y="300.87" width="113.99" height="98.75" />
+    <rect class="cls-3" x="650.46" y="300.87" width="131.51" height="111.01" />
+    <rect class="cls-3" x="650.46" y="300.87" width="159.24" height="132.63" />
     <g>
-      <rect class="cls-1" x="694.22" y="300.87" width="9.03" height="28.75"/>
-      <rect class="cls-1" x="703.25" y="300.87" width="9.39" height="28.75"/>
-      <rect class="cls-1" x="712.64" y="300.87" width="10.84" height="28.75"/>
-      <rect class="cls-1" x="723.47" y="300.87" width="8.67" height="28.75"/>
-      <rect class="cls-1" x="732.14" y="300.87" width="10.84" height="28.75"/>
-      <rect class="cls-1" x="742.98" y="300.87" width="7.77" height="28.75"/>
-      <rect class="cls-1" x="750.75" y="300.87" width="11.74" height="28.75"/>
-      <rect class="cls-1" x="762.48" y="300.87" width="10.84" height="28.75"/>
-      <rect class="cls-1" x="773.32" y="300.87" width="9.39" height="28.75"/>
-      <rect class="cls-1" x="782.71" y="300.87" width="9.39" height="28.75"/>
+      <rect class="cls-1" x="694.22" y="300.87" width="9.03" height="28.75" />
+      <rect class="cls-1" x="703.25" y="300.87" width="9.39" height="28.75" />
+      <rect class="cls-1" x="712.64" y="300.87" width="10.84" height="28.75" />
+      <rect class="cls-1" x="723.47" y="300.87" width="8.67" height="28.75" />
+      <rect class="cls-1" x="732.14" y="300.87" width="10.84" height="28.75" />
+      <rect class="cls-1" x="742.98" y="300.87" width="7.77" height="28.75" />
+      <rect class="cls-1" x="750.75" y="300.87" width="11.74" height="28.75" />
+      <rect class="cls-1" x="762.48" y="300.87" width="10.84" height="28.75" />
+      <rect class="cls-1" x="773.32" y="300.87" width="9.39" height="28.75" />
+      <rect class="cls-1" x="782.71" y="300.87" width="9.39" height="28.75" />
     </g>
     <g>
-      <rect class="cls-1" x="652.21" y="356.38" width="28.75" height="6.3"/>
-      <rect class="cls-1" x="652.21" y="362.67" width="28.75" height="6.55"/>
-      <rect class="cls-1" x="652.21" y="369.22" width="28.75" height="7.56"/>
-      <rect class="cls-1" x="652.21" y="376.78" width="28.75" height="6.04"/>
-      <rect class="cls-1" x="652.21" y="382.82" width="28.75" height="7.56"/>
-      <rect class="cls-1" x="652.21" y="390.38" width="28.75" height="5.41"/>
-      <rect class="cls-1" x="652.21" y="395.79" width="28.75" height="8.19"/>
-      <rect class="cls-1" x="652.21" y="403.98" width="28.75" height="7.56"/>
-      <rect class="cls-1" x="652.21" y="411.53" width="28.75" height="6.55"/>
-      <rect class="cls-1" x="652.21" y="418.08" width="28.75" height="6.55"/>
+      <rect class="cls-1" x="652.21" y="356.38" width="28.75" height="6.3" />
+      <rect class="cls-1" x="652.21" y="362.67" width="28.75" height="6.55" />
+      <rect class="cls-1" x="652.21" y="369.22" width="28.75" height="7.56" />
+      <rect class="cls-1" x="652.21" y="376.78" width="28.75" height="6.04" />
+      <rect class="cls-1" x="652.21" y="382.82" width="28.75" height="7.56" />
+      <rect class="cls-1" x="652.21" y="390.38" width="28.75" height="5.41" />
+      <rect class="cls-1" x="652.21" y="395.79" width="28.75" height="8.19" />
+      <rect class="cls-1" x="652.21" y="403.98" width="28.75" height="7.56" />
+      <rect class="cls-1" x="652.21" y="411.53" width="28.75" height="6.55" />
+      <rect class="cls-1" x="652.21" y="418.08" width="28.75" height="6.55" />
     </g>
   </g>
   <g id="Layer_318">
-    <polygon class="cls-4" points="378.18 333.99 416.76 333.99 416.76 374.15 448.66 374.15 448.66 417.95 378.18 417.95 378.18 333.99"/>
-    <text class="cls-6" transform="translate(389.49 385.55)"><tspan x="0" y="0">B108</tspan><tspan x="-5.92" y="13.2">교양물리</tspan><tspan x="-6.22" y="26.4">기기실 B</tspan></text>
+    <polygon
+      class="cls-4"
+      points="378.18 333.99 416.76 333.99 416.76 374.15 448.66 374.15 448.66 417.95 378.18 417.95 378.18 333.99"
+    />
+    <text class="cls-6" transform="translate(389.49 385.55)">
+      <tspan x="0" y="0">B108</tspan>
+      <tspan x="-5.92" y="13.2">교양물리</tspan>
+      <tspan x="-6.22" y="26.4">기기실 B</tspan>
+    </text>
   </g>
   <g id="Layer_319">
-    <polygon class="cls-3" points="378.04 480.14 378.04 433.5 489.82 433.5 489.82 503.09 430.27 503.09 430.27 480.14 378.04 480.14"/>
+    <polygon
+      class="cls-3"
+      points="378.04 480.14 378.04 433.5 489.82 433.5 489.82 503.09 430.27 503.09 430.27 480.14 378.04 480.14"
+    />
   </g>
   <g id="Layer_295">
-    <rect class="cls-4" x="266.69" y="188.88" width="222.99" height="111.99"/>
-    <text class="cls-7" transform="translate(362.02 240.66)"><tspan x="0" y="0">B109</tspan><tspan x="-12.28" y="14.4">전산실습실</tspan></text>
+    <rect class="cls-4" x="266.69" y="188.88" width="222.99" height="111.99" />
+    <text class="cls-7" transform="translate(362.02 240.66)">
+      <tspan x="0" y="0">B109</tspan>
+      <tspan x="-12.28" y="14.4">전산실습실</tspan>
+    </text>
   </g>
   <g id="Layer_296">
-    <rect class="cls-4" x="266.69" y="300.87" width="80.58" height="139.4"/>
-    <text class="cls-7" transform="translate(291.29 359.15)"><tspan x="0" y="0">B107</tspan><tspan x="-12.76" y="14.4">일반물리학</tspan><tspan x="-6.77" y="28.8">실험실 E</tspan></text>
+    <rect class="cls-4" x="266.69" y="300.87" width="80.58" height="139.4" />
+    <text class="cls-7" transform="translate(291.29 359.15)">
+      <tspan x="0" y="0">B107</tspan>
+      <tspan x="-12.76" y="14.4">일반물리학</tspan>
+      <tspan x="-6.77" y="28.8">실험실 E</tspan>
+    </text>
   </g>
   <g id="Layer_297">
-    <polygon class="cls-4" points="266.69 440.27 347.26 440.27 347.26 504.2 327.64 504.2 327.64 565.7 266.69 565.7 266.69 440.27"/>
-    <text class="cls-7" transform="translate(281.81 491.57)"><tspan x="0" y="0">B106</tspan><tspan x="-12.28" y="14.4">일반물리학</tspan><tspan x="-6.08" y="28.8">실험실 F</tspan></text>
+    <polygon
+      class="cls-4"
+      points="266.69 440.27 347.26 440.27 347.26 504.2 327.64 504.2 327.64 565.7 266.69 565.7 266.69 440.27"
+    />
+    <text class="cls-7" transform="translate(281.81 491.57)">
+      <tspan x="0" y="0">B106</tspan>
+      <tspan x="-12.28" y="14.4">일반물리학</tspan>
+      <tspan x="-6.08" y="28.8">실험실 F</tspan>
+    </text>
   </g>
   <g id="Layer_298">
-    <polygon class="cls-4" points="327.64 706.17 485.81 706.17 485.81 554.92 449.7 554.92 449.7 565.7 366.73 565.7 366.73 554.92 327.64 554.92 327.64 706.17"/>
-    <text class="cls-7" transform="translate(390.68 626.33)"><tspan x="0" y="0">B105</tspan><tspan x="-6.71" y="14.4">중강의실</tspan></text>
+    <polygon
+      class="cls-4"
+      points="327.64 706.17 485.81 706.17 485.81 554.92 449.7 554.92 449.7 565.7 366.73 565.7 366.73 554.92 327.64 554.92 327.64 706.17"
+    />
+    <text class="cls-7" transform="translate(390.68 626.33)">
+      <tspan x="0" y="0">B105</tspan>
+      <tspan x="-6.71" y="14.4">중강의실</tspan>
+    </text>
   </g>
   <g id="Layer_299">
-    <polygon class="cls-4" points="650.46 706.17 485.81 706.17 485.81 554.92 525.36 554.92 525.36 565.7 610.05 565.7 610.05 554.92 650.46 554.92 650.46 706.17"/>
-    <text class="cls-7" transform="translate(551.94 626.33)"><tspan x="0" y="0">B104</tspan><tspan x="-13.73" y="14.4">공감 강의실</tspan></text>
+    <polygon
+      class="cls-4"
+      points="650.46 706.17 485.81 706.17 485.81 554.92 525.36 554.92 525.36 565.7 610.05 565.7 610.05 554.92 650.46 554.92 650.46 706.17"
+    />
+    <text class="cls-7" transform="translate(551.94 626.33)">
+      <tspan x="0" y="0">B104</tspan>
+      <tspan x="-13.73" y="14.4">공감 강의실</tspan>
+    </text>
   </g>
   <g id="Layer_300">
-    <rect class="cls-4" x="650.46" y="554.92" width="78.62" height="151.25"/>
-    <text class="cls-7" transform="translate(673.61 619.13)"><tspan x="0" y="0">B103</tspan><tspan x="-12.28" y="14.4">일반물리학</tspan><tspan x="-7.04" y="28.8">실험실 G</tspan></text>
+    <rect class="cls-4" x="650.46" y="554.92" width="78.62" height="151.25" />
+    <text class="cls-7" transform="translate(673.61 619.13)">
+      <tspan x="0" y="0">B103</tspan>
+      <tspan x="-12.28" y="14.4">일반물리학</tspan>
+      <tspan x="-7.04" y="28.8">실험실 G</tspan>
+    </text>
   </g>
   <g id="Layer_301">
-    <rect class="cls-4" x="729.09" y="554.92" width="232.37" height="151.25"/>
-    <text class="cls-7" transform="translate(829.24 626.33)"><tspan x="0" y="0">B102</tspan><tspan x="-19.58" y="14.4">송무현 강의실</tspan></text>
+    <rect class="cls-4" x="729.09" y="554.92" width="232.37" height="151.25" />
+    <text class="cls-7" transform="translate(829.24 626.33)">
+      <tspan x="0" y="0">B102</tspan>
+      <tspan x="-19.58" y="14.4">송무현 강의실</tspan>
+    </text>
   </g>
   <g id="Layer_302">
-    <polygon class="cls-4" points="961.46 554.92 1001.94 554.92 1001.94 565.7 1087.57 565.7 1087.57 554.92 1121.75 554.92 1121.75 706.17 961.46 706.17 961.46 554.92"/>
-    <text class="cls-7" transform="translate(1026.74 626.33)"><tspan x="0" y="0">B101</tspan><tspan x="-20.75" y="14.4">이원교 강의실</tspan></text>
+    <polygon
+      class="cls-4"
+      points="961.46 554.92 1001.94 554.92 1001.94 565.7 1087.57 565.7 1087.57 554.92 1121.75 554.92 1121.75 706.17 961.46 706.17 961.46 554.92"
+    />
+    <text class="cls-7" transform="translate(1026.74 626.33)">
+      <tspan x="0" y="0">B101</tspan>
+      <tspan x="-20.75" y="14.4">이원교 강의실</tspan>
+    </text>
   </g>
   <g id="Layer_303">
-    <rect class="cls-4" x="1024.48" y="401.47" width="100.59" height="104.21"/>
-    <text class="cls-7" transform="translate(1060.02 442.15)"><tspan x="0" y="0">B114</tspan><tspan x="-13.69" y="14.4">일반물리학</tspan><tspan x="-5.45" y="28.8">실험실 I</tspan></text>
+    <rect class="cls-4" x="1024.48" y="401.47" width="100.59" height="104.21" />
+    <text class="cls-7" transform="translate(1060.02 442.15)">
+      <tspan x="0" y="0">B114</tspan>
+      <tspan x="-13.69" y="14.4">일반물리학</tspan>
+      <tspan x="-5.45" y="28.8">실험실 I</tspan>
+    </text>
   </g>
   <g id="Layer_304">
-    <rect class="cls-4" x="1024.48" y="300.87" width="100.59" height="100.59"/>
-    <text class="cls-7" transform="translate(1060.17 339.75)"><tspan x="0" y="0">B115</tspan><tspan x="-13.84" y="14.4">일반물리학</tspan><tspan x="-8.81" y="28.8">실험실 H</tspan></text>
+    <rect class="cls-4" x="1024.48" y="300.87" width="100.59" height="100.59" />
+    <text class="cls-7" transform="translate(1060.17 339.75)">
+      <tspan x="0" y="0">B115</tspan>
+      <tspan x="-13.84" y="14.4">일반물리학</tspan>
+      <tspan x="-8.81" y="28.8">실험실 H</tspan>
+    </text>
   </g>
   <g id="Layer_305">
-    <rect class="cls-4" x="952.89" y="188.88" width="168.86" height="111.99"/>
-    <text class="cls-7" transform="translate(1022.59 240.66)"><tspan x="0" y="0">B113</tspan><tspan x="-13.72" y="14.4">전산실습실</tspan></text>
+    <rect class="cls-4" x="952.89" y="188.88" width="168.86" height="111.99" />
+    <text class="cls-7" transform="translate(1022.59 240.66)">
+      <tspan x="0" y="0">B113</tspan>
+      <tspan x="-13.72" y="14.4">전산실습실</tspan>
+    </text>
   </g>
   <g id="Layer_306">
-    <rect class="cls-4" x="809.71" y="188.88" width="143.18" height="85.72"/>
-    <text class="cls-7" transform="translate(861.86 227.52)"><tspan x="0" y="0">B113A</tspan><tspan x="2.37" y="14.4">강의실</tspan></text>
+    <rect class="cls-4" x="809.71" y="188.88" width="143.18" height="85.72" />
+    <text class="cls-7" transform="translate(861.86 227.52)">
+      <tspan x="0" y="0">B113A</tspan>
+      <tspan x="2.37" y="14.4">강의실</tspan>
+    </text>
   </g>
   <g id="Layer_307">
-    <rect class="cls-4" x="914.82" y="334.57" width="78.27" height="42.08"/>
-    <text class="cls-7" transform="translate(934.52 351.4)"><tspan x="0" y="0">B116A</tspan><tspan x="-16.18" y="14.4">여학생 휴게실</tspan></text>
+    <rect class="cls-4" x="914.82" y="334.57" width="78.27" height="42.08" />
+    <text class="cls-7" transform="translate(934.52 351.4)">
+      <tspan x="0" y="0">B116A</tspan>
+      <tspan x="-16.18" y="14.4">여학생 휴게실</tspan>
+    </text>
   </g>
   <g id="Layer_308">
-    <polygon class="cls-3" points="993.08 480.14 993.08 433.5 881.3 433.5 881.3 503.09 940.85 503.09 940.85 480.14 993.08 480.14"/>
+    <polygon
+      class="cls-3"
+      points="993.08 480.14 993.08 433.5 881.3 433.5 881.3 503.09 940.85 503.09 940.85 480.14 993.08 480.14"
+    />
   </g>
   <g id="Layer_309">
-    <rect class="cls-4" x="914.82" y="376.65" width="78.27" height="41.54"/>
-    <text class="cls-8" transform="translate(937.92 388)"><tspan x="0" y="0">B116B</tspan><tspan x="-7.67" y="12">말레이시아</tspan><tspan x="1.81" y="24">기도실</tspan></text>
+    <rect class="cls-4" x="914.82" y="376.65" width="78.27" height="41.54" />
+    <text class="cls-8" transform="translate(937.92 388)">
+      <tspan x="0" y="0">B116B</tspan>
+      <tspan x="-7.67" y="12">말레이시아</tspan>
+      <tspan x="1.81" y="24">기도실</tspan>
+    </text>
   </g>
   <g id="Layer_310">
-    <rect class="cls-4" x="940.85" y="480.14" width="52.24" height="22.94"/>
-    <text class="cls-5" transform="translate(957.47 488.8)"><tspan x="0" y="0">B117</tspan><tspan x="-9.46" y="9.6">기자재창고</tspan></text>
+    <rect class="cls-4" x="940.85" y="480.14" width="52.24" height="22.94" />
+    <text class="cls-5" transform="translate(957.47 488.8)">
+      <tspan x="0" y="0">B117</tspan>
+      <tspan x="-9.46" y="9.6">기자재창고</tspan>
+    </text>
   </g>
 </svg>

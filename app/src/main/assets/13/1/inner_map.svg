@@ -6,12 +6,17 @@
         fill: #fed0d0;
       }
 
-      .cls-1, .cls-2, .cls-3, .cls-4 {
+      .cls-1,
+      .cls-2,
+      .cls-3,
+      .cls-4 {
         stroke: #ea8b8b;
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-2, .cls-4 {
+      .cls-1,
+      .cls-2,
+      .cls-4 {
         stroke-width: 3px;
       }
 
@@ -26,71 +31,83 @@
 
       .cls-4 {
         fill: #fff;
-        opacity: .46;
+        opacity: 0.46;
       }
     </style>
   </defs>
   <g id="Layer_x5F_border-2" data-name="Layer_x5F_border">
-    <rect class="cls-3" x="230" y="144" width="2782" height="758"/>
+    <rect class="cls-3" x="230" y="144" width="2782" height="758" />
   </g>
   <g id="Layer_x5F_others-2" data-name="Layer_x5F_others">
-    <rect class="cls-1" x="232" y="577" width="43" height="45.53"/>
-    <polygon class="cls-1" points="359.5 622.5 359.5 577.02 317.64 577.02 317.64 622.53 359.5 622.5"/>
-    <rect class="cls-1" x="230" y="414.31" width="129.5" height="44.89"/>
+    <rect class="cls-1" x="232" y="577" width="43" height="45.53" />
+    <polygon
+      class="cls-1"
+      points="359.5 622.5 359.5 577.02 317.64 577.02 317.64 622.53 359.5 622.5"
+    />
+    <rect class="cls-1" x="230" y="414.31" width="129.5" height="44.89" />
     <g>
-      <rect class="cls-4" x="230" y="414.25" width="9.34" height="44.75"/>
-      <rect class="cls-4" x="239.34" y="414.25" width="8.34" height="44.75"/>
-      <rect class="cls-4" x="247.68" y="414.25" width="10.78" height="44.75"/>
-      <rect class="cls-4" x="258.46" y="414.25" width="13.23" height="44.75"/>
-      <rect class="cls-4" x="271.69" y="414.25" width="11.03" height="44.75"/>
-      <rect class="cls-4" x="282.71" y="414.25" width="11.03" height="44.75"/>
-      <rect class="cls-4" x="293.74" y="414.25" width="24.26" height="44.75"/>
+      <rect class="cls-4" x="230" y="414.25" width="9.34" height="44.75" />
+      <rect class="cls-4" x="239.34" y="414.25" width="8.34" height="44.75" />
+      <rect class="cls-4" x="247.68" y="414.25" width="10.78" height="44.75" />
+      <rect class="cls-4" x="258.46" y="414.25" width="13.23" height="44.75" />
+      <rect class="cls-4" x="271.69" y="414.25" width="11.03" height="44.75" />
+      <rect class="cls-4" x="282.71" y="414.25" width="11.03" height="44.75" />
+      <rect class="cls-4" x="293.74" y="414.25" width="24.26" height="44.75" />
     </g>
-    <polygon class="cls-1" points="317.28 622.79 317.28 577.31 275.42 577.31 275.42 622.82 317.28 622.79"/>
-    <rect class="cls-2" x="359.5" y="414.5" width="76" height="208"/>
+    <polygon
+      class="cls-1"
+      points="317.28 622.79 317.28 577.31 275.42 577.31 275.42 622.82 317.28 622.79"
+    />
+    <rect class="cls-2" x="359.5" y="414.5" width="76" height="208" />
     <g>
-      <rect class="cls-2" x="359.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="369.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="379.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="389.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="399.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="409.5" y="459.5" width="10" height="118"/>
-      <rect class="cls-2" x="419.5" y="459.5" width="8" height="118"/>
-      <rect class="cls-2" x="427.5" y="459.5" width="8" height="118"/>
+      <rect class="cls-2" x="359.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="369.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="379.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="389.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="399.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="409.5" y="459.5" width="10" height="118" />
+      <rect class="cls-2" x="419.5" y="459.5" width="8" height="118" />
+      <rect class="cls-2" x="427.5" y="459.5" width="8" height="118" />
     </g>
-    <polygon class="cls-2" points="2321.5 400.36 2086.16 400.36 2086.16 451.75 2367.7 451.75 2367.7 400.36 2321.5 400.36"/>
-    <rect class="cls-2" x="2205.45" y="451.75" width="162.25" height="104.78"/>
+    <polygon
+      class="cls-2"
+      points="2321.5 400.36 2086.16 400.36 2086.16 451.75 2367.7 451.75 2367.7 400.36 2321.5 400.36"
+    />
+    <rect class="cls-2" x="2205.45" y="451.75" width="162.25" height="104.78" />
     <g>
-      <rect class="cls-2" x="2092.84" y="400.36" width="8.12" height="51.39"/>
-      <rect class="cls-2" x="2100.97" y="400.36" width="6.67" height="51.39"/>
-      <rect class="cls-2" x="2107.64" y="400.36" width="7.61" height="51.39"/>
-      <rect class="cls-2" x="2115.24" y="400.36" width="6.92" height="51.39"/>
-      <rect class="cls-2" x="2122.16" y="400.36" width="6.92" height="51.39"/>
-      <rect class="cls-2" x="2129.08" y="400.36" width="7.26" height="51.39"/>
-      <rect class="cls-2" x="2136.34" y="400.36" width="6.92" height="51.39"/>
+      <rect class="cls-2" x="2092.84" y="400.36" width="8.12" height="51.39" />
+      <rect class="cls-2" x="2100.97" y="400.36" width="6.67" height="51.39" />
+      <rect class="cls-2" x="2107.64" y="400.36" width="7.61" height="51.39" />
+      <rect class="cls-2" x="2115.24" y="400.36" width="6.92" height="51.39" />
+      <rect class="cls-2" x="2122.16" y="400.36" width="6.92" height="51.39" />
+      <rect class="cls-2" x="2129.08" y="400.36" width="7.26" height="51.39" />
+      <rect class="cls-2" x="2136.34" y="400.36" width="6.92" height="51.39" />
     </g>
-    <rect class="cls-1" x="2086.16" y="556.67" width="42.84" height="57.33"/>
-    <rect class="cls-1" x="2155" y="556.67" width="43.65" height="57.33"/>
+    <rect class="cls-1" x="2086.16" y="556.67" width="42.84" height="57.33" />
+    <rect class="cls-1" x="2155" y="556.67" width="43.65" height="57.33" />
     <g>
-      <rect class="cls-2" x="2151.04" y="400.3" width="8.12" height="51.39"/>
-      <rect class="cls-2" x="2159.16" y="400.3" width="6.67" height="51.39"/>
-      <rect class="cls-2" x="2165.83" y="400.3" width="7.61" height="51.39"/>
-      <rect class="cls-2" x="2173.44" y="400.3" width="6.92" height="51.39"/>
-      <rect class="cls-2" x="2180.36" y="400.3" width="6.92" height="51.39"/>
-      <rect class="cls-2" x="2187.27" y="400.3" width="7.26" height="51.39"/>
-      <rect class="cls-2" x="2194.54" y="400.3" width="6.92" height="51.39"/>
+      <rect class="cls-2" x="2151.04" y="400.3" width="8.12" height="51.39" />
+      <rect class="cls-2" x="2159.16" y="400.3" width="6.67" height="51.39" />
+      <rect class="cls-2" x="2165.83" y="400.3" width="7.61" height="51.39" />
+      <rect class="cls-2" x="2173.44" y="400.3" width="6.92" height="51.39" />
+      <rect class="cls-2" x="2180.36" y="400.3" width="6.92" height="51.39" />
+      <rect class="cls-2" x="2187.27" y="400.3" width="7.26" height="51.39" />
+      <rect class="cls-2" x="2194.54" y="400.3" width="6.92" height="51.39" />
     </g>
-    <polygon class="cls-2" points="2367.7 556.53 2368.05 614.5 2086.16 614.5 2086.16 556.53 2367.7 556.53"/>
-    <rect class="cls-2" x="2086.5" y="400.5" width="282" height="214"/>
-    <rect class="cls-2" x="2205.5" y="451.5" width="81" height="105"/>
+    <polygon
+      class="cls-2"
+      points="2367.7 556.53 2368.05 614.5 2086.16 614.5 2086.16 556.53 2367.7 556.53"
+    />
+    <rect class="cls-2" x="2086.5" y="400.5" width="282" height="214" />
+    <rect class="cls-2" x="2205.5" y="451.5" width="81" height="105" />
     <g>
-      <rect class="cls-2" x="2206.55" y="478.16" width="12.96" height="51.39"/>
-      <rect class="cls-2" x="2219.51" y="478.16" width="10.64" height="51.39"/>
-      <rect class="cls-2" x="2230.15" y="478.16" width="12.14" height="51.39"/>
-      <rect class="cls-2" x="2242.29" y="478.16" width="11.04" height="51.39"/>
-      <rect class="cls-2" x="2253.33" y="478.16" width="11.04" height="51.39"/>
-      <rect class="cls-2" x="2264.37" y="478.16" width="11.59" height="51.39"/>
-      <rect class="cls-2" x="2275.96" y="478.16" width="11.04" height="51.39"/>
+      <rect class="cls-2" x="2206.55" y="478.16" width="12.96" height="51.39" />
+      <rect class="cls-2" x="2219.51" y="478.16" width="10.64" height="51.39" />
+      <rect class="cls-2" x="2230.15" y="478.16" width="12.14" height="51.39" />
+      <rect class="cls-2" x="2242.29" y="478.16" width="11.04" height="51.39" />
+      <rect class="cls-2" x="2253.33" y="478.16" width="11.04" height="51.39" />
+      <rect class="cls-2" x="2264.37" y="478.16" width="11.59" height="51.39" />
+      <rect class="cls-2" x="2275.96" y="478.16" width="11.04" height="51.39" />
     </g>
   </g>
 </svg>
