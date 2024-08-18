@@ -8,8 +8,10 @@ import android.os.Looper
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlin.reflect.KClass
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private var backPressedTime: Long = 0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +60,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 백스택에 아무것도 없는지 확인
-        if (fragmentManager.backStackEntryCount == 0 || currentFragment is HomeFragment) {
-            // 마지막 뒤로가기 버튼 클릭 후 2초 이내에 다시 클릭 시 종료
-            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+        if (fragmentManager.backStackEntryCount == 1) {
+            // 마지막 뒤로가기 버튼 클릭 후 1초 이내에 다시 클릭 시 종료
+            if (backPressedTime + 1000 > System.currentTimeMillis()) {
                 finish() // 액티비티 종료
                 // super.onBackPressed()
                 return
@@ -81,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.fragment_home -> {
                     if (currentFragment !is HomeFragment) {
+                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.main_container, HomeFragment(), "HomeFragment")
                             .addToBackStack("HomeFragment")  // 백 스택에 추가
@@ -92,8 +96,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_bus -> {
                     if (currentFragment !is BusFragment) {
+                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, BusFragment())
+                            .replace(R.id.main_container, BusFragment(),"BusFragment")
+                            .addToBackStack("BusFragment")
                             .commit()
                         item.setIcon(R.drawable.bus_button)
                     }
@@ -102,8 +108,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_community -> {
                     if (currentFragment !is CommunityFragment) {
+                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, CommunityFragment())
+                            .replace(R.id.main_container, CommunityFragment(),"CommunityFragment")
+                            .addToBackStack("CommunityFragment")
                             .commit()
                         item.setIcon(R.drawable.community_button)
                     }
@@ -112,8 +120,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_favorites -> {
                     if (currentFragment !is FavoritesFragment) {
+                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, FavoritesFragment())
+                            .replace(R.id.main_container, FavoritesFragment(),"FavoritesFragment")
+                            .addToBackStack("FavoritesFragment")
                             .commit()
                         item.setIcon(R.drawable.favorites_button)
                     }
@@ -122,8 +132,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_mypage -> {
                     if (currentFragment !is MypageFragment) {
+                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, MypageFragment())
+                            .replace(R.id.main_container, MypageFragment(),"MypageFragment")
+                            .addToBackStack("MypageFragment")
                             .commit()
                         item.setIcon(R.drawable.mypage_button)
                     }
