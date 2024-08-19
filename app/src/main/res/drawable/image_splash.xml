@@ -9,21 +9,8 @@
         android:pathData="M0,0h360v800h-360z"/>
     <path
         android:pathData="M0,0h360v800h-360z"
-        android:fillColor="#FDFDFD"/>
-    <path
-        android:pathData="M0,0h360v800h-360z">
-      <aapt:attr name="android:fillColor">
-        <gradient 
-            android:centerX="225.5"
-            android:centerY="662.5"
-            android:gradientRadius="580.08"
-            android:type="radial">
-          <item android:offset="0" android:color="#FFFFE6E1"/>
-          <item android:offset="0.37" android:color="#FFFFF2F0"/>
-          <item android:offset="1" android:color="#FFFFFFFF"/>
-        </gradient>
-      </aapt:attr>
-    </path>
+        android:fillColor="#FDFDFD"
+        android:fillAlpha="0"/>
     <path
         android:pathData="M92,177C86.48,177 82,181.48 82,187V238C82,243.52 86.48,248 92,248H219.97L220.08,267.76L237.15,248H269C274.52,248 279,243.52 279,238V187C279,181.48 274.52,177 269,177H92Z"
         android:fillColor="#FDFDFD"

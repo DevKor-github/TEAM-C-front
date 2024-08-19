@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="GradientBlurView">
+        <attr name="hasTopBlur" format="boolean" />
+        <attr name="hasBottomBlur" format="boolean" />
+    </declare-styleable>
+</resources>
