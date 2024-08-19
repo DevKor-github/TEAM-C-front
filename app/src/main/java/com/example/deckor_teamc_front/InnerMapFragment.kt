@@ -91,6 +91,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private lateinit var standardBottomSheet: FrameLayout
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var customScrollView: CustomScrollView
+    private lateinit var customScrollViewLayout: FrameLayout
 
     private var searchedFloor: Int = 1
     private var searchedMask: Int = 0
@@ -136,6 +137,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         customScrollView = binding.customScrollView
+        customScrollViewLayout = binding.customScrollViewLayout
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
@@ -426,159 +428,65 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     // SVG 강의 실 클릭 시 색변화 글씨 변화 주는 함수
-    // 심연이니 건드리지 마시오
+    // 리팩토링 완
+
+
     private fun changeElementFillColor(svgContent: String, elementId: String): String {
+        val TAG = "SVG_DEBUG" // 로그 태그 설정
         val groupRegex = Regex("""(<g[^>]*id="$elementId"[^>]*>.*?</g>)""", RegexOption.DOT_MATCHES_ALL)
 
         return svgContent.replace(groupRegex) { groupMatchResult ->
             var groupContent = groupMatchResult.value
 
-            // 기존 fill 속성 변경, fill="#424142"는 제외
-            groupContent = groupContent.replace(Regex("""fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
-                if (matchResult.value == """fill="#424142"""") {
-                    matchResult.value  // 그대로 유지(애기능 생활관 예외처리)
+            Log.e(TAG, "Original Group Content:\n$groupContent")
+
+            // rect 및 polygon 태그에 style 속성 추가
+            groupContent = groupContent.replace(Regex("""<(rect|polygon|path)([^/>]*)(/?)>""")) { matchResult ->
+                val tag = matchResult.groupValues[1]
+                val attributes = matchResult.groupValues[2]
+
+                // 애기능 예외처리: fill="#424142" 유지
+                if (attributes.contains("""fill="#424142"""")) {
+                    matchResult.value
                 } else {
-                    """fill="#F85C5C""""  // 다른 색상은 변경
+                    val closingSlash = matchResult.groupValues[3] // Optional closing slash
+                    val newTag = if (closingSlash.isNotEmpty()) {
+                        // 슬래시 앞에 스타일 속성을 추가하고 슬래시와 함께 태그를 닫음
+                        """<$tag$attributes style="fill:#F85C5C"/>"""
+                    } else {
+                        // 꺾쇠 앞에 스타일 속성을 추가하고 태그를 닫음
+                        """<$tag$attributes style="fill:#F85C5C">"""
+                    }
+                    Log.e(TAG, "Modified rect/polygon Tag: $newTag")
+                    newTag
                 }
             }
 
-            // 기존 글씨 fill 속성 변경
-            groupContent = groupContent.replace(Regex("""<text[^>]*fill="#[0-9A-Fa-f]{3,6}"""")) { matchResult ->
-                matchResult.value.replace(
-                    Regex("""fill="#[0-9A-Fa-f]{3,6}""""),
-                    """fill="#FFFFFF""""
-                )
-            }
-
-            // fill="#424142"를 모두 fill="#FFFFFF"로 변경(애기능 생활관 예외처리)
-            groupContent = groupContent.replace("""fill="#424142"""", """fill="#FFFFFF"""")
-
-            groupContent
+            // text 및 tspan 태그에 style 속성 추가
+            groupContent = groupContent.replace(Regex("""<(text|tspan)([^/>]*)(/?)>""")) { matchResult ->
+                val tag = matchResult.groupValues[1]
+                val attributes = matchResult.groupValues[2]
 
 
-
-        // 1. <text> 및 <tspan> 태그 처리
-            val textAndTspanRegex = Regex("""<(text|tspan)[^>]*>.*?</(text|tspan)>""", RegexOption.DOT_MATCHES_ALL)
-            groupContent = groupContent.replace(textAndTspanRegex) { elementMatch ->
-                var elementContent = elementMatch.value
-
-                // 클래스 추출 및 스타일 적용
-                val classRegex = Regex("""class="([^"]+)"""")
-                val classMatch = classRegex.find(elementContent)
-
-                if (classMatch != null) {
-                    val originalClass = classMatch.groupValues[1]
-                    val styleRegex = Regex("""<style\b[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
-                    val styleMatch = styleRegex.find(svgContent)
-
-                    val combinedStyles = mutableMapOf<String, String>()
-
-                    if (styleMatch != null) {
-                        val styleContent = styleMatch.groupValues[1]
-
-                        // .cls-3 등 클래스를 포함하는 모든 스타일 블록을 찾는 정규식
-                        val classStyleRegex = Regex("""\.([^\s,{}]+(?:\s*,\s*[^\s,{}]+)*)\s*\{([^}]+)\}""")
-                        val classStyleMatches = classStyleRegex.findAll(styleContent)
-
-                        // 해당 클래스에 대한 스타일 추출
-                        for (match in classStyleMatches) {
-                            val classNames = match.groupValues[1].split(",").map { it.trim().removePrefix(".") }
-                            val styleProperties = match.groupValues[2].trim()
-
-                            if (classNames.contains(originalClass)) {
-                                val propertiesList = styleProperties.split(";").map { it.trim() }.filter { it.isNotEmpty() }
-
-                                for (property in propertiesList) {
-                                    if (combinedStyles.containsKey(originalClass)) {
-                                        combinedStyles[originalClass] = combinedStyles[originalClass] + " " + property + ";"
-                                    } else {
-                                        combinedStyles[originalClass] = property + ";"
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // 병합된 스타일을 인라인 속성으로 text 및 tspan 요소에 적용
-                    val inlineStyle = combinedStyles.flatMap { (attrName, attrValue) ->
-                        attrValue.split(";").map { it.trim() }.filter { it.isNotEmpty() }.map { property ->
-                            val (key, value) = property.split(":").map { it.trim() }
-                            key to value
-                        }
-                    }.joinToString(" ") { (key, value) ->
-                        """$key="$value""""
-                    }
-
-                    // fill 속성을 흰색으로 변경하고 인라인 스타일에 추가
-                    elementContent = elementContent
-                        .replace(classRegex, "")
-                        .replace("<${elementMatch.groupValues[1]}", """<${elementMatch.groupValues[1]} $inlineStyle fill="#FFFFFF"""")
+                val closingSlash = matchResult.groupValues[3] // Optional closing slash
+                val newTag = if (closingSlash.isNotEmpty()) {
+                    // 슬래시 앞에 스타일 속성을 추가하고 슬래시와 함께 태그를 닫음
+                    """<$tag$attributes style="fill:#FFFFFF"/>"""
+                } else {
+                    // 꺾쇠 앞에 스타일 속성을 추가하고 태그를 닫음
+                    """<$tag$attributes style="fill:#FFFFFF">"""
                 }
-                elementContent
+                Log.e(TAG, "Modified text/tspan Tag: $newTag")
+                newTag
+
             }
 
-            // 2. <rect> 및 <polygon> 태그 처리
-            val shapeRegex = Regex("""<(rect|polygon)[^>]*>""")
-            groupContent = groupContent.replace(shapeRegex) { shapeMatch ->
-                var shapeContent = shapeMatch.value
-
-                val classRegex = Regex("""class="([^"]+)"""")
-                val classMatch = classRegex.find(shapeContent)
-
-                if (classMatch != null) {
-                    val originalClass = classMatch.groupValues[1]
-                    val styleRegex = Regex("""<style\b[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
-                    val styleMatch = styleRegex.find(svgContent)
-
-                    val combinedStyles = mutableMapOf<String, String>()
-
-                    if (styleMatch != null) {
-                        val styleContent = styleMatch.groupValues[1]
-
-                        // .cls-6을 포함하는 모든 스타일 블록을 찾는 정규식
-                        val classStyleRegex = Regex("""\.([^\s,{}]+(?:\s*,\s*[^\s,{}]+)*)\s*\{([^}]+)\}""")
-                        val classStyleMatches = classStyleRegex.findAll(styleContent)
-
-                        // 해당 클래스에 대한 스타일 추출
-                        for (match in classStyleMatches) {
-                            val classNames = match.groupValues[1].split(",").map { it.trim().removePrefix(".") }
-                            val styleProperties = match.groupValues[2].trim()
-
-                            if (classNames.contains(originalClass)) {
-                                val propertiesList = styleProperties.split(";").map { it.trim() }.filter { it.isNotEmpty() }
-
-                                for (property in propertiesList) {
-                                    if (combinedStyles.containsKey(originalClass)) {
-                                        combinedStyles[originalClass] = combinedStyles[originalClass] + " " + property + ";"
-                                    } else {
-                                        combinedStyles[originalClass] = property + ";"
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // 병합된 스타일을 인라인 속성으로 rect 및 polygon 요소에 적용
-                    val inlineStyle = combinedStyles.flatMap { (attrName, attrValue) ->
-                        attrValue.split(";").map { it.trim() }.filter { it.isNotEmpty() }.map { property ->
-                            val (key, value) = property.split(":").map { it.trim() }
-                            key to value
-                        }
-                    }.joinToString(" ") { (key, value) ->
-                        """$key="$value""""
-                    }
-
-                    // fill 속성을 지정된 색상으로 변경하고 인라인 스타일에 추가
-                    shapeContent = shapeContent
-                        .replace(classRegex, "")
-                        .replace("<${shapeMatch.groupValues[1]}", """<${shapeMatch.groupValues[1]} $inlineStyle fill="#F85C5C"""")
-                }
-                shapeContent
-            }
-
+            Log.e(TAG, "Final Group Content:\n$groupContent")
             groupContent
         }
     }
+
+
 
 
 
@@ -631,11 +539,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
 
     private fun showScroll() {
+        customScrollViewLayout.visibility = View.VISIBLE
         customScrollView.visibility = View.VISIBLE
         isScrollVisible = true
     }
 
     private fun hideScroll() {
+        customScrollViewLayout.visibility = View.GONE
         customScrollView.visibility = View.GONE
         isScrollVisible = false
     }
@@ -665,63 +575,26 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-    private fun updateTextTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
-        var updatedContent = svgContent
+    private fun updateSvgFont(svgContent: String, fontFamily: String = "Pretendard", fillColor: String = "#424242"): String {
+        val style = """style="font-family:'$fontFamily'; fill:$fillColor;""""
 
-        // <text> 태그 내의 모든 내용을 찾아서 처리
-        val textTagContentRegex = Regex("""<text[^>]*>.*?</text>""", RegexOption.DOT_MATCHES_ALL)
-        updatedContent = textTagContentRegex.replace(updatedContent) { matchResult ->
-            var tagContent = matchResult.value
+        // <text> 및 <tspan> 태그에 스타일 속성 추가
+        val updatedContent = svgContent.replace(Regex("""<(text|tspan)([^/>]*)(/?)>""")) { matchResult ->
+            val tag = matchResult.groupValues[1]
+            val attributes = matchResult.groupValues[2]
+            val closingSlash = matchResult.groupValues[3] // Optional closing slash
 
-            // font-family 속성 변경
-            tagContent = tagContent.replace(Regex("""font-family\s*=\s*["'][^"']*["']"""), """font-family="$targetFontFamily"""")
-
-            // fill 속성 변경
-            tagContent = tagContent.replace(Regex("""fill\s*=\s*["']#[0-9a-fA-F]{3,6}["']"""), """fill="$targetFillColor"""")
-
-            tagContent
-        }
-
-        return updatedContent
-    }
-    private fun updateStyleTagContent(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
-        // <style> 태그의 내용 찾기
-        val styleTagRegex = Regex("""<style[^>]*>(.*?)</style>""", RegexOption.DOT_MATCHES_ALL)
-
-        return styleTagRegex.replace(svgContent) { matchResult ->
-            val styleContent = matchResult.groups[1]?.value ?: ""
-            // 각 CSS 규칙을 찾아서 처리
-            val updatedStyleContent = styleContent.replace(Regex("""([^{]+)\{([^}]+)\}""")) { cssMatch ->
-                val selectors = cssMatch.groups[1]?.value?.trim() ?: ""
-                var properties = cssMatch.groups[2]?.value ?: ""
-
-                // font-family 속성이 있는 블록만 처리
-                if (properties.contains(Regex("""font-family\s*:"""))) {
-                    // font-family 변경
-                    properties = properties.replace(Regex("""font-family\s*:\s*[^;]+;"""), """font-family: $targetFontFamily;""")
-
-                    // fill 속성 변경
-                    properties = properties.replace(Regex("""fill\s*:\s*[^;]+;"""), """fill: $targetFillColor;""")
-                }
-
-                "$selectors {\n$properties\n}"
+            // 슬래시가 있는 경우와 없는 경우를 처리
+            if (closingSlash.isNotEmpty()) {
+                """<$tag$attributes $style/>"""
+            } else {
+                """<$tag$attributes $style>"""
             }
-
-            "<style>\n$updatedStyleContent\n</style>"
         }
-    }
-
-    private fun updateSvgFont(svgContent: String, targetFontFamily: String, targetFillColor: String = "#424242"): String {
-        var updatedContent = svgContent
-
-        // 1. <text> 태그의 속성 변경
-        updatedContent = updateTextTagContent(updatedContent, targetFontFamily, targetFillColor)
-
-        // 2. <style> 태그의 속성 변경
-        updatedContent = updateStyleTagContent(updatedContent, targetFontFamily, targetFillColor)
 
         return updatedContent
     }
+
 
     private fun enableVerticalOverScroll() {
         binding.includedMap.zoomLayout.setOverScrollHorizontal(true)
