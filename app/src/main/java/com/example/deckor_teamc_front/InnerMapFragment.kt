@@ -428,7 +428,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     // SVG 강의 실 클릭 시 색변화 글씨 변화 주는 함수
-    // 심연이니 건드리지 마시오
+    // 리팩토링 완
 
 
     private fun changeElementFillColor(svgContent: String, elementId: String): String {
