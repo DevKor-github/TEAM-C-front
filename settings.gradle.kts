@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "deckor_teamC_front"
+rootProject.name = "Devkor_TeamC_Front"
 include(":app")
