@@ -133,7 +133,6 @@
         </g>
       </g>
       <g id="Layer_25">
-        <rect class="cls-1" x="2311.7" y="597.5" width="232.6" height="491.3"/>
         <rect class="cls-3" x="2544.2" y="597.5" width="271.6" height="491.3"/>
         <g class="cls-5">
           <text class="cls-4" transform="translate(2644.7 843.2)"><tspan x="0" y="0">108</tspan></text>
@@ -160,6 +159,9 @@
           <text class="cls-4" transform="translate(812.6 826.3)"><tspan x="0" y="0">104</tspan></text>
           <text class="cls-4" transform="translate(740.8 869.5)"><tspan x="0" y="0">교직원 휴게실</tspan></text>
         </g>
+      </g>
+      <g id="Layer_toilet">
+        <rect class="cls-1" x="2311.7" y="597.5" width="232.6" height="491.3"/>
       </g>
       <g id="Layer_x5F_others">
         <rect class="cls-1" x="348.8" y="597.5" width="253.3" height="491.3"/>
