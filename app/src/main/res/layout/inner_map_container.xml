@@ -168,20 +168,20 @@
                     android:background="@drawable/rounded_container_background"
                     android:clipToOutline="true">
 
-                    <com.example.deckor_teamc_front.CustomScrollView
+                    <com.devkor.kodaero.CustomScrollView
                         android:id="@+id/customScrollView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"/>
 
-                    <com.example.deckor_teamc_front.GradientBlurView
+                    <com.devkor.kodaero.GradientBlurView
                         android:id="@+id/customScrollTopBlur"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/item_height"
                         app:hasTopBlur="true"
                         app:hasBottomBlur="false"/>
 
-                    <com.example.deckor_teamc_front.GradientBlurView
+                    <com.devkor.kodaero.GradientBlurView
                         android:id="@+id/customScrollBottomBlur"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/item_height"
