@@ -505,18 +505,24 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             // rect 및 polygon 태그에 style 속성 추가
             groupContent = groupContent.replace(Regex("""<(rect|polygon|path)([^/>]*)(/?)>""")) { matchResult ->
                 val tag = matchResult.groupValues[1]
-                val attributes = matchResult.groupValues[2]
+                var attributes = matchResult.groupValues[2]
+                val closingSlash = matchResult.groupValues[3] // Optional closing slash
 
-                // 애기능 예외처리: fill="#424142" 유지
+                // 애기능 예외처리: fill="#424142" -> fill="#FFFFFF"으로 변경, 다른 스타일 추가 안함
                 if (attributes.contains("""fill="#424142"""")) {
-                    matchResult.value
-                } else {
-                    val closingSlash = matchResult.groupValues[3] // Optional closing slash
+                    attributes = attributes.replace("""fill="#424142"""", """fill="#FFFFFF"""")
                     val newTag = if (closingSlash.isNotEmpty()) {
-                        // 슬래시 앞에 스타일 속성을 추가하고 슬래시와 함께 태그를 닫음
-                        """<$tag$attributes style="fill:#F85C5C"/>"""
+                        """<$tag$attributes$closingSlash>"""
                     } else {
-                        // 꺾쇠 앞에 스타일 속성을 추가하고 태그를 닫음
+                        """<$tag$attributes>"""
+                    }
+                    Log.e(TAG, "Modified rect/polygon Tag (fill #424142 exception): $newTag")
+                    newTag
+                } else {
+                    // 다른 경우 스타일 속성 추가
+                    val newTag = if (closingSlash.isNotEmpty()) {
+                        """<$tag$attributes style="fill:#F85C5C"$closingSlash>"""
+                    } else {
                         """<$tag$attributes style="fill:#F85C5C">"""
                     }
                     Log.e(TAG, "Modified rect/polygon Tag: $newTag")
@@ -528,8 +534,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             groupContent = groupContent.replace(Regex("""<(text|tspan)([^/>]*)(/?)>""")) { matchResult ->
                 val tag = matchResult.groupValues[1]
                 val attributes = matchResult.groupValues[2]
-
-
                 val closingSlash = matchResult.groupValues[3] // Optional closing slash
                 val newTag = if (closingSlash.isNotEmpty()) {
                     // 슬래시 앞에 스타일 속성을 추가하고 슬래시와 함께 태그를 닫음
