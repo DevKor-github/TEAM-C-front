@@ -68,7 +68,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     private var _binding: InnerMapContainerBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private lateinit var viewModel: FetchDataViewModel
 
@@ -102,6 +102,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     private lateinit var routeView: RouteView
 
+    private var currentRouteIndex = 0
+    private var routeResponse: RouteResponse? = null
+
+    private var pendingRouteInfo: String? = null
+
+    private var currentBuildingId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -110,18 +117,18 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             selectedBuildingUnderFloor = it.getInt("selectedBuildingUnderFloor")
             selectedBuildingId = it.getInt("selectedBuildingId")
 
+            // Initialize currentBuildingId with selectedBuildingId
+            currentBuildingId = selectedBuildingId
+
             searchedFloor = it.getInt("selectedRoomFloor")
             searchedMask = it.getInt("selectedRoomMask")
 
             hasDirection = it.getBoolean("hasDirection")
 
             if (searchedFloor != 0) innermapCurrentFloor = searchedFloor
-
         }
         // JSON 파일에서 데이터 읽어오기
         readJsonAndUpdateColorMap()
-
-
     }
 
     override fun onCreateView(
@@ -144,6 +151,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         routeView = binding.includedMap.routeView
 
+        if (selectedBuildingId != 0 && innermapCurrentFloor != 0) {
+            // Valid values
+            initInnermap()
+            replaceInnermapMask()
+        } else {
+            Log.e("InnerMapFragment", "Invalid buildingId or floor: $selectedBuildingId, $innermapCurrentFloor")
+        }
+
         if (hasDirection) {
             try {
                 searchedRoute = DirectionSearchRouteDataHolder.splitedRoute
@@ -153,15 +168,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
 
-
-        drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
-
+        drawRouteForCurrentFloor(routeView, searchedRoute, currentBuildingId, innermapCurrentFloor)
 
         Log.e("InnerMapFragment", "${innermapCurrentFloor} Floor")
         onFloorSelected(innermapCurrentFloor)
 
         val layerName = colorMap[searchedMask] // 선택된 마스크를 레이어명으로 변환
-        if (layerName != null) {
+        if (layerName != null && !hasDirection) {
             Log.d("InnerMapFragment", "Filename for id $searchedMask: $layerName")
             replaceInnermap(layerName) // 검색에서 진입 할 시 장소의 색상을 변경하는 로직
 
@@ -215,13 +228,12 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val pinOnoffButton: ImageButton = binding.pinOnoffButton
         pinOnoffButton.setOnClickListener {
-            // 스크롤을 토글하는 로직 추가
+            // Toggle scroll visibility
             if (isScrollVisible) {
                 hideScroll()
                 pinOnoffButton.setImageResource(R.drawable.pin_on_button)
@@ -234,10 +246,58 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             requireActivity().onBackPressed()
         }
 
-        enableVerticalOverScroll()
+        // Check if hasDirection is true
+        if (hasDirection) {
+            customScrollView.isClickable = false
+            customScrollView.isFocusable = false
+            customScrollView.isEnabled = false
 
+            // Set get_directions_route_guide_layout to visible
+            binding.getDirectionsGuideLayout.visibility = View.VISIBLE
+        } else {
+            customScrollView.isClickable = true
+            customScrollView.isFocusable = true
+            customScrollView.isEnabled = true
+
+            // Set get_directions_route_guide_layout to gone (or invisible if needed)
+            binding.getDirectionsGuideLayout.visibility = View.GONE
+        }
+
+        enableVerticalOverScroll()
     }
 
+    // Set route info to the UI
+    fun setRouteInfo(info: String, routeIndex: Int) {
+        if (_binding != null) {
+            // UI가 준비된 경우 직접 접근
+            binding.getDirectionsGuideInout.text = "실내"
+            binding.getDirectionsGuideInfo.text = info
+
+            // Set the guide number based on routeIndex
+            binding.getDirectionsGuideNumber.text = (routeIndex + 1).toString()
+
+            when {
+                info.contains("층으로", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_floor_button)
+                }
+                info.contains("나가세요", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_outside_button)
+                }
+                info.contains("들어가세요", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_inside_button)
+                }
+            }
+
+            if (info == "도착") {
+                binding.toNextGuideButton.visibility = View.GONE
+            } else {
+                binding.toNextGuideButton.visibility = View.VISIBLE
+            }
+        } else {
+            // UI가 준비되지 않은 경우 정보를 저장
+            pendingRouteInfo = info
+        }
+    }
 
     private fun fetchData() {
 
@@ -320,9 +380,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-
     override fun onFloorSelected(floor: Int) {
-        Log.e("innermapfragment", "Now on $floor")
+        Log.e("innermapfragment", "Now on $floor in building $currentBuildingId")
         if (floor == 0) return
 
         innermapCurrentFloor = floor
@@ -331,11 +390,16 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         replaceInnermap()
         replaceInnermapMask()
         updateTouchHandler()
+
+        // Draw the route for the current building and floor
+        drawRouteForCurrentFloor(routeView, searchedRoute, currentBuildingId, innermapCurrentFloor)
+
         Log.d(
             "InnerMapFragment",
             "Floor selected: $floor, innermapCurrentFloor updated: $innermapCurrentFloor"
         )
     }
+
 
     private fun replaceInnermapMask() {
         val resourceName = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
@@ -384,8 +448,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-
-
     fun replaceInnermap(groupIdToChange: String? = null) {
         if(initInnermap() != null){
             // `initInnermap` 함수에서 수정된 SVG 콘텐츠를 가져옴
@@ -420,7 +482,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
         try{
-            drawRouteForCurrentFloor(routeView, searchedRoute, innermapCurrentFloor)
+            drawRouteForCurrentFloor(routeView, searchedRoute, currentBuildingId, innermapCurrentFloor)
         }
         catch (e: Exception){
             Log.e("InnerMapFragment", "Route is null")
@@ -486,55 +548,51 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-
-
-
-
     private fun updateTouchHandler() {
 
-        Log.e("e", "$floorRoomList")
-        val imageView: ImageView = binding.includedMap.innermapMask
-        val filePath = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
-        val assetManager = context?.assets
+        if (!hasDirection){
+            Log.e("e", "$floorRoomList")
+            val imageView: ImageView = binding.includedMap.innermapMask
+            val filePath = "${selectedBuildingId}/${innermapCurrentFloor}/final_overlay.png"
+            val assetManager = context?.assets
 
-        var bitmap: Bitmap? = null
-        var inputStream: InputStream? = null
+            var bitmap: Bitmap? = null
+            var inputStream: InputStream? = null
 
-        try {
-            inputStream = assetManager?.open(filePath)
-            bitmap = BitmapFactory.decodeStream(inputStream)
-        } catch (e: IOException) {
-            Log.e("InnerMapFragment", "Error loading bitmap from file: $filePath", e)
-        } finally {
-            inputStream?.close()
-        }
+            try {
+                inputStream = assetManager?.open(filePath)
+                bitmap = BitmapFactory.decodeStream(inputStream)
+            } catch (e: IOException) {
+                Log.e("InnerMapFragment", "Error loading bitmap from file: $filePath", e)
+            } finally {
+                inputStream?.close()
+            }
 
-        if (bitmap == null) {
-            Log.e("InnerMapFragment", "Bitmap could not be loaded, skipping touch handler setup")
+            if (bitmap == null) {
+                Log.e("InnerMapFragment", "Bitmap could not be loaded, skipping touch handler setup")
+                return
+            }
+
+            try {
+                val touchHandler = InnerMapTouchHandler(
+                    context = requireContext(),
+                    imageView = imageView,
+                    bitmap = bitmap,
+                    colorMap = colorMap,
+                    innerMapBinding = binding,
+                    floor = innermapCurrentFloor,
+                    buildingId = selectedBuildingId,
+                    replaceInnermapCallback = { groupId ->
+                        replaceInnermap(groupId)
+                    }
+                )
+                imageView.setOnTouchListener(touchHandler)
+            } catch (e: Exception) {
+                Log.e("InnerMapFragment", "Error creating touch handler: ${e.message}")
+            }
+        } else {
             return
         }
-
-        try {
-            val touchHandler = InnerMapTouchHandler(
-                context = requireContext(),
-                imageView = imageView,
-                bitmap = bitmap,
-                colorMap = colorMap,
-                innerMapBinding = binding,
-                floor = innermapCurrentFloor,
-                buildingId = selectedBuildingId,
-                replaceInnermapCallback = { groupId ->
-                    replaceInnermap(groupId)
-                }
-            )
-            imageView.setOnTouchListener(touchHandler)
-        } catch (e: Exception) {
-            Log.e("InnerMapFragment", "Error creating touch handler: ${e.message}")
-        }
-
-
-
-
     }
 
 
@@ -553,24 +611,27 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private fun drawRouteForCurrentFloor(
         routeView: RouteView,
         searchedRoute: RouteResponse?,
+        currentBuildingId: Int,
         innermapCurrentFloor: Int
     ) {
         searchedRoute?.let { routeResponse ->
-            // 현재 층과 일치하는 경로만 필터링
-            val matchingRoutes = routeResponse.path.filter { it.floor == innermapCurrentFloor }
+            // Filter routes by the current building and floor
+            val matchingRoutes = routeResponse.path.filter {
+                it.floor == innermapCurrentFloor && it.buildingId == currentBuildingId
+            }
 
-            // 필터링된 경로에서 좌표를 추출하여 튜플로 저장
+            // Extract coordinates from the filtered routes
             val coordinates = matchingRoutes.flatMap { route ->
                 route.route.map { Pair(it[0].toFloat(), it[1].toFloat()) }
             }
 
-            // 디버깅을 위한 출력
-            Log.d("RouteDebug", "Coordinates for floor $innermapCurrentFloor: $coordinates")
+            // Debugging: log the coordinates
+            Log.d("RouteDebug", "Coordinates for building $currentBuildingId, floor $innermapCurrentFloor: $coordinates")
 
-            // 루트 좌표를 설정하여 그리기 (비율 조정 포함)
+            // Set the route coordinates for the RouteView
             routeView.setRouteCoordinates(coordinates)
         } ?: run {
-            // 예외 처리 또는 로그
+            // Handle the case where searchedRoute is null
             Log.e("RouteDebug", "searchedRoute is null")
         }
     }
