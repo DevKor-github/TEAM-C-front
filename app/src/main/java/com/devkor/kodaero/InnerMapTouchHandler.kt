@@ -250,7 +250,7 @@ class InnerMapTouchHandler(
         val activity = context as? FragmentActivity
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.main_container, getDirectionsFragment)
-            ?.addToBackStack(null)
+            ?.addToBackStack("DirectionFragment")
             ?.commit()
     }
 

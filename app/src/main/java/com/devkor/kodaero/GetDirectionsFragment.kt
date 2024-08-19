@@ -191,7 +191,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
-                Log.e("","notnulleeeee")
+                Log.e("","notnull")
                 binding.getDirectionsMapLayout.visibility = View.VISIBLE
                 binding.toDetailRouteButton.setOnClickListener {
                     startRouteNavigation(routeResponse)
@@ -270,6 +270,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun showCurrentRouteStep(routePath: RoutePath, routeResponse: RouteResponse) {
+
         if (routePath.inOut) {
             // Handle indoor navigation
             val buildingId = routePath.buildingId
@@ -320,9 +321,11 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     private fun moveToNextRouteStep(routeResponse: RouteResponse) {
         currentRouteIndex++
+
         if (currentRouteIndex < routeResponse.path.size) {
             val nextRoutePath = routeResponse.path[currentRouteIndex]
             nextRoutePath?.let { showCurrentRouteStep(it, routeResponse) }
+            Log.e("eeeeeeeee","")
         } else {
             // Handle end of route or do nothing
         }
@@ -343,7 +346,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 val buildingItem = BuildingCache.get(it.buildingId)
                 if (buildingItem != null) {
                     val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
-                        selectedBuildingName = buildingItem.name,
+                        selectedBuildingName = BuildingCache.get(buildingId)!!.name,
                         selectedBuildingAboveFloor = buildingItem.floor ?: 0,
                         selectedBuildingUnderFloor = buildingItem.underFloor,
                         selectedBuildingId = buildingId,
@@ -366,16 +369,24 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                     innerMapFragment.binding.toNextGuideButton.setOnClickListener {
                         currentRouteIndex++
                         val nextRoutePath = routeResponse.path.getOrNull(currentRouteIndex)
-
                         nextRoutePath?.let {
-                            navigateToInnerMapFragment(
-                                buildingId = nextRoutePath.buildingId,
-                                floor = nextRoutePath.floor,
-                                info = nextRoutePath.info,
-                                routeResponse = routeResponse
-                            )
+                            if(nextRoutePath.buildingId != 0) {
+                                navigateToInnerMapFragment(
+                                    buildingId = nextRoutePath.buildingId,
+                                    floor = nextRoutePath.floor,
+                                    info = nextRoutePath.info,
+                                    routeResponse = routeResponse
+                                )
+                            }
+                            else{
+                                currentRouteIndex--
+                                moveToNextRouteStep(routeResponse)
+                                requireActivity().supportFragmentManager.popBackStack("DirectionFragment", 0)
+                                Log.e("navigateToInnerMapFragment", "No more route steps available.")
+                                true
+                            }
                         } ?: run {
-                            Log.e("navigateToInnerMapFragment", "No more route steps available.")
+                            Log.e("navigateToInnerMapFragment", "Route is null.")
                         }
                     }
                 } else {
@@ -389,7 +400,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun startRouteNavigation(routeResponse: RouteResponse) {
-        currentRouteIndex = 0
+        //currentRouteIndex = 0
         pendingRouteResponse = routeResponse
 
         // Call the method that uses routeResponse
