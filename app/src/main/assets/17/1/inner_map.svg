@@ -105,10 +105,6 @@
     <rect class="cls-4" x="632.95" y="166.11" width="93.72" height="162.37"/>
     <text class="cls-6" transform="translate(668.16 247.3)"><tspan x="0" y="0">103</tspan></text>
   </g>
-  <g id="Layer_16">
-    <rect class="cls-5" x="539.23" y="166.11" width="93.72" height="51.67"/>
-    <text class="cls-6" transform="translate(576.01 190.61)"><tspan x="0" y="0">112</tspan><tspan x="-18.36" y="14.4">미화원쉼터</tspan></text>
-  </g>
   <g id="Layer_x5F_others">
     <rect class="cls-2" x="539.23" y="166.11" width="93.72" height="162.37"/>
     <g>
@@ -123,5 +119,9 @@
       <rect class="cls-3" x="539.23" y="297.71" width="46.86" height="9.49"/>
       <rect class="cls-3" x="539.23" y="307.2" width="46.86" height="9.49"/>
     </g>
+  </g>
+  <g id="Layer_16">
+    <rect class="cls-5" x="539.23" y="166.11" width="93.72" height="51.67"/>
+    <text class="cls-6" transform="translate(576.01 190.61)"><tspan x="0" y="0">112</tspan><tspan x="-18.36" y="14.4">미화원쉼터</tspan></text>
   </g>
 </svg>

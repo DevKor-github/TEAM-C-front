@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deckor_teamc_front.databinding.FragmentSearchBuildingBinding
+import kotlinx.coroutines.*
 
 class SearchBuildingFragment : Fragment() {
 
@@ -27,6 +28,9 @@ class SearchBuildingFragment : Fragment() {
     private lateinit var adapter: SearchListAdapter
 
     private var taggedBuildingId : Int? = null
+
+    // 검색 필드의 내용을 가져와 검색 수행
+    private lateinit var searchText : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,9 @@ class SearchBuildingFragment : Fragment() {
             binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
             taggedBuildingId = null
         }
+
+
+        searchText = binding.customEditTextLayout.editText.text.toString().trim()
 
         val layoutManager = LinearLayoutManager(requireContext())
         binding.searchListRecyclerview.layoutManager = layoutManager
@@ -73,21 +80,38 @@ class SearchBuildingFragment : Fragment() {
             adapter.setBuildingList(buildingItems)
         })
 
+
+        var searchJob: Job? = null
+
         binding.customEditTextLayout.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val searchText = s.toString().trim().replace("${Constants.TAG_SUFFIX} ", "")
+                val delayMillis: Long = 200 // 0.2초 지연
+
+                // 이전 작업이 있으면 취소
+                searchJob?.cancel()
+
                 if (searchText.isNotBlank()) {
-                    viewModel.searchBuildings(searchText, taggedBuildingId)
+                    // 새로운 작업을 지연 후 실행
+                    searchJob = CoroutineScope(Dispatchers.Main).launch {
+                        delay(delayMillis) // 지연
+                        viewModel.searchBuildings(searchText, taggedBuildingId)
+                    }
                 } else {
+                    // 텍스트가 비어있으면 즉시 빈 리스트 설정
                     adapter.setBuildingList(emptyList())
                 }
+
+                // Clear button visibility 설정
                 binding.customEditTextLayout.clearButton.visibility = if (searchText.isNotEmpty()) View.VISIBLE else View.GONE
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+
 
         // Open keyboard when the fragment starts
         binding.customEditTextLayout.editText.requestFocus()
@@ -119,6 +143,8 @@ class SearchBuildingFragment : Fragment() {
             if (tagContainer.childCount == 0) {
                 binding.customEditTextLayout.editText.hint = "학교 건물을 검색해 주세요"
             }
+            // 검색을 수행. 이 경우 taggedBuildingId가 null일 수 있습니다.
+            viewModel.searchBuildings(searchText, taggedBuildingId)
         }
 
         tagContainer.addView(tagView)

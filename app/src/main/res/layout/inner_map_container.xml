@@ -137,6 +137,7 @@
             </HorizontalScrollView>
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/pin_onoff_button"
                 android:layout_marginTop="55dp"
                 android:layout_marginRight="20dp"
@@ -238,25 +239,41 @@
                 android:layout_width="match_parent"
                 android:id="@+id/includedMap"/>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/frame_width"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="bottom|start">
+                android:gravity="bottom|start"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp">
 
                 <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="@dimen/frame_width"
+                    android:id="@+id/customScrollViewLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_container_background"
-                    android:clipToOutline="true"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="30dp">
+                    android:clipToOutline="true">
 
                     <com.example.deckor_teamc_front.CustomScrollView
                         android:id="@+id/customScrollView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"/>
+
+                    <com.example.deckor_teamc_front.GradientBlurView
+                        android:id="@+id/customScrollTopBlur"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        app:hasTopBlur="true"
+                        app:hasBottomBlur="false"/>
+
+                    <com.example.deckor_teamc_front.GradientBlurView
+                        android:id="@+id/customScrollBottomBlur"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        app:hasTopBlur="false"
+                        app:hasBottomBlur="true"
+                        android:layout_marginTop="0dp"/>
+
                 </FrameLayout>
 
             </LinearLayout>

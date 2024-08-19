@@ -61,6 +61,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private var selectedBuildingUnderFloor: Int? = null
 
 
+    private var previousZoom: Double? = null
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         closeModal()
@@ -93,7 +96,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             if (areMarkersVisible) {
                 hideMarkers()
             } else {
+                areMarkersVisible = !areMarkersVisible
                 showMarkers()
+                areMarkersVisible = !areMarkersVisible
             }
             areMarkersVisible = !areMarkersVisible
 
@@ -135,7 +140,19 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         naverMap.addOnCameraChangeListener { reason, animated ->
             val currentZoom = naverMap.cameraPosition.zoom
-            updateMarkersVisibility(currentZoom)
+
+            // 줌 레벨이 임계점을 넘었는지 확인
+            val isThresholdChanged = MarkerZoomLevelThreshold.zoomToIdsMap.keys.any { threshold ->
+                (previousZoom ?: 0.0) < threshold && currentZoom >= threshold ||
+                        (previousZoom ?: 0.0) >= threshold && currentZoom < threshold
+            }
+
+            if (isThresholdChanged) {
+                updateMarkersVisibility(currentZoom)
+            }
+
+            // 이전 줌 레벨 업데이트
+            previousZoom = currentZoom
         }
 
         val cameraZoomUpdate = CameraUpdate.zoomTo(14.3)
@@ -212,7 +229,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showMarkers() {
-        markers.forEach { it.map = naverMap }
+        updateMarkersVisibility(naverMap.cameraPosition.zoom)
+        // markers.forEach { it.map = naverMap }
     }
 
     private fun navigateToSearchBuildingFragment() {
@@ -406,7 +424,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 // ID에 해당하는 줌 임계값을 가져옴
                 val threshold = MarkerZoomLevelThreshold.getThresholdForId(buildingId)
 
-                if (zoom >= threshold) {
+                if (zoom >= threshold && areMarkersVisible) {
                     marker.map = naverMap // 줌 값이 임계값 이상이면 마커 표시
                 } else {
                     marker.map = null // 줌 값이 임계값 이하이면 마커 숨김
