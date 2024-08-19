@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.deckor_teamc_front"
+    namespace = "com.devkor.kodaero"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.deckor_teamc_front"
+        applicationId = "com.devkor.kodaero"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

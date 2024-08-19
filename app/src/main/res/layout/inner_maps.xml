@@ -78,7 +78,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter" />
 
-                <com.example.deckor_teamc_front.RouteView
+                <com.devkor.kodaero.RouteView
                     android:id="@+id/routeView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
