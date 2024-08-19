@@ -147,6 +147,91 @@
                 android:src="@drawable/pin_off_button"
                 android:translationZ="1dp"/>
 
+            <RelativeLayout
+                android:id="@+id/get_directions_guide_layout"
+                android:layout_width="320dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:elevation="4dp"
+                android:background="@drawable/rounded_rec_white"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/get_directions_route_guide_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_number"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textSize="10dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:background="@drawable/red_circle"/>
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_inout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="실내"
+                            android:textSize="12dp"
+                            android:textColor="@color/dark_gray"
+                            android:fontFamily="@font/pretendard_regular"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 경로 안내"
+                            android:textSize="12dp"
+                            android:textColor="@color/dark_gray"
+                            android:fontFamily="@font/pretendard_regular"/>
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_below="@id/get_directions_route_guide_layout"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2층으로 이동하세요."
+                            android:textSize="18dp"
+                            android:textColor="@color/map_main"
+                            android:fontFamily="@font/pretendard_semibold"/>
+
+                    </HorizontalScrollView>
+
+                </RelativeLayout>
+
+                <ImageButton
+                    android:id="@+id/to_next_guide_button"
+                    android:src="@drawable/move_inside_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="8dp"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
+
             <include
                 layout="@layout/inner_maps"
                 android:layout_height="match_parent"

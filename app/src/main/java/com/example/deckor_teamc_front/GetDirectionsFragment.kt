@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.deckor_teamc_front.databinding.FragmentGetDirectionsBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
@@ -23,7 +24,6 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 
 class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
-
     private var _binding: FragmentGetDirectionsBinding? = null
     private val binding get() = _binding!!
 
@@ -42,6 +42,8 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     private val pathOverlays = mutableListOf<PathOverlay>()
     private val markers = mutableListOf<Marker>()
+
+    private var currentRouteIndex = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +78,6 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
             }
         }
-
 
         return binding.root
     }
@@ -194,6 +195,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             if (routeResponse != null) {
                 Log.e("","notnulleeeee")
                 binding.getDirectionsMapLayout.visibility = View.VISIBLE
+                binding.toDetailRouteButton.setOnClickListener {
+                    startRouteNavigation(routeResponse)
+                }
                 if (naverMap != null) {
                     drawRoute(routeResponse)
                     displayDuration(routeResponse.duration)
@@ -208,6 +212,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private fun displayDuration(durationInSeconds: Int) {
         val durationInMinutes = Math.round(durationInSeconds / 60.0).toInt()
         binding.getDirectionsRouteTime.text = durationInMinutes.toString()
+
+        val durationInMeter = Math.round(durationInSeconds * 1.25).toInt()
+        binding.getDirectionsRouteDistance.text = durationInMeter.toString()
     }
 
     private fun drawRoute(routeResponse: RouteResponse) {
@@ -226,20 +233,11 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             val startLatLng = coords.first()
             val endLatLng = coords.last()
 
-            // 앞쪽 경로와 뒤쪽 경로를 분할
-            val (startRoute, endRoute) = splitRouteByInOut(routeResponse)
-
             // Start Marker 설정
             val startMarker = Marker().apply {
                 position = startLatLng
                 icon = OverlayImage.fromResource(R.drawable.icon_start_point)
                 map = naverMap
-                if (startingPointPlaceType != "BUILDING") {
-                    setOnClickListener {
-                        navigateToInnerMapFragment(startingPointId, startRoute)
-                        true
-                    }
-                }
             }
             markers.add(startMarker) // Marker 리스트에 추가
 
@@ -248,12 +246,6 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 position = endLatLng
                 icon = OverlayImage.fromResource(R.drawable.icon_arrive_point)
                 map = naverMap
-                if (arrivalPointPlaceType != "BUILDING") {
-                    setOnClickListener {
-                        navigateToInnerMapFragment(arrivalPointId, endRoute)
-                        true
-                    }
-                }
             }
             markers.add(endMarker) // Marker 리스트에 추가
 
@@ -279,52 +271,115 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    fun showCurrentRouteStep(routePath: RoutePath, routeResponse: RouteResponse) {
+        if (routePath.inOut) {
+            // Handle indoor navigation
+            val buildingId = routePath.buildingId
+            val floor = routePath.floor
 
-    private fun splitRouteByInOut(routeResponse: RouteResponse): Pair<RouteResponse, RouteResponse> {
-        // inOut이 false인 첫 번째 경로를 찾음
-        val splitIndex = routeResponse.path.indexOfFirst { !it.inOut }
+            navigateToInnerMapFragment(buildingId, floor, routePath.info, routeResponse)
 
-        if (splitIndex == -1) {
-            // 만약 inOut이 false인 경로가 없으면 전체 루트를 반환
-            return Pair(routeResponse, routeResponse)
+        } else {
+            val latitude = routePath.route.firstOrNull()?.get(0) ?: return
+            val longitude = routePath.route.firstOrNull()?.get(1) ?: return
+
+            val cameraUpdate = CameraUpdate
+                .scrollAndZoomTo(LatLng(latitude, longitude), 18.0)
+                .animate(CameraAnimation.Fly)
+            naverMap?.moveCamera(cameraUpdate)
+
+            // Update the guide UI
+            binding.getDirectionsGuideInout.text = "실외"
+            binding.getDirectionsGuideInfo.text = routePath.info
+
+            binding.getDirectionsGuideNumber.text = (currentRouteIndex + 1).toString()
+
+            binding.getDirectionsGuideLayout.visibility = View.VISIBLE
+            binding.getDirectionsSelectDirectionLayout.visibility = View.GONE
+
+            when {
+                routePath.info.contains("층으로", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_floor_button)
+                }
+                routePath.info.contains("나가세요", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_outside_button)
+                }
+                routePath.info.contains("들어가세요", ignoreCase = true) -> {
+                    binding.toNextGuideButton.setImageResource(R.drawable.move_inside_button)
+                }
+            }
+
+            if (routePath.info == "도착") {
+                binding.toNextGuideButton.visibility = View.GONE
+            } else {
+                binding.toNextGuideButton.visibility = View.VISIBLE
+                binding.toNextGuideButton.setOnClickListener {
+                    moveToNextRouteStep(routeResponse)
+                }
+            }
         }
-
-        // 앞쪽 경로 (시작 루트)
-        val startRoute = routeResponse.copy(path = routeResponse.path.take(splitIndex + 1))
-
-        // 뒤쪽 경로 (끝 루트)
-        val endRoute = routeResponse.copy(path = routeResponse.path.drop(splitIndex + 1))
-
-        return Pair(startRoute, endRoute)
     }
 
+    private fun moveToNextRouteStep(routeResponse: RouteResponse) {
+        currentRouteIndex++
+        if (currentRouteIndex < routeResponse.path.size) {
+            val nextRoutePath = routeResponse.path[currentRouteIndex]
+            nextRoutePath?.let { showCurrentRouteStep(it, routeResponse) }
+        } else {
+            // Handle end of route or do nothing
+        }
+    }
 
+    private fun navigateToInnerMapFragment(buildingId: Int?, floor: Int?, info: String, routeResponse: RouteResponse) {
+        if (buildingId == null || floor == null) {
+            Log.e("navigateToInnerMapFragment", "Building ID or Floor is null: buildingId=$buildingId, floor=$floor")
+            return
+        }
 
-    private fun navigateToInnerMapFragment(roomId: Int, route: RouteResponse) {
-        viewModel.updateSplitedRoute(route)  // RouteResponse를 ViewModel에 저장
+        // Add routeResponse to DirectionSearchRouteDataHolder
+        DirectionSearchRouteDataHolder.splitedRoute = routeResponse
 
-        viewModel.fetchPlaceInfo(roomId, "CLASSROOM") { placeInfo ->
+        // Proceed with fragment navigation
+        viewModel.fetchPlaceInfo(buildingId, "CLASSROOM") { placeInfo ->
             placeInfo?.let {
-                // 캐시에서 BuildingItem 가져오기
                 val buildingItem = BuildingCache.get(it.buildingId)
-
                 if (buildingItem != null) {
-                    val selectedBuildingName = buildingItem.name
-                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
-                    val selectedBuildingUnderFloor = buildingItem.underFloor
-
-                    val selectedRoomFloor = it.floor
-                    val selectedRoomMask = it.maskIndex
-
                     val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
-                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
-                        it.buildingId, selectedRoomFloor, selectedRoomMask, true
+                        selectedBuildingName = buildingItem.name,
+                        selectedBuildingAboveFloor = buildingItem.floor ?: 0,
+                        selectedBuildingUnderFloor = buildingItem.underFloor,
+                        selectedBuildingId = buildingId,
+                        selectedRoomFloor = floor,
+                        selectedRoomMask = it.maskIndex,
+                        hasDirection = true
                     )
 
                     val transaction = requireActivity().supportFragmentManager.beginTransaction()
                     transaction.add(R.id.main_container, innerMapFragment)
                     transaction.addToBackStack("InnerMapFragment")
                     transaction.commit()
+
+                    requireActivity().supportFragmentManager.executePendingTransactions()
+
+                    // Set the route info to the InnerMapFragment
+                    innerMapFragment.setRouteInfo(info, currentRouteIndex)
+
+                    // Set up toNextGuideButton functionality
+                    innerMapFragment.binding.toNextGuideButton.setOnClickListener {
+                        currentRouteIndex++
+                        val nextRoutePath = routeResponse.path.getOrNull(currentRouteIndex)
+
+                        nextRoutePath?.let {
+                            navigateToInnerMapFragment(
+                                buildingId = nextRoutePath.buildingId,
+                                floor = nextRoutePath.floor,
+                                info = nextRoutePath.info,
+                                routeResponse = routeResponse
+                            )
+                        } ?: run {
+                            Log.e("navigateToInnerMapFragment", "No more route steps available.")
+                        }
+                    }
                 } else {
                     Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
                 }
@@ -335,7 +390,15 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     }
 
 
+    private fun startRouteNavigation(routeResponse: RouteResponse) {
+        currentRouteIndex = 0
+        pendingRouteResponse = routeResponse
 
+        // Call the method that uses routeResponse
+        routeResponse.path.firstOrNull()?.let {
+            showCurrentRouteStep(it, routeResponse)
+        }
+    }
 
     private fun removeAllOverlays() {
         // 저장된 PathOverlay 제거
@@ -346,8 +409,6 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         markers.forEach { it.map = null }
         markers.clear()
     }
-
-
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map
