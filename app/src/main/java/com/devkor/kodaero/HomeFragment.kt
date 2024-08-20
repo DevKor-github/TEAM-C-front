@@ -244,7 +244,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun navigateToGetDirectionsFragment() {
         val getDirectionsFragment = GetDirectionsFragment()
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, getDirectionsFragment)
+        transaction.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
         transaction.addToBackStack("DirectionFragment")
         transaction.commit()
     }

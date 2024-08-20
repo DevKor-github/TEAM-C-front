@@ -34,6 +34,22 @@ class MainActivity : AppCompatActivity() {
         // 현재 보여지고 있는 Fragment를 가져옵니다.
         val currentFragment = fragmentManager.findFragmentById(R.id.main_container)
 
+        val directionsFragment = supportFragmentManager.findFragmentByTag("DirectionFragment") as? GetDirectionsFragment
+
+        val backStackCount = fragmentManager.backStackEntryCount
+
+        for (i in 0 until backStackCount) {
+            val backStackEntry = fragmentManager.getBackStackEntryAt(i)
+            Log.d("BackStackFragment", "Fragment name: ${backStackEntry.name}, ID: ${backStackEntry.id}")
+        }
+
+        val fragments = fragmentManager.fragments
+        for (fragment in fragments) {
+            fragment?.let {
+                Log.d("BackStackFragment", "Fragment tag: ${fragment.tag}, Fragment: ${fragment::class.java.simpleName}")
+            }
+        }
+
         if (currentFragment is HomeFragment) {
             if (currentFragment.isBottomSheetExpanded()) {
                 currentFragment.closeModal()
@@ -44,6 +60,13 @@ class MainActivity : AppCompatActivity() {
             if (currentFragment.isBottomSheetExpanded()) {
                 currentFragment.closeModal()
                 Log.e("MainActivity", "expanded")
+                return
+            }
+            Log.e("MainActivity", "innermapabcedf")
+            if (directionsFragment != null && directionsFragment.currentRouteIndex != 0){
+                Log.e("MainActivity", "{${directionsFragment}}")
+                directionsFragment.resetRouteStep()
+                fragmentManager.popBackStack("DirectionFragment", 0)
                 return
             }
         } else if (currentFragment is GetDirectionsFragment) {

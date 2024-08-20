@@ -41,7 +41,9 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private val pathOverlays = mutableListOf<PathOverlay>()
     private val markers = mutableListOf<Marker>()
 
-    private var currentRouteIndex = 0
+    var currentRouteIndex = 0
+
+    private var fetchedRouteResponse: RouteResponse? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -191,8 +193,13 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
+                fetchedRouteResponse = routeResponse
                 Log.e("","notnull")
                 binding.getDirectionsMapLayout.visibility = View.VISIBLE
+
+                binding.getDirectionsGuideLayout.visibility = View.GONE
+                binding.getDirectionsSelectDirectionLayout.visibility = View.VISIBLE
+
                 binding.toDetailRouteButton.setOnClickListener {
                     startRouteNavigation(routeResponse)
                 }
@@ -276,7 +283,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             val buildingId = routePath.buildingId
             val floor = routePath.floor
 
-            navigateToInnerMapFragment(buildingId, floor, routePath.info, routeResponse)
+            navigateToInnerMapFragment(buildingId, floor, routePath.info, routeResponse, true)
 
         } else {
             val latitude = routePath.route.firstOrNull()?.get(0) ?: return
@@ -331,7 +338,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun navigateToInnerMapFragment(buildingId: Int?, floor: Int?, info: String, routeResponse: RouteResponse) {
+    private fun navigateToInnerMapFragment(buildingId: Int?, floor: Int?, info: String, routeResponse: RouteResponse, addBackStack: Boolean) {
         if (buildingId == null || floor == null) {
             Log.e("navigateToInnerMapFragment", "Building ID or Floor is null: buildingId=$buildingId, floor=$floor")
             return
@@ -347,8 +354,8 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 if (buildingItem != null) {
                     val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
                         selectedBuildingName = BuildingCache.get(buildingId)!!.name,
-                        selectedBuildingAboveFloor = buildingItem.floor ?: 0,
-                        selectedBuildingUnderFloor = buildingItem.underFloor,
+                        selectedBuildingAboveFloor = BuildingCache.get(buildingId)!!.floor,
+                        selectedBuildingUnderFloor = BuildingCache.get(buildingId)!!.underFloor,
                         selectedBuildingId = buildingId,
                         selectedRoomFloor = floor,
                         selectedRoomMask = it.maskIndex,
@@ -375,7 +382,8 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                                     buildingId = nextRoutePath.buildingId,
                                     floor = nextRoutePath.floor,
                                     info = nextRoutePath.info,
-                                    routeResponse = routeResponse
+                                    routeResponse = routeResponse,
+                                    addBackStack = false
                                 )
                             }
                             else{
@@ -399,8 +407,8 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    private fun startRouteNavigation(routeResponse: RouteResponse) {
-        //currentRouteIndex = 0
+    fun startRouteNavigation(routeResponse: RouteResponse) {
+        currentRouteIndex = 0
         pendingRouteResponse = routeResponse
 
         // Call the method that uses routeResponse
@@ -417,6 +425,12 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         // 저장된 Marker 제거
         markers.forEach { it.map = null }
         markers.clear()
+    }
+
+    fun resetRouteStep(){
+        currentRouteIndex = 0
+        Log.e("fffffffffffff","innermapabcedfreset")
+        getRoutes()
     }
 
     override fun onMapReady(map: NaverMap) {
