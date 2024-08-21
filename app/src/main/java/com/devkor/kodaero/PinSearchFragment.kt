@@ -44,6 +44,9 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var pinSearchAdapter: PinSearchAdapter
 
+    private val selectedMarkers = mutableListOf<Marker>()
+    private val unselectedMarkers = mutableListOf<Marker>()
+
     // To hold facilities for each building
     private val facilitiesMap = mutableMapOf<Int, List<FacilityItem>>()
 
@@ -75,17 +78,28 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         })
         viewModel.searchFacilities(facilityType)
 
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.pinsearchIncludedLayout.standardBottomSheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.pinSearchIncludedLayout.standardBottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         pinSearchAdapter = PinSearchAdapter()
-        binding.pinsearchIncludedLayout.pinSearchListRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        binding.pinsearchIncludedLayout.pinSearchListRecyclerview.adapter = pinSearchAdapter
+        binding.pinSearchIncludedLayout.pinSearchListRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.pinSearchIncludedLayout.pinSearchListRecyclerview.adapter = pinSearchAdapter
+
+        view.post {
+            bottomSheetBehavior.peekHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250f, resources.displayMetrics).toInt()
+        }
 
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.peekHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250f, resources.displayMetrics).toInt()
+                } else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    // Unselect the currently selected marker when the bottom sheet is hidden
+                    if (selectedMarkers.isNotEmpty()) {
+                        val currentSelectedMarker = selectedMarkers.first()
+                        unselectMarker(currentSelectedMarker)
+                        unselectAllMarkers()
+                    }
                 }
             }
 
@@ -102,12 +116,13 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             "CONVENIENCE_STORE" -> "편의점"
             "READING_ROOM" -> "열람실"
             "STUDY_ROOM" -> "스터디룸"
-            "REST_AREA" -> "휴게 공간"
+            "LOUNGE" -> "라운지"
             "WATER_PURIFIER" -> "정수기"
             "PRINTER" -> "프린터"
             "VENDING_MACHINE" -> "자판기"
             "SMOKING_AREA" -> "흡연구역"
             "SLEEPING_ROOM" -> "수면실"
+            "BOOK_RETURN_MACHINE" -> "도서 반납기"
             else -> facilityType
         }
     }
@@ -138,7 +153,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
                 }
             }
             if (::naverMap.isInitialized) {
-                showMarkersOnMap()
+                unselectAllMarkers()
             }
         })
     }
@@ -159,27 +174,84 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun onMarkerClick(marker: Marker) {
-        val buildingId = marker.tag as Int
-        val facilities = facilitiesMap[buildingId] ?: emptyList()
-        pinSearchAdapter.submitList(facilities)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
+        when {
+            selectedMarkers.isEmpty() -> {
+                selectMarker(marker)
+            }
 
-    private fun showMarkersOnMap() {
-        markers.forEach { it.map = naverMap }
-    }
-
-    private fun getDrawableAsBitmap(drawableResId: Int): Bitmap {
-        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)!!
-        return Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888).also { bitmap ->
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
+            selectedMarkers.isNotEmpty() -> {
+                val currentSelectedMarker = selectedMarkers.first()
+                if (currentSelectedMarker == marker) {
+                    // Marker is reselected or the bottom sheet is collapsed
+                    unselectMarker(currentSelectedMarker)
+                    unselectAllMarkers()
+                } else {
+                    // Selecting a new marker, deselect the current one and select the new one
+                    unselectMarker(currentSelectedMarker)
+                    selectMarker(marker)
+                }
+            }
         }
     }
 
-    private fun createDrawableWithText(drawableResId: Int, text: String): Bitmap {
+    private fun selectMarker(marker: Marker) {
+        selectedMarkers.add(marker)
+        unselectedMarkers.remove(marker)
+
+        unselectedMarkers.forEach { unselectedMarker ->
+            val unselectedDrawableName = "unselected_pin_${facilityType.lowercase()}"
+            val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
+            unselectedMarker.icon = OverlayImage.fromResource(unselectedDrawableResId)
+        }
+
+        val selectedDrawableName = "pin_${facilityType.lowercase()}"
+        val selectedDrawableResId = resources.getIdentifier(selectedDrawableName, "drawable", requireContext().packageName)
+        marker.icon = OverlayImage.fromBitmap(createDrawableWithText(selectedDrawableResId, (facilitiesMap[marker.tag as Int]?.size ?: "").toString()))
+
+        val buildingId = marker.tag as Int
+        val facilities = facilitiesMap[buildingId] ?: emptyList()
+        pinSearchAdapter.submitList(facilities)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    fun unselectMarker(marker: Marker) {
+        selectedMarkers.remove(marker)
+        unselectedMarkers.add(marker)
+
+        val unselectedDrawableName = "unselected_pin_${facilityType.lowercase()}"
+        val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
+        marker.icon = OverlayImage.fromResource(unselectedDrawableResId)
+
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    fun unselectAllMarkers() {
+        if (selectedMarkers.isNotEmpty()) {
+            val currentSelectedMarker = selectedMarkers.first()
+            unselectMarker(currentSelectedMarker)
+        }
+
+        markers.forEach { marker ->
+            unselectedMarkers.add(marker)
+            selectedMarkers.remove(marker)
+
+            val unselectedDrawableName = "pin_${facilityType.lowercase()}"
+            val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
+            marker.icon = OverlayImage.fromBitmap(createDrawableWithText(unselectedDrawableResId, (facilitiesMap[marker.tag as Int]?.size ?: "").toString()))
+            marker.map = naverMap
+        }
+    }
+
+    fun hasSelectedMarkers(): Boolean {
+        return selectedMarkers.isNotEmpty()
+    }
+
+    private fun createDrawableWithText(drawableResId: Int, text: String?): Bitmap {
         val bitmap = getDrawableAsBitmap(drawableResId)
+
+        // Only add text if the marker is selected (i.e., the text is not null or empty)
+        if (text.isNullOrEmpty()) return bitmap
+
         val canvas = Canvas(bitmap)
 
         val paintCircle = Paint().apply {
@@ -207,6 +279,15 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         return bitmap
     }
 
+    private fun getDrawableAsBitmap(drawableResId: Int): Bitmap {
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableResId)!!
+        return Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888).also { bitmap ->
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0, 0, canvas.width, canvas.height)
+            drawable.draw(canvas)
+        }
+    }
+
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
@@ -220,7 +301,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             moveCameraToPosition(it)
         }
 
-        showMarkersOnMap()
+        unselectAllMarkers()
     }
 
     override fun onDestroyView() {

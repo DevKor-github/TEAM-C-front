@@ -21,6 +21,37 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/pin_search_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:elevation="5dp"
+        android:background="#FDFDFD"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:id="@+id/back_to_home_button"
+            android:src="@drawable/grey_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/facility_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="열람실"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textColor="@color/dark_gray"
+            android:textSize="16dp" />
+
+    </FrameLayout>
+
     <ImageButton
         android:id="@+id/home_more_button"
         android:src="@drawable/home_more_button"
@@ -67,6 +98,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
+        android:id="@+id/facility_button_scroll_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -115,9 +147,9 @@
                 android:layout_marginEnd="5dp" />
 
             <ImageButton
-                android:id="@+id/rest_area_button"
-                android:src="@drawable/button_rest_area"
-                android:layout_width="83dp"
+                android:id="@+id/lounge_button"
+                android:src="@drawable/button_lounge"
+                android:layout_width="70dp"
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
@@ -156,6 +188,13 @@
                 android:layout_height="29dp"
                 android:layout_marginEnd="5dp" />
 
+            <ImageButton
+                android:id="@+id/book_return_machine_button"
+                android:src="@drawable/button_book_return_machine"
+                android:layout_width="86dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="5dp" />
+
         </LinearLayout>
 
     </HorizontalScrollView>
@@ -173,5 +212,8 @@
 
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>
+
+    <include layout="@layout/pin_search_modal_sheet"
+        android:id="@+id/pin_search_included_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
