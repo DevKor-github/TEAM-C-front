@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/rounded_rec_white"
     android:padding="0dp"
-    android:elevation="10dp"
+    android:elevation="2dp"
     android:gravity="center_vertical">
 
 
@@ -43,8 +43,13 @@
             android:hint="학교 건물을 검색해 주세요"
             android:textSize="15dp"
             android:elevation="0dp"
-            android:background="@android:color/transparent"
-            android:singleLine="true"/>
+            android:background="@drawable/rounded_rec_white"
+            android:singleLine="true"
+            android:textColor="@color/map_main"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColorHint="@color/gray"
+        />
+
 
         <ImageButton
             android:id="@+id/clear_button"

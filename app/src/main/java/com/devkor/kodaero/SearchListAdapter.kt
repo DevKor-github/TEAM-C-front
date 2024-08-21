@@ -72,7 +72,7 @@ class SearchListAdapter(
     private fun getModifiedList(): List<BuildingSearchItem> {
         val modifiedList = mutableListOf<BuildingSearchItem>()
         for (building in buildingList) {
-            if (building.placeType == "BUILDING") {
+            if (building.placeType == "BUILDING" && false) { // 태그 미사용
                 val modifiedBuilding = building.copy(name = "${building.name} ${Constants.TAG_SUFFIX}", placeType = "TAG")
                 modifiedList.add(modifiedBuilding)
             }
