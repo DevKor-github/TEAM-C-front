@@ -21,7 +21,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 
-class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
+class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentGetDirectionsBinding? = null
     private val binding get() = _binding!!
 
