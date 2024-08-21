@@ -89,7 +89,7 @@ data class BuildingItem(
     val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
-    val floor: Int?,
+    val floor: Int,
     val underFloor: Int,
     val nextBuildingTime: String,
     val facilityTypes: List<String>,
