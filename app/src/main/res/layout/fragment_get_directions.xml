@@ -96,9 +96,10 @@
 
         <RelativeLayout
             android:id="@+id/get_directions_select_direction_layout"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="50dp"
             android:elevation="4dp"
             android:background="@drawable/rounded_rec_white"
@@ -211,10 +212,11 @@
 
         <RelativeLayout
             android:id="@+id/get_directions_guide_layout"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="85dp"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="50dp"
+            android:layout_marginHorizontal="30dp"
             android:elevation="4dp"
             android:background="@drawable/rounded_rec_white"
             android:visibility="gone">
