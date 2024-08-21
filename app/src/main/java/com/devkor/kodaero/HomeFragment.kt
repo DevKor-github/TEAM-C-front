@@ -275,12 +275,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             binding.convenienceStoreButton,
             binding.readingRoomButton,
             binding.studyRoomButton,
-            binding.restAreaButton,
+            binding.loungeButton,
             binding.waterPurifierButton,
             binding.printerButton,
             binding.vendingMachineButton,
             binding.smokingAreaButton,
-            binding.sleepingRoomButton
+            binding.sleepingRoomButton,
+            binding.bookReturnMachineButton
         )
 
         for (button in buttonIds) {

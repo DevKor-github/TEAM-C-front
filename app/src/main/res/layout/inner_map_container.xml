@@ -91,13 +91,6 @@
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
-                        android:id="@+id/rest_area_button"
-                        android:src="@drawable/button_rest_area"
-                        android:layout_width="83dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="5dp" />
-
-                    <ImageButton
                         android:id="@+id/water_purifier_button"
                         android:src="@drawable/button_water_purifier"
                         android:layout_width="70dp"
