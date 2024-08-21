@@ -50,30 +50,42 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (currentFragment is HomeFragment) {
-            if (currentFragment.isBottomSheetExpanded()) {
-                currentFragment.closeModal()
-                Log.e("MainActivity", "expanded")
+        when (currentFragment) {
+            is HomeFragment -> {
+                if (currentFragment.isBottomSheetExpanded()) {
+                    currentFragment.closeModal()
+                    Log.e("MainActivity", "expanded")
+                    return
+                }
+            }
+            is InnerMapFragment -> {
+                if (currentFragment.isBottomSheetExpanded()) {
+                    currentFragment.closeModal()
+                    Log.e("MainActivity", "expanded")
+                    return
+                }
+                Log.e("MainActivity", "innermapabcedf")
+                if (directionsFragment != null && directionsFragment.currentRouteIndex != 0) {
+                    Log.e("MainActivity", "{${directionsFragment}}")
+                    directionsFragment.resetRouteStep()
+                    fragmentManager.popBackStack("DirectionFragment", 0)
+                    return
+                }
+            }
+            is GetDirectionsFragment -> {
+                fragmentManager.popBackStack("HomeFragment", 0)
                 return
             }
-        } else if (currentFragment is InnerMapFragment) {
-            if (currentFragment.isBottomSheetExpanded()) {
-                currentFragment.closeModal()
-                Log.e("MainActivity", "expanded")
-                return
+            is PinSearchFragment -> {
+                val pinSearchFragment = currentFragment as PinSearchFragment
+                if (pinSearchFragment.hasSelectedMarkers()) {
+                    pinSearchFragment.unselectAllMarkers()
+                    return
+                }
             }
-            Log.e("MainActivity", "innermapabcedf")
-            if (directionsFragment != null && directionsFragment.currentRouteIndex != 0){
-                Log.e("MainActivity", "{${directionsFragment}}")
-                directionsFragment.resetRouteStep()
-                fragmentManager.popBackStack("DirectionFragment", 0)
-                return
+            else -> {
+                Log.e("MainActivity", "Doesn't have modal")
             }
-        } else if (currentFragment is GetDirectionsFragment) {
-            fragmentManager.popBackStack("HomeFragment", 0)
-                return
-        } else {
-            Log.e("MainActivity", "Doesn't have modal")
         }
 
         // 백스택에 아무것도 없는지 확인
