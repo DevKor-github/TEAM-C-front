@@ -6,7 +6,7 @@
     <color name="gray">#FFB0B0B0</color>
     <color name="dark_gray">#FF424242</color>
     <color name="red">#FFF85C5C</color>
-    <color name="map_main">#FF333333</color>
+    <color name="map_main">#FF424242</color>
     <color name="map_sub">#FFB0B0B0</color>
 
 </resources>

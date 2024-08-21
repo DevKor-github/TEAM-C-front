@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -25,24 +27,26 @@
                 android:src="@drawable/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_gravity="center_vertical"
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/search_starting_point_bar"
-                android:layout_width="340dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_gravity="center_vertical|right"
                 android:gravity="start|center_vertical"
-                android:layout_marginEnd="10dp"
-                android:paddingStart="10dp"
+                android:layout_marginStart="53dp"
+                android:layout_marginEnd="24dp"
+                android:paddingStart="18dp"
                 android:hint="출발지를 입력해주세요"
                 android:textSize="15dp"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
                 android:background="@drawable/rounded_rec_white"
+                android:textColorHint="@color/gray"
                 app:itemActiveIndicatorStyle="@android:color/transparent"/>
         </FrameLayout>
 
@@ -55,25 +59,26 @@
                 android:src="@drawable/button_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_gravity="center_vertical"
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/search_arrival_point_bar"
-                android:layout_width="340dp"
+                android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:layout_gravity="center_vertical|right"
                 android:gravity="start|center_vertical"
-                android:layout_marginEnd="10dp"
-                android:paddingStart="10dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="53dp"
+                android:paddingStart="18dp"
                 android:hint="도착지를 입력해주세요"
                 android:textSize="15dp"
-                android:textColor="@color/dark_gray"
-                android:fontFamily="@font/pretendard_semibold"
-                android:elevation="10dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
                 android:background="@drawable/rounded_rec_white"
+                android:textColorHint="@color/gray"
                 app:itemActiveIndicatorStyle="@android:color/transparent"/>
 
         </FrameLayout>
@@ -232,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical">
-                    
+
                     <TextView
                         android:id="@+id/get_directions_guide_number"
                         android:layout_width="14dp"
