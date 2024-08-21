@@ -12,8 +12,8 @@ android {
         applicationId = "com.devkor.kodaero"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +25,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            applicationIdSuffix = ".release"
+            resValue("string", "app_name", "고대로")
+        }
+        debug {
+            applicationIdSuffix = ".debug"
+            resValue("string", "app_name", "고대로 Debug")
+        }
+        create("nodemask") {
+            applicationIdSuffix = ".nodemask"
+            resValue("string", "app_name", "고대로 NodeMask")
         }
     }
 

@@ -92,7 +92,8 @@ class InnerMapTouchHandler(
 
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
 
-                    if(maskIndex != 0){// 새로운 메시지를 생성
+                    // 마스크 노드 찍기용
+                    /*if(maskIndex != 0){
                         val newMessage = "MaskIndex: $maskIndex"
 
                         // 이전 메시지와 동일하다면 새로 표시하지 않고 기존 스낵바를 유지
@@ -137,7 +138,7 @@ class InnerMapTouchHandler(
                         // 마지막 메시지 업데이트
                         lastMessage = newMessage
 
-                    }
+                    }*/
 
                     openInnermapModal(maskIndex)
                     replaceInnermapCallback(fileName)

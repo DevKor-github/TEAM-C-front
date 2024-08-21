@@ -11,6 +11,8 @@
 /build
 /captures
 /release
+/nodemask
+/debug
 .externalNativeBuild
 .cxx
 local.properties
