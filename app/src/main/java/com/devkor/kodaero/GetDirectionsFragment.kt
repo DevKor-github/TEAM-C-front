@@ -1,11 +1,16 @@
 package com.devkor.kodaero
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -45,6 +50,9 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     private var fetchedRouteResponse: RouteResponse? = null
 
+    private val originalTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_regular) }
+    private val changedTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_semibold) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,6 +68,27 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         val roomId = arguments?.getInt("placeId") ?: -1 // 기본값 -1, 실제로 존재하지 않는 ID로 설정
         val roomType = arguments?.getString("placeType") ?: "CLASSROOM" // 기본값 설정
 
+        val textView = binding.searchStartingPointBar
+        val originalTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_regular) }
+        val changedTypeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL)
+
+        textView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // 텍스트가 변경되기 전에 실행될 코드
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()) {
+                    // 텍스트가 null이거나 빈 문자열인 경우 폰트 변경
+                    textView.typeface = changedTypeface
+                } else {
+                    // 텍스트가 null이 아닌 경우 원래 폰트로 복원
+                    textView.typeface = originalTypeface
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {
+                // 텍스트가 변경된 후에 실행될 코드
+            }
+        })
 
         if (isStartingPointAssigned) {
             startingPointHint = buildingName
@@ -128,6 +157,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         binding.switchButton.setOnClickListener {
             switchHints()
+            getRoutes()
         }
 
         startingPointHint?.let {
@@ -166,6 +196,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         } else {
             binding.searchArrivalPointBar.text = arrivalPointHint
         }
+
     }
 
     private fun navigateToGetDirectionsSearchBuildingFragment(isStartingPoint: Boolean) {
@@ -194,6 +225,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
                 if (routeResponse.path != null) {
+                    binding.directionErrorContainer.visibility = View.GONE
                     fetchedRouteResponse = routeResponse
                     Log.e("", "notnull")
                     binding.getDirectionsMapLayout.visibility = View.VISIBLE
@@ -211,7 +243,14 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                         pendingRouteResponse = routeResponse
                     }
                 }
-                else Log.e("GetDirectionsFragment","Path is null")
+
+                else {
+                    binding.directionErrorContainer.visibility = View.VISIBLE
+                    binding.includedErrorLayout.errorBackButton.setOnClickListener{
+                        requireActivity().supportFragmentManager.popBackStack("HomeFragment", 0)
+                    }
+                    Log.e("GetDirectionsFragment","Path is null")
+                }
             }
             else Log.e("GetDirectionsFragment","RouteResponse is null")
         }
@@ -410,6 +449,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     }
 
 
+
     fun startRouteNavigation(routeResponse: RouteResponse) {
         currentRouteIndex = 0
         pendingRouteResponse = routeResponse
@@ -435,6 +475,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         Log.e("fffffffffffff","innermapabcedfreset")
         getRoutes()
     }
+
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map
