@@ -193,24 +193,27 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
-                fetchedRouteResponse = routeResponse
-                Log.e("","notnull")
-                binding.getDirectionsMapLayout.visibility = View.VISIBLE
+                if (routeResponse.path != null) {
+                    fetchedRouteResponse = routeResponse
+                    Log.e("", "notnull")
+                    binding.getDirectionsMapLayout.visibility = View.VISIBLE
 
-                binding.getDirectionsGuideLayout.visibility = View.GONE
-                binding.getDirectionsSelectDirectionLayout.visibility = View.VISIBLE
+                    binding.getDirectionsGuideLayout.visibility = View.GONE
+                    binding.getDirectionsSelectDirectionLayout.visibility = View.VISIBLE
 
-                binding.toDetailRouteButton.setOnClickListener {
-                    startRouteNavigation(routeResponse)
+                    binding.toDetailRouteButton.setOnClickListener {
+                        startRouteNavigation(routeResponse)
+                    }
+                    if (naverMap != null) {
+                        drawRoute(routeResponse)
+                        displayDuration(routeResponse.duration)
+                    } else {
+                        pendingRouteResponse = routeResponse
+                    }
                 }
-                if (naverMap != null) {
-                    drawRoute(routeResponse)
-                    displayDuration(routeResponse.duration)
-                } else {
-                    pendingRouteResponse = routeResponse
-                }
+                else Log.e("GetDirectionsFragment","Path is null")
             }
-            else Log.e("","eeeee")
+            else Log.e("GetDirectionsFragment","RouteResponse is null")
         }
     }
 
