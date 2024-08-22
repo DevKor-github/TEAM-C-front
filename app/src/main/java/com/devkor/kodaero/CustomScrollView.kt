@@ -46,9 +46,8 @@ class CustomScrollView @JvmOverloads constructor(
         }
     }
 
-    private var previousState: ScrollState? = null
-
     private fun checkIfReachedEnd(scrollY: Int) {
+        var previousState: ScrollState? = null
         val scrollViewHeight = height
         val contentHeight = getChildAt(0).height
 
@@ -138,6 +137,9 @@ class CustomScrollView @JvmOverloads constructor(
                     //onFloorSelectedListener?.onFloorSelected(floor)
                 }
             }
+
+            // 스크롤 위치와 레이아웃 스타일 변경 후 함수 호출
+            checkIfReachedEnd(scrollY = scrollY)
         }
 
         initBlurEffect(maxVisibleItems, sumFloorItems)
