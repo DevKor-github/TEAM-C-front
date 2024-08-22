@@ -300,9 +300,9 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             val path = PathOverlay().apply {
                 this.coords = coords
                 this.color = ContextCompat.getColor(requireContext(), R.color.red)
-                this.width = 20
-                this.outlineWidth = 5
-                this.outlineColor = ContextCompat.getColor(requireContext(), R.color.red)
+                this.width = 15
+                this.outlineWidth = 2
+                this.outlineColor = ContextCompat.getColor(requireContext(), R.color.neon_red)
                 this.map = naverMap
             }
             pathOverlays.add(path) // PathOverlay 리스트에 추가
