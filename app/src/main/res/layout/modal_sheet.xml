@@ -97,6 +97,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
+                    android:id="@+id/modal_sheet_operating_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -122,6 +123,7 @@
                         android:fontFamily="@font/pretendard_regular"/>
 
                     <TextView
+                        android:id="@+id/modal_sheet_deadline_cont"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
