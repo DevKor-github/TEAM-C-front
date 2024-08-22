@@ -1,14 +1,16 @@
 package com.devkor.kodaero
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
-
 class SearchListAdapter(
     private var buildingList: List<BuildingSearchItem>,
-    private val itemClick: (BuildingSearchItem) -> Unit  // 클릭 리스너를 위한 함수 타입 매개변수 추가
+    private val itemClick: (BuildingSearchItem) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -25,12 +27,12 @@ class SearchListAdapter(
             TYPE_BUILDING -> LayoutInflater.from(parent.context).inflate(R.layout.search_list_building, parent, false)
             else -> LayoutInflater.from(parent.context).inflate(R.layout.search_list_room, parent, false)
         }
-        return ViewHolder(view)
+        return ViewHolder(view, parent.context)  // context를 ViewHolder로 전달
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val building = modifiedList[position]
-        holder.itemView.setOnClickListener { itemClick(building) }  // 클릭 리스너 설정
+        holder.itemView.setOnClickListener { itemClick(building) }
 
         when (holder) {
             is ViewHolder -> holder.bind(building)
@@ -50,13 +52,35 @@ class SearchListAdapter(
         }
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
         private val buildingNameTextView: TextView = itemView.findViewById(R.id.building_name)
         private val buildingAddressTextView: TextView = itemView.findViewById(R.id.building_address)
 
+        // ViewModelProvider를 사용해 ViewModel 가져오기
+        private val viewModel: FetchDataViewModel = ViewModelProvider(
+            context as ViewModelStoreOwner
+        ).get(FetchDataViewModel::class.java)
+
         fun bind(building: BuildingSearchItem) {
             buildingNameTextView.text = building.name
-            buildingAddressTextView.text = building.address
+
+            if (building.placeType == "CLASSROOM") {
+                // ViewModel을 사용해 API 호출
+                viewModel.fetchPlaceInfo(building.id, "CLASSROOM") { placeInfo ->
+                    placeInfo?.let {
+                        if (it.detail != "."){
+                            buildingAddressTextView.text = it.detail
+                        }
+                        else{
+                            buildingAddressTextView.text = null
+                        }
+                    } ?: run {
+                        buildingAddressTextView.text = null
+                    }
+                }
+            } else {
+                buildingAddressTextView.text = building.address
+            }
         }
     }
 
@@ -67,12 +91,10 @@ class SearchListAdapter(
         notifyDataSetChanged()
     }
 
-    // BUILDING 타입의 아이템을 수정하여 리스트에 추가하는 메서드
-
     private fun getModifiedList(): List<BuildingSearchItem> {
         val modifiedList = mutableListOf<BuildingSearchItem>()
         for (building in buildingList) {
-            if (building.placeType == "BUILDING" && false) { // 태그 미사용
+            if (building.placeType == "BUILDING" && false) {
                 val modifiedBuilding = building.copy(name = "${building.name} ${Constants.TAG_SUFFIX}", placeType = "TAG")
                 modifiedList.add(modifiedBuilding)
             }

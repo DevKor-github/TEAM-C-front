@@ -5,12 +5,15 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import kotlin.math.min
 
 class CustomScrollView @JvmOverloads constructor(
     context: Context,
@@ -90,6 +93,8 @@ class CustomScrollView @JvmOverloads constructor(
         container.removeAllViews()
         if (minNumber >= 0 && maxNumber <= 1) {
             this.isVisible = false
+            // 부모 뷰의 visibility를 GONE으로 설정하여 보이지 않게 함
+            (parent as? View)?.visibility = View.GONE
             return
         } else {
             this.isVisible = true
@@ -139,7 +144,7 @@ class CustomScrollView @JvmOverloads constructor(
             }
 
             // 스크롤 위치와 레이아웃 스타일 변경 후 함수 호출
-            checkIfReachedEnd(scrollY = scrollY)
+            if((maxNumber - minNumber) > maxVisibleItems) checkIfReachedEnd(scrollY = scrollY)
         }
 
         initBlurEffect(maxVisibleItems, sumFloorItems)
