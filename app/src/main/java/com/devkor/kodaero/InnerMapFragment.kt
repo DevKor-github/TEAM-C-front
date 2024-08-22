@@ -449,7 +449,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     fun replaceInnermap(groupIdToChange: String? = null) {
-        if(initInnermap() != null){
+        if (initInnermap() != null){
             // `initInnermap` 함수에서 수정된 SVG 콘텐츠를 가져옴
             val modifiedSvgContent = initInnermap()
             var svg = SVG.getFromString(modifiedSvgContent)
@@ -641,10 +641,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     private fun updateSvgFont(svgContent: String, fontFamily: String = "Pretendard", fillColor: String = "#424242"): String {
-        val style = """style="font-family:'$fontFamily'; fill:$fillColor;""""
 
+
+        // opacity 속성 제거 (다양한 표현 방식을 고려)
+        val opaqueSvgContent = svgContent.replace(Regex("""\bopacity\s*[:=]\s*['"]?\s*\d*\.?\d+\s*['"]?;?""", RegexOption.IGNORE_CASE), "")
+
+        val style = """style="font-family:'$fontFamily'; fill:$fillColor;""""
         // <text> 및 <tspan> 태그에 스타일 속성 추가
-        val updatedContent = svgContent.replace(Regex("""<(text|tspan)([^/>]*)(/?)>""")) { matchResult ->
+        val updatedContent = opaqueSvgContent.replace(Regex("""<(text|tspan)([^/>]*)(/?)>""")) { matchResult ->
             val tag = matchResult.groupValues[1]
             val attributes = matchResult.groupValues[2]
             val closingSlash = matchResult.groupValues[3] // Optional closing slash
