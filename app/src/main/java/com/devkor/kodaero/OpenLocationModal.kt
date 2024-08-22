@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import com.naver.maps.geometry.LatLng
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
@@ -35,25 +36,15 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
         // 카메라 위치 이동 및 모달 열기 작업
         homeFragment.viewLifecycleOwner.lifecycleScope.launch {
             homeFragment.moveCameraToPosition(LatLng(place.latitude ?: 38.0, place.longitude ?: 127.0))
-            homeFragment.updateSelectedBuilding(place.id)
             homeFragment.view?.post {
                 val includedLayout = homeFragment.view?.findViewById<View>(R.id.includedLayout)
                 if (includedLayout == null) {
                     Log.e("openLocationModal", "Included layout not found in HomeFragment layout")
                     return@post
                 }
-
-                val nameTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_name)
-                val addressTextView = includedLayout.findViewById<TextView>(R.id.modal_sheet_building_address)
-
-                if (nameTextView == null || addressTextView == null) {
-                    Log.e("openLocationModal", "One of the TextViews not found")
-                    return@post
-                }
-
-                nameTextView.text = place.name
-                addressTextView.text = place.address
             }
+            delay(100)
+            homeFragment.openBuildingModal(place.id)
         }
     } catch (e: Exception) {
         Log.e("openLocationModal", "Error in openLocationModal", e)

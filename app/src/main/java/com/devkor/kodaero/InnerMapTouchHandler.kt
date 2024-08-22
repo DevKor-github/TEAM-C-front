@@ -4,14 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.devkor.kodaero.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.FragmentActivity
@@ -148,6 +145,7 @@ class InnerMapTouchHandler(
         }
         return true
     }
+
     fun openInnermapModal(maskIndex: Int) {
         Log.d("InnerMapTouchHandler", "Matching Room: $fileName")
 
@@ -157,25 +155,34 @@ class InnerMapTouchHandler(
         val standardBottomSheet = innerMapBinding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
+        val roomDetail = standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_address)
         // 첫 번째 API 호출: MaskInfo를 가져옴
         fetchMaskInfo(buildingId, floor, maskIndex, "CLASSROOM") { roomId ->
             if (roomId != null) {
                 // 두 번째 API 호출: Place 정보 가져오기
-                fetchPlaceInfo(roomId) { placeName ->
-                    if (placeName != null && maskIndex != 0) {
-                        val modifiedRoomName = "$placeName"
-
-                        standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_name).text = modifiedRoomName
+                fetchPlaceInfo(roomId) { placeInfo ->
+                    if (placeInfo != null && placeInfo.maskIndex != 0) {
+                        val fetchedRoomName = placeInfo.name
+                        standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_name).text = fetchedRoomName
+                        if(placeInfo.detail != ".") {
+                            roomDetail.text = placeInfo.detail
+                            roomDetail.visibility = View.VISIBLE
+                        }
+                        else{
+                            roomDetail.text = null
+                            roomDetail.visibility = View.GONE
+                        }
+                        standardBottomSheet.findViewById<View>(R.id.modal_sheet_operating_container).visibility = View.GONE
                         // standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
                         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
                         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                         standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(true, modifiedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(true, fetchedRoomName, roomId, "CLASSROOM")
                         }
 
                         standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(false, modifiedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(false, fetchedRoomName, roomId, "CLASSROOM")
                         }
                     } else {
                         Log.e("InnerMapTouchHandler", "Failed to fetch place name")
@@ -212,18 +219,18 @@ class InnerMapTouchHandler(
     }
 
     // 두 번째 API 호출: Place 정보 가져오기
-    private fun fetchPlaceInfo(roomId: Int, callback: (String?) -> Unit) {
+    private fun fetchPlaceInfo(roomId: Int, callback: (PlaceInfoResponse?) -> Unit) {
         RetrofitClient.instance.getPlaceInfo(roomId, "CLASSROOM").enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
             override fun onResponse(
                 call: Call<ApiResponse<PlaceInfoResponse>>,
                 response: Response<ApiResponse<PlaceInfoResponse>>
             ) {
                 if (response.isSuccessful && response.body()?.statusCode == 0) {
-                    val placeName = response.body()?.data?.name
-                    Log.d("InnerMapTouchHandler", "Fetched Place Name: $placeName")
-                    callback(placeName)
+                    val placeInfo = response.body()?.data
+                    Log.d("InnerMapTouchHandler", "Fetched Place Info: $placeInfo")
+                    callback(placeInfo)
                 } else {
-                    Log.e("InnerMapTouchHandler", "Failed to fetch place name: ${response.errorBody()?.string()}")
+                    Log.e("InnerMapTouchHandler", "Failed to fetch place info: ${response.errorBody()?.string()}")
                     callback(null)
                 }
             }
@@ -234,6 +241,7 @@ class InnerMapTouchHandler(
             }
         })
     }
+
 
 
 
@@ -255,6 +263,17 @@ class InnerMapTouchHandler(
             ?.commit()
     }
 
+    private fun getBuildingInfo(buildingId: Int): BuildingItem? {
+        // BuildingCache에서 빌딩 정보를 가져옴
+        val building = BuildingCache.get(buildingId)
+
+        if (building != null) {
+            // 캐시에 빌딩 정보가 있는 경우 해당 정보를 반환
+            return building
+        } else {
+            return null // 또는 예외 처리
+        }
+    }
 
 
 }
