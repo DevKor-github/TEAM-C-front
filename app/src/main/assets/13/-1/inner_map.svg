@@ -75,10 +75,6 @@
         font-size: 18px;
       }
 
-      .cls-6 {
-        opacity: .46;
-      }
-
       .cls-12 {
         font-size: 12px;
       }
