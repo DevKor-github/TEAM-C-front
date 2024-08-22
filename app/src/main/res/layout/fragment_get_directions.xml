@@ -92,7 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/get_directions_bar_layout"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
         <include
             android:id="@+id/included_error_layout"
             layout="@layout/direction_error"/>

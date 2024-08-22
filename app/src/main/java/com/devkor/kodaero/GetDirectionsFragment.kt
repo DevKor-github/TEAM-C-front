@@ -1,16 +1,11 @@
 package com.devkor.kodaero
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -38,6 +33,10 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private var arrivalPointPlaceType: String? = null
     private var startingPointId: Int = 0
     private var arrivalPointId: Int = 0
+    private var startingPointLat: Double? = null
+    private var startingPointLng: Double? = null
+    private var arrivalPointLat: Double? = null
+    private var arrivalPointLng: Double? = null
 
     private lateinit var mapView: MapView
     private var naverMap: NaverMap? = null
@@ -49,9 +48,6 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     var currentRouteIndex = 0
 
     private var fetchedRouteResponse: RouteResponse? = null
-
-    private val originalTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_regular) }
-    private val changedTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_semibold) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,44 +64,19 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         val roomId = arguments?.getInt("placeId") ?: -1 // 기본값 -1, 실제로 존재하지 않는 ID로 설정
         val roomType = arguments?.getString("placeType") ?: "CLASSROOM" // 기본값 설정
 
-        val textView = binding.searchStartingPointBar
-        val originalTypeface = context?.let { ResourcesCompat.getFont(it, R.font.pretendard_regular) }
-        val changedTypeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL)
-
-        textView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // 텍스트가 변경되기 전에 실행될 코드
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.isNullOrEmpty()) {
-                    // 텍스트가 null이거나 빈 문자열인 경우 폰트 변경
-                    textView.typeface = changedTypeface
-                } else {
-                    // 텍스트가 null이 아닌 경우 원래 폰트로 복원
-                    textView.typeface = originalTypeface
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {
-                // 텍스트가 변경된 후에 실행될 코드
-            }
-        })
 
         if (isStartingPointAssigned) {
             startingPointHint = buildingName
-            if (buildingName != null) {
-                binding.searchStartingPointBar.text = buildingName
-                startingPointId = roomId
-                startingPointPlaceType = roomType
-                Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
-            }
+            binding.searchStartingPointBar.text = buildingName
+            startingPointId = roomId
+            startingPointPlaceType = roomType
+            Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
         } else {
             arrivalPointHint = buildingName
-            if (buildingName != null) {
-                binding.searchArrivalPointBar.text = buildingName
-                arrivalPointId = roomId
-                arrivalPointPlaceType = roomType
-                Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
-            }
+            binding.searchArrivalPointBar.text = buildingName
+            arrivalPointId = roomId
+            arrivalPointPlaceType = roomType
+            Log.e("GetDirectionFragment","Item is Filled $startingPointId $arrivalPointId")
         }
 
         return binding.root
@@ -114,25 +85,39 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFragmentResultListener("requestKey") { key, bundle ->
+        setFragmentResultListener("requestKey") { _, bundle ->
             val result = bundle.getString("buildingName")
             val isStartingPoint = bundle.getBoolean("isStartingPoint")
             val placeType = bundle.getString("placeType")
             val id = bundle.getInt("id")
+            val lat = bundle.getDouble("lat")
+            val lng = bundle.getDouble("lng")
 
             if (isStartingPoint) {
                 startingPointHint = result
                 startingPointPlaceType = placeType
                 startingPointId = id
+                startingPointLat = lat
+                startingPointLng = lng
                 if (result != null) {
                     binding.searchStartingPointBar.text = result
+                }
+                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD"){
+                    arrivalPointHint = null
+                    binding.searchArrivalPointBar.text = null
                 }
             } else {
                 arrivalPointHint = result
                 arrivalPointPlaceType = placeType
                 arrivalPointId = id
+                arrivalPointLat = lat
+                arrivalPointLng = lng
                 if (result != null) {
                     binding.searchArrivalPointBar.text = result
+                }
+                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD"){
+                    startingPointHint = null
+                    binding.searchStartingPointBar.text = null
                 }
             }
 
@@ -211,12 +196,16 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getRoutes() {
-        if (startingPointPlaceType != null && startingPointId != null && arrivalPointPlaceType != null && arrivalPointId != null) {
+        if (startingPointPlaceType != null && arrivalPointPlaceType != null) {
             viewModel.getRoutes(
                 startType = startingPointPlaceType!!,
-                startId = startingPointId!!,
+                startId = startingPointId,
+                startLat = startingPointLat,
+                startLong = startingPointLng,
                 endType = arrivalPointPlaceType!!,
-                endId = arrivalPointId!!
+                endId = arrivalPointId,
+                endLat = arrivalPointLat,
+                endLong = arrivalPointLng
             )
         }
 
@@ -224,32 +213,22 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {
-                if (routeResponse.path != null) {
-                    binding.directionErrorContainer.visibility = View.GONE
-                    fetchedRouteResponse = routeResponse
-                    Log.e("", "notnull")
-                    binding.getDirectionsMapLayout.visibility = View.VISIBLE
+                binding.directionErrorContainer.visibility = View.GONE
+                fetchedRouteResponse = routeResponse
+                Log.e("", "notnull")
+                binding.getDirectionsMapLayout.visibility = View.VISIBLE
 
-                    binding.getDirectionsGuideLayout.visibility = View.GONE
-                    binding.getDirectionsSelectDirectionLayout.visibility = View.VISIBLE
+                binding.getDirectionsGuideLayout.visibility = View.GONE
+                binding.getDirectionsSelectDirectionLayout.visibility = View.VISIBLE
 
-                    binding.toDetailRouteButton.setOnClickListener {
-                        startRouteNavigation(routeResponse)
-                    }
-                    if (naverMap != null) {
-                        drawRoute(routeResponse)
-                        displayDuration(routeResponse.duration)
-                    } else {
-                        pendingRouteResponse = routeResponse
-                    }
+                binding.toDetailRouteButton.setOnClickListener {
+                    startRouteNavigation(routeResponse)
                 }
-
-                else {
-                    binding.directionErrorContainer.visibility = View.VISIBLE
-                    binding.includedErrorLayout.errorBackButton.setOnClickListener{
-                        requireActivity().supportFragmentManager.popBackStack("HomeFragment", 0)
-                    }
-                    Log.e("GetDirectionsFragment","Path is null")
+                if (naverMap != null) {
+                    drawRoute(routeResponse)
+                    displayDuration(routeResponse.duration)
+                } else {
+                    pendingRouteResponse = routeResponse
                 }
             }
             else Log.e("GetDirectionsFragment","RouteResponse is null")
@@ -318,14 +297,14 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    fun showCurrentRouteStep(routePath: RoutePath, routeResponse: RouteResponse) {
+    private fun showCurrentRouteStep(routePath: RoutePath, routeResponse: RouteResponse) {
 
         if (routePath.inOut) {
             // Handle indoor navigation
             val buildingId = routePath.buildingId
             val floor = routePath.floor
 
-            navigateToInnerMapFragment(buildingId, floor, routePath.info, routeResponse, true)
+            navigateToInnerMapFragment(buildingId, floor, routePath.info, routeResponse)
 
         } else {
             val latitude = routePath.route.firstOrNull()?.get(0) ?: return
@@ -373,14 +352,18 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
         if (currentRouteIndex < routeResponse.path.size) {
             val nextRoutePath = routeResponse.path[currentRouteIndex]
-            nextRoutePath?.let { showCurrentRouteStep(it, routeResponse) }
-            Log.e("eeeeeeeee","")
+            showCurrentRouteStep(nextRoutePath, routeResponse)
         } else {
             // Handle end of route or do nothing
         }
     }
 
-    private fun navigateToInnerMapFragment(buildingId: Int?, floor: Int?, info: String, routeResponse: RouteResponse, addBackStack: Boolean) {
+    private fun navigateToInnerMapFragment(
+        buildingId: Int?,
+        floor: Int?,
+        info: String,
+        routeResponse: RouteResponse
+    ) {
         if (buildingId == null || floor == null) {
             Log.e("navigateToInnerMapFragment", "Building ID or Floor is null: buildingId=$buildingId, floor=$floor")
             return
@@ -424,8 +407,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                                     buildingId = nextRoutePath.buildingId,
                                     floor = nextRoutePath.floor,
                                     info = nextRoutePath.info,
-                                    routeResponse = routeResponse,
-                                    addBackStack = false
+                                    routeResponse = routeResponse
                                 )
                             }
                             else{
@@ -450,7 +432,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
 
 
-    fun startRouteNavigation(routeResponse: RouteResponse) {
+    private fun startRouteNavigation(routeResponse: RouteResponse) {
         currentRouteIndex = 0
         pendingRouteResponse = routeResponse
 
@@ -472,7 +454,6 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     fun resetRouteStep(){
         currentRouteIndex = 0
-        Log.e("fffffffffffff","innermapabcedfreset")
         getRoutes()
     }
 
