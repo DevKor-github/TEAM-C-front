@@ -25,7 +25,9 @@ interface ApiService {
     ): Call<ApiResponse<RoomListResponse>>
 
     @GET("search/buildings")
-    fun getAllBuildings(): Call<ApiResponse<BuildingListResponse>>
+    fun getAllBuildings(
+        @Query("type") type: String
+    ): Call<ApiResponse<BuildingListResponse>>
 
     @GET("search/buildings/{buildingId}")
     fun getBuildingDetail(
@@ -35,7 +37,7 @@ interface ApiService {
     @GET("search/facilities")
     fun searchFacilities(
         @Query("type") type: String
-    ): Call<ApiResponse<BuildingListResponse>>
+    ): Call<ApiResponse<IndividualFacilityListResponse>>
 
     @GET("search/buildings/{buildingId}/facilities")
     fun getFacilities(
@@ -77,7 +79,6 @@ data class BuildingListResponse(
 data class BuildingSearchResponse(
     val list: List<BuildingSearchItem>
 )
-
 
 data class BuildingItem(
     val buildingId: Int,
@@ -155,6 +156,10 @@ data class FacilityListResponse(
     val facilities: Map<String, List<FacilityItem>>
 )
 
+data class IndividualFacilityListResponse(
+    val facilities: List<FacilityItem>
+)
+
 data class FacilityItem(
     val facilityId: Int,
     val name: String,
@@ -162,9 +167,13 @@ data class FacilityItem(
     val operatingTime: String,
     val longitude: Double,
     val latitude: Double,
+    val detail: String,
+    val buildingId: Int,
+    val floor: Int,
+    val operating: Boolean,
     val xcoord: Int,
     val ycoord: Int,
-    val operating: Boolean
+    val facilityType: String
 )
 
 data class RouteResponse(

@@ -193,8 +193,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val prefix = "고려대학교 서울캠퍼스"
 
-
-
         val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
 
         modalDepartButton.setOnClickListener {
@@ -213,7 +211,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         observeViewModel()
-        viewModel.fetchBuildingList()
+        viewModel.fetchBuildingList("")
         // API 제공 될 때 까지 임시로 제거
 
     }
@@ -295,11 +293,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun navigateToPinSearchFragment(keyword: String) {
-        val pinSearchFragment = PinSearchFragment.newInstance(keyword)
+        val currentCameraPosition = getCurrentCameraPosition()
+        val currentZoomLevel = getCurrentZoomLevel()
+
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword, currentCameraPosition, currentZoomLevel)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container, pinSearchFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun getCurrentCameraPosition(): LatLng {
+        return naverMap.cameraPosition.target
+    }
+
+    fun getCurrentZoomLevel(): Double {
+        return naverMap.cameraPosition.zoom
     }
 
     override fun onDestroyView() {
