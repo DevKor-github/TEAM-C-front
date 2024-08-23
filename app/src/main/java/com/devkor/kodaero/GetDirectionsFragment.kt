@@ -59,6 +59,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
+
         val isStartingPointAssigned = arguments?.getBoolean("isStartingPoint") ?: true
         val buildingName = arguments?.getString("buildingName") ?: "" // 기본값을 설정
         val roomId = arguments?.getInt("placeId") ?: -1 // 기본값 -1, 실제로 존재하지 않는 ID로 설정
@@ -460,6 +461,10 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map
+
+        naverMap!!.uiSettings.isLocationButtonEnabled = false
+        naverMap!!.uiSettings.isZoomControlEnabled = false
+
         pendingRouteResponse?.let {
             drawRoute(it)
             displayDuration(it.duration)
