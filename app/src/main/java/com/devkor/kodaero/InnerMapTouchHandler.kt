@@ -4,11 +4,14 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.devkor.kodaero.databinding.InnerMapContainerBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.FragmentActivity
@@ -28,6 +31,7 @@ class InnerMapTouchHandler(
     private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
+    private val isNodeMaskBuild: Boolean = true
     private var fileName: String = "" // obsolete
     private var maskIndex: Int = 0
 
@@ -90,52 +94,59 @@ class InnerMapTouchHandler(
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
 
                     // 마스크 노드 찍기용
-                    /*if(maskIndex != 0){
-                        val newMessage = "MaskIndex: $maskIndex"
+                    if(isNodeMaskBuild) {
+                        if (maskIndex != 0) {
+                            val newMessage = "MaskIndex: $maskIndex"
 
-                        // 이전 메시지와 동일하다면 새로 표시하지 않고 기존 스낵바를 유지
-                        if (newMessage == lastMessage && currentSnackbar?.isShown == true) {
-                            return true
-                        }
-
-                        // 이전에 표시된 스낵바가 있으면 즉시 중단
-                        currentSnackbar?.dismiss()
-
-                        // 새로운 스낵바 메시지를 생성
-                        currentSnackbar = Snackbar.make(v ?: return@let, newMessage, Snackbar.LENGTH_INDEFINITE)
-
-                        // 스낵바의 애니메이션을 최소화
-                        currentSnackbar?.setAnimationMode(Snackbar.ANIMATION_MODE_FADE) // 페이드 애니메이션 사용 (빠르게 표시)
-
-                        // 스낵바의 텍스트 크기 및 속성 설정
-                        val snackbarView = currentSnackbar?.view
-                        val snackbarTextView = snackbarView?.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-
-                        snackbarTextView?.let {
-                            it.textSize = 24f  // 텍스트 크기를 크게 설정
-                            it.maxLines = 3  // 필요한 경우 여러 줄을 허용
-                        }
-
-                        snackbarView?.let {
-                            val params = it.layoutParams as ViewGroup.MarginLayoutParams
-                            params.setMargins(0, 0, 0, 0)  // 마진 최소화
-
-                            // 스낵바를 화면의 위쪽에 표시하도록 설정
-                            if (params is CoordinatorLayout.LayoutParams) {
-                                params.gravity = Gravity.TOP
-                            } else if (params is ViewGroup.MarginLayoutParams) {
-                                params.topMargin = 0  // 스낵바를 상단에 붙임
+                            // 이전 메시지와 동일하다면 새로 표시하지 않고 기존 스낵바를 유지
+                            if (newMessage == lastMessage && currentSnackbar?.isShown == true) {
+                                return true
                             }
-                            it.layoutParams = params
+
+                            // 이전에 표시된 스낵바가 있으면 즉시 중단
+                            currentSnackbar?.dismiss()
+
+                            // 새로운 스낵바 메시지를 생성
+                            currentSnackbar = Snackbar.make(
+                                v ?: return@let,
+                                newMessage,
+                                Snackbar.LENGTH_INDEFINITE
+                            )
+
+                            // 스낵바의 애니메이션을 최소화
+                            currentSnackbar?.setAnimationMode(Snackbar.ANIMATION_MODE_FADE) // 페이드 애니메이션 사용 (빠르게 표시)
+
+                            // 스낵바의 텍스트 크기 및 속성 설정
+                            val snackbarView = currentSnackbar?.view
+                            val snackbarTextView =
+                                snackbarView?.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+
+                            snackbarTextView?.let {
+                                it.textSize = 24f  // 텍스트 크기를 크게 설정
+                                it.maxLines = 3  // 필요한 경우 여러 줄을 허용
+                            }
+
+                            snackbarView?.let {
+                                val params = it.layoutParams as ViewGroup.MarginLayoutParams
+                                params.setMargins(0, 0, 0, 0)  // 마진 최소화
+
+                                // 스낵바를 화면의 위쪽에 표시하도록 설정
+                                if (params is CoordinatorLayout.LayoutParams) {
+                                    params.gravity = Gravity.TOP
+                                } else if (params is ViewGroup.MarginLayoutParams) {
+                                    params.topMargin = 0  // 스낵바를 상단에 붙임
+                                }
+                                it.layoutParams = params
+                            }
+
+                            // 스낵바를 즉시 표시 (자동으로 사라지지 않음)
+                            currentSnackbar?.show()
+
+                            // 마지막 메시지 업데이트
+                            lastMessage = newMessage
+
                         }
-
-                        // 스낵바를 즉시 표시 (자동으로 사라지지 않음)
-                        currentSnackbar?.show()
-
-                        // 마지막 메시지 업데이트
-                        lastMessage = newMessage
-
-                    }*/
+                    }
 
                     openInnermapModal(maskIndex)
                     replaceInnermapCallback(fileName)
