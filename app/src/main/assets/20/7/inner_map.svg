@@ -153,8 +153,6 @@
   <g id="Layer_214">
     <rect class="cls-3" x="934.5" y="441.91" width="56" height="130.09"/>
     <text class="cls-7" transform="translate(942.43 492.14)"><tspan class="cls-5"><tspan x="0" y="0">704A</tspan></tspan><tspan class="cls-4"><tspan x="-3.67" y="16.8">복원력을 가진</tspan></tspan><tspan class="cls-4"><tspan x="3.91" y="26.4">자율 운영</tspan></tspan><tspan class="cls-4"><tspan x="8.69" y="36">전력망</tspan></tspan><tspan class="cls-4"><tspan x="12.48" y="45.6">센터</tspan></tspan></text>
-    <rect class="cls-3" x="871.5" y="441.91" width="63" height="130.09"/>
-    <text class="cls-7" transform="translate(883.15 492.14)"><tspan class="cls-5"><tspan x="0" y="0">704B</tspan></tspan><tspan class="cls-4"><tspan x="-7.81" y="16.8">자동차융합학과,</tspan></tspan><tspan class="cls-4"><tspan x="-6.7" y="26.4">스마트모빌리티</tspan></tspan><tspan class="cls-4"><tspan x="12.26" y="36">학부</tspan></tspan><tspan class="cls-4"><tspan x="8.47" y="45.6">행정실</tspan></tspan></text>
   </g>
   <g id="Layer_215">
     <rect class="cls-3" x="990.5" y="441.91" width="63" height="130.09"/>
@@ -241,5 +239,9 @@
   <g id="Layer_202">
     <rect class="cls-3" x="1291.5" y="442.32" width="60" height="129.68"/>
     <text class="cls-6" transform="translate(1308.47 502.24)"><tspan x="0" y="0">701</tspan><tspan x="-6.88" y="16.8">연구실</tspan></text>
+  </g>
+  <g id="Layer_704B">
+    <rect class="cls-3" x="871.5" y="441.91" width="63" height="130.09"/>
+    <text class="cls-7" transform="translate(883.15 492.14)"><tspan class="cls-5"><tspan x="0" y="0">704B</tspan></tspan><tspan class="cls-4"><tspan x="-7.81" y="16.8">자동차융합학과,</tspan></tspan><tspan class="cls-4"><tspan x="-6.7" y="26.4">스마트모빌리티</tspan></tspan><tspan class="cls-4"><tspan x="12.26" y="36">학부</tspan></tspan><tspan class="cls-4"><tspan x="8.47" y="45.6">행정실</tspan></tspan></text>
   </g>
 </svg>
