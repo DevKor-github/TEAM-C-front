@@ -412,7 +412,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         naverMap.uiSettings.isLocationButtonEnabled = true
 
         naverMap.uiSettings.isLocationButtonEnabled = false
-        naverMap.uiSettings.isZoomControlEnabled = false
 
         naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
