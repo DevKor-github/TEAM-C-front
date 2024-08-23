@@ -135,8 +135,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
-        naverMap.uiSettings.isLocationButtonEnabled = true
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        // naverMap.uiSettings.isLocationButtonEnabled = true
+        // naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.uiSettings.isZoomControlEnabled = false
 
         naverMap.addOnCameraChangeListener { reason, animated ->
             val currentZoom = naverMap.cameraPosition.zoom
