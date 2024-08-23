@@ -409,7 +409,9 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
-        naverMap.uiSettings.isLocationButtonEnabled = true
+        naverMap.uiSettings.isLocationButtonEnabled = false
+        
+        naverMap.uiSettings.isZoomControlEnabled = false
 
         naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
