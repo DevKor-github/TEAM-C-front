@@ -13,7 +13,7 @@
       }
 
       .cls-2 {
-        fill: none;
+        fill: #fcf2f2;
       }
 
       .cls-2, .cls-3 {

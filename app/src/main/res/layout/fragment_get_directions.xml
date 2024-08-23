@@ -32,7 +32,7 @@
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.devkor.kodaero.CustomButtonWithHint
                 android:id="@+id/search_starting_point_bar"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
@@ -47,7 +47,8 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:background="@drawable/rounded_rec_white"
                 android:textColorHint="@color/gray"
-                app:itemActiveIndicatorStyle="@android:color/transparent"/>
+                app:itemActiveIndicatorStyle="@android:color/transparent"
+                android:elevation="2dp"/>
         </FrameLayout>
 
         <FrameLayout
@@ -64,7 +65,7 @@
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.devkor.kodaero.CustomButtonWithHint
                 android:id="@+id/search_arrival_point_bar"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
@@ -79,10 +80,23 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:background="@drawable/rounded_rec_white"
                 android:textColorHint="@color/gray"
-                app:itemActiveIndicatorStyle="@android:color/transparent"/>
+                app:itemActiveIndicatorStyle="@android:color/transparent"
+                android:elevation="2dp"/>
 
         </FrameLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/direction_error_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/get_directions_bar_layout"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <include
+            android:id="@+id/included_error_layout"
+            layout="@layout/layout_error"/>
     </LinearLayout>
 
     <FrameLayout
@@ -106,7 +120,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="50dp"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:background="@drawable/rounded_rec_white"
             android:visibility="visible">
 
@@ -124,7 +138,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="루트"
+                        android:text="경로"
                         android:textSize="12dp"
                         android:textColor="@color/gray"
                         android:fontFamily="@font/pretendard_regular"/>
@@ -222,7 +236,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="50dp"
             android:layout_marginHorizontal="30dp"
-            android:elevation="4dp"
+            android:elevation="2dp"
             android:background="@drawable/rounded_rec_white"
             android:visibility="gone">
 

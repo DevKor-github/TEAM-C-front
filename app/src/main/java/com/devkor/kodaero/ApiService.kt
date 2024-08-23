@@ -85,7 +85,7 @@ data class BuildingItem(
     val imageUrl: String,
     val detail: String,
     val address: String?,
-    val operatingTime:String,
+    val operatingTime: String,
     val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,

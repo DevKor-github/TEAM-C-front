@@ -34,7 +34,7 @@
             flexbox:justifyContent="flex_start"
             flexbox:alignItems="center"/>
 
-        <EditText
+        <com.devkor.kodaero.CustomEditTextWithHint
             android:id="@+id/edit_text"
             android:layout_width="0dp"
             android:layout_height="54dp"
@@ -48,6 +48,7 @@
             android:textColor="@color/map_main"
             android:fontFamily="@font/pretendard_regular"
             android:textColorHint="@color/gray"
+            android:gravity="center_vertical"
         />
 
 
