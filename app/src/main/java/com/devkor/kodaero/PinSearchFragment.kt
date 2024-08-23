@@ -10,13 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devkor.kodaero.databinding.FragmentPinSearchBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
@@ -25,6 +26,9 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
@@ -35,7 +39,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     private lateinit var locationSource: FusedLocationSource
     private val LOCATION_PERMISSION_REQUEST_CODE = 5000
 
-    private var cameraPosition: LatLng? = null
+    private val initCameraPosition: LatLng = LatLng(37.59, 127.03)
 
     private lateinit var viewModel: FetchDataViewModel
     private lateinit var facilityType: String
@@ -47,7 +51,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     private val selectedMarkers = mutableListOf<Marker>()
     private val unselectedMarkers = mutableListOf<Marker>()
 
-    // To hold facilities for each building
     private val facilitiesMap = mutableMapOf<Int, List<FacilityItem>>()
 
     override fun onCreateView(
@@ -71,12 +74,30 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         initMapView()
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
-        viewModel.buildingList.observe(viewLifecycleOwner, { buildingList ->
-            if (buildingList.isNotEmpty()) {
-                updateMarkers(buildingList)
+
+        lifecycleScope.launch {
+            if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
+                    if (facilities.isNotEmpty()) {
+                        updateMarkers(facilities = facilities)
+                    }
+                })
+
+                withContext(Dispatchers.IO) {
+                    viewModel.searchFacilities(facilityType)
+                }
+            } else {
+                viewModel.buildingList.observe(viewLifecycleOwner, { buildingList ->
+                    if (buildingList.isNotEmpty()) {
+                        updateMarkers(buildingList = buildingList)
+                    }
+                })
+
+                withContext(Dispatchers.IO) {
+                    viewModel.fetchBuildingList(facilityType)
+                }
             }
-        })
-        viewModel.searchFacilities(facilityType)
+        }
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.pinSearchIncludedLayout.standardBottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -94,7 +115,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.peekHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250f, resources.displayMetrics).toInt()
                 } else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    // Unselect the currently selected marker when the bottom sheet is hidden
                     if (selectedMarkers.isNotEmpty()) {
                         val currentSelectedMarker = selectedMarkers.first()
                         unselectMarker(currentSelectedMarker)
@@ -103,9 +123,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // Handle on slide events if needed
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
     }
 
@@ -136,21 +154,43 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
-    private fun updateMarkers(buildingList: List<BuildingItem>) {
+    private fun updateMarkers(buildingList: List<BuildingItem>? = null, facilities: List<FacilityItem>? = null) {
+        if (!::naverMap.isInitialized) {
+            return
+        }
+
         markers.clear()
-        buildingList.forEach { building ->
+
+        buildingList?.forEach { building ->
             viewModel.getFacilities(building.buildingId, facilityType)
         }
 
-        // Observe the facilityList to update markers once data is fetched
         viewModel.facilityList.observe(viewLifecycleOwner, { facilityMap ->
             facilityMap.forEach { (buildingId, facilities) ->
-                facilitiesMap[buildingId] = facilities
-                val count = facilities.size
-                val building = buildingList.find { it.buildingId == buildingId }
-                if (building != null) {
-                    addMarker(building, count)
+                facilitiesMap[buildingId] = facilities.map {
+                    it.copy(facilityType = this@PinSearchFragment.facilityType) // Copy with facilityType
                 }
+                val count = facilities.size
+                val building = buildingList?.find { it.buildingId == buildingId }
+                if (building != null) {
+                    addMarker(LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0), building.buildingId, count.toString())
+                }
+            }
+            if (::naverMap.isInitialized) {
+                unselectAllMarkers()
+            }
+        })
+
+        viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
+            facilities.forEach { facility ->
+                facilitiesMap[facility.facilityId] = listOf(facility).map {
+                    it.copy(facilityType = this@PinSearchFragment.facilityType) // Copy with facilityType
+                }
+                addMarker(
+                    LatLng(facility.latitude, facility.longitude),
+                    facility.facilityId,
+                    facility.name
+                )
             }
             if (::naverMap.isInitialized) {
                 unselectAllMarkers()
@@ -158,19 +198,33 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         })
     }
 
-    private fun addMarker(building: BuildingItem, count: Int) {
-        val drawableName = "pin_${facilityType.lowercase()}"
-        val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
-        val marker = Marker().apply {
-            position = LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0)
-            icon = OverlayImage.fromBitmap(createDrawableWithText(drawableResId, count.toString()))
-            tag = building.buildingId
+
+    private fun addMarker(position: LatLng, id: Int, text: String) {
+        binding.root.post {
+            val marker = Marker().apply {
+                this.position = position
+                tag = id
+
+                if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                    val drawableName = "pin_${facilityType.lowercase()}"
+                    val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
+                    icon = OverlayImage.fromBitmap(createCustomDrawableWithText(drawableResId, text))
+                } else {
+                    val drawableName = "pin_${facilityType.lowercase()}"
+                    val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
+                    icon = OverlayImage.fromBitmap(createDrawableWithText(drawableResId, text))
+                }
+            }
+
+            marker.setOnClickListener {
+                onMarkerClick(marker)
+                true
+            }
+
+            unselectedMarkers.add(marker)
+            markers.add(marker)
+            marker.map = naverMap
         }
-        marker.setOnClickListener {
-            onMarkerClick(marker)
-            true
-        }
-        markers.add(marker)
     }
 
     private fun onMarkerClick(marker: Marker) {
@@ -182,11 +236,9 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             selectedMarkers.isNotEmpty() -> {
                 val currentSelectedMarker = selectedMarkers.first()
                 if (currentSelectedMarker == marker) {
-                    // Marker is reselected or the bottom sheet is collapsed
                     unselectMarker(currentSelectedMarker)
                     unselectAllMarkers()
                 } else {
-                    // Selecting a new marker, deselect the current one and select the new one
                     unselectMarker(currentSelectedMarker)
                     selectMarker(marker)
                 }
@@ -206,10 +258,17 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
         val selectedDrawableName = "pin_${facilityType.lowercase()}"
         val selectedDrawableResId = resources.getIdentifier(selectedDrawableName, "drawable", requireContext().packageName)
-        marker.icon = OverlayImage.fromBitmap(createDrawableWithText(selectedDrawableResId, (facilitiesMap[marker.tag as Int]?.size ?: "").toString()))
 
-        val buildingId = marker.tag as Int
-        val facilities = facilitiesMap[buildingId] ?: emptyList()
+        val id = marker.tag as Int
+        val facilityName = facilitiesMap[id]?.firstOrNull { it.facilityId == id }?.name ?: ""
+
+        marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+            OverlayImage.fromBitmap(createCustomDrawableWithText(selectedDrawableResId, facilityName))
+        } else {
+            OverlayImage.fromBitmap(createDrawableWithText(selectedDrawableResId, (facilitiesMap[id]?.size ?: "").toString()))
+        }
+
+        val facilities = facilitiesMap[id] ?: emptyList()
         pinSearchAdapter.submitList(facilities)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
@@ -237,7 +296,15 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
             val unselectedDrawableName = "pin_${facilityType.lowercase()}"
             val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
-            marker.icon = OverlayImage.fromBitmap(createDrawableWithText(unselectedDrawableResId, (facilitiesMap[marker.tag as Int]?.size ?: "").toString()))
+            val id = marker.tag as Int
+            val facilityName = facilitiesMap[id]?.firstOrNull { it.facilityId == id }?.name ?: ""
+
+            marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                OverlayImage.fromBitmap(createCustomDrawableWithText(unselectedDrawableResId, facilityName))
+            } else {
+                OverlayImage.fromBitmap(createDrawableWithText(unselectedDrawableResId, (facilitiesMap[id]?.size ?: "").toString()))
+            }
+
             marker.map = naverMap
         }
     }
@@ -246,20 +313,26 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         return selectedMarkers.isNotEmpty()
     }
 
-    private fun createDrawableWithText(drawableResId: Int, text: String?): Bitmap {
-        val bitmap = getDrawableAsBitmap(drawableResId)
+    private fun createDrawableWithText(drawableResId: Int, text: String?, marginTop: Int = 20): Bitmap {
+        val originalBitmap = getDrawableAsBitmap(drawableResId)
 
-        // Only add text if the marker is selected (i.e., the text is not null or empty)
-        if (text.isNullOrEmpty()) return bitmap
+        val bitmapWithMargin = Bitmap.createBitmap(
+            originalBitmap.width,
+            originalBitmap.height - marginTop,
+            Bitmap.Config.ARGB_8888
+        )
 
-        val canvas = Canvas(bitmap)
+        val canvas = Canvas(bitmapWithMargin)
+        canvas.drawBitmap(originalBitmap, 0f, 0f, null)
+
+        if (text.isNullOrEmpty()) return bitmapWithMargin
 
         val paintCircle = Paint().apply {
             color = ContextCompat.getColor(requireContext(), R.color.red)
             isAntiAlias = true
         }
         val circleRadius = 25f
-        val circleX = bitmap.width - circleRadius - 10f
+        val circleX = bitmapWithMargin.width - circleRadius - 10f
         val circleY = circleRadius + 10f
         canvas.drawCircle(circleX, circleY, circleRadius, paintCircle)
 
@@ -276,7 +349,52 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         val textY = circleY + (textBounds.height() / 2)
         canvas.drawText(text, textX, textY, paintText)
 
-        return bitmap
+        return bitmapWithMargin
+    }
+
+    private fun createCustomDrawableWithText(drawableResId: Int, text: String): Bitmap {
+        val originalBitmap = getDrawableAsBitmap(drawableResId)
+
+        val paintStroke = Paint().apply {
+            color = ContextCompat.getColor(requireContext(), android.R.color.white) // Stroke color
+            textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics)
+            typeface = ResourcesCompat.getFont(requireContext(), R.font.pretendard_bold)
+            isAntiAlias = true
+            style = Paint.Style.STROKE
+            strokeWidth = 3f
+            textAlign = Paint.Align.CENTER
+        }
+
+        val paintFill = Paint().apply {
+            color = ContextCompat.getColor(requireContext(), R.color.facility_name) // Text fill color
+            textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics)
+            typeface = ResourcesCompat.getFont(requireContext(), R.font.pretendard_bold)
+            isAntiAlias = true
+            style = Paint.Style.FILL
+            textAlign = Paint.Align.CENTER
+        }
+
+        val textWidth = paintFill.measureText(text)
+        val bitmapWidth = maxOf(originalBitmap.width.toFloat(), textWidth).toInt()
+        val bitmapWithText = Bitmap.createBitmap(
+            bitmapWidth,
+            originalBitmap.height + 10,
+            Bitmap.Config.ARGB_8888
+        ).apply {
+            density = originalBitmap.density
+        }
+
+        val canvas = Canvas(bitmapWithText)
+        val bitmapLeft = (bitmapWidth - originalBitmap.width) / 2f
+        canvas.drawBitmap(originalBitmap, bitmapLeft, 30f, null)
+        val x = bitmapWidth / 2f
+        val y = paintFill.textSize
+
+        canvas.drawText(text, x, y, paintStroke)
+
+        canvas.drawText(text, x, y, paintFill)
+
+        return bitmapWithText
     }
 
     private fun getDrawableAsBitmap(drawableResId: Int): Bitmap {
@@ -292,13 +410,37 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = true
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
-        val cameraUpdate = CameraUpdate.zoomTo(16.0)
-        naverMap.moveCamera(cameraUpdate)
+        naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
-        cameraPosition?.let {
-            moveCameraToPosition(it)
+        val initPosition = arguments?.getParcelable<LatLng>(ARG_INIT_CAMERA_POSITION) ?: initCameraPosition
+        val initZoom = arguments?.getDouble(ARG_INIT_ZOOM_LEVEL) ?: 14.3
+
+        val cameraZoomUpdate = CameraUpdate.zoomTo(initZoom)
+        val cameraScrollUpdate = CameraUpdate.scrollTo(initPosition)
+        naverMap.moveCamera(cameraZoomUpdate)
+        naverMap.moveCamera(cameraScrollUpdate)
+
+        naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
+
+        viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
+            if (facilities.isNotEmpty()) {
+                updateMarkers(facilities = facilities)
+            }
+        })
+
+        viewModel.buildingList.value?.let { buildingList ->
+            if (buildingList.isNotEmpty()) {
+                updateMarkers(buildingList = buildingList)
+            }
+        }
+
+        naverMap.setOnMapClickListener { _, _ ->
+            if (selectedMarkers.isNotEmpty()) {
+                val currentSelectedMarker = selectedMarkers.first()
+                unselectMarker(currentSelectedMarker)
+                unselectAllMarkers()
+            }
         }
 
         unselectAllMarkers()
@@ -309,21 +451,17 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         _binding = null
     }
 
-    fun moveCameraToPosition(position: LatLng) {
-        if (::naverMap.isInitialized) {
-            naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing, 1000L))
-        } else {
-            cameraPosition = position
-        }
-    }
-
     companion object {
         private const val ARG_FACILITY_NAME = "facility_name"
+        private const val ARG_INIT_CAMERA_POSITION = "init_camera_position"
+        private const val ARG_INIT_ZOOM_LEVEL = "init_zoom_level"
 
-        fun newInstance(facilityName: String): PinSearchFragment {
+        fun newInstance(facilityName: String, initCameraPosition: LatLng, initZoomLevel: Double): PinSearchFragment {
             val fragment = PinSearchFragment()
             val args = Bundle().apply {
                 putString(ARG_FACILITY_NAME, facilityName)
+                putParcelable(ARG_INIT_CAMERA_POSITION, initCameraPosition)
+                putDouble(ARG_INIT_ZOOM_LEVEL, initZoomLevel)
             }
             fragment.arguments = args
             return fragment
