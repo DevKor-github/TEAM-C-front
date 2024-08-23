@@ -1,10 +1,13 @@
 package com.devkor.kodaero
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +15,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -63,16 +69,37 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private var previousZoom: Double? = null
 
+    private var isInitialSetup = true
+
+    private val backStackListener = FragmentManager.OnBackStackChangedListener {
+        if (isInitialSetup) {
+            isInitialSetup = false
+        } else {
+            updateStatusBar(currentFragmentCheck = true)
+        }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         closeModal()
+
+        activity?.supportFragmentManager?.addOnBackStackChangedListener(backStackListener)
+
+        updateStatusBar(currentFragmentCheck = false)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        val targetLayout = view?.findViewById<ViewGroup>(R.id.home_menu_container)
+
+        if (targetLayout != null) {
+            handleLayout(targetLayout)
+        }
 
         binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
@@ -112,6 +139,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
 
         setHorizontalScrollViewButtonListeners()
+
     }
 
     private fun initMapView() {
@@ -216,6 +244,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         viewModel.fetchBuildingList()
         // API 제공 될 때 까지 임시로 제거
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onPause() {
@@ -509,5 +542,64 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             ?.addToBackStack("DirectionFragment")
             ?.commit()
     }
+
+    private fun updateStatusBar(currentFragmentCheck: Boolean) {
+        // 상태 바 높이를 가져와 status_bar에 적용
+        val statusBarView = activity?.window?.decorView?.findViewById<LinearLayout>(R.id.status_bar)
+        val statusBarHeight = getStatusBarHeight()
+
+        // 메인 컨테이너에 프래그먼트가 있는 지 확인(현재 홈 프래그 먼트 인지 확인)
+        val isCurrentFragmentTop = if (currentFragmentCheck) {
+            requireActivity().supportFragmentManager.findFragmentById(R.id.main_container) == null
+        } else {
+            true
+        }
+
+        if (isCurrentFragmentTop) {
+            // 프래그먼트가 최상단에 있으면 상태 바 레이아웃 높이를 그대로 유지하고 배경색을 투명으로 설정
+            statusBarView?.layoutParams?.height = statusBarHeight
+            statusBarView?.setBackgroundColor(Color.TRANSPARENT)
+        } else {
+            // 그렇지 않으면 상태 바 높이로 설정하고 배경색을 흰색으로 설정
+            statusBarView?.layoutParams?.height = statusBarHeight
+            statusBarView?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+
+        // 레이아웃 변경 사항을 적용
+        statusBarView?.requestLayout()
+
+    }
+
+    private fun getStatusBarHeight(): Int {
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            resources.getDimensionPixelSize(resourceId)
+        } else {
+            0
+        }
+    }
+
+
+    private fun handleLayout(layout: ViewGroup) {
+        // 상태 바 높이를 가져와서 상단 패딩을 적용하는 함수
+        layout.setOnApplyWindowInsetsListener { view, insets ->
+            val statusBarHeight = insets.systemWindowInsetTop
+
+            // 패딩 적용: 기존 패딩 값은 유지하고 상단 패딩만 상태 바 높이로 설정
+            view.setPadding(
+                view.paddingLeft,        // 기존 왼쪽 패딩 유지
+                statusBarHeight,         // 상단 패딩을 상태 바 높이로 설정
+                view.paddingRight,       // 기존 오른쪽 패딩 유지
+                view.paddingBottom       // 기존 하단 패딩 유지
+            )
+
+            // 소비된 insets를 반환하여 추가적인 시스템 처리 방지
+            insets
+        }
+
+        // Insets을 강제로 적용하여 초기 패딩 설정
+        layout.requestApplyInsets()
+    }
+
 
 }

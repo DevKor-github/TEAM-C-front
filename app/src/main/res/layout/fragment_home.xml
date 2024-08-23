@@ -20,196 +20,201 @@
         </com.naver.maps.map.MapView>
 
     </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/pin_search_top_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_menu_container"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:elevation="5dp"
-        android:background="#FDFDFD"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent"
+        android:layout_marginTop="-8dp">
+
+        <FrameLayout
+            android:id="@+id/pin_search_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:elevation="5dp"
+            android:background="#FDFDFD"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints">
+
+            <ImageButton
+                android:id="@+id/back_to_home_button"
+                android:src="@drawable/grey_back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/facility_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="열람실"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/dark_gray"
+                android:textSize="16dp" />
+
+        </FrameLayout>
 
         <ImageButton
-            android:id="@+id/back_to_home_button"
-            android:src="@drawable/grey_back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="15dp"
-            android:background="@android:color/transparent"/>
+            android:id="@+id/home_more_button"
+            android:src="@drawable/home_more_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:translationZ="90dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginLeft="36dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/search_button"
+            android:background="@drawable/rounded_rec_white"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginVertical="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
-            android:id="@+id/facility_name"
+            android:layout_height="54dp"
+            android:layout_width="wrap_content"
+            android:text="학교 건물을 검색해 주세요"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/gray"
+            android:textSize="15dp"
+            android:layout_marginVertical="24dp"
+            android:layout_marginLeft="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/search_route_button"
+            android:src="@drawable/search_route_button"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_margin="24dp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/facility_button_scroll_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="열람실"
-            android:fontFamily="@font/pretendard_semibold"
-            android:textColor="@color/dark_gray"
-            android:textSize="16dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="92dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scrollbars="none">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/home_more_button"
-        android:src="@drawable/home_more_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:translationZ="90dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="36dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <ImageButton
+                    android:id="@+id/cafe_button"
+                    android:src="@drawable/button_cafe"
+                    android:layout_width="62.6dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp"/>
 
-    <ImageButton
-        android:id="@+id/search_button"
-        android:background="@drawable/rounded_rec_white"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginVertical="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:layout_height="54dp"
-        android:layout_width="wrap_content"
-        android:text="학교 건물을 검색해 주세요"
-        android:fontFamily="@font/pretendard_regular"
-        android:textColor="@color/gray"
-        android:textSize="15dp"
-        android:layout_marginVertical="24dp"
-        android:layout_marginLeft="72dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_vertical"/>
+                <ImageButton
+                    android:id="@+id/cafeteria_button"
+                    android:src="@drawable/button_cafeteria"
+                    android:layout_width="62.6dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp"/>
 
-    <ImageButton
-        android:id="@+id/search_route_button"
-        android:src="@drawable/search_route_button"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:layout_margin="24dp"
-        android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <ImageButton
+                    android:id="@+id/convenience_store_button"
+                    android:src="@drawable/button_convenience_store"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-    <HorizontalScrollView
-        android:id="@+id/facility_button_scroll_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:layout_marginStart="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="none">
+                <ImageButton
+                    android:id="@+id/reading_room_button"
+                    android:src="@drawable/button_reading_room"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/study_room_button"
+                    android:src="@drawable/button_study_room"
+                    android:layout_width="80dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/cafe_button"
-                android:src="@drawable/button_cafe"
-                android:layout_width="62.6dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp"/>
+                <ImageButton
+                    android:id="@+id/lounge_button"
+                    android:src="@drawable/button_lounge"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/cafeteria_button"
-                android:src="@drawable/button_cafeteria"
-                android:layout_width="62.6dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp"/>
+                <ImageButton
+                    android:id="@+id/water_purifier_button"
+                    android:src="@drawable/button_water_purifier"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/convenience_store_button"
-                android:src="@drawable/button_convenience_store"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+                <ImageButton
+                    android:id="@+id/printer_button"
+                    android:src="@drawable/button_printer"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/reading_room_button"
-                android:src="@drawable/button_reading_room"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+                <ImageButton
+                    android:id="@+id/vending_machine_button"
+                    android:src="@drawable/button_vending_machine"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/study_room_button"
-                android:src="@drawable/button_study_room"
-                android:layout_width="80dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+                <ImageButton
+                    android:id="@+id/smoking_area_button"
+                    android:src="@drawable/button_smoking_area"
+                    android:layout_width="80dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/lounge_button"
-                android:src="@drawable/button_lounge"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+                <ImageButton
+                    android:id="@+id/sleeping_room_button"
+                    android:src="@drawable/button_sleeping_room"
+                    android:layout_width="70dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/water_purifier_button"
-                android:src="@drawable/button_water_purifier"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+                <ImageButton
+                    android:id="@+id/book_return_machine_button"
+                    android:src="@drawable/button_book_return_machine"
+                    android:layout_width="86dp"
+                    android:layout_height="29dp"
+                    android:layout_marginEnd="5dp" />
 
-            <ImageButton
-                android:id="@+id/printer_button"
-                android:src="@drawable/button_printer"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/vending_machine_button"
-                android:src="@drawable/button_vending_machine"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
+        </HorizontalScrollView>
 
-            <ImageButton
-                android:id="@+id/smoking_area_button"
-                android:src="@drawable/button_smoking_area"
-                android:layout_width="80dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-            <ImageButton
-                android:id="@+id/sleeping_room_button"
-                android:src="@drawable/button_sleeping_room"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-            <ImageButton
-                android:id="@+id/book_return_machine_button"
-                android:src="@drawable/button_book_return_machine"
-                android:layout_width="86dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="5dp" />
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <ImageButton
-        android:id="@+id/pin_onoff_button"
-        android:src="@drawable/pin_off_button"
-        android:layout_width="28dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginRight="24dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        <ImageButton
+            android:id="@+id/pin_onoff_button"
+            android:src="@drawable/pin_off_button"
+            android:layout_width="28dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginRight="24dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>
 
