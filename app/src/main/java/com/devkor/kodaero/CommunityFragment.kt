@@ -24,6 +24,9 @@ class CommunityFragment : Fragment() {
         // 텍스트를 동적으로 수정
         binding.textView.text = "앗, 아직 개발 중이에요!\n" + "조금만 기다려 주세요 :("
         binding.errorBackButton.setOnClickListener {
+            val mainActivity = activity as MainActivity
+            mainActivity.binding.bottomNavigationView.selectedItemId = R.id.fragment_home
+
             requireActivity().supportFragmentManager.popBackStack("HomeFragment", 0)
         }
 
@@ -32,6 +35,10 @@ class CommunityFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.binding.bottomNavigationView.selectedItemId = R.id.fragment_home
+
         _binding = null
     }
 }
