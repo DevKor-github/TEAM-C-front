@@ -57,7 +57,7 @@
             app:threeFingersScrollEnabled="false"
             app:minZoom="1"
             app:minZoomType="zoom"
-            app:maxZoom="5"
+            app:maxZoom="10"
             app:maxZoomType="zoom"
             app:animationDuration="100"
             app:hasClickableChildren="true">
