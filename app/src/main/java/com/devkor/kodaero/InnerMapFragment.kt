@@ -199,7 +199,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
         selectedBuildingAboveFloor?.let { aboveFloor ->
             selectedBuildingUnderFloor?.let { underFloor ->
-                customScrollView.setFloors(-underFloor, aboveFloor, innermapCurrentFloor)
+                if(!hasDirection) {
+                    customScrollView.setFloors(-underFloor, aboveFloor, innermapCurrentFloor)
+                }
+                else(hideScroll())
             }
         }
         customScrollView.setOnFloorSelectedListener(this)
