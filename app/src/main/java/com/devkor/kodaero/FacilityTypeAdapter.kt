@@ -15,10 +15,17 @@ class FacilityTypeAdapter(private val facilityTypes: List<String>) : RecyclerVie
 
     override fun onBindViewHolder(holder: FacilityTypeViewHolder, position: Int) {
         val facilityType = facilityTypes[position]
-        val iconName = "icon_${facilityType.lowercase()}" // 아이콘 이름
+        val iconName = "icon_${facilityType.lowercase()}" // Icon name
         val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
-        holder.imageButton.setImageResource(resourceId)
+
+        if (resourceId != 0) {
+            holder.imageButton.setImageResource(resourceId)
+            holder.imageButton.visibility = View.VISIBLE
+        } else {
+            holder.imageButton.visibility = View.GONE // Hide the ImageButton if the drawable does not exist
+        }
     }
+
 
     override fun getItemCount(): Int {
         return facilityTypes.size

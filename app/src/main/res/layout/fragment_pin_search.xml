@@ -53,6 +53,5 @@
     <include layout="@layout/pin_search_modal_sheet"
         android:id="@+id/pin_search_included_layout"/>
 
-
 </RelativeLayout>
 
