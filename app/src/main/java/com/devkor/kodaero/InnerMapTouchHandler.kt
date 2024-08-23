@@ -31,6 +31,7 @@ class InnerMapTouchHandler(
     private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
+    private val isNodeMaskBuild: Boolean = false
     private var fileName: String = "" // obsolete
     private var maskIndex: Int = 0
 
@@ -93,52 +94,59 @@ class InnerMapTouchHandler(
                     // 파일명이 존재하면 토스트 메시지로 표시하고, 모달 열기 함수 호출
 
                     // 마스크 노드 찍기용
-                    /*if(maskIndex != 0){
-                        val newMessage = "MaskIndex: $maskIndex"
+                    if(isNodeMaskBuild) {
+                        if (maskIndex != 0) {
+                            val newMessage = "MaskIndex: $maskIndex"
 
-                        // 이전 메시지와 동일하다면 새로 표시하지 않고 기존 스낵바를 유지
-                        if (newMessage == lastMessage && currentSnackbar?.isShown == true) {
-                            return true
-                        }
-
-                        // 이전에 표시된 스낵바가 있으면 즉시 중단
-                        currentSnackbar?.dismiss()
-
-                        // 새로운 스낵바 메시지를 생성
-                        currentSnackbar = Snackbar.make(v ?: return@let, newMessage, Snackbar.LENGTH_INDEFINITE)
-
-                        // 스낵바의 애니메이션을 최소화
-                        currentSnackbar?.setAnimationMode(Snackbar.ANIMATION_MODE_FADE) // 페이드 애니메이션 사용 (빠르게 표시)
-
-                        // 스낵바의 텍스트 크기 및 속성 설정
-                        val snackbarView = currentSnackbar?.view
-                        val snackbarTextView = snackbarView?.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-
-                        snackbarTextView?.let {
-                            it.textSize = 24f  // 텍스트 크기를 크게 설정
-                            it.maxLines = 3  // 필요한 경우 여러 줄을 허용
-                        }
-
-                        snackbarView?.let {
-                            val params = it.layoutParams as ViewGroup.MarginLayoutParams
-                            params.setMargins(0, 0, 0, 0)  // 마진 최소화
-
-                            // 스낵바를 화면의 위쪽에 표시하도록 설정
-                            if (params is CoordinatorLayout.LayoutParams) {
-                                params.gravity = Gravity.TOP
-                            } else if (params is ViewGroup.MarginLayoutParams) {
-                                params.topMargin = 0  // 스낵바를 상단에 붙임
+                            // 이전 메시지와 동일하다면 새로 표시하지 않고 기존 스낵바를 유지
+                            if (newMessage == lastMessage && currentSnackbar?.isShown == true) {
+                                return true
                             }
-                            it.layoutParams = params
+
+                            // 이전에 표시된 스낵바가 있으면 즉시 중단
+                            currentSnackbar?.dismiss()
+
+                            // 새로운 스낵바 메시지를 생성
+                            currentSnackbar = Snackbar.make(
+                                v ?: return@let,
+                                newMessage,
+                                Snackbar.LENGTH_INDEFINITE
+                            )
+
+                            // 스낵바의 애니메이션을 최소화
+                            currentSnackbar?.setAnimationMode(Snackbar.ANIMATION_MODE_FADE) // 페이드 애니메이션 사용 (빠르게 표시)
+
+                            // 스낵바의 텍스트 크기 및 속성 설정
+                            val snackbarView = currentSnackbar?.view
+                            val snackbarTextView =
+                                snackbarView?.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+
+                            snackbarTextView?.let {
+                                it.textSize = 24f  // 텍스트 크기를 크게 설정
+                                it.maxLines = 3  // 필요한 경우 여러 줄을 허용
+                            }
+
+                            snackbarView?.let {
+                                val params = it.layoutParams as ViewGroup.MarginLayoutParams
+                                params.setMargins(0, 0, 0, 0)  // 마진 최소화
+
+                                // 스낵바를 화면의 위쪽에 표시하도록 설정
+                                if (params is CoordinatorLayout.LayoutParams) {
+                                    params.gravity = Gravity.TOP
+                                } else if (params is ViewGroup.MarginLayoutParams) {
+                                    params.topMargin = 0  // 스낵바를 상단에 붙임
+                                }
+                                it.layoutParams = params
+                            }
+
+                            // 스낵바를 즉시 표시 (자동으로 사라지지 않음)
+                            currentSnackbar?.show()
+
+                            // 마지막 메시지 업데이트
+                            lastMessage = newMessage
+
                         }
-
-                        // 스낵바를 즉시 표시 (자동으로 사라지지 않음)
-                        currentSnackbar?.show()
-
-                        // 마지막 메시지 업데이트
-                        lastMessage = newMessage
-
-                    }*/
+                    }
 
                     openInnermapModal(maskIndex)
                     replaceInnermapCallback(fileName)
@@ -148,6 +156,7 @@ class InnerMapTouchHandler(
         }
         return true
     }
+
     fun openInnermapModal(maskIndex: Int) {
         Log.d("InnerMapTouchHandler", "Matching Room: $fileName")
 
@@ -157,25 +166,34 @@ class InnerMapTouchHandler(
         val standardBottomSheet = innerMapBinding.includedModal.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
+        val roomDetail = standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_address)
         // 첫 번째 API 호출: MaskInfo를 가져옴
         fetchMaskInfo(buildingId, floor, maskIndex, "CLASSROOM") { roomId ->
             if (roomId != null) {
                 // 두 번째 API 호출: Place 정보 가져오기
-                fetchPlaceInfo(roomId) { placeName ->
-                    if (placeName != null && maskIndex != 0) {
-                        val modifiedRoomName = "$placeName"
-
-                        standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_name).text = modifiedRoomName
+                fetchPlaceInfo(roomId) { placeInfo ->
+                    if (placeInfo != null && placeInfo.maskIndex != 0) {
+                        val fetchedRoomName = placeInfo.name
+                        standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_name).text = fetchedRoomName
+                        if(placeInfo.detail != ".") {
+                            roomDetail.text = placeInfo.detail
+                            roomDetail.visibility = View.VISIBLE
+                        }
+                        else{
+                            roomDetail.text = null
+                            roomDetail.visibility = View.GONE
+                        }
+                        standardBottomSheet.findViewById<View>(R.id.modal_sheet_operating_container).visibility = View.GONE
                         // standardBottomSheet.findViewById<View>(R.id.consent_container).visibility = View.GONE
                         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
                         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                         standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(true, modifiedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(true, fetchedRoomName, roomId, "CLASSROOM")
                         }
 
                         standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(false, modifiedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(false, fetchedRoomName, roomId, "CLASSROOM")
                         }
                     } else {
                         Log.e("InnerMapTouchHandler", "Failed to fetch place name")
@@ -212,18 +230,18 @@ class InnerMapTouchHandler(
     }
 
     // 두 번째 API 호출: Place 정보 가져오기
-    private fun fetchPlaceInfo(roomId: Int, callback: (String?) -> Unit) {
+    private fun fetchPlaceInfo(roomId: Int, callback: (PlaceInfoResponse?) -> Unit) {
         RetrofitClient.instance.getPlaceInfo(roomId, "CLASSROOM").enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
             override fun onResponse(
                 call: Call<ApiResponse<PlaceInfoResponse>>,
                 response: Response<ApiResponse<PlaceInfoResponse>>
             ) {
                 if (response.isSuccessful && response.body()?.statusCode == 0) {
-                    val placeName = response.body()?.data?.name
-                    Log.d("InnerMapTouchHandler", "Fetched Place Name: $placeName")
-                    callback(placeName)
+                    val placeInfo = response.body()?.data
+                    Log.d("InnerMapTouchHandler", "Fetched Place Info: $placeInfo")
+                    callback(placeInfo)
                 } else {
-                    Log.e("InnerMapTouchHandler", "Failed to fetch place name: ${response.errorBody()?.string()}")
+                    Log.e("InnerMapTouchHandler", "Failed to fetch place info: ${response.errorBody()?.string()}")
                     callback(null)
                 }
             }
@@ -234,6 +252,7 @@ class InnerMapTouchHandler(
             }
         })
     }
+
 
 
 
@@ -255,6 +274,17 @@ class InnerMapTouchHandler(
             ?.commit()
     }
 
+    private fun getBuildingInfo(buildingId: Int): BuildingItem? {
+        // BuildingCache에서 빌딩 정보를 가져옴
+        val building = BuildingCache.get(buildingId)
+
+        if (building != null) {
+            // 캐시에 빌딩 정보가 있는 경우 해당 정보를 반환
+            return building
+        } else {
+            return null // 또는 예외 처리
+        }
+    }
 
 
 }

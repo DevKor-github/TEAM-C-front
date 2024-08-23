@@ -44,34 +44,41 @@
       .cls-3 {
         fill: #f3cdcf;
       }
+
+      .cls-10 {
+        stroke-width: 3px;
+        stroke: #e68b8b;
+        stroke-miterlimit: 10;
+        fill: #fcf2f2;
+      }
     </style>
   </defs>
   <g id="Layer_x5F_border-2" data-name="Layer_x5F_border">
     <g>
       <polygon class="cls-1" points="777.46 573.01 917.02 492.43 760.11 222.59 760.11 45.76 554.2 45.76 554.2 334.05 590.84 334.05 590.84 370.69 554.2 370.69 554.2 542.19 612.53 542.19 612.53 573.01 410.77 572.71 410.77 777.38 1068.9 777.38 1068.9 573.01 777.46 573.01"/>
       <g>
-        <rect class="cls-2" x="494.23" y="542.83" width="8.04" height="27.51"/>
-        <rect class="cls-2" x="502.27" y="542.83" width="8.36" height="27.51"/>
-        <rect class="cls-2" x="510.63" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="520.27" y="542.83" width="7.72" height="27.51"/>
-        <rect class="cls-2" x="527.99" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="537.64" y="542.83" width="6.91" height="27.51"/>
-        <rect class="cls-2" x="544.55" y="542.83" width="10.45" height="27.51"/>
-        <rect class="cls-2" x="555" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="564.64" y="542.83" width="8.36" height="27.51"/>
-        <rect class="cls-2" x="573" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="494.23" y="542.83" width="8.04" height="27.51"/>
+        <rect class="cls-10" x="502.27" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="510.63" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="520.27" y="542.83" width="7.72" height="27.51"/>
+        <rect class="cls-10" x="527.99" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="537.64" y="542.83" width="6.91" height="27.51"/>
+        <rect class="cls-10" x="544.55" y="542.83" width="10.45" height="27.51"/>
+        <rect class="cls-10" x="555" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="564.64" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="573" y="542.83" width="8.36" height="27.51"/>
       </g>
       <g>
-        <rect class="cls-2" x="407.11" y="542.83" width="8.04" height="27.51"/>
-        <rect class="cls-2" x="415.14" y="542.83" width="8.36" height="27.51"/>
-        <rect class="cls-2" x="423.5" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="433.15" y="542.83" width="7.72" height="27.51"/>
-        <rect class="cls-2" x="440.86" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="450.51" y="542.83" width="6.91" height="27.51"/>
-        <rect class="cls-2" x="457.42" y="542.83" width="10.45" height="27.51"/>
-        <rect class="cls-2" x="467.87" y="542.83" width="9.64" height="27.51"/>
-        <rect class="cls-2" x="477.52" y="542.83" width="8.36" height="27.51"/>
-        <rect class="cls-2" x="485.87" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="407.11" y="542.83" width="8.04" height="27.51"/>
+        <rect class="cls-10" x="415.14" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="423.5" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="433.15" y="542.83" width="7.72" height="27.51"/>
+        <rect class="cls-10" x="440.86" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="450.51" y="542.83" width="6.91" height="27.51"/>
+        <rect class="cls-10" x="457.42" y="542.83" width="10.45" height="27.51"/>
+        <rect class="cls-10" x="467.87" y="542.83" width="9.64" height="27.51"/>
+        <rect class="cls-10" x="477.52" y="542.83" width="8.36" height="27.51"/>
+        <rect class="cls-10" x="485.87" y="542.83" width="8.36" height="27.51"/>
       </g>
     </g>
   </g>

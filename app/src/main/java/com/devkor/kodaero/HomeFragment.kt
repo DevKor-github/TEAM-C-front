@@ -135,8 +135,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
-        naverMap.uiSettings.isLocationButtonEnabled = true
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        // naverMap.uiSettings.isLocationButtonEnabled = true
+        // naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.uiSettings.isZoomControlEnabled = false
 
         naverMap.addOnCameraChangeListener { reason, animated ->
             val currentZoom = naverMap.cameraPosition.zoom
@@ -307,18 +308,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun moveCameraToPosition(position: LatLng) {
-
         if (::naverMap.isInitialized) {
-            naverMap.moveCamera(CameraUpdate.scrollTo(position).animate(CameraAnimation.Easing,1000L))
-
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                expandModal()
-            }, 100L)
+            val cameraUpdate = CameraUpdate.scrollAndZoomTo(position, 16.0)
+                .animate(CameraAnimation.Easing, 1000L)
+            naverMap.moveCamera(cameraUpdate)
         } else {
             cameraPosition = position
         }
     }
+
     private fun expandModal() {
 
         val includedLayout = binding.includedLayout.root
@@ -372,51 +370,95 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             markers.add(marker) // 마커 리스트에 추가
 
             marker.setOnClickListener {
-                val buildingName =
-                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
-                val buildingAddress =
-                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
-                val buildingOperating =
-                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
-                val buildingNextOperating =
-                    binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
-                val standardBottomSheet =
-                    binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
-                val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
-
-                buildingName.text = building.name
-                buildingAddress.text = building.address
-                if (building.operating) {
-                    buildingOperating.text = "운영 중"
-                } else {
-                    buildingOperating.text = "운영 종료"
-                }
-                buildingNextOperating.text = building.nextBuildingTime
-                selectedBuildingName = building.name
-                selectedBuildingAboveFloor = building.floor
-                selectedBuildingUnderFloor = building.underFloor
-                selectedBuildingId = building.buildingId
-
-                val facilityTypesRecyclerView =
-                    binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
-                val adapter = FacilityTypeAdapter(building.facilityTypes)
-                facilityTypesRecyclerView.adapter = adapter
-
-                buildingName.setOnClickListener {
-                    selectedBuildingId?.let { id ->
-                        val fragment = BuildingDetailFragment.newInstance(id)
-                        val transaction = parentFragmentManager.beginTransaction()
-                        transaction.replace(R.id.main_container, fragment)
-                        transaction.addToBackStack(null)
-                        transaction.commit()
-                    }
-                }
-
-                standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                openBuildingModal(building.buildingId)
                 true
             }
         }
     }
+
+    fun openBuildingModal(buildingId: Int) {
+        val building = getBuildingInfo(buildingId) ?: return  // 빌딩 정보를 가져옴
+
+        val buildingName =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+        val buildingAddress =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+        val buildingOperating =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+        val buildingNextOperating =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
+        val buildingNextOperatingCont =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
+        val standardBottomSheet =
+            binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+
+        buildingName.text = building.name
+        buildingAddress.text = building.address
+
+        when {
+            building.operatingTime.contains("00:00-00:00") -> {
+                buildingOperating.text = "운영 정보 없음"
+                buildingOperating.setTextColor(resources.getColor(R.color.gray, null))
+                buildingNextOperating.text = null
+                buildingNextOperatingCont.text = null
+            }
+            building.operatingTime.contains("00:00-23:59") -> {
+                buildingOperating.text = "운영 중"
+                buildingOperating.setTextColor(resources.getColor(R.color.red, null))
+                buildingNextOperating.text = "상시 운영"
+                buildingNextOperatingCont.text = null
+            }
+            else -> {
+                if (building.operating) {
+                    buildingOperating.text = "운영 중"
+                    buildingOperating.setTextColor(resources.getColor(R.color.red, null))
+                    buildingNextOperating.text = building.nextBuildingTime
+                    buildingNextOperatingCont.text = "에 운영 종료"
+                } else {
+                    buildingOperating.text = "운영 종료"
+                    buildingOperating.setTextColor(resources.getColor(R.color.red, null))
+                    buildingNextOperating.text = building.nextBuildingTime
+                    buildingNextOperatingCont.text = "에 운영 시작"
+                }
+            }
+        }
+        selectedBuildingName = building.name
+        selectedBuildingAboveFloor = building.floor
+        selectedBuildingUnderFloor = building.underFloor
+        selectedBuildingId = building.buildingId
+
+        val facilityTypesRecyclerView =
+            binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+        val adapter = FacilityTypeAdapter(building.facilityTypes)
+        facilityTypesRecyclerView.adapter = adapter
+
+        buildingName.setOnClickListener {
+            selectedBuildingId?.let { id ->
+                val fragment = BuildingDetailFragment.newInstance(id)
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.main_container, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun getBuildingInfo(buildingId: Int): BuildingItem? {
+        // BuildingCache에서 빌딩 정보를 가져옴
+        val building = BuildingCache.get(buildingId)
+
+        if (building != null) {
+            // 캐시에 빌딩 정보가 있는 경우 해당 정보를 반환
+            return building
+        } else {
+            return null // 또는 예외 처리
+        }
+    }
+
+
 
     private fun updateMarkersVisibility(zoom: Double) {
         for (marker in markers) {
@@ -463,7 +505,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
         val activity = context as? FragmentActivity
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.main_container, getDirectionsFragment)
+            ?.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
             ?.addToBackStack("DirectionFragment")
             ?.commit()
     }

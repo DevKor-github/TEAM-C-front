@@ -67,7 +67,7 @@ class SearchBuildingFragment : Fragment() {
                 // 건물을 선택했을 때 OpenModal 함수 호출
                 openLocationModal(requireActivity(), buildingItem)
             } else if (buildingItem.placeType == "CLASSROOM") {
-                // 장소을 선택했을 때 OpenModal 함수 호출
+                // 장소을 선택했을 때 Navigate 함수 호출
                 navigateToInnerMapFragment(buildingItem.id)
             }
             else Log.e("SearchBuildingFragment","No mating type")

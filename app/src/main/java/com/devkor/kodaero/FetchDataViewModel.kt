@@ -223,9 +223,4 @@ class FetchDataViewModel : ViewModel() {
             })
     }
 
-    // RouteResponse를 업데이트할 때 사용하는 메서드
-    fun updateSplitedRoute(route: RouteResponse) {
-        DirectionSearchRouteDataHolder.splitedRoute = route
-    }
-
 }

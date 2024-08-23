@@ -13,7 +13,7 @@
       }
 
       .cls-2 {
-        fill: none;
+        fill: #fcf2f2;
       }
 
       .cls-2, .cls-3 {
@@ -86,7 +86,6 @@
     <text class="cls-4" transform="translate(1174.86 388.72)"><tspan x="0" y="0">530</tspan><tspan x="-26.99" y="14.4">미래배전시스템</tspan><tspan x="-4.24" y="28.8">연구실</tspan></text>
   </g>
   <g id="Layer_153">
-    <polygon class="cls-2" points="1005.22 539.19 1005.22 514.6 1092.3 514.6 1092.3 401.35 985.11 401.35 985.11 539.19 1005.22 539.19"/>
     <polygon class="cls-3" points="1194.86 323.6 1266.38 323.6 1266.38 188.88 1166.21 188.88 1166.21 305.61 1194.86 305.61 1194.86 323.6"/>
     <text class="cls-4" transform="translate(1203.75 244.82)"><tspan x="0" y="0">529</tspan><tspan x="-21.58" y="14.4">나노트로닉스</tspan><tspan x="-4.51" y="28.8">연구실</tspan></text>
   </g>
@@ -267,4 +266,8 @@
     <rect class="cls-3" x="952.54" y="567.54" width="105.93" height="138.63"/>
     <text class="cls-4" transform="translate(992.69 625.44)"><tspan x="0" y="0">503</tspan><tspan x="-15.62" y="14.4">통신시스템</tspan><tspan x="-4.24" y="28.8">연구실</tspan></text>
   </g>
+  <g id="Layer_toilet1">
+    <polygon class="cls-2" points="1005.22 539.19 1005.22 514.6 1092.3 514.6 1092.3 401.35 985.11 401.35 985.11 539.19 1005.22 539.19"/>
+  </g>
+  
 </svg>
