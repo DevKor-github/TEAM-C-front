@@ -113,11 +113,19 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.fragment_home -> {
                     if (currentFragment !is HomeFragment) {
-                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, HomeFragment(), "HomeFragment")
-                            .addToBackStack("HomeFragment")  // 백 스택에 추가
-                            .commit()
+                        // 백 스택에 HomeFragment가 있는지 확인
+                        val fragmentInBackStack = supportFragmentManager.findFragmentByTag("HomeFragment")
+                        if (fragmentInBackStack != null) {
+                            // HomeFragment가 백 스택에 있는 경우, 그곳으로 이동
+                            supportFragmentManager.popBackStack("HomeFragment", 0)
+                        } else {
+                            // HomeFragment가 백 스택에 없는 경우, 새로 추가
+                            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_container, HomeFragment(), "HomeFragment")
+                                .addToBackStack("HomeFragment")
+                                .commit()
+                        }
                         item.setIcon(R.drawable.home_button)
                     }
                     true
@@ -125,9 +133,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_bus -> {
                     if (currentFragment !is BusFragment) {
-                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, BusFragment(),"BusFragment")
+                            .add(R.id.main_container, BusFragment(),"BusFragment")
                             .addToBackStack("BusFragment")
                             .commit()
                         item.setIcon(R.drawable.bus_button)
@@ -137,9 +144,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_community -> {
                     if (currentFragment !is CommunityFragment) {
-                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, CommunityFragment(),"CommunityFragment")
+                            .add(R.id.main_container, CommunityFragment(),"CommunityFragment")
                             .addToBackStack("CommunityFragment")
                             .commit()
                         item.setIcon(R.drawable.community_button)
@@ -149,9 +155,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_favorites -> {
                     if (currentFragment !is FavoritesFragment) {
-                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, FavoritesFragment(),"FavoritesFragment")
+                            .add(R.id.main_container, FavoritesFragment(),"FavoritesFragment")
                             .addToBackStack("FavoritesFragment")
                             .commit()
                         item.setIcon(R.drawable.favorites_button)
@@ -161,9 +166,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.fragment_mypage -> {
                     if (currentFragment !is MypageFragment) {
-                        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_container, MypageFragment(),"MypageFragment")
+                            .add(R.id.main_container, MypageFragment(),"MypageFragment")
                             .addToBackStack("MypageFragment")
                             .commit()
                         item.setIcon(R.drawable.mypage_button)

@@ -96,7 +96,7 @@
         tools:visibility="visible">
         <include
             android:id="@+id/included_error_layout"
-            layout="@layout/direction_error"/>
+            layout="@layout/layout_error"/>
     </LinearLayout>
 
     <FrameLayout
