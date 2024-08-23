@@ -242,6 +242,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         viewModel.fetchBuildingList("")
         // API 제공 될 때 까지 임시로 제거
 
+        naverMap.setOnMapClickListener { _, _ ->
+            closeModal()
+        }
 
     }
 
@@ -472,7 +475,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val facilityTypesRecyclerView =
             binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
-        val adapter = FacilityTypeAdapter(building.facilityTypes)
+        val adapter = FacilityTypeAdapter(building.facilityTypes, requireContext())
         facilityTypesRecyclerView.adapter = adapter
 
         buildingName.setOnClickListener {

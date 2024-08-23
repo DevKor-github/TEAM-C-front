@@ -108,7 +108,7 @@ class BuildingDetailFragment : Fragment() {
                 tmiDetailTextView.text = buildingDetail?.details?.replace("\\n", "\n")
 
                 // Set up horizontal facility types
-                val adapter = buildingDetail?.existTypes?.let { FacilityTypeAdapter(it) }
+                val adapter = buildingDetail?.existTypes?.let { FacilityTypeAdapter(it, requireContext()) }
                 facilityRecyclerView.adapter = adapter
 
                 // Set the initial active button and display
