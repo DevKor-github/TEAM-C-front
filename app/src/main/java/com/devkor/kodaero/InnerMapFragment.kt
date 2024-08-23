@@ -503,7 +503,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             Log.e(TAG, "Original Group Content:\n$groupContent")
 
             // rect 및 polygon 태그에 style 속성 추가
-            groupContent = groupContent.replace(Regex("""<(rect|polygon|path)([^/>]*)(/?)>""")) { matchResult ->
+            groupContent = groupContent.replace(Regex("""<(rect|polygon|path|circle)([^/>]*)(/?)>""")) { matchResult ->
                 val tag = matchResult.groupValues[1]
                 var attributes = matchResult.groupValues[2]
                 val closingSlash = matchResult.groupValues[3] // Optional closing slash
