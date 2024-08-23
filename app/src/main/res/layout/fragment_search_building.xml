@@ -21,9 +21,9 @@
             layout="@layout/custom_edit_text_layout"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="16dp" />
     </LinearLayout>
 
     <LinearLayout

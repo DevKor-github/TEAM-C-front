@@ -1,10 +1,15 @@
 package com.devkor.kodaero
 
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.devkor.kodaero.databinding.ActivityMainBinding
 import android.util.Log
+import android.view.View
+import android.view.WindowInsetsController
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 
 
@@ -22,10 +27,21 @@ class MainActivity : AppCompatActivity() {
 
         setBottomNavigationView()
 
+        // 상태 바 텍스트와 아이콘을 어두운 색상으로 설정
+        setStatusBarTextColor(isLightText = false)
+
+        // 상태 바 투명화 및 콘텐츠 확장 설정
+        window.apply {
+            decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            statusBarColor = Color.TRANSPARENT
+        }
+
         // 앱 초기 실행 시 홈화면으로 설정
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_home
         }
+
 
     }
 
@@ -34,30 +50,23 @@ class MainActivity : AppCompatActivity() {
         // 현재 보여지고 있는 Fragment를 가져옵니다.
         val currentFragment = fragmentManager.findFragmentById(R.id.main_container)
 
+        val homeFragment = fragmentManager.findFragmentById(R.id.home_container) as? HomeFragment
+
         val directionsFragment = supportFragmentManager.findFragmentByTag("DirectionFragment") as? GetDirectionsFragment
 
-        val backStackCount = fragmentManager.backStackEntryCount
-
-        for (i in 0 until backStackCount) {
-            val backStackEntry = fragmentManager.getBackStackEntryAt(i)
-            Log.d("BackStackFragment", "Fragment name: ${backStackEntry.name}, ID: ${backStackEntry.id}")
-        }
-
-        val fragments = fragmentManager.fragments
-        for (fragment in fragments) {
-            fragment?.let {
-                Log.d("BackStackFragment", "Fragment tag: ${fragment.tag}, Fragment: ${fragment::class.java.simpleName}")
-            }
-        }
 
         when (currentFragment) {
-            is HomeFragment -> {
-                if (currentFragment.isBottomSheetExpanded()) {
-                    currentFragment.closeModal()
-                    Log.e("MainActivity", "expanded")
-                    return
+            null -> {
+                // HomeFragment인 경우는 이곳에 정의
+                if (homeFragment != null) {
+                    if (homeFragment.isBottomSheetExpanded()) {
+                        homeFragment.closeModal()
+                        Log.e("MainActivity", "expanded")
+                        return
+                    }
                 }
             }
+
             is InnerMapFragment -> {
                 if (currentFragment.isBottomSheetExpanded()) {
                     currentFragment.closeModal()
@@ -72,10 +81,12 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
             }
+
             is GetDirectionsFragment -> {
                 fragmentManager.popBackStack("HomeFragment", 0)
                 return
             }
+
             is PinSearchFragment -> {
                 val pinSearchFragment = currentFragment as PinSearchFragment
                 if (pinSearchFragment.hasSelectedMarkers()) {
@@ -83,6 +94,7 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
             }
+
             else -> {
                 Log.e("MainActivity", "Doesn't have modal")
             }
@@ -110,6 +122,7 @@ class MainActivity : AppCompatActivity() {
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             val currentFragment = supportFragmentManager.findFragmentById(R.id.main_container)
+
             when (item.itemId) {
                 R.id.fragment_home -> {
                     if (currentFragment !is HomeFragment) {
@@ -122,7 +135,7 @@ class MainActivity : AppCompatActivity() {
                             // HomeFragment가 백 스택에 없는 경우, 새로 추가
                             supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             supportFragmentManager.beginTransaction()
-                                .replace(R.id.main_container, HomeFragment(), "HomeFragment")
+                                .replace(R.id.home_container, HomeFragment(), "HomeFragment")
                                 .addToBackStack("HomeFragment")
                                 .commit()
                         }
@@ -176,6 +189,31 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> false
+            }
+        }
+    }
+
+    private fun setStatusBarTextColor(isLightText: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val wic = window.insetsController
+            if (wic != null) {
+                if (isLightText) {
+                    // 상태 바 텍스트와 아이콘을 밝은 색상으로 설정
+                    wic.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                } else {
+                    // 상태 바 텍스트와 아이콘을 어두운 색상으로 설정
+                    wic.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    )
+                }
+            }
+        } else {
+            // Android 10 이하에서는 systemUiVisibility를 사용
+            if (isLightText) {
+                window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+            } else {
+                window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
         }
     }
