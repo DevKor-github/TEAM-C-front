@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager
 
 
 class MainActivity : AppCompatActivity() {
-    private val binding: ActivityMainBinding by lazy {
+    val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private var backPressedTime: Long = 0
