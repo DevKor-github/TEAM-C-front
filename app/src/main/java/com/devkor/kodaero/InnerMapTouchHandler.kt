@@ -230,8 +230,8 @@ class InnerMapTouchHandler(
     }
 
     // 두 번째 API 호출: Place 정보 가져오기
-    private fun fetchPlaceInfo(roomId: Int, callback: (PlaceInfoResponse?) -> Unit) {
-        RetrofitClient.instance.getPlaceInfo(roomId, "CLASSROOM").enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
+        private fun fetchPlaceInfo(placeId : Int, callback: (PlaceInfoResponse?) -> Unit) {
+        RetrofitClient.instance.getPlaceInfo(placeId).enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
             override fun onResponse(
                 call: Call<ApiResponse<PlaceInfoResponse>>,
                 response: Response<ApiResponse<PlaceInfoResponse>>

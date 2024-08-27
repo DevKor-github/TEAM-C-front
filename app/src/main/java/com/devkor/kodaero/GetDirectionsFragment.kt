@@ -374,7 +374,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
         DirectionSearchRouteDataHolder.splitedRoute = routeResponse
 
         // Proceed with fragment navigation
-        viewModel.fetchPlaceInfo(buildingId, "CLASSROOM") { placeInfo ->
+        viewModel.fetchPlaceInfo(buildingId) { placeInfo ->
             placeInfo?.let {
                 val buildingItem = BuildingCache.get(it.buildingId)
                 if (buildingItem != null) {

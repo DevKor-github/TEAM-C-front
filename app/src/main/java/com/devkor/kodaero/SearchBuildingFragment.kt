@@ -151,7 +151,7 @@ class SearchBuildingFragment : Fragment() {
     }
 
     private fun navigateToInnerMapFragment(roomId: Int) {
-        viewModel.fetchPlaceInfo(roomId, "CLASSROOM") { placeInfo ->
+        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
             placeInfo?.let {
                 // 캐시에서 BuildingItem 가져오기
                 val buildingItem = BuildingCache.get(it.buildingId)

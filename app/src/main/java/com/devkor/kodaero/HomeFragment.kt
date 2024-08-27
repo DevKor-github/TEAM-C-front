@@ -475,7 +475,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val facilityTypesRecyclerView =
             binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
-        val adapter = FacilityTypeAdapter(building.facilityTypes, requireContext())
+        val adapter = FacilityTypeAdapter(building.placeTypes, requireContext())
         facilityTypesRecyclerView.adapter = adapter
 
         buildingName.setOnClickListener {
