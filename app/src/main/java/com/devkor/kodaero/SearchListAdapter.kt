@@ -66,7 +66,7 @@ class SearchListAdapter(
 
             if (building.placeType == "CLASSROOM") {
                 // ViewModel을 사용해 API 호출
-                viewModel.fetchPlaceInfo(building.id, "CLASSROOM") { placeInfo ->
+                viewModel.fetchPlaceInfo(building.id) { placeInfo ->
                     placeInfo?.let {
                         if (it.detail != "."){
                             buildingAddressTextView.text = it.detail

@@ -64,9 +64,9 @@ class FetchDataViewModel : ViewModel() {
 
     }
 
-    fun fetchBuildingList(type: String) {
+    fun fetchBuildingList(placeType: String) {
         Log.d("FetchBuildingList","Done")
-        service.getAllBuildings(type).enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
+        service.getAllBuildings(placeType).enqueue(object : Callback<ApiResponse<BuildingListResponse>> {
             override fun onResponse(call: Call<ApiResponse<BuildingListResponse>>, response: Response<ApiResponse<BuildingListResponse>>) {
                 if (response.isSuccessful) {
                     _buildingList.value = response.body()?.data?.list ?: emptyList()
@@ -126,8 +126,8 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
-    fun searchFacilities(type: String) {
-        service.searchFacilities(type).enqueue(object : Callback<ApiResponse<IndividualFacilityListResponse>> {
+    fun searchFacilities(placeType: String) {
+        service.searchFacilities(placeType).enqueue(object : Callback<ApiResponse<IndividualFacilityListResponse>> {
             override fun onResponse(
                 call: Call<ApiResponse<IndividualFacilityListResponse>>,
                 response: Response<ApiResponse<IndividualFacilityListResponse>>
@@ -135,7 +135,7 @@ class FetchDataViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val facilities = response.body()?.data?.facilities ?: emptyList()
                     _individualFacilityList.value = facilities
-                    Log.d("FetchDataViewModel", "Fetched ${facilities.size} facilities of type $type")
+                    Log.d("FetchDataViewModel", "Fetched ${facilities.size} facilities of type $placeType")
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Log.e("FetchDataViewModel", "Error fetching facilities: $errorBody")
@@ -149,8 +149,8 @@ class FetchDataViewModel : ViewModel() {
     }
 
 
-    fun getFacilities(buildingId: Int, type: String) {
-        service.getFacilities(buildingId, type).enqueue(object : Callback<ApiResponse<FacilityListResponse>> {
+    fun getFacilities(buildingId: Int, placeType: String) {
+        service.getFacilities(buildingId, placeType).enqueue(object : Callback<ApiResponse<FacilityListResponse>> {
             override fun onResponse(call: Call<ApiResponse<FacilityListResponse>>, response: Response<ApiResponse<FacilityListResponse>>) {
                 if (response.isSuccessful) {
                     val facilities = response.body()?.data?.facilities ?: emptyMap()
@@ -211,8 +211,8 @@ class FetchDataViewModel : ViewModel() {
 
 
 
-    fun fetchPlaceInfo(roomId: Int, placeType: String, callback: (PlaceInfoResponse?) -> Unit) {
-        service.getPlaceInfo(roomId, placeType)
+    fun fetchPlaceInfo(roomId: Int, callback: (PlaceInfoResponse?) -> Unit) {
+        service.getPlaceInfo(roomId)
             .enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
                 override fun onResponse(
                     call: Call<ApiResponse<PlaceInfoResponse>>,

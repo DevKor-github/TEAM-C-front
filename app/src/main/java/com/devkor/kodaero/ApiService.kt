@@ -26,7 +26,7 @@ interface ApiService {
 
     @GET("search/buildings")
     fun getAllBuildings(
-        @Query("type") type: String
+        @Query("placeType") placeType: String
     ): Call<ApiResponse<BuildingListResponse>>
 
     @GET("search/buildings/{buildingId}")
@@ -36,13 +36,13 @@ interface ApiService {
 
     @GET("search/facilities")
     fun searchFacilities(
-        @Query("type") type: String
+        @Query("placeType") placeType: String
     ): Call<ApiResponse<IndividualFacilityListResponse>>
 
     @GET("search/buildings/{buildingId}/facilities")
     fun getFacilities(
         @Path("buildingId") buildingId: Int,
-        @Query("type") type: String
+        @Query("placeType") placeType: String
     ): Call<ApiResponse<FacilityListResponse>>
 
     @GET("routes")
@@ -58,17 +58,16 @@ interface ApiService {
     ): Call<ApiResponse<List<RouteResponse>>>  // List<RouteResponse>로 반환 타입 변경
 
     @GET("search/buildings/{id}/floor/{floor}/mask/{redValue}")
-    fun getMaskInfo(
+        fun getMaskInfo(
         @Path("id") id: Int,
         @Path("floor") floor: Int,
         @Path("redValue") redValue: Int,
         @Query("type") type: String
     ): Call<ApiResponse<MaskInfoResponse>>
 
-    @GET("search/place/{roomid}")
+    @GET("search/place/{placeId}")
     fun getPlaceInfo(
-        @Path("roomid") roomId: Int,
-        @Query("placeType") placeType: String
+        @Path("placeId") roomId: Int
     ): Call<ApiResponse<PlaceInfoResponse>>
 }
 
@@ -93,7 +92,7 @@ data class BuildingItem(
     val floor: Int,
     val underFloor: Int,
     val nextBuildingTime: String,
-    val facilityTypes: List<String>,
+    val placeTypes: List<String>,
     val operating: Boolean
 )
 
@@ -161,6 +160,7 @@ data class IndividualFacilityListResponse(
 )
 
 data class FacilityItem(
+    val id: Int,
     val facilityId: Int,
     val name: String,
     val availability: Boolean,
@@ -174,6 +174,23 @@ data class FacilityItem(
     val xcoord: Int,
     val ycoord: Int,
     val facilityType: String
+)
+
+data class IndividualFacilityItem(
+    val id: Int,
+    val buildingId: Int,
+    val buildingName: String,
+    val name: String,
+    val detail: String,
+    val floor: Int,
+    val operatingTime: String,
+    val plugAvailability: Boolean,
+    val longitude: Double,
+    val latitude: Double,
+    val locationType: String,
+    val operating: Boolean,
+    val xcoord: Int,
+    val ycoord: Int
 )
 
 data class RouteResponse(

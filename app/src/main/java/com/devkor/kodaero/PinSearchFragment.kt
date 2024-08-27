@@ -183,12 +183,12 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
         viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
             facilities.forEach { facility ->
-                facilitiesMap[facility.facilityId] = listOf(facility).map {
+                facilitiesMap[facility.id] = listOf(facility).map {
                     it.copy(facilityType = this@PinSearchFragment.facilityType) // Copy with facilityType
                 }
                 addMarker(
                     LatLng(facility.latitude, facility.longitude),
-                    facility.facilityId,
+                    facility.id,
                     facility.name
                 )
             }
@@ -197,7 +197,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             }
         })
     }
-
 
     private fun addMarker(position: LatLng, id: Int, text: String) {
         binding.root.post {
@@ -260,7 +259,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         val selectedDrawableResId = resources.getIdentifier(selectedDrawableName, "drawable", requireContext().packageName)
 
         val id = marker.tag as Int
-        val facilityName = facilitiesMap[id]?.firstOrNull { it.facilityId == id }?.name ?: ""
+        val facilityName = facilitiesMap[id]?.firstOrNull { it.id == id }?.name ?: ""
 
         marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
             OverlayImage.fromBitmap(createCustomDrawableWithText(selectedDrawableResId, facilityName))
@@ -297,7 +296,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             val unselectedDrawableName = "pin_${facilityType.lowercase()}"
             val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
             val id = marker.tag as Int
-            val facilityName = facilitiesMap[id]?.firstOrNull { it.facilityId == id }?.name ?: ""
+            val facilityName = facilitiesMap[id]?.firstOrNull { it.id == id }?.name ?: ""
 
             marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
                 OverlayImage.fromBitmap(createCustomDrawableWithText(unselectedDrawableResId, facilityName))
