@@ -125,7 +125,9 @@ data class BuildingSearchItem(
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int,
-    val placeType: String
+    val locationType: String,
+    val placeType: String,
+    val buildingId: Int
 )
 
 data class RoomListResponse(

@@ -58,15 +58,15 @@ class SearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.placeType == "TAG") {
+            if (buildingItem.locationType == "TAG") {
                 // 건물 태그를 선택했을 때 태그 추가
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
-            } else if (buildingItem.placeType == "BUILDING") {
+            } else if (buildingItem.locationType == "BUILDING") {
                 // 건물을 선택했을 때 OpenModal 함수 호출
                 openLocationModal(requireActivity(), buildingItem)
-            } else if (buildingItem.placeType == "CLASSROOM") {
+            } else if (buildingItem.locationType == "PLACE") {
                 // 장소을 선택했을 때 Navigate 함수 호출
                 navigateToInnerMapFragment(buildingItem.id)
             }
