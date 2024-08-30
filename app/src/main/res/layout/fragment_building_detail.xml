@@ -1,292 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/building_detail_image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/building_detail_layout"
-        android:layout_below="@id/building_detail_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/building_detail_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp">
-
-            <TextView
-                android:id="@+id/building_detail_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="고려대학교 서울캠퍼스애기능생활관"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/pretendard_semibold"/>
-
-            <ImageButton
-                android:id="@+id/building_detail_bookmarked_button"
-                android:src="@drawable/button_bookmarked_off"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@android:color/transparent"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/building_detail_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="서울 성북구 안암로 73-15"
-            android:textSize="12dp"
-            android:textColor="@color/dark_gray"
-            android:fontFamily="@font/pretendard_regular"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp">
-
-            <TextView
-                android:id="@+id/building_detail_operating_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="운영 중"
-                android:textSize="12dp"
-                android:textColor="@color/red"
-                android:fontFamily="@font/pretendard_semibold"/>
-
-            <TextView
-                android:id="@+id/building_detail_deadline"
-                android:layout_toEndOf="@id/building_detail_operating_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22:00"
-                android:textSize="12dp"
-                android:textColor="@color/gray"
-                android:fontFamily="@font/pretendard_regular"/>
-
-            <TextView
-                android:id="@+id/building_detail_deadline_text"
-                android:layout_toEndOf="@id/building_detail_deadline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:text="에 운영 종료"
-                android:textSize="12dp"
-                android:textColor="@color/gray"
-                android:fontFamily="@font/pretendard_regular"/>
-
-            <ImageButton
-                android:id="@+id/show_operating_time_button"
-                android:layout_toEndOf="@id/building_detail_deadline_text"
-                android:src="@drawable/button_show_operating_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@android:color/transparent"/>
-
-        </RelativeLayout>
+            android:layout_height="220dp"/>
 
         <LinearLayout
-            android:id="@+id/building_detail_operating_time_layout"
-            android:layout_width="wrap_content"
+            android:id="@+id/building_detail_layout"
+            android:layout_below="@id/building_detail_image"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-            
-            <LinearLayout
-                android:id="@+id/building_detail_operating_time_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                
+            android:paddingHorizontal="15dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
                 <TextView
+                    android:id="@+id/building_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="고려대학교 서울캠퍼스애기능생활관"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pretendard_semibold"/>
+
+                <ImageButton
+                    android:id="@+id/building_detail_bookmarked_button"
+                    android:src="@drawable/button_bookmarked_off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/building_detail_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="서울 성북구 안암로 73-15"
+                android:textSize="12dp"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/pretendard_regular"/>
+
+            <RelativeLayout
+                android:id="@+id/show_operating_time_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp">
+
+                <TextView
+                    android:id="@+id/building_detail_operating_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="평일"
+                    android:text="운영 중"
                     android:textSize="12dp"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/red"
                     android:fontFamily="@font/pretendard_semibold"/>
 
                 <TextView
+                    android:id="@+id/building_detail_deadline"
+                    android:layout_toEndOf="@id/building_detail_operating_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10:00-22:00"
+                    android:text="22:00"
                     android:textSize="12dp"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/gray"
                     android:fontFamily="@font/pretendard_regular"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/building_detail_deadline_text"
+                    android:layout_toEndOf="@id/building_detail_deadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="에 운영 종료"
+                    android:textSize="12dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/pretendard_regular"/>
+
+                <ImageButton
+                    android:id="@+id/show_operating_time_button"
+                    android:layout_toEndOf="@id/building_detail_deadline_text"
+                    android:src="@drawable/button_show_operating_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/building_detail_operating_time_2"
+                android:id="@+id/building_detail_operating_time_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="주말"
-                    android:textSize="12dp"
-                    android:textColor="@color/dark_gray"
-                    android:fontFamily="@font/pretendard_semibold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:00-18:00"
-                    android:textSize="12dp"
-                    android:textColor="@color/dark_gray"
-                    android:fontFamily="@font/pretendard_regular"/>
-
-            </LinearLayout>
-            
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/building_detail_facility_types"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_building_detail_types"/>
-
-        <android.widget.Button
-            android:id="@+id/modal_innermap_button"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="건물 내부 지도 보기"
-            android:textSize="16dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_semibold"
-            android:background="@drawable/rounded_rec_red"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <android.widget.Button
-                android:id="@+id/modal_depart_button"
-                android:layout_width="185dp"
-                android:layout_height="45dp"
-                android:layout_centerVertical="true"
-                android:text="출발"
-                android:textSize="16dp"
-                android:textColor="@color/red"
-                android:fontFamily="@font/pretendard_semibold"
-                android:background="@drawable/rounded_rec_white"/>
-
-            <android.widget.Button
-                android:id="@+id/modal_arrive_button"
-                android:layout_width="185dp"
-                android:layout_height="45dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:text="도착"
-                android:textSize="16dp"
-                android:textColor="@color/red"
-                android:fontFamily="@font/pretendard_semibold"
-                android:background="@drawable/rounded_rec_white"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-    
-    <View
-        android:id="@+id/building_detail_boundary"
-        android:layout_below="@id/building_detail_layout"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="#F2F2F2"/>
-
-    <RelativeLayout
-        android:id="@+id/building_detail_layout_2"
-        android:layout_below="@id/building_detail_boundary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/building_detail_button_layout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-
-            <android.widget.Button
-                android:id="@+id/building_detail_facility_button"
-                android:layout_width="135dp"
-                android:layout_height="38dp"
-                android:text="시설 정보"
-                android:textSize="14dp"
-                android:textColor="@color/bright_gray"
-                android:fontFamily="@font/pretendard_semibold"
-                android:background="@color/red"/>
-
-            <android.widget.Button
-                android:id="@+id/building_detail_community_button"
-                android:layout_toStartOf="@id/building_detail_tmi_button"
-                android:layout_toEndOf="@id/building_detail_facility_button"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:text="커뮤니티"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/pretendard_semibold"
-                android:background="@color/white"/>
-
-            <android.widget.Button
-                android:id="@+id/building_detail_tmi_button"
-                android:layout_width="135dp"
-                android:layout_height="38dp"
-                android:layout_alignParentEnd="true"
-                android:text="건물 tmi"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/pretendard_semibold"
-                android:background="@color/white"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_below="@+id/building_detail_button_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/building_detail_facilities_gridview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="25dp"
-                android:layout_centerHorizontal="true"
-                android:verticalSpacing="20dp"
-                android:horizontalSpacing="20dp"
-                android:visibility="visible"
-                tools:listitem="@layout/item_building_detail_facilities"/>
-
-            <ScrollView
-                android:id="@+id/building_detail_community_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:visibility="gone">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/building_detail_operating_time_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="평일"
+                        android:textSize="12dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00-22:00"
+                        android:textSize="12dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/building_detail_operating_time_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="주말"
+                        android:textSize="12dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00-18:00"
+                        android:textSize="12dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/building_detail_facility_types"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_building_detail_types"/>
+
+            <android.widget.Button
+                android:id="@+id/modal_innermap_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="건물 내부 지도 보기"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/rounded_rec_red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+
+                <android.widget.Button
+                    android:id="@+id/modal_depart_button"
+                    android:layout_width="185dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:text="출발"
+                    android:textSize="16dp"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:background="@drawable/rounded_rec_white"/>
+
+                <android.widget.Button
+                    android:id="@+id/modal_arrive_button"
+                    android:layout_width="185dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="도착"
+                    android:textSize="16dp"
+                    android:textColor="@color/red"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:background="@drawable/rounded_rec_white"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/building_detail_boundary"
+            android:layout_below="@id/building_detail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#F2F2F2"/>
+
+        <RelativeLayout
+            android:id="@+id/building_detail_layout_2"
+            android:layout_below="@id/building_detail_boundary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/building_detail_button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <android.widget.Button
+                    android:id="@+id/building_detail_facility_button"
+                    android:layout_width="135dp"
+                    android:layout_height="38dp"
+                    android:text="시설 정보"
+                    android:textSize="14dp"
+                    android:textColor="@color/bright_gray"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:background="@color/red"/>
+
+                <android.widget.Button
+                    android:id="@+id/building_detail_community_button"
+                    android:layout_toStartOf="@id/building_detail_tmi_button"
+                    android:layout_toEndOf="@id/building_detail_facility_button"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:text="커뮤니티"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:background="@color/white"/>
+
+                <android.widget.Button
+                    android:id="@+id/building_detail_tmi_button"
+                    android:layout_width="135dp"
+                    android:layout_height="38dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="건물 tmi"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:background="@color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_below="@+id/building_detail_button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/building_detail_facilities_gridview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:verticalSpacing="20dp"
+                    android:horizontalSpacing="20dp"
+                    android:visibility="visible"
+                    tools:listitem="@layout/item_building_detail_facilities"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"/>
+
+                <RelativeLayout
+                    android:id="@+id/building_detail_community_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
                     <ImageView
                         android:src="@drawable/example_building_detail_community"
@@ -297,18 +304,12 @@
 
                 </RelativeLayout>
 
-            </ScrollView>
-
-            <ScrollView
-                android:id="@+id/building_detail_tmi_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
                 <RelativeLayout
+                    android:id="@+id/building_detail_tmi_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingVertical="10dp">
+                    android:paddingVertical="10dp"
+                    android:visibility="gone">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -351,10 +352,10 @@
 
                 </RelativeLayout>
 
-            </ScrollView>
+            </RelativeLayout>
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
