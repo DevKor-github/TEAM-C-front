@@ -79,7 +79,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         closeModal()
@@ -422,20 +421,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun openBuildingModal(buildingId: Int) {
-        val building = getBuildingInfo(buildingId) ?: return  // 빌딩 정보를 가져옴
+        val building = getBuildingInfo(buildingId) ?: return
 
-        val buildingName =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
-        val buildingAddress =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
-        val buildingOperating =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
-        val buildingNextOperating =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
-        val buildingNextOperatingCont =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
-        val standardBottomSheet =
-            binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+        val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+        val buildingOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+        val buildingNextOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
+        val buildingNextOperatingCont = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
+        val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         buildingName.text = building.name
@@ -468,27 +461,55 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }
+
         selectedBuildingName = building.name
         selectedBuildingAboveFloor = building.floor
         selectedBuildingUnderFloor = building.underFloor
         selectedBuildingId = building.buildingId
 
-        val facilityTypesRecyclerView =
-            binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+        val facilityTypesRecyclerView = binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
         val adapter = FacilityTypeAdapter(building.placeTypes, requireContext())
         facilityTypesRecyclerView.adapter = adapter
 
-        buildingName.setOnClickListener {
-            selectedBuildingId?.let { id ->
-                val fragment = BuildingDetailFragment.newInstance(id)
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.main_container, fragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-            }
+        standardBottomSheet.setOnClickListener {
+            navigateToBuildingDetailFragment()
         }
 
+        var isInitialExpand = true
+
+        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
+                    navigateToBuildingDetailFragment()
+                }
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    isInitialExpand = true
+                } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    isInitialExpand = false
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // Optionally handle the sliding state here if needed
+            }
+        })
+
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun navigateToBuildingDetailFragment() {
+        selectedBuildingId?.let { id ->
+            val fragmentManager = parentFragmentManager
+
+            // Remove any existing BuildingDetailFragment for this building from the back stack
+            fragmentManager.popBackStack("BuildingDetailFragment_$id", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+
+            val fragment = BuildingDetailFragment.newInstance(id)
+            val transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.main_container, fragment, "BuildingDetailFragment_$id")
+            transaction.addToBackStack("BuildingDetailFragment_$id")
+            transaction.commit()
+        }
     }
 
     private fun getBuildingInfo(buildingId: Int): BuildingItem? {
@@ -502,8 +523,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             return null // 또는 예외 처리
         }
     }
-
-
 
     private fun updateMarkersVisibility(zoom: Double) {
         for (marker in markers) {

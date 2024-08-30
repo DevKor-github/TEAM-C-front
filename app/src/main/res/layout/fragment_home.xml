@@ -224,7 +224,4 @@
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"/>
 
-    <include layout="@layout/pin_search_modal_sheet"
-        android:id="@+id/pin_search_included_layout"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
