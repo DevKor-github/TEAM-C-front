@@ -45,7 +45,7 @@ class SearchListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         val building = modifiedList[position]
-        return when (building.placeType) {
+        return when (building.locationType) {
             "TAG" -> TYPE_TAG
             "BUILDING" -> TYPE_BUILDING
             else -> TYPE_ROOM
@@ -64,7 +64,7 @@ class SearchListAdapter(
         fun bind(building: BuildingSearchItem) {
             buildingNameTextView.text = building.name
 
-            if (building.placeType == "CLASSROOM") {
+            if (building.locationType == "CLASSROOM") {
                 // ViewModel을 사용해 API 호출
                 viewModel.fetchPlaceInfo(building.id) { placeInfo ->
                     placeInfo?.let {
@@ -94,8 +94,8 @@ class SearchListAdapter(
     private fun getModifiedList(): List<BuildingSearchItem> {
         val modifiedList = mutableListOf<BuildingSearchItem>()
         for (building in buildingList) {
-            if (building.placeType == "BUILDING" && false) {
-                val modifiedBuilding = building.copy(name = "${building.name} ${Constants.TAG_SUFFIX}", placeType = "TAG")
+            if (building.locationType == "BUILDING" && false) {
+                val modifiedBuilding = building.copy(name = "${building.name} ${Constants.TAG_SUFFIX}", locationType = "TAG")
                 modifiedList.add(modifiedBuilding)
             }
             modifiedList.add(building)

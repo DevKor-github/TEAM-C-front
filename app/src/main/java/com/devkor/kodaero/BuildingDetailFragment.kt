@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -45,18 +46,20 @@ class BuildingDetailFragment : Fragment() {
         val buildingNameTextView = view.findViewById<TextView>(R.id.building_detail_name)
         val buildingAddressTextView = view.findViewById<TextView>(R.id.building_detail_address)
         val buildingDeadlineTextView = view.findViewById<TextView>(R.id.building_detail_deadline)
+        val buildingDeadlineTextTextView = view.findViewById<TextView>(R.id.building_detail_deadline_text)
         val buildingOperatingStatusTextView = view.findViewById<TextView>(R.id.building_detail_operating_status)
         val facilityRecyclerView = view.findViewById<RecyclerView>(R.id.building_detail_facility_types)
         val buildingImageView = view.findViewById<ImageView>(R.id.building_detail_image)
         val operatingTimeLayout = view.findViewById<LinearLayout>(R.id.building_detail_operating_time_layout)
+        val showOperatingTimeLayout = view.findViewById<RelativeLayout>(R.id.show_operating_time_layout)
         val showOperatingTimeButton = view.findViewById<ImageButton>(R.id.show_operating_time_button)
         val facilityButton = view.findViewById<Button>(R.id.building_detail_facility_button)
         val communityButton = view.findViewById<Button>(R.id.building_detail_community_button)
         val tmiButton = view.findViewById<Button>(R.id.building_detail_tmi_button)
 
         val facilityGridView = view.findViewById<RecyclerView>(R.id.building_detail_facilities_gridview)
-        val communityLayout = view.findViewById<ScrollView>(R.id.building_detail_community_layout)
-        val tmiLayout = view.findViewById<ScrollView>(R.id.building_detail_tmi_layout)
+        val communityLayout = view.findViewById<RelativeLayout>(R.id.building_detail_community_layout)
+        val tmiLayout = view.findViewById<RelativeLayout>(R.id.building_detail_tmi_layout)
         val tmiNameTextView = view.findViewById<TextView>(R.id.building_detail_tmi_name)
         val tmiDetailTextView = view.findViewById<TextView>(R.id.building_detail_tmi)
 
@@ -64,7 +67,7 @@ class BuildingDetailFragment : Fragment() {
         operatingTimeLayout.visibility = View.GONE
 
         // 운영 시간 버튼 클릭 시 토글
-        showOperatingTimeButton.setOnClickListener {
+        showOperatingTimeLayout.setOnClickListener {
             val isVisible = operatingTimeLayout.visibility == View.VISIBLE
             if (isVisible) {
                 operatingTimeLayout.visibility = View.GONE
@@ -88,8 +91,10 @@ class BuildingDetailFragment : Fragment() {
 
                 if (buildingDetail?.operating == true) {
                     buildingOperatingStatusTextView.text = "운영 중"
+                    buildingDeadlineTextTextView.text = "에 운영 종료"
                 } else {
                     buildingOperatingStatusTextView.text = "운영 종료"
+                    buildingDeadlineTextTextView.text = "에 운영 시작"
                 }
 
                 // Load the image using Glide

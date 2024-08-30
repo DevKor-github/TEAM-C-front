@@ -101,12 +101,12 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.placeType == "TAG") {
+            if (buildingItem.locationType == "TAG") {
                 addTag(buildingItem.name)
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
             } else {
-                returnToGetDirectionsFragment(buildingItem.name, buildingItem.placeType, buildingItem.id, 0.0, 0.0)
+                returnToGetDirectionsFragment(buildingItem.name, buildingItem.locationType, buildingItem.id, 0.0, 0.0)
 
             }
             taggedBuildingId = buildingItem.id
