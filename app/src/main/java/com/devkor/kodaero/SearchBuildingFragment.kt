@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devkor.kodaero.databinding.FragmentSearchBuildingBinding
+import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.*
 
 class SearchBuildingFragment : Fragment() {
@@ -31,6 +32,8 @@ class SearchBuildingFragment : Fragment() {
 
     // 검색 필드의 내용을 가져와 검색 수행
     private lateinit var searchText : String
+
+    private val initCameraPosition: LatLng = LatLng(37.59, 127.03)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,19 +61,23 @@ class SearchBuildingFragment : Fragment() {
         binding.searchListRecyclerview.layoutManager = layoutManager
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
-            if (buildingItem.locationType == "TAG") {
-                // 건물 태그를 선택했을 때 태그 추가
-                addTag(buildingItem.name)
-                binding.customEditTextLayout.editText.setText("")
-                binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
-            } else if (buildingItem.locationType == "BUILDING") {
-                // 건물을 선택했을 때 OpenModal 함수 호출
-                openLocationModal(requireActivity(), buildingItem)
-            } else if (buildingItem.locationType == "PLACE") {
-                // 장소을 선택했을 때 Navigate 함수 호출
-                navigateToInnerMapFragment(buildingItem.id)
+            if (buildingItem.id == null) {
+                navigateToPinSearchFragment(buildingItem.placeType)
+            } else {
+                if (buildingItem.locationType == "TAG") {
+                    // 건물 태그를 선택했을 때 태그 추가
+                    addTag(buildingItem.name)
+                    binding.customEditTextLayout.editText.setText("")
+                    binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
+                } else if (buildingItem.locationType == "BUILDING") {
+                    // 건물을 선택했을 때 OpenModal 함수 호출
+                    openLocationModal(requireActivity(), buildingItem)
+                } else if (buildingItem.locationType == "PLACE") {
+                    // 장소을 선택했을 때 Navigate 함수 호출
+                    navigateToInnerMapFragment(buildingItem.id)
+                }
+                else Log.e("SearchBuildingFragment","No mating type")
             }
-            else Log.e("SearchBuildingFragment","No mating type")
             taggedBuildingId = buildingItem.id
         }
 
@@ -186,4 +193,15 @@ class SearchBuildingFragment : Fragment() {
         }
     }
 
+    private fun navigateToPinSearchFragment(keyword: String) {
+        val currentCameraPosition = initCameraPosition
+        val currentZoomLevel = 14.3
+
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword, currentCameraPosition, currentZoomLevel)
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.popBackStack()
+        transaction.add(R.id.main_container, pinSearchFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }
