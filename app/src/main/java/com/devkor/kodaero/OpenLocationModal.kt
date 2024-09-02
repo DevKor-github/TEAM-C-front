@@ -44,7 +44,7 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
                 }
             }
             delay(100)
-            homeFragment.openBuildingModal(place.id)
+            place.id?.let { homeFragment.openBuildingModal(it) }
         }
     } catch (e: Exception) {
         Log.e("openLocationModal", "Error in openLocationModal", e)

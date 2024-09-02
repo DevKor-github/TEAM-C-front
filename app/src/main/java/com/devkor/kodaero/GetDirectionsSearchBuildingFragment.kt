@@ -106,7 +106,10 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
                 binding.customEditTextLayout.editText.setText("")
                 binding.customEditTextLayout.editText.hint = "건물 내 장소를 입력하세요"
             } else {
-                returnToGetDirectionsFragment(buildingItem.name, buildingItem.locationType, buildingItem.id, 0.0, 0.0)
+                buildingItem.id?.let {
+                    returnToGetDirectionsFragment(buildingItem.name, buildingItem.locationType,
+                        it, 0.0, 0.0)
+                }
 
             }
             taggedBuildingId = buildingItem.id
