@@ -121,7 +121,7 @@ data class BuildingDetailMainFacilityList(
 
 
 data class BuildingSearchItem(
-    val id: Int,
+    val id: Int?,
     val name: String,
     val address: String?,
     val longitude: Double?,
