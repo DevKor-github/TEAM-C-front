@@ -95,6 +95,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            is TeamIntroductionFragment -> {
+                fragmentManager.popBackStack("MypageFragment", 0)
+                return
+            }
+
             else -> {
                 Log.e("MainActivity", "Doesn't have modal")
             }
