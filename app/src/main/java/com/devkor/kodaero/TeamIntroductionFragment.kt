@@ -23,7 +23,6 @@ class TeamIntroductionFragment : Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
-        // Handle the device's back button
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().supportFragmentManager.popBackStack()
         }

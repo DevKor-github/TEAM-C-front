@@ -87,8 +87,7 @@
                 android:text="Lv."
                 android:textSize="10dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/pretendard_regular"
-                android:visibility="gone"/>
+                android:fontFamily="@font/pretendard_regular"/>
 
             <TextView
                 android:id="@+id/user_level"

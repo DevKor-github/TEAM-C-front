@@ -277,10 +277,9 @@ class FetchDataViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val newAccessToken = response.headers()["AccessToken"]
 
-                    // Check if a new accessToken is present in the response headers
                     if (!newAccessToken.isNullOrEmpty()) {
                         Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
-                        TokenManager.saveTokens(newAccessToken, refreshToken)  // Update the new accessToken
+                        TokenManager.saveTokens(newAccessToken, refreshToken)
                     }
 
                     _userInfo.value = response.body()?.data
@@ -295,4 +294,40 @@ class FetchDataViewModel : ViewModel() {
             }
         })
     }
+
+    fun submitSuggestion(title: String, type: String, content: String) {
+        val accessToken = TokenManager.getAccessToken()
+        val refreshToken = TokenManager.getRefreshToken()
+
+        if (accessToken == null || refreshToken == null) {
+            Log.e("FetchDataViewModel", "No tokens available.")
+            return
+        }
+
+        val suggestionRequest = SuggestionRequest(title, type, content)
+
+        service.summitSuggestion(accessToken, refreshToken, suggestionRequest).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                responseCode = response.code()
+
+                if (response.isSuccessful) {
+                    val newAccessToken = response.headers()["AccessToken"]
+
+                    if (!newAccessToken.isNullOrEmpty()) {
+                        Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
+                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                    }
+                    Log.d("FetchDataViewModel", "Suggestion submitted successfully")
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("FetchDataViewModel", "Error submitting suggestion: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("FetchDataViewModel", "Failure submitting suggestion: ${t.message}")
+            }
+        })
+    }
+
 }

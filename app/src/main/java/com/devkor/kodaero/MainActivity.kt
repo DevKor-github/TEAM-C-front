@@ -95,9 +95,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            is TeamIntroductionFragment -> {
-                fragmentManager.popBackStack("MypageFragment", 0)
-                return
+            is MypageFragment -> {
+                if (currentFragment.isLogoutConfirmationVisible()) {
+                    currentFragment.hideLogoutConfirmation()
+                    return
+                }
+            }
+
+            is SuggestionFragment -> {
+                if (currentFragment.isSuggestionSummitConfirmationVisible()) {
+                    currentFragment.hideSuggestionSummitConfirmation()
+                    return
+                }
             }
 
             else -> {
@@ -122,7 +131,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->

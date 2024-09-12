@@ -83,12 +83,25 @@ interface ApiService {
         @Header("AccessToken") accessToken: String,
         @Header("RefreshToken") refreshToken: String
     ): Call<ApiResponse<UserInfo>>
+
+    @POST("suggestions")
+    fun summitSuggestion(
+        @Header("AccessToken") accessToken: String,
+        @Header("RefreshToken") refreshToken: String,
+        @Body suggestionRequest: SuggestionRequest
+    ): Call<Void>
 }
 
 data class LoginRequest(
     val provider: String,
     val email: String,
     val token: String
+)
+
+data class SuggestionRequest(
+    val title: String,
+    val type: String,
+    val content: String
 )
 
 data class UserTokens(
