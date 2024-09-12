@@ -1,5 +1,7 @@
 package com.devkor.kodaero
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +14,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.devkor.kodaero.databinding.FragmentSuggestionBinding
+import com.kakao.sdk.common.util.KakaoCustomTabsClient
+import com.kakao.sdk.talk.TalkApiClient
 
 class SuggestionFragment : Fragment() {
 
@@ -45,6 +49,14 @@ class SuggestionFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.suggestionKakaoButton.setOnClickListener {
+            navigateToKakao()
+        }
+
+        binding.suggestionInstarButton.setOnClickListener {
+            navigateToInstar()
+        }
+
         binding.suggestionSelectType.setOnClickListener {
             toggleSuggestionTypeScroll()
         }
@@ -114,6 +126,16 @@ class SuggestionFragment : Fragment() {
                 .replace(R.id.main_container, HomeFragment())
                 .commit()
         }
+    }
+
+    private fun navigateToKakao() {
+        val url = TalkApiClient.instance.addChannelUrl("kodaero_ku")
+        context?.let { KakaoCustomTabsClient.openWithDefault(it, url) }
+    }
+
+    private fun navigateToInstar() {
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/kodaero_ku/"))
+        startActivity(intent)
     }
 
     private fun toggleSuggestionTypeScroll() {

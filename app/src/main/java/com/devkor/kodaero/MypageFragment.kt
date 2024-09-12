@@ -1,12 +1,15 @@
 package com.devkor.kodaero
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.devkor.kodaero.databinding.FragmentMypageBinding
+import com.kakao.sdk.common.util.KakaoCustomTabsClient
+import com.kakao.sdk.talk.TalkApiClient
 
 class MypageFragment : Fragment() {
 
@@ -51,6 +54,14 @@ class MypageFragment : Fragment() {
             navigateToTeamIntroductionFragment()
         }
 
+        binding.kodaeroKakaoButton.setOnClickListener {
+            navigateToKakao()
+        }
+
+        binding.kodaeroInstarButton.setOnClickListener {
+            navigateToInstar()
+        }
+
         binding.logoutButton.setOnClickListener {
             showLogoutConfirmation()
         }
@@ -80,6 +91,16 @@ class MypageFragment : Fragment() {
         transaction.add(R.id.main_container, teamIntroductionFragment)
         transaction.addToBackStack("TeamIntroductionFragment")
         transaction.commit()
+    }
+
+    private fun navigateToKakao() {
+        val url = TalkApiClient.instance.addChannelUrl("kodaero_ku")
+        context?.let { KakaoCustomTabsClient.openWithDefault(it, url) }
+    }
+
+    private fun navigateToInstar() {
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/kodaero_ku/"))
+        startActivity(intent)
     }
 
     private fun showLogoutConfirmation() {
