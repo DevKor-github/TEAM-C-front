@@ -85,13 +85,15 @@ data class BuildingItem(
     val imageUrl: String,
     val detail: String,
     val address: String?,
-    val operatingTime: String,
+    val weekdayOperatingTime: String,
+    val saturdayOperatingTime: String,
+    val sundayOperatingTime: String,
     val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
     val floor: Int,
     val underFloor: Int,
-    val nextBuildingTime: String,
+    val nextBuildingTime: String?,
     val placeTypes: List<String>,
     val operating: Boolean
 )
@@ -137,7 +139,7 @@ data class RoomListResponse(
 data class RoomList(
     val type: String,
     val id: Int,
-    val facilityType: String,
+    val placeType: String,
     val name: String,
     val detail: String,
     val availability: Boolean,
