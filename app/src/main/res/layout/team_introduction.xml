@@ -16,10 +16,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/introduction_header"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="0dp"
         android:background="@color/bright_gray"
         android:elevation="8dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/introduction_guideline17">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/introduction_guideline2"
@@ -56,11 +58,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/introduction_guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/introduction_guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
+        app:layout_constraintGuide_percent="0.1"/>
 
     <TextView
         android:id="@+id/introduction_member"
