@@ -76,6 +76,9 @@ dependencies {
     implementation("com.caverock:androidsvg:1.4")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.otaliastudios:zoomlayout:1.9.0")
-
-
+    implementation("com.kakao.sdk:v2-user:2.20.0")
+    implementation ("com.google.firebase:firebase-auth:22.0.0")
+    implementation ("com.google.firebase:firebase-bom:32.0.0")
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")
+    implementation ("com.kakao.sdk:v2-talk:2.10.0")
 }

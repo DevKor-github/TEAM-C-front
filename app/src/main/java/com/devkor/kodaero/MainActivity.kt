@@ -95,6 +95,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            is MypageFragment -> {
+                if (currentFragment.isLogoutConfirmationVisible()) {
+                    currentFragment.hideLogoutConfirmation()
+                    return
+                }
+            }
+
+            is SuggestionFragment -> {
+                if (currentFragment.isSuggestionSummitConfirmationVisible()) {
+                    currentFragment.hideSuggestionSummitConfirmation()
+                    return
+                }
+            }
+
             else -> {
                 Log.e("MainActivity", "Doesn't have modal")
             }
@@ -117,7 +131,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
