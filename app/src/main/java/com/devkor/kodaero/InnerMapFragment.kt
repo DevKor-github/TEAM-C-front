@@ -234,6 +234,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         val pinOnoffButton: ImageButton = binding.pinOnoffButton
         pinOnoffButton.setOnClickListener {
             // Toggle scroll visibility
@@ -321,6 +323,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 // roomList를 로그로 출력
                 Log.d("InnerMapFragment", "Room: $roomList")
                 floorRoomList = roomList
+                updateFacilityButtonsVisibility(floorRoomList)
                 updateTouchHandler()
             } else {
                 Log.e("InnerMapFragment", "Room list is empty")
@@ -682,5 +685,39 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         })
 
     }
+
+    private fun updateFacilityButtonsVisibility(floorRoomList: List<RoomList>) {
+        // facilityType에 따라 대응하는 버튼을 ViewBinding으로 맵핑
+        val facilityButtonMap = mapOf(
+            "CAFE" to _binding!!.cafeButton,
+            "CAFETERIA" to _binding!!.cafeteriaButton,
+            "CONVENIENCE_STORE" to _binding!!.convenienceStoreButton,
+            "READING_ROOM" to _binding!!.readingRoomButton,
+            "STUDY_ROOM" to _binding!!.studyRoomButton,
+            "LOUNGE" to _binding!!.loungeButton,
+            "WATER_PURIFIER" to _binding!!.waterPurifierButton,
+            "PRINTER" to _binding!!.printerButton,
+            "VENDING_MACHINE" to _binding!!.vendingMachineButton,
+            "SMOKING_BOOTH" to _binding!!.smokingAreaButton,
+            "SLEEPING_ROOM" to _binding!!.sleepingRoomButton,
+            "BOOK_RETURN_MACHINE" to _binding!!.bookReturnMachineButton
+        )
+
+        // 버튼 모두 GONE으로 설정
+        facilityButtonMap.values.forEach { button ->
+            button.visibility = View.GONE
+            Log.e("qqqqqqqqqqqqqqqqq","sssss")
+        }
+
+        // roomList의 facilityType에 해당하는 버튼만 VISIBLE로 설정
+        Log.e("qqqqqqqqqqqqqqqqq","$floorRoomList")
+        floorRoomList.map { it.placeType }  // 각 room의 facilityType을 추출
+            .distinct()  // 중복된 facilityType을 제거
+            .forEach { placeType ->
+                Log.e("qqqqqqqqqqqqqqqqq","$placeType")
+                facilityButtonMap[placeType]?.visibility = View.VISIBLE  // 해당하는 버튼을 VISIBLE로 설정
+            }
+    }
+
 
 }
