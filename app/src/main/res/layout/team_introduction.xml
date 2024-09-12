@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF1F1">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/introduction_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/introduction_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bright_gray"
+        android:elevation="8dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/introduction_guideline17">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <ImageButton
+            android:id="@+id/back_to_mypage_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/grey_back_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/introduction_guideline2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="팀원 소개"
+            android:textColor="#424242"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/introduction_guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/introduction_guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <TextView
+        android:id="@+id/introduction_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="팀원 리스트"
+        android:textSize="14dp"
+        android:textColor="@color/map_main"
+        android:fontFamily="@font/pretendard_semibold"
+        app:layout_constraintStart_toStartOf="@id/introduction_guideline1"
+        app:layout_constraintTop_toBottomOf="@id/introduction_guideline3"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/introduction_front"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/introduction_guideline1"
+        app:layout_constraintTop_toBottomOf="@id/introduction_member"
+        android:background="@drawable/rounded_rec_white"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/introduction_front_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/introduction_guideline6"
+            app:layout_constraintEnd_toStartOf="@id/introduction_guideline7"
+            app:layout_constraintTop_toBottomOf="@id/introduction_guideline5">
+
+            <ImageView
+                android:id="@+id/red_tiger_icon"
+                android:src="@drawable/red_tiger_icon"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Front-end"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:fontFamily="@font/pretendard_semibold"
+                app:layout_constraintStart_toEndOf="@id/red_tiger_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintTop_toBottomOf="@id/introduction_front_text">
+
+            <TextView
+                android:id="@+id/introduction_front_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김주영"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="전상윤"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                app:layout_constraintTop_toBottomOf="@id/introduction_front_1"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/introduction_back"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/introduction_front"
+        app:layout_constraintTop_toBottomOf="@id/introduction_member"
+        android:background="@drawable/rounded_rec_white"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/introduction_back_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/introduction_guideline9"
+            app:layout_constraintEnd_toStartOf="@id/introduction_guideline10"
+            app:layout_constraintTop_toBottomOf="@id/introduction_guideline8">
+
+            <ImageView
+                android:id="@+id/red_tiger_icon_2"
+                android:src="@drawable/red_tiger_icon"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Back-end"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:fontFamily="@font/pretendard_semibold"
+                app:layout_constraintStart_toEndOf="@id/red_tiger_icon_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintTop_toBottomOf="@id/introduction_back_text">
+
+            <TextView
+                android:id="@+id/introduction_back_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="박승현"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/introduction_back_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="이예진"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                app:layout_constraintTop_toBottomOf="@id/introduction_back_1"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="양여은"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                app:layout_constraintTop_toBottomOf="@id/introduction_back_2"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/introduction_design"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/introduction_guideline1"
+        app:layout_constraintTop_toBottomOf="@id/introduction_front"
+        android:background="@drawable/rounded_rec_white"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/introduction_design_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/introduction_guideline12"
+            app:layout_constraintEnd_toStartOf="@id/introduction_guideline13"
+            app:layout_constraintTop_toBottomOf="@id/introduction_guideline11">
+
+            <ImageView
+                android:id="@+id/red_tiger_icon_3"
+                android:src="@drawable/red_tiger_icon"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Design"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:fontFamily="@font/pretendard_semibold"
+                app:layout_constraintStart_toEndOf="@id/red_tiger_icon_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintTop_toBottomOf="@id/introduction_design_text">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김민채"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/introduction_PM"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/introduction_design"
+        app:layout_constraintTop_toBottomOf="@id/introduction_back"
+        android:background="@drawable/rounded_rec_white"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/introduction_guideline16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/introduction_PM_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/introduction_guideline15"
+            app:layout_constraintEnd_toStartOf="@id/introduction_guideline16"
+            app:layout_constraintTop_toBottomOf="@id/introduction_guideline14">
+
+            <ImageView
+                android:id="@+id/red_tiger_icon_4"
+                android:src="@drawable/red_tiger_icon"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="PM"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:fontFamily="@font/pretendard_semibold"
+                app:layout_constraintStart_toEndOf="@id/red_tiger_icon_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintTop_toBottomOf="@id/introduction_PM_text">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김은서"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:src="@drawable/introduction_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/introduction_guideline1"
+        app:layout_constraintBottom_toTopOf="@id/introduction_guideline4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/introduction_guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"/>
+    
+    <ImageView
+        android:src="@drawable/icon_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="-90dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
