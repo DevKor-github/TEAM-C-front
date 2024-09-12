@@ -79,6 +79,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+
+    // 콜백이 이미 등록되었는지 여부를 추적하는 변수
+    private var isBottomSheetCallbackRegistered = false
+
+    // 바텀시트 상태 추적 변수
+    private var isInitialExpand = true
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         closeModal()
@@ -423,40 +430,54 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     fun openBuildingModal(buildingId: Int) {
         val building = getBuildingInfo(buildingId) ?: return
 
-        val buildingName = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
-        val buildingAddress = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
-        val buildingOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
-        val buildingNextOperating = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
-        val buildingNextOperatingCont = binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
-        val standardBottomSheet = binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val buildingName =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+        val buildingAddress =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+        val buildingOperating =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+        val buildingNextOperating =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
+        val buildingNextOperatingCont =
+            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
+        val standardBottomSheet =
+            binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
         buildingName.text = building.name
         buildingAddress.text = building.address
 
         when {
-            building.operatingTime.contains("00:00-00:00") -> {
+            building.weekdayOperatingTime.contains("00:00-00:00") ||
+                    building.saturdayOperatingTime.contains("00:00-00:00") ||
+                    building.sundayOperatingTime.contains("00:00-00:00") -> {
+
                 buildingOperating.text = "운영 정보 없음"
                 buildingOperating.setTextColor(resources.getColor(R.color.gray, null))
                 buildingNextOperating.text = null
                 buildingNextOperatingCont.text = null
             }
-            building.operatingTime.contains("00:00-23:59") -> {
+
+            building.weekdayOperatingTime.contains("00:00-23:59") &&
+                    building.saturdayOperatingTime.contains("00:00-23:59") &&
+                    building.sundayOperatingTime.contains("00:00-23:59") -> {
+
                 buildingOperating.text = "운영 중"
                 buildingOperating.setTextColor(resources.getColor(R.color.red, null))
                 buildingNextOperating.text = "상시 운영"
                 buildingNextOperatingCont.text = null
             }
+
             else -> {
                 if (building.operating) {
                     buildingOperating.text = "운영 중"
                     buildingOperating.setTextColor(resources.getColor(R.color.red, null))
-                    buildingNextOperating.text = building.nextBuildingTime
+                    buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
                     buildingNextOperatingCont.text = "에 운영 종료"
                 } else {
                     buildingOperating.text = "운영 종료"
                     buildingOperating.setTextColor(resources.getColor(R.color.red, null))
-                    buildingNextOperating.text = building.nextBuildingTime
+                    buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
                     buildingNextOperatingCont.text = "에 운영 시작"
                 }
             }
@@ -467,7 +488,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         selectedBuildingUnderFloor = building.underFloor
         selectedBuildingId = building.buildingId
 
-        val facilityTypesRecyclerView = binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+        val facilityTypesRecyclerView =
+            binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
         val adapter = FacilityTypeAdapter(building.placeTypes, requireContext())
         facilityTypesRecyclerView.adapter = adapter
 
@@ -475,25 +497,36 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             navigateToBuildingDetailFragment()
         }
 
-        var isInitialExpand = true
 
-        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
-                    navigateToBuildingDetailFragment()
+
+        isInitialExpand = true
+
+        if (!isBottomSheetCallbackRegistered) {
+            standardBottomSheetBehavior.addBottomSheetCallback(object :
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    Log.e("", "turned changed $newState $isInitialExpand")
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
+                        navigateToBuildingDetailFragment()
+                    }
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        isInitialExpand = true
+                    } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                        isInitialExpand = false
+                        Log.e("", "turned flase")
+                    }
                 }
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    isInitialExpand = true
-                } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    isInitialExpand = false
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    // 슬라이드 상태에서의 추가 처리
                 }
-            }
+            })
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // Optionally handle the sliding state here if needed
-            }
-        })
+            // 콜백이 등록되었음을 기록
+            isBottomSheetCallbackRegistered = true
+        }
 
+        // 바텀시트 상태를 바로 확장 상태로 설정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
