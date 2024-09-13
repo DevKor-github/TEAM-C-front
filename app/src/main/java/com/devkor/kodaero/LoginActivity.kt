@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -30,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        KakaoSdk.init(this, "8f0c8f0fbe9c7aef1bb90ba2f1b4fae3")
 
         // Initialize TokenManager
         TokenManager.init(this)
@@ -92,6 +95,15 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+    private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        if (error != null) {
+            Log.e(TAG, "로그인 실패 $error")
+        } else if (token != null) {
+            Log.e(TAG, "로그인 성공")
+            fetchUserInfoAndToken()
+        }
+    }
+
     private fun startKakaoLogin() {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
             // 카카오톡 로그인
@@ -110,15 +122,6 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback)
-        }
-    }
-
-    private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            Log.e(TAG, "로그인 실패 $error")
-        } else if (token != null) {
-            Log.e(TAG, "로그인 성공")
-            fetchUserInfoAndToken()
         }
     }
 
