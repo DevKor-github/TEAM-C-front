@@ -1,7 +1,10 @@
 package com.devkor.kodaero
 
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -69,7 +72,52 @@ interface ApiService {
     fun getPlaceInfo(
         @Path("placeId") roomId: Int
     ): Call<ApiResponse<PlaceInfoResponse>>
+
+    @POST("users/login")
+    fun getUserTokens(
+        @Body loginRequest: LoginRequest
+    ): Call<ApiResponse<UserTokens>>
+
+    @GET("users/mypage")
+    fun getUserInfo(
+        @Header("AccessToken") accessToken: String,
+        @Header("RefreshToken") refreshToken: String
+    ): Call<ApiResponse<UserInfo>>
+
+    @POST("suggestions")
+    fun summitSuggestion(
+        @Header("AccessToken") accessToken: String,
+        @Header("RefreshToken") refreshToken: String,
+        @Body suggestionRequest: SuggestionRequest
+    ): Call<Void>
 }
+
+data class LoginRequest(
+    val provider: String,
+    val email: String,
+    val token: String
+)
+
+data class SuggestionRequest(
+    val title: String,
+    val type: String,
+    val content: String
+)
+
+data class UserTokens(
+    val accessToken: String,
+    val refreshToken: String
+)
+
+data class UserInfo(
+    val username: String,
+    val email: String,
+    val profileUrl: String?,
+    val provider: String,
+    val role: String,
+    val level: String,
+    val categoryCount: Int
+)
 
 data class BuildingListResponse(
     val list: List<BuildingItem>
