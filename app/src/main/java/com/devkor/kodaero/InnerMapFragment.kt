@@ -2,6 +2,8 @@ package com.devkor.kodaero
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.FragmentManager
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
 import com.devkor.kodaero.databinding.InnerMapContainerBinding
@@ -390,6 +393,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         Log.e("innermapfragment", "Now on $floor in building $currentBuildingId")
         if (floor == 0) return
 
+
         innermapCurrentFloor = floor
         fetchData()
         readJsonAndUpdateColorMap()
@@ -686,38 +690,145 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
 
     }
 
+
+    // 현재 표시된 핀의 placeType을 저장할 변수
+    private var currentDisplayedPinType: String? = null
+
+    private fun getPinDrawableByPlaceType(placeType: String): Int {
+        return when (placeType) {
+            "CAFE" -> R.drawable.pin_cafe
+            "CAFETERIA" -> R.drawable.pin_cafeteria
+            "CONVENIENCE_STORE" -> R.drawable.pin_convenience_store
+            "READING_ROOM" -> R.drawable.pin_reading_room
+            "STUDY_ROOM" -> R.drawable.pin_study_room
+            "LOUNGE" -> R.drawable.pin_lounge
+            "WATER_PURIFIER" -> R.drawable.pin_water_purifier
+            "PRINTER" -> R.drawable.pin_printer
+            "VENDING_MACHINE" -> R.drawable.pin_vending_machine
+            "SMOKING_BOOTH" -> R.drawable.pin_smoking_area
+            "SLEEPING_ROOM" -> R.drawable.pin_sleeping_room
+            "BOOK_RETURN_MACHINE" -> R.drawable.pin_book_return
+            "BANK" -> R.drawable.pin_bank
+            "FITNESS_ROOM" -> R.drawable.pin_fitness_room
+            "TUMBLER_WASHER" -> R.drawable.pin_tumbler_washer
+            "SHOWER_ROOM" -> R.drawable.pin_shower_room
+            else -> R.drawable.pin_cafe // 기본 핀 설정
+        }
+    }
+
+    // placeType에 맞는 핀을 그리는 함수
+    private fun drawRoomCoordinatesByPlaceType(facilityLayout: FrameLayout, floorRoomList: List<RoomList>, placeType: String, drawable: Drawable) {
+        // 필터링된 좌표 가져오기
+        val filteredRooms = floorRoomList
+            .filter { room -> room.placeType == placeType }  // placeType 필터링
+            .distinctBy { room -> room.id }  // id로 중복 제거
+
+        // 부모 레이아웃에서 기존에 표시된 ImageView가 있으면 제거
+        facilityLayout.removeAllViews()
+
+        // FrameLayout의 크기를 가져옵니다.
+        val width = facilityLayout.width
+        val height = facilityLayout.height
+
+        // 스케일 계산 (이미지 크기에 맞춰 좌표 스케일링)
+        val originalSize = 1680f
+        val scaleFactor = minOf(width / originalSize, height / originalSize)
+        val offsetX = (width - originalSize * scaleFactor) / 2
+        val offsetY = (height - originalSize * scaleFactor) / 2
+
+        // 드로어블 크기 설정: 0.5배 크기
+        val drawableScale = 0.5f
+        val drawableWidth = (drawable.intrinsicWidth * drawableScale).toInt()
+        val drawableHeight = (drawable.intrinsicHeight * drawableScale).toInt()
+
+        filteredRooms.forEach { room ->
+            val xCoord = offsetX + room.xcoord * scaleFactor
+            val yCoord = offsetY + room.ycoord * scaleFactor
+
+            // ImageView를 동적으로 생성
+            val pinImageView = ImageView(facilityLayout.context)
+
+            // 드로어블을 ImageView에 설정
+            pinImageView.setImageDrawable(drawable)
+
+            // 드로어블의 크기 설정 (0.5배 크기로 조정)
+            val params = FrameLayout.LayoutParams(drawableWidth, drawableHeight)
+
+            // 위치 설정: 수평 가운데, 수직 하단 맞춤
+            pinImageView.layoutParams = params
+            pinImageView.x = xCoord - (drawableWidth / 2)  // 수평 가운데 맞춤
+            pinImageView.y = yCoord - drawableHeight       // 수직으로 하단 맞춤 (드로어블의 아래가 yCoord와 맞닿게)
+
+            // ImageView를 부모 레이아웃에 추가
+            facilityLayout.addView(pinImageView)
+
+            Log.e("facilityee","$xCoord,$yCoord")
+        }
+    }
+
+    // 버튼 클릭 시 핀을 표시하거나 제거하는 함수
+    private fun togglePinDisplay(floorRoomList: List<RoomList>, placeType: String, resetParam: Boolean) {
+        val facilityLayout = _binding?.includedMap?.facility  // facility 레이아웃을 가져옴
+
+        facilityLayout?.let {
+            // placeType이 이미 표시된 상태라면, 핀을 제거하고 상태를 초기화
+            if(resetParam){
+                it.removeAllViews() // 이미지 제거
+                currentDisplayedPinType = null // 현재 표시된 핀 상태 초기화
+                return
+            }
+            if (currentDisplayedPinType == placeType) {
+                it.removeAllViews() // 이미지 제거
+                currentDisplayedPinType = null // 현재 표시된 핀 상태 초기화
+            } else {
+                // 새로운 핀을 표시
+                val drawableResId = getPinDrawableByPlaceType(placeType)
+                val drawable = resources.getDrawable(drawableResId, null)
+
+                // placeType에 맞는 핀 아이콘을 그리기
+                drawRoomCoordinatesByPlaceType(it, floorRoomList, placeType, drawable)
+
+                // 현재 표시된 핀의 타입 업데이트
+                currentDisplayedPinType = placeType
+            }
+        }
+    }
+
+    // 버튼 클릭 리스너 설정
     private fun updateFacilityButtonsVisibility(floorRoomList: List<RoomList>) {
         // facilityType에 따라 대응하는 버튼을 ViewBinding으로 맵핑
         val facilityButtonMap = mapOf(
-            "CAFE" to _binding!!.cafeButton,
-            "CAFETERIA" to _binding!!.cafeteriaButton,
-            "CONVENIENCE_STORE" to _binding!!.convenienceStoreButton,
-            "READING_ROOM" to _binding!!.readingRoomButton,
-            "STUDY_ROOM" to _binding!!.studyRoomButton,
-            "LOUNGE" to _binding!!.loungeButton,
-            "WATER_PURIFIER" to _binding!!.waterPurifierButton,
-            "PRINTER" to _binding!!.printerButton,
-            "VENDING_MACHINE" to _binding!!.vendingMachineButton,
-            "SMOKING_BOOTH" to _binding!!.smokingAreaButton,
-            "SLEEPING_ROOM" to _binding!!.sleepingRoomButton,
-            "BOOK_RETURN_MACHINE" to _binding!!.bookReturnMachineButton
+            "CAFE" to _binding?.cafeButton,
+            "CAFETERIA" to _binding?.cafeteriaButton,
+            "CONVENIENCE_STORE" to _binding?.convenienceStoreButton,
+            "READING_ROOM" to _binding?.readingRoomButton,
+            "STUDY_ROOM" to _binding?.studyRoomButton,
+            "LOUNGE" to _binding?.loungeButton,
+            "WATER_PURIFIER" to _binding?.waterPurifierButton,
+            "PRINTER" to _binding?.printerButton,
+            "VENDING_MACHINE" to _binding?.vendingMachineButton,
+            "SMOKING_BOOTH" to _binding?.smokingAreaButton,
+            "SLEEPING_ROOM" to _binding?.sleepingRoomButton,
+            "BOOK_RETURN_MACHINE" to _binding?.bookReturnMachineButton
         )
 
         // 버튼 모두 GONE으로 설정
         facilityButtonMap.values.forEach { button ->
-            button.visibility = View.GONE
-            Log.e("qqqqqqqqqqqqqqqqq","sssss")
+            button?.visibility = View.GONE
+            button?.setOnClickListener(null) // 기존에 설정된 클릭 리스너가 중복되지 않도록 클릭 리스너를 덮어씀
         }
 
-        // roomList의 facilityType에 해당하는 버튼만 VISIBLE로 설정
-        Log.e("qqqqqqqqqqqqqqqqq","$floorRoomList")
+        // roomList의 facilityType에 해당하는 버튼만 VISIBLE로 설정하고, 클릭 리스너를 추가
         floorRoomList.map { it.placeType }  // 각 room의 facilityType을 추출
             .distinct()  // 중복된 facilityType을 제거
             .forEach { placeType ->
-                Log.e("qqqqqqqqqqqqqqqqq","$placeType")
-                facilityButtonMap[placeType]?.visibility = View.VISIBLE  // 해당하는 버튼을 VISIBLE로 설정
+                facilityButtonMap[placeType]?.apply {
+                    visibility = View.VISIBLE  // 해당하는 버튼을 VISIBLE로 설정
+                    setOnClickListener {
+                        // 클릭 시 핀을 표시하거나 제거하는 로직 호출
+                        togglePinDisplay(floorRoomList, placeType, false)
+                    }
+                }
             }
     }
-
-
 }
