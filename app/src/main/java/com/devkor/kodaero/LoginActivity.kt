@@ -17,6 +17,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +32,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        // Key Hash 얻기
+        val keyHash = Utility.getKeyHash(this)
+
+        // Key Hash를 로그로 출력 (Logcat에서 확인)
+        Log.d("KeyHash", keyHash)
 
         KakaoSdk.init(this, "8f0c8f0fbe9c7aef1bb90ba2f1b4fae3")
 
@@ -97,9 +105,9 @@ class LoginActivity : AppCompatActivity() {
 
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
-            Log.e(TAG, "로그인 실패 $error")
+            Log.e(TAG, "m로그인 실패 $error")
         } else if (token != null) {
-            Log.e(TAG, "로그인 성공")
+            Log.e(TAG, "m로그인 성공")
             fetchUserInfoAndToken()
         }
     }

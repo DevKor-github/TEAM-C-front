@@ -27,6 +27,7 @@ android {
             )
             applicationIdSuffix = ".release"
             resValue("string", "app_name", "고대로")
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             applicationIdSuffix = ".debug"
