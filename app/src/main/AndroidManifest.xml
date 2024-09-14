@@ -7,6 +7,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".GlobalApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +22,17 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="im2fzevib1" />
         <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth"
+                    android:scheme="kakao8f0c8f0fbe9c7aef1bb90ba2f1b4fae3" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme"
@@ -32,9 +44,15 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

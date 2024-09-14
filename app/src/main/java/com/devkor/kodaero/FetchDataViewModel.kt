@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.kakao.sdk.user.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,10 +35,18 @@ class FetchDataViewModel : ViewModel() {
     private val _routeResponse = MutableLiveData<RouteResponse?>()
     val routeResponse: MutableLiveData<RouteResponse?> get() = _routeResponse
 
-    private val service = RetrofitClient.instance
-
     private val _placeInfoResponse = MutableLiveData<PlaceInfoResponse?>()
     val placeInfoResponse: LiveData<PlaceInfoResponse?> get() = _placeInfoResponse
+
+    private val _userTokens = MutableLiveData<UserTokens?>()
+    val userTokens: LiveData<UserTokens?> get() = _userTokens
+
+    private val _userInfo = MutableLiveData<UserInfo?>()
+    val userInfo: LiveData<UserInfo?> get() = _userInfo
+
+    var responseCode: Int? = null
+
+    private val service = RetrofitClient.instance
 
     fun searchBuildings(keyword: String, buildingId: Int? = null) {
         val call = if (buildingId != null) {
@@ -209,8 +219,6 @@ class FetchDataViewModel : ViewModel() {
             })
     }
 
-
-
     fun fetchPlaceInfo(roomId: Int, callback: (PlaceInfoResponse?) -> Unit) {
         service.getPlaceInfo(roomId)
             .enqueue(object : Callback<ApiResponse<PlaceInfoResponse>> {
@@ -231,6 +239,95 @@ class FetchDataViewModel : ViewModel() {
                     callback(null)
                 }
             })
+    }
+
+    fun getUserTokens(provider: String, email: String, token: String) {
+        val loginRequest = LoginRequest(provider, email, token)
+        val service = RetrofitClient.instance
+        service.getUserTokens(loginRequest).enqueue(object : Callback<ApiResponse<UserTokens>> {
+            override fun onResponse(call: Call<ApiResponse<UserTokens>>, response: Response<ApiResponse<UserTokens>>) {
+                if (response.isSuccessful) {
+                    _userTokens.value = response.body()?.data
+                } else {
+                    _userTokens.value = null
+                    Log.e("FetchDataViewModel", "Token fetch failed: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<UserTokens>>, t: Throwable) {
+                _userTokens.value = null
+                Log.e("FetchDataViewModel", "API call failed: ${t.message}")
+            }
+        })
+    }
+
+    fun fetchUserInfo() {
+        val accessToken = TokenManager.getAccessToken()
+        val refreshToken = TokenManager.getRefreshToken()
+
+        if (accessToken == null || refreshToken == null) {
+            Log.e("FetchDataViewModel", "No tokens available.")
+            return
+        }
+
+        service.getUserInfo(accessToken, refreshToken).enqueue(object : Callback<ApiResponse<UserInfo>> {
+            override fun onResponse(call: Call<ApiResponse<UserInfo>>, response: Response<ApiResponse<UserInfo>>) {
+                responseCode = response.code()
+
+                if (response.isSuccessful) {
+                    val newAccessToken = response.headers()["AccessToken"]
+
+                    if (!newAccessToken.isNullOrEmpty()) {
+                        Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
+                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                    }
+
+                    _userInfo.value = response.body()?.data
+                    Log.d("FetchDataViewModel", "User info: ${response.body()?.data}")
+                } else {
+                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<UserInfo>>, t: Throwable) {
+                Log.e("FetchDataViewModel", "API call failed: ${t.message}")
+            }
+        })
+    }
+
+    fun submitSuggestion(title: String, type: String, content: String) {
+        val accessToken = TokenManager.getAccessToken()
+        val refreshToken = TokenManager.getRefreshToken()
+
+        if (accessToken == null || refreshToken == null) {
+            Log.e("FetchDataViewModel", "No tokens available.")
+            return
+        }
+
+        val suggestionRequest = SuggestionRequest(title, type, content)
+
+        service.summitSuggestion(accessToken, refreshToken, suggestionRequest).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                responseCode = response.code()
+
+                if (response.isSuccessful) {
+                    val newAccessToken = response.headers()["AccessToken"]
+
+                    if (!newAccessToken.isNullOrEmpty()) {
+                        Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
+                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                    }
+                    Log.d("FetchDataViewModel", "Suggestion submitted successfully")
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("FetchDataViewModel", "Error submitting suggestion: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("FetchDataViewModel", "Failure submitting suggestion: ${t.message}")
+            }
+        })
     }
 
 }
