@@ -691,7 +691,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
 
-
     // 현재 표시된 핀의 placeType을 저장할 변수
     private var currentDisplayedPinType: String? = null
 
@@ -832,8 +831,4 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 }
             }
     }
-
-
-
-
 }
