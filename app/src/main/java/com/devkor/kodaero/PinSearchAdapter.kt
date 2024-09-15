@@ -29,7 +29,7 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
     inner class PinSearchViewHolder(private val binding: PinSearchListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(facility: FacilityItem) {
             val context = binding.root.context
-            val facilityType = facility.facilityType
+            val facilityType = facility.placeType
             val drawableName = "pin_${facilityType.lowercase()}"
             val drawableResId = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
 
@@ -38,9 +38,8 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
             }
 
             binding.facilityName.text = facility.name
-            binding.facilityOperatingTime.text = facility.operatingTime
+            binding.facilityOperatingTime.text = facility.weekdayOperatingTime
             binding.facilityOperatingStatus.text = if (facility.operating) "운영 중" else "마감"
         }
     }
-
 }
