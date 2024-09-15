@@ -214,35 +214,28 @@ data class IndividualFacilityListResponse(
 data class FacilityItem(
     val id: Int,
     val facilityId: Int,
+    val placeType: String,
     val name: String,
     val availability: Boolean,
-    val operatingTime: String,
+    val weekdayOperatingTime: String?,
+    val saturdayOperatingTime: String?,
+    val sundayOperatingTime: String?,
+    val imageUrl: String?,
     val longitude: Double,
     val latitude: Double,
     val detail: String,
     val buildingId: Int,
+    val buildingName: String?,
     val floor: Int,
-    val operating: Boolean,
+    val address: String?,
+    val needStudentCard: Boolean?,
+    val plugAvailability: Boolean,
+    val locationType: String?,
+    val description: String,
+    val starAverage: String,
     val xcoord: Int,
     val ycoord: Int,
-    val facilityType: String
-)
-
-data class IndividualFacilityItem(
-    val id: Int,
-    val buildingId: Int,
-    val buildingName: String,
-    val name: String,
-    val detail: String,
-    val floor: Int,
-    val operatingTime: String,
-    val plugAvailability: Boolean,
-    val longitude: Double,
-    val latitude: Double,
-    val locationType: String,
-    val operating: Boolean,
-    val xcoord: Int,
-    val ycoord: Int
+    val operating: Boolean
 )
 
 data class RouteResponse(

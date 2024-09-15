@@ -168,7 +168,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         viewModel.facilityList.observe(viewLifecycleOwner, { facilityMap ->
             facilityMap.forEach { (buildingId, facilities) ->
                 facilitiesMap[buildingId] = facilities.map {
-                    it.copy(facilityType = this@PinSearchFragment.facilityType) // Copy with facilityType
+                    it.copy(placeType = this@PinSearchFragment.facilityType)
                 }
                 val count = facilities.size
                 val building = buildingList?.find { it.buildingId == buildingId }
@@ -184,7 +184,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
             facilities.forEach { facility ->
                 facilitiesMap[facility.id] = listOf(facility).map {
-                    it.copy(facilityType = this@PinSearchFragment.facilityType) // Copy with facilityType
+                    it.copy(placeType = this@PinSearchFragment.facilityType)
                 }
                 addMarker(
                     LatLng(facility.latitude, facility.longitude),
