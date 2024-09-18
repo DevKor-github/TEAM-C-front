@@ -94,7 +94,7 @@ class MypageFragment : Fragment() {
     }
 
     private fun navigateToKakao() {
-        val url = TalkApiClient.instance.addChannelUrl("kodaero_ku")
+        val url = TalkApiClient.instance.addChannelUrl("_lzuhn")
         context?.let { KakaoCustomTabsClient.openWithDefault(it, url) }
     }
 

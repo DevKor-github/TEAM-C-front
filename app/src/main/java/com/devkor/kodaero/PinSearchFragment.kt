@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -77,21 +78,21 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
         lifecycleScope.launch {
             if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
-                viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
+                viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
                     if (facilities.isNotEmpty()) {
                         updateMarkers(facilities = facilities)
                     }
-                })
+                }
 
                 withContext(Dispatchers.IO) {
                     viewModel.searchFacilities(facilityType)
                 }
             } else {
-                viewModel.buildingList.observe(viewLifecycleOwner, { buildingList ->
+                viewModel.buildingList.observe(viewLifecycleOwner) { buildingList ->
                     if (buildingList.isNotEmpty()) {
                         updateMarkers(buildingList = buildingList)
                     }
-                })
+                }
 
                 withContext(Dispatchers.IO) {
                     viewModel.fetchBuildingList(facilityType)
@@ -134,13 +135,19 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             "CONVENIENCE_STORE" -> "편의점"
             "READING_ROOM" -> "열람실"
             "STUDY_ROOM" -> "스터디룸"
+            "BOOK_RETURN_MACHINE" -> "도서 반납기"
             "LOUNGE" -> "라운지"
             "WATER_PURIFIER" -> "정수기"
-            "PRINTER" -> "프린터"
             "VENDING_MACHINE" -> "자판기"
+            "PRINTER" -> "프린터"
+            "TUMBLER_WASHER" -> "텀블러세척기"
+            "ONESTOP_AUTO_MACHINE" -> "원스탑"
+            "BANK" -> "은행"
+            "SHOWER_ROOM" -> "샤워실"
+            "GYM" -> "헬스장"
             "SMOKING_AREA" -> "흡연구역"
             "SLEEPING_ROOM" -> "수면실"
-            "BOOK_RETURN_MACHINE" -> "도서 반납기"
+
             else -> facilityType
         }
     }
@@ -165,37 +172,51 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             viewModel.getFacilities(building.buildingId, facilityType)
         }
 
-        viewModel.facilityList.observe(viewLifecycleOwner, { facilityMap ->
+        viewModel.facilityList.observe(viewLifecycleOwner) { facilityMap ->
             facilityMap.forEach { (buildingId, facilities) ->
-                facilitiesMap[buildingId] = facilities.map {
-                    it.copy(placeType = this@PinSearchFragment.facilityType)
-                }
-                val count = facilities.size
-                val building = buildingList?.find { it.buildingId == buildingId }
-                if (building != null) {
-                    addMarker(LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0), building.buildingId, count.toString())
+                if (buildingId == 0) {
+                    facilities.forEach { facility ->
+                        handleIndividualFacility(facility)
+                    }
+                } else {
+                    facilitiesMap[buildingId] = facilities.map {
+                        it.copy(placeType = this@PinSearchFragment.facilityType)
+                    }
+                    val count = facilities.size
+                    val building = buildingList?.find { it.buildingId == buildingId }
+                    if (building != null) {
+                        addMarker(
+                            LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0),
+                            building.buildingId,
+                            count.toString()
+                        )
+                    }
                 }
             }
             if (::naverMap.isInitialized) {
                 unselectAllMarkers()
             }
-        })
+        }
 
-        viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
+        viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
             facilities.forEach { facility ->
-                facilitiesMap[facility.id] = listOf(facility).map {
-                    it.copy(placeType = this@PinSearchFragment.facilityType)
-                }
-                addMarker(
-                    LatLng(facility.latitude, facility.longitude),
-                    facility.id,
-                    facility.name
-                )
+                handleIndividualFacility(facility)
             }
             if (::naverMap.isInitialized) {
                 unselectAllMarkers()
             }
-        })
+        }
+    }
+
+    private fun handleIndividualFacility(facility: FacilityItem) {
+        facilitiesMap[facility.id] = listOf(facility).map {
+            it.copy(placeType = this@PinSearchFragment.facilityType)
+        }
+        addMarker(
+            LatLng(facility.latitude, facility.longitude),
+            facility.id,
+            facility.name
+        )
     }
 
     private fun addMarker(position: LatLng, id: Int, text: String) {
@@ -204,10 +225,10 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
                 this.position = position
                 tag = id
 
-                if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE") || facilitiesMap[id]?.firstOrNull()?.buildingId == 0) {
                     val drawableName = "pin_${facilityType.lowercase()}"
                     val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
-                    icon = OverlayImage.fromBitmap(createCustomDrawableWithText(drawableResId, text))
+                    icon = OverlayImage.fromBitmap(createCustomDrawableWithText(facilityType.lowercase(), drawableResId, text))
                 } else {
                     val drawableName = "pin_${facilityType.lowercase()}"
                     val drawableResId = resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
@@ -261,8 +282,8 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         val id = marker.tag as Int
         val facilityName = facilitiesMap[id]?.firstOrNull { it.id == id }?.name ?: ""
 
-        marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
-            OverlayImage.fromBitmap(createCustomDrawableWithText(selectedDrawableResId, facilityName))
+        marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE") || facilitiesMap[id]?.firstOrNull()?.buildingId == 0) {
+            OverlayImage.fromBitmap(createCustomDrawableWithText(facilityType.lowercase(), selectedDrawableResId, facilityName))
         } else {
             OverlayImage.fromBitmap(createDrawableWithText(selectedDrawableResId, (facilitiesMap[id]?.size ?: "").toString()))
         }
@@ -298,8 +319,8 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             val id = marker.tag as Int
             val facilityName = facilitiesMap[id]?.firstOrNull { it.id == id }?.name ?: ""
 
-            marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
-                OverlayImage.fromBitmap(createCustomDrawableWithText(unselectedDrawableResId, facilityName))
+            marker.icon = if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE") || facilitiesMap[id]?.firstOrNull()?.buildingId == 0) {
+                OverlayImage.fromBitmap(createCustomDrawableWithText(facilityType.lowercase(), unselectedDrawableResId, facilityName))
             } else {
                 OverlayImage.fromBitmap(createDrawableWithText(unselectedDrawableResId, (facilitiesMap[id]?.size ?: "").toString()))
             }
@@ -351,11 +372,11 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         return bitmapWithMargin
     }
 
-    private fun createCustomDrawableWithText(drawableResId: Int, text: String): Bitmap {
+    private fun createCustomDrawableWithText(facilityType: String, drawableResId: Int, text: String): Bitmap {
         val originalBitmap = getDrawableAsBitmap(drawableResId)
 
         val paintStroke = Paint().apply {
-            color = ContextCompat.getColor(requireContext(), android.R.color.white) // Stroke color
+            color = ContextCompat.getColor(requireContext(), android.R.color.white)
             textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics)
             typeface = ResourcesCompat.getFont(requireContext(), R.font.pretendard_bold)
             isAntiAlias = true
@@ -364,8 +385,12 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             textAlign = Paint.Align.CENTER
         }
 
+        val colorResId = resources.getIdentifier(facilityType, "color", requireContext().packageName)
+
+        Log.d("PinSearchFragment", "FacilityType: $facilityType, ColorResId: $colorResId")
+
         val paintFill = Paint().apply {
-            color = ContextCompat.getColor(requireContext(), R.color.facility_name) // Text fill color
+            color = ContextCompat.getColor(requireContext(), colorResId)
             textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics)
             typeface = ResourcesCompat.getFont(requireContext(), R.font.pretendard_bold)
             isAntiAlias = true

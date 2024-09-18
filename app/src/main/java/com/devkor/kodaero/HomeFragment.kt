@@ -316,13 +316,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             binding.convenienceStoreButton,
             binding.readingRoomButton,
             binding.studyRoomButton,
+            binding.bookReturnMachineButton,
             binding.loungeButton,
             binding.waterPurifierButton,
-            binding.printerButton,
             binding.vendingMachineButton,
+            binding.printerButton,
+            binding.tumblerWasherButton,
+            binding.onestopAutoMachineButton,
+            binding.bankButton,
             binding.smokingAreaButton,
-            binding.sleepingRoomButton,
-            binding.bookReturnMachineButton
+            binding.showerRoomButton,
+            binding.gymButton,
+            binding.sleepingRoomButton
         )
 
         for (button in buttonIds) {
@@ -495,9 +500,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         standardBottomSheet.setOnClickListener {
             navigateToBuildingDetailFragment()
+            closeModal()
         }
-
-
 
         isInitialExpand = true
 
@@ -508,6 +512,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     Log.e("", "turned changed $newState $isInitialExpand")
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
                         navigateToBuildingDetailFragment()
+                        closeModal()
                     }
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                         isInitialExpand = true

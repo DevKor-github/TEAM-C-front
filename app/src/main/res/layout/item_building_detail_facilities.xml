@@ -4,7 +4,8 @@
     android:layout_width="160dp"
     android:layout_height="160dp"
     android:layout_margin="5dp"
-    android:background="@drawable/rounded_rec_gray">
+    android:background="@drawable/rounded_rec_gray"
+    android:elevation="8dp">
     
     <ImageView
         android:id="@+id/building_detail_facility_image"
@@ -16,8 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:paddingHorizontal="15dp"
-        android:background="@color/map_main"
-        android:elevation="8dp">
+        android:background="@drawable/half_round_rec_map_main"
+        android:elevation="8dp"
+        android:alpha="0.8">
 
         <TextView
             android:id="@+id/building_detail_facility_name"
