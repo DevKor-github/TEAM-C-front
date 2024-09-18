@@ -3,6 +3,7 @@ package com.devkor.kodaero
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.devkor.kodaero.databinding.PinSearchListItemBinding
 
 class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHolder>() {
@@ -33,12 +34,18 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
             val drawableName = "pin_${facilityType.lowercase()}"
             val drawableResId = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
 
-            if (drawableResId != 0) {
+            if (facility.imageUrl != null) {
+                Glide.with(binding.pinSearchItemImg.context)
+                    .load(facility.imageUrl)
+                    .into(binding.pinSearchItemImg)
+            } else {
                 binding.pinSearchItemImg.setImageResource(drawableResId)
             }
 
             binding.facilityName.text = facility.name
-            binding.facilityOperatingTime.text = facility.weekdayOperatingTime
+            binding.facilityOperatingTime1.text = facility.weekdayOperatingTime
+            binding.facilityOperatingTime2.text = facility.saturdayOperatingTime
+            binding.facilityOperatingTime3.text = facility.sundayOperatingTime
             binding.facilityOperatingStatus.text = if (facility.operating) "운영 중" else "마감"
         }
     }
