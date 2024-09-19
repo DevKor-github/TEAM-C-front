@@ -119,7 +119,11 @@ class BuildingDetailFragment : Fragment() {
                         .into(buildingImageView)
                 }
 
-                val facilityGridAdapter = FacilityGridAdapter(buildingDetail?.mainFacilityList ?: emptyList())
+                val facilityGridAdapter = FacilityGridAdapter(
+                    facilities = buildingDetail?.mainFacilityList ?: emptyList()
+                ) { placeId ->
+                    navigateToInnerMapFragment(placeId)
+                }
                 facilityGridView.adapter = facilityGridAdapter
 
                 tmiNameTextView.text = buildingDetail?.name
@@ -187,6 +191,41 @@ class BuildingDetailFragment : Fragment() {
             transaction.commit()
         } else {
             Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
+        }
+    }
+
+    private fun navigateToInnerMapFragment(roomId: Int) {
+        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
+
+                if (buildingItem != null) {
+                    // 캐시된 BuildingItem의 정보를 사용
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask, false
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                // placeInfo가 null인 경우 오류 처리
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
         }
     }
 

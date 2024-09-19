@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilityList>) :
-    RecyclerView.Adapter<FacilityGridAdapter.ViewHolder>() {
+class FacilityGridAdapter(
+    private val facilities: List<BuildingDetailMainFacilityList>,
+    private val onItemClick: (Int) -> Unit  // placeId를 전달할 수 있도록 수정
+) : RecyclerView.Adapter<FacilityGridAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -27,6 +29,11 @@ class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilit
         } else {
             holder.facilityImage.setImageDrawable(null)
         }
+
+        // 아이템이 클릭되었을 때 placeId를 전달
+        holder.itemView.setOnClickListener {
+            onItemClick(facility.placeId)  // 클릭 시 해당 placeId를 콜백으로 전달
+        }
     }
 
     override fun getItemCount(): Int = facilities.size
@@ -36,3 +43,4 @@ class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilit
         val facilityName: TextView = view.findViewById(R.id.building_detail_facility_name)
     }
 }
+
