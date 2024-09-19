@@ -46,6 +46,10 @@ class MypageFragment : Fragment() {
             }
         }
 
+        binding.userImage.setOnClickListener {
+            navigateToEditNameFragment()
+        }
+
         binding.suggestionButton.setOnClickListener {
             navigateToSuggestionFragment()
         }
@@ -75,6 +79,19 @@ class MypageFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun navigateToEditNameFragment() {
+        val editNameFragment = EditNameFragment()
+
+        val bundle = Bundle()
+        bundle.putString("username", binding.username.text.toString())
+        editNameFragment.arguments = bundle
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container, editNameFragment)
+        transaction.addToBackStack("EditNameFragment")
+        transaction.commit()
     }
 
     private fun navigateToSuggestionFragment() {
