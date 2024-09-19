@@ -343,9 +343,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val currentCameraPosition = getCurrentCameraPosition()
         val currentZoomLevel = getCurrentZoomLevel()
 
-        val pinSearchFragment = PinSearchFragment.newInstance(keyword, currentCameraPosition, currentZoomLevel)
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword, 0, currentCameraPosition, currentZoomLevel)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, pinSearchFragment)
+        transaction.replace(R.id.main_container, pinSearchFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

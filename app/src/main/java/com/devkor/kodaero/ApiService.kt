@@ -215,7 +215,6 @@ data class IndividualFacilityListResponse(
 
 data class FacilityItem(
     val id: Int,
-    val facilityId: Int,
     val placeType: String,
     val name: String,
     val availability: Boolean,

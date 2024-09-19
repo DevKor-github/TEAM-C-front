@@ -13,12 +13,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devkor.kodaero.databinding.FragmentPinSearchBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
@@ -46,6 +49,11 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     private lateinit var facilityType: String
 
     private val markers = mutableListOf<Marker>()
+    private val _markersAdded = MutableLiveData<Boolean>(false)
+    private val markersAdded: LiveData<Boolean> get() = _markersAdded
+
+    private var isOnMarkerClickCalled = false
+
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var pinSearchAdapter: PinSearchAdapter
 
@@ -76,26 +84,21 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
 
-        lifecycleScope.launch {
-            if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
-                viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
-                    if (facilities.isNotEmpty()) {
-                        updateMarkers(facilities = facilities)
+        markersAdded.observe(viewLifecycleOwner) { added ->
+            if (added && !isOnMarkerClickCalled) {
+                val facilityBuildingId = arguments?.getInt(ARG_FACILITY_BUILDING_ID) ?: 0
+                if (facilityBuildingId != 0) {
+                    val targetMarker = markers.find { marker ->
+                        val markerBuildingId = marker.tag as? Int
+                        markerBuildingId == facilityBuildingId
                     }
-                }
 
-                withContext(Dispatchers.IO) {
-                    viewModel.searchFacilities(facilityType)
-                }
-            } else {
-                viewModel.buildingList.observe(viewLifecycleOwner) { buildingList ->
-                    if (buildingList.isNotEmpty()) {
-                        updateMarkers(buildingList = buildingList)
+                    targetMarker?.let { marker ->
+                        lifecycleScope.launch {
+                            triggerMarkerClick(marker)
+                            isOnMarkerClickCalled = true
+                        }
                     }
-                }
-
-                withContext(Dispatchers.IO) {
-                    viewModel.fetchBuildingList(facilityType)
                 }
             }
         }
@@ -103,7 +106,10 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.pinSearchIncludedLayout.standardBottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        pinSearchAdapter = PinSearchAdapter()
+        pinSearchAdapter = PinSearchAdapter { facility ->
+            navigateToInnerMapFragment(facility.id)
+        }
+
         binding.pinSearchIncludedLayout.pinSearchListRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.pinSearchIncludedLayout.pinSearchListRecyclerview.adapter = pinSearchAdapter
 
@@ -167,34 +173,39 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         }
 
         markers.clear()
+        val expectedMarkerCount = buildingList?.size ?: 0
 
         buildingList?.forEach { building ->
             viewModel.getFacilities(building.buildingId, facilityType)
         }
 
         viewModel.facilityList.observe(viewLifecycleOwner) { facilityMap ->
-            facilityMap.forEach { (buildingId, facilities) ->
-                if (buildingId == 0) {
-                    facilities.forEach { facility ->
-                        handleIndividualFacility(facility)
-                    }
-                } else {
-                    facilitiesMap[buildingId] = facilities.map {
-                        it.copy(placeType = this@PinSearchFragment.facilityType)
-                    }
-                    val count = facilities.size
-                    val building = buildingList?.find { it.buildingId == buildingId }
-                    if (building != null) {
-                        addMarker(
-                            LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0),
-                            building.buildingId,
-                            count.toString()
-                        )
+            lifecycleScope.launch(Dispatchers.Main) {
+                facilityMap.forEach { (buildingId, facilities) ->
+                    if (buildingId == 0) {
+                        facilities.forEach { facility ->
+                            handleIndividualFacility(facility)
+                        }
+                    } else {
+                        if (!facilitiesMap.containsKey(buildingId)) {
+                            facilitiesMap[buildingId] = facilities.map {
+                                it.copy(placeType = this@PinSearchFragment.facilityType)
+                            }
+                            val count = facilities.size
+                            val building = buildingList?.find { it.buildingId == buildingId }
+                            if (building != null) {
+                                addMarker(
+                                    LatLng(building.latitude ?: 0.0, building.longitude ?: 0.0),
+                                    building.buildingId,
+                                    count.toString()
+                                )
+                            }
+                        }
                     }
                 }
-            }
-            if (::naverMap.isInitialized) {
-                unselectAllMarkers()
+                if (markers.size == expectedMarkerCount) {
+                    _markersAdded.value = true
+                }
             }
         }
 
@@ -202,9 +213,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             facilities.forEach { facility ->
                 handleIndividualFacility(facility)
             }
-            if (::naverMap.isInitialized) {
-                unselectAllMarkers()
-            }
+            _markersAdded.value = true
         }
     }
 
@@ -220,7 +229,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun addMarker(position: LatLng, id: Int, text: String) {
-        binding.root.post {
+        requireActivity().runOnUiThread {
             val marker = Marker().apply {
                 this.position = position
                 tag = id
@@ -247,6 +256,14 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private suspend fun triggerMarkerClick(marker: Marker) {
+        unselectAllMarkers()
+
+        withContext(Dispatchers.Main) {
+            onMarkerClick(marker)
+        }
+    }
+
     private fun onMarkerClick(marker: Marker) {
         when {
             selectedMarkers.isEmpty() -> {
@@ -267,8 +284,10 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun selectMarker(marker: Marker) {
-        selectedMarkers.add(marker)
-        unselectedMarkers.remove(marker)
+        if (!selectedMarkers.contains(marker)) {
+            selectedMarkers.add(marker)
+            unselectedMarkers.remove(marker)
+        }
 
         unselectedMarkers.forEach { unselectedMarker ->
             val unselectedDrawableName = "unselected_pin_${facilityType.lowercase()}"
@@ -288,20 +307,23 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             OverlayImage.fromBitmap(createDrawableWithText(selectedDrawableResId, (facilitiesMap[id]?.size ?: "").toString()))
         }
 
+        val cameraUpdate = CameraUpdate
+            .scrollAndZoomTo(marker.position, 15.0)
+            .animate(CameraAnimation.Fly)
+        naverMap.moveCamera(cameraUpdate)
+
         val facilities = facilitiesMap[id] ?: emptyList()
         pinSearchAdapter.submitList(facilities)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        binding.root.post {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 
     fun unselectMarker(marker: Marker) {
         selectedMarkers.remove(marker)
-        unselectedMarkers.add(marker)
-
-        val unselectedDrawableName = "unselected_pin_${facilityType.lowercase()}"
-        val unselectedDrawableResId = resources.getIdentifier(unselectedDrawableName, "drawable", requireContext().packageName)
-        marker.icon = OverlayImage.fromResource(unselectedDrawableResId)
-
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        if (!unselectedMarkers.contains(marker)) {
+            unselectedMarkers.add(marker)
+        }
     }
 
     fun unselectAllMarkers() {
@@ -311,7 +333,9 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         }
 
         markers.forEach { marker ->
-            unselectedMarkers.add(marker)
+            if (!unselectedMarkers.contains(marker)) {
+                unselectedMarkers.add(marker)
+            }
             selectedMarkers.remove(marker)
 
             val unselectedDrawableName = "pin_${facilityType.lowercase()}"
@@ -327,6 +351,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
             marker.map = naverMap
         }
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     fun hasSelectedMarkers(): Boolean {
@@ -387,8 +412,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
 
         val colorResId = resources.getIdentifier(facilityType, "color", requireContext().packageName)
 
-        Log.d("PinSearchFragment", "FacilityType: $facilityType, ColorResId: $colorResId")
-
         val paintFill = Paint().apply {
             color = ContextCompat.getColor(requireContext(), colorResId)
             textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics)
@@ -434,9 +457,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = false
-        
         naverMap.uiSettings.isZoomControlEnabled = false
-
         naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
         val initPosition = arguments?.getParcelable<LatLng>(ARG_INIT_CAMERA_POSITION) ?: initCameraPosition
@@ -447,17 +468,27 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         naverMap.moveCamera(cameraZoomUpdate)
         naverMap.moveCamera(cameraScrollUpdate)
 
-        naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
+        lifecycleScope.launch {
+            if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
+                    if (facilities.isNotEmpty()) {
+                        updateMarkers(facilities = facilities)
+                    }
+                }
 
-        viewModel.individualFacilityList.observe(viewLifecycleOwner, { facilities ->
-            if (facilities.isNotEmpty()) {
-                updateMarkers(facilities = facilities)
-            }
-        })
+                withContext(Dispatchers.IO) {
+                    viewModel.searchFacilities(facilityType)
+                }
+            } else {
+                viewModel.buildingList.observe(viewLifecycleOwner) { buildingList ->
+                    if (buildingList.isNotEmpty()) {
+                        updateMarkers(buildingList = buildingList)
+                    }
+                }
 
-        viewModel.buildingList.value?.let { buildingList ->
-            if (buildingList.isNotEmpty()) {
-                updateMarkers(buildingList = buildingList)
+                withContext(Dispatchers.IO) {
+                    viewModel.fetchBuildingList(facilityType)
+                }
             }
         }
 
@@ -468,8 +499,6 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
                 unselectAllMarkers()
             }
         }
-
-        unselectAllMarkers()
     }
 
     override fun onDestroyView() {
@@ -477,15 +506,52 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         _binding = null
     }
 
+    private fun navigateToInnerMapFragment(roomId: Int) {
+        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
+
+                if (buildingItem != null) {
+                    // 캐시된 BuildingItem의 정보를 사용
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask, false
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                // placeInfo가 null인 경우 오류 처리
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
+        }
+    }
+
     companion object {
         private const val ARG_FACILITY_NAME = "facility_name"
+        private const val ARG_FACILITY_BUILDING_ID = "facility_building_id"
         private const val ARG_INIT_CAMERA_POSITION = "init_camera_position"
         private const val ARG_INIT_ZOOM_LEVEL = "init_zoom_level"
 
-        fun newInstance(facilityName: String, initCameraPosition: LatLng, initZoomLevel: Double): PinSearchFragment {
+        fun newInstance(facilityName: String, facilityBuildingId: Int, initCameraPosition: LatLng, initZoomLevel: Double): PinSearchFragment {
             val fragment = PinSearchFragment()
             val args = Bundle().apply {
                 putString(ARG_FACILITY_NAME, facilityName)
+                putInt(ARG_FACILITY_BUILDING_ID, facilityBuildingId)
                 putParcelable(ARG_INIT_CAMERA_POSITION, initCameraPosition)
                 putDouble(ARG_INIT_ZOOM_LEVEL, initZoomLevel)
             }
