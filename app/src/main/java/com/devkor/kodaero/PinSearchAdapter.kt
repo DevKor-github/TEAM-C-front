@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.devkor.kodaero.databinding.PinSearchListItemBinding
 
-class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHolder>() {
+class PinSearchAdapter(
+    private val onItemClick: (FacilityItem) -> Unit
+) : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHolder>() {
 
     private val facilities = mutableListOf<FacilityItem>()
 
@@ -47,6 +49,10 @@ class PinSearchAdapter : RecyclerView.Adapter<PinSearchAdapter.PinSearchViewHold
             binding.facilityOperatingTime2.text = facility.saturdayOperatingTime
             binding.facilityOperatingTime3.text = facility.sundayOperatingTime
             binding.facilityOperatingStatus.text = if (facility.operating) "운영 중" else "마감"
+
+            binding.root.setOnClickListener {
+                onItemClick(facility)
+            }
         }
     }
 }
