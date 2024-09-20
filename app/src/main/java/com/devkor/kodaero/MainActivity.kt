@@ -102,6 +102,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            is EditNameFragment -> {
+                if (currentFragment.isEditNameConfirmationVisible()) {
+                    currentFragment.hideEditNameConfirmationVisible()
+                    return
+                }
+            }
+
             is SuggestionFragment -> {
                 if (currentFragment.isSuggestionSummitConfirmationVisible()) {
                     currentFragment.hideSuggestionSummitConfirmation()
