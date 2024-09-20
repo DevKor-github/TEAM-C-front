@@ -468,35 +468,41 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         naverMap.moveCamera(cameraZoomUpdate)
         naverMap.moveCamera(cameraScrollUpdate)
 
-        lifecycleScope.launch {
-            if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
-                viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
-                    if (facilities.isNotEmpty()) {
-                        updateMarkers(facilities = facilities)
-                    }
-                }
-
-                withContext(Dispatchers.IO) {
-                    viewModel.searchFacilities(facilityType)
-                }
-            } else {
-                viewModel.buildingList.observe(viewLifecycleOwner) { buildingList ->
-                    if (buildingList.isNotEmpty()) {
-                        updateMarkers(buildingList = buildingList)
-                    }
-                }
-
-                withContext(Dispatchers.IO) {
-                    viewModel.fetchBuildingList(facilityType)
-                }
-            }
-        }
+        updateMarkersOnMapReady()
 
         naverMap.setOnMapClickListener { _, _ ->
             if (selectedMarkers.isNotEmpty()) {
                 val currentSelectedMarker = selectedMarkers.first()
                 unselectMarker(currentSelectedMarker)
                 unselectAllMarkers()
+            }
+        }
+    }
+
+    private fun updateMarkersOnMapReady() {
+        if (::naverMap.isInitialized) {
+            lifecycleScope.launch {
+                if (facilityType in listOf("CAFE", "CAFETERIA", "CONVENIENCE_STORE")) {
+                    viewModel.individualFacilityList.observe(viewLifecycleOwner) { facilities ->
+                        if (facilities.isNotEmpty()) {
+                            updateMarkers(facilities = facilities)
+                        }
+                    }
+
+                    withContext(Dispatchers.IO) {
+                        viewModel.searchFacilities(facilityType)
+                    }
+                } else {
+                    viewModel.buildingList.observe(viewLifecycleOwner) { buildingList ->
+                        if (buildingList.isNotEmpty()) {
+                            updateMarkers(buildingList = buildingList)
+                        }
+                    }
+
+                    withContext(Dispatchers.IO) {
+                        viewModel.fetchBuildingList(facilityType)
+                    }
+                }
             }
         }
     }

@@ -10,7 +10,8 @@ import com.bumptech.glide.Glide
 
 class FacilityGridAdapter(
     private val facilities: List<BuildingDetailMainFacilityList>,
-    private val onItemClick: (Int) -> Unit  // placeId를 전달할 수 있도록 수정
+    private val onItemClick: (Int) -> Unit,
+    private val itemWidth: Int
 ) : RecyclerView.Adapter<FacilityGridAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,6 +22,12 @@ class FacilityGridAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val facility = facilities[position]
+
+        val layoutParams = holder.itemView.layoutParams
+        layoutParams.width = itemWidth
+        layoutParams.height = itemWidth
+        holder.itemView.layoutParams = layoutParams
+
         holder.facilityName.text = facility.name
         if (facility.imageUrl != null) {
             Glide.with(holder.itemView.context)
@@ -30,9 +37,8 @@ class FacilityGridAdapter(
             holder.facilityImage.setImageDrawable(null)
         }
 
-        // 아이템이 클릭되었을 때 placeId를 전달
         holder.itemView.setOnClickListener {
-            onItemClick(facility.placeId)  // 클릭 시 해당 placeId를 콜백으로 전달
+            onItemClick(facility.placeId)
         }
     }
 

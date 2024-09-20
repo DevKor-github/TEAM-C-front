@@ -119,11 +119,18 @@ class BuildingDetailFragment : Fragment() {
                         .into(buildingImageView)
                 }
 
+                val displayMetrics = resources.displayMetrics
+                val screenWidth = displayMetrics.widthPixels
+                val itemMargin = 20 * resources.displayMetrics.density
+                val itemWidth = (screenWidth / 2) - (2 * itemMargin.toInt())
+
                 val facilityGridAdapter = FacilityGridAdapter(
-                    facilities = buildingDetail?.mainFacilityList ?: emptyList()
-                ) { placeId ->
-                    navigateToInnerMapFragment(placeId)
-                }
+                    facilities = buildingDetail?.mainFacilityList ?: emptyList(),
+                    itemWidth = itemWidth,
+                    onItemClick = { placeId ->
+                        navigateToInnerMapFragment(placeId)
+                    }
+                )
                 facilityGridView.adapter = facilityGridAdapter
 
                 tmiNameTextView.text = buildingDetail?.name
