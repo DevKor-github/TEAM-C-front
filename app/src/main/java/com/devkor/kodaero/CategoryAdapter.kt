@@ -19,6 +19,9 @@ class CategoryAdapter(
     // 외부에서 버튼 클릭 리스너를 설정할 수 있도록 변수 추가
     var onAddButtonClick: (() -> Unit)? = null
 
+    // 선택된 아이템들의 인덱스를 추적하는 Set
+    private val selectedPositions: MutableSet<Int> = mutableSetOf()
+
     override fun getItemViewType(position: Int): Int {
         return if (position == items.size) VIEW_TYPE_ADD_BUTTON else VIEW_TYPE_ITEM
     }
@@ -50,6 +53,26 @@ class CategoryAdapter(
                 else -> R.drawable.icon_star_red  // 기본 드로어블 설정
             }
             holder.icon.setImageResource(iconResId)
+
+            // 선택된 아이템의 테두리를 전환
+            if (selectedPositions.contains(position)) {
+                holder.itemView.findViewById<ImageView>(R.id.selected_border).visibility = View.VISIBLE
+            } else {
+                holder.itemView.findViewById<ImageView>(R.id.selected_border).visibility = View.GONE
+            }
+
+            // 아이템 클릭 리스너 설정
+            holder.itemView.setOnClickListener {
+                if (selectedPositions.contains(position)) {
+                    // 이미 선택된 아이템이면 선택 해제
+                    selectedPositions.remove(position)
+                } else {
+                    // 선택되지 않은 아이템이면 선택 추가
+                    selectedPositions.add(position)
+                }
+                notifyItemChanged(position)
+            }
+
         } else if (holder is AddButtonViewHolder) {
             holder.addButton.setOnClickListener {
                 onAddButtonClick?.invoke()
