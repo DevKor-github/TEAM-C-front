@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -90,6 +91,13 @@ interface ApiService {
         @Header("RefreshToken") refreshToken: String,
         @Body suggestionRequest: SuggestionRequest
     ): Call<Void>
+
+    @PATCH("users/username")
+    fun editUserName(
+        @Header("AccessToken") accessToken: String,
+        @Header("RefreshToken") refreshToken: String,
+        @Query("username") username: String
+    ): Call<Void>
 }
 
 data class LoginRequest(
@@ -151,7 +159,9 @@ data class BuildingDetailItem(
     val name: String,
     val address: String?,
     val imageUrl: String?,
-    val operatingTime: String?,
+    val weekdayOperatingTime: String?,
+    val saturdayOperatingTime: String?,
+    val sundayOperatingTime: String?,
     val details: String?,
     val bookmarked: Boolean,
     val existTypes: List<String>,
@@ -213,7 +223,6 @@ data class IndividualFacilityListResponse(
 
 data class FacilityItem(
     val id: Int,
-    val facilityId: Int,
     val placeType: String,
     val name: String,
     val availability: Boolean,

@@ -12,7 +12,8 @@
         android:layout_width="71dp"
         android:layout_height="71dp"
         android:layout_margin="15dp"
-        android:background="@drawable/rounded_container_background"/>
+        android:background="@drawable/rounded_container_background"
+        android:elevation="8dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -43,43 +44,87 @@
                 android:fontFamily="@font/pretendard_bold"
                 android:textColor="@color/red"/>
 
-            <TextView
-                android:id="@+id/facility_operating_time"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10:00-22:00"
-                android:textSize="10dp"
-                android:textColor="@color/map_main"
-                android:fontFamily="@font/pretendard_regular"/>
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="평일"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:id="@+id/facility_operating_time_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00-22:00"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="토요일"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:id="@+id/facility_operating_time_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00-18:00"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="일요일"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:id="@+id/facility_operating_time_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00-18:00"
+                        android:textSize="10dp"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/facility_distance_away"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="15dp"-->
-<!--                android:text="280m"-->
-<!--                android:textSize="10dp"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textColor="@color/red"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/facility_address"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="서울 성북구 고려대로22길 6-7"-->
-<!--                android:textSize="10dp"-->
-<!--                android:textColor="@color/gray"/>-->
-
-<!--        </LinearLayout>-->
-
     </LinearLayout>
-
-
 
 </LinearLayout>

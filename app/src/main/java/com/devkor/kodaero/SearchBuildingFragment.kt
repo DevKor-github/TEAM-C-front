@@ -62,7 +62,11 @@ class SearchBuildingFragment : Fragment() {
 
         adapter = SearchListAdapter(emptyList()) { buildingItem ->
             if (buildingItem.id == null) {
-                navigateToPinSearchFragment(buildingItem.placeType)
+                if (buildingItem.buildingId == 0) {
+                    navigateToPinSearchFragment(buildingItem.placeType, 0)
+                } else {
+                    navigateToPinSearchFragment(buildingItem.placeType, buildingItem.buildingId)
+                }
             } else {
                 if (buildingItem.locationType == "TAG") {
                     // 건물 태그를 선택했을 때 태그 추가
@@ -193,11 +197,11 @@ class SearchBuildingFragment : Fragment() {
         }
     }
 
-    private fun navigateToPinSearchFragment(keyword: String) {
+    private fun navigateToPinSearchFragment(keyword: String, buildingId: Int) {
         val currentCameraPosition = initCameraPosition
         val currentZoomLevel = 14.3
 
-        val pinSearchFragment = PinSearchFragment.newInstance(keyword, currentCameraPosition, currentZoomLevel)
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword, buildingId, currentCameraPosition, currentZoomLevel)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
         requireActivity().supportFragmentManager.popBackStack()
         transaction.add(R.id.main_container, pinSearchFragment)
