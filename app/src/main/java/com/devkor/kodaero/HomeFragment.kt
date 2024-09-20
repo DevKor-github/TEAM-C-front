@@ -1,6 +1,7 @@
 package com.devkor.kodaero
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -227,10 +229,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val prefix = "고려대학교 서울캠퍼스"
 
-        val favoriteAddButton = includedLayout.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
+        val bookMarkAddButton = includedLayout.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
 
-        favoriteAddButton.setOnClickListener{
-            openFavoriteAddingModal(selectedBuildingId!!)
+        bookMarkAddButton.setOnClickListener{
+            openBookMarkModal(selectedBuildingId!!)
         }
 
         val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
@@ -391,10 +393,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
+        val bookMarkModal = binding.bookmarkModal.root
+        val bookMarkBottomSheet = bookMarkModal.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val bookMarkBottomSheetBehavior = BottomSheetBehavior.from(bookMarkBottomSheet)
+        bookMarkBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         val favoriteModal = binding.favoriteModal.root
         val favoriteBottomSheet = favoriteModal.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val favoriteBottomSheetBehavior = BottomSheetBehavior.from(favoriteBottomSheet)
         favoriteBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+
+        val favoriteModalDetail = binding.favoriteModalDetail.root
+        val favoriteDetailBottomSheet = favoriteModalDetail.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val favoriteDetailBottomSheetBehavior = BottomSheetBehavior.from(favoriteDetailBottomSheet)
+        favoriteDetailBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
     }
 
     // BottomSheet의 확장 상태를 확인하는 메서드
@@ -437,21 +451,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-    private fun openFavoriteAddingModal(buildingId: Int) {
-        // Favorite Modal의 루트 레이아웃을 가져오기
-        val favoriteAddingModal = binding.favoriteModal.standardBottomSheet
+
+    private fun openBookMarkModal(buildingId: Int) {
+        // BookMark Modal의 루트 레이아웃을 가져오기
+        val bookMarkAddingModal = binding.bookmarkModal.standardBottomSheet
 
         // Close 버튼 참조
-        val favoriteAddingModalCloseButton = binding.favoriteModal.root.findViewById<ImageButton>(R.id.modal_sheet_close_button)
+        val bookMarkAddingModalCloseButton = binding.bookmarkModal.root.findViewById<ImageButton>(R.id.modal_sheet_close_button)
+
+        // Save 버튼 참조
+        val saveBookmarkButton = binding.bookmarkModal.root.findViewById<Button>(R.id.save_bookmark_button)
 
         // RecyclerView 참조
-        val favoriteRecyclerView = binding.favoriteModal.root.findViewById<RecyclerView>(R.id.modal_sheet_favorite_types)
+        val bookMarkRecyclerView = binding.bookmarkModal.root.findViewById<RecyclerView>(R.id.modal_sheet_bookmark_types)
 
         // BottomSheetBehavior로 모달 동작 관리
-        val bottomSheetBehavior = BottomSheetBehavior.from(favoriteAddingModal)
+        val bottomSheetBehavior = BottomSheetBehavior.from(bookMarkAddingModal)
 
         // 닫기 버튼 클릭 시 모달 닫기
-        favoriteAddingModalCloseButton.setOnClickListener {
+        bookMarkAddingModalCloseButton.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
@@ -459,9 +477,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         bottomSheetBehavior.isDraggable = false
 
         // RecyclerView 설정
-        favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())  // 프래그먼트의 컨텍스트 사용
+        bookMarkRecyclerView.layoutManager = LinearLayoutManager(requireContext())  // 프래그먼트의 컨텍스트 사용
         val adapter = CategoryAdapter(emptyList()) // 초기에는 빈 리스트 설정
-        favoriteRecyclerView.adapter = adapter
+        bookMarkRecyclerView.adapter = adapter
 
         // 어댑터의 AddButton 클릭 리스너 설정
         adapter.onAddButtonClick = {
@@ -479,16 +497,196 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
         categoryViewModel.fetchCategories(buildingId)
 
+        // Save 버튼 클릭 시 동작 설정
+        saveBookmarkButton.setOnClickListener {
+            val selectedCategories = adapter.getSelectedCategories()
+            val bookmarkManager = BookmarkManager(requireContext(), RetrofitClient.instance)
+            bookmarkManager.addBookmarks(selectedCategories, "BUILDING", buildingId, "")
+        }
+
         // 0.1초 후에 BottomSheet를 확장 상태로 설정하여 열기
         viewLifecycleOwner.lifecycleScope.launch {
-            delay(100)  // 0.1초 지연
+            delay(300)  // 0.1초 지연
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    fun openFavoriteModal() {
+        closeModal() // 기존에 열려있던 모달을 닫는 함수 호출
+
+        // BookMark Modal의 루트 레이아웃을 가져오기
+        val favoriteModal = binding.favoriteModal.standardBottomSheet
+
+        // Close 버튼 참조
+        val favoriteModalCloseButton = binding.favoriteModal.root.findViewById<ImageButton>(R.id.modal_sheet_close_button)
+
+        // RecyclerView 참조
+        val favoriteRecyclerView = binding.favoriteModal.root.findViewById<RecyclerView>(R.id.modal_sheet_bookmark_types)
+
+        // BottomSheetBehavior 설정 및 모달 확장
+        favoriteModal?.let {
+            val bottomSheetBehavior = BottomSheetBehavior.from(it)
+
+            // 모달이 열릴 때 ViewModel을 통해 데이터를 초기화
+            val categoryViewModel: CategoryViewModel by viewModels()
+
+            val adapter = FavoriteAdapter(
+                items = emptyList(),
+                onItemClick = { categoryId, category, color ->
+                    // 아이템 클릭 시 수행할 작업
+                    openFavoriteDetailModal(categoryId, category, color)
+                },
+                onAddButtonClick = {
+                    // Add 버튼 클릭 시 수행할 작업
+                    val dialog = AddCategoryDialog(requireContext())
+                    dialog.show()
+                }
+            )
+            favoriteRecyclerView.adapter = adapter
+
+
+            // ViewModel에서 카테고리 데이터를 가져와 어댑터에 업데이트
+            categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
+                adapter.updateItems(items)
+            }
+
+            // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
+            categoryViewModel.fetchCategories(1)
+
+            // 닫기 버튼 클릭 시 모달 닫기
+            favoriteModalCloseButton.setOnClickListener {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            }
+
+            // 드래그를 비활성화하여 상하로 움직이지 않도록 설정
+            bottomSheetBehavior.isDraggable = false
+
+
+            // 0.3초 후에 모달을 확장 상태로 설정
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(300)  // 0.3초 지연
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED // 모달을 확장 상태로 설정
+            }
+        }
+    }
+    private fun openFavoriteDetailModal(categoryId: Int, category: String, color: String) {
+        closeModal()
+
+        // favorite_modal_detail 레이아웃을 가져오기
+        val favoriteDetailModal = binding.favoriteModalDetail.standardBottomSheet
+
+
+        // 카테고리 삭제 버튼 설정
+        val deleteButton = binding.favoriteModalDetail.root.findViewById<TextView>(R.id.delete_button)
+
+
+        val bookmarkManager = BookmarkManager(requireContext(), RetrofitClient.instance)
+
+        // 삭제 버튼 클릭 리스너 설정
+        deleteButton.setOnClickListener {
+            // 카테고리 삭제 확인
+            AlertDialog.Builder(requireContext())
+                .setTitle("카테고리 삭제")
+                .setMessage("정말로 카테고리를 삭제하시겠습니까?")
+                .setPositiveButton("삭제") { _, _ ->
+                    bookmarkManager.deleteCategory(categoryId)
+                }
+                .setNegativeButton("취소", null)
+                .show()
+        }
+
+
+        // 색상에 따른 드로어블 설정 (기존 코드를 유지)
+        val categoryIconImageView = binding.favoriteModalDetail.root.findViewById<ImageView>(R.id.star_icon)
+        val iconResId = when (color.lowercase()) {
+            "red" -> R.drawable.icon_star_red
+            "blue" -> R.drawable.icon_star_blue
+            "green" -> R.drawable.icon_star_green
+            "yellow" -> R.drawable.icon_star_yellow
+            "orange" -> R.drawable.icon_star_orange
+            "pink" -> R.drawable.icon_star_pink
+            "purple" -> R.drawable.icon_star_purple
+            else -> R.drawable.icon_star_red
+        }
+        categoryIconImageView.setImageResource(iconResId)
+
+
+
+        // RecyclerView 설정
+        val favoriteDetailRecyclerView = binding.favoriteModalDetail.root.findViewById<RecyclerView>(R.id.search_list_recyclerview)
+        // HomeFragment에서 어댑터 설정
+        val adapter = FavoriteBuildingAdapter(
+            items = mutableListOf(),
+            onDeleteClick = { bookmarkId ->
+                // 북마크 삭제 처리
+                bookmarkManager.deleteBookmark(bookmarkId)
+            },
+            onItemClick = { buildingId ->
+                val buildingItem = BuildingCache.get(buildingId)
+                if (buildingItem != null) {
+                    // BuildingItem이 캐시에 존재하면 위치로 카메라 이동
+                    val position = buildingItem.latitude?.let { buildingItem.longitude?.let { it1 ->
+                        LatLng(it,
+                            it1
+                        )
+                    } }
+
+                    // HomeFragment의 카메라를 해당 위치로 이동
+                    if (position != null) {
+                        moveCameraToPosition(position)
+                    }
+                }
+
+                // buildingId를 사용하여 모달 열기
+                openBuildingModal(buildingId)
+
+            }
+        )
+
+        favoriteDetailRecyclerView.adapter = adapter
+        favoriteDetailRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // ViewModel을 통해 API 호출
+        val fetchDataViewModel: FetchDataViewModel by viewModels()
+
+        bookmarkManager.fetchBookmarks(categoryId) { bookmarkList ->
+            bookmarkList?.let {
+                val items = mutableListOf<FavoriteBuildingItem>()
+                for (bookmark in it) {
+                    when (bookmark.locationType) {
+                        "BUILDING" -> {
+                            fetchDataViewModel.fetchBuildingDetail(bookmark.locationId)
+                            fetchDataViewModel.buildingDetail.observe(viewLifecycleOwner) { buildingDetail ->
+                                buildingDetail?.let { detail ->
+                                    items.add(FavoriteBuildingItem(detail.buildingId, detail.name, detail.address!!, bookmark.bookmarkId))
+                                    adapter.updateItems(items)
+                                }
+                            }
+                        }
+                        "PLACE" -> {
+                            fetchDataViewModel.fetchPlaceInfo(bookmark.locationId) { placeInfo ->
+                                placeInfo?.let { info ->
+                                    items.add(FavoriteBuildingItem(info.buildingId, info.name, info.detail, bookmark.bookmarkId))
+                                    adapter.updateItems(items)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 모달을 확장 상태로 설정
+        val bottomSheetBehavior = BottomSheetBehavior.from(favoriteDetailModal)
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(500)  // 0.1초 지연
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
     }
 
 
-
     fun openBuildingModal(buildingId: Int) {
+        closeModal()
         val building = getBuildingInfo(buildingId) ?: return
 
         val buildingName =

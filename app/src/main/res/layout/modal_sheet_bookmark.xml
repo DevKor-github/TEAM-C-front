@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/modal_sheet_favorite_add">
+    android:id="@+id/modal_sheet_bookmark">
 
     <FrameLayout
         android:id="@+id/standard_bottom_sheet"
@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:background="@color/black"
-        android:layout_marginTop="80dp"
         android:backgroundTint="@color/white"
         tools:layout_height="match_parent"
         style="@style/Widget.Material3.BottomSheet">
@@ -54,13 +53,13 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
-                        android:id="@+id/modal_sheet_favorite"
+                        android:id="@+id/modal_sheet_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginVertical="10dp"
                         android:fontFamily="@font/pretendard_bold"
-                        android:text="즐겨찾기"
+                        android:text="즐겨찾기 추가"
                         android:textColor="@color/dark_gray"
                         android:textSize="18dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +83,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:overScrollMode="never"
-                    android:id="@+id/modal_sheet_favorite_types"
+                    android:id="@+id/modal_sheet_bookmark_types"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
@@ -105,7 +104,7 @@
                     android:clipToPadding="false">
 
                     <android.widget.Button
-                        android:id="@+id/modal_innermap_button"
+                        android:id="@+id/save_bookmark_button"
                         android:textAppearance="@style/PretendardTextStyle"
                         android:textColor="@color/white"
                         android:textSize="18dp"

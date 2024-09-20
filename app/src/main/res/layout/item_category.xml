@@ -9,8 +9,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/rounded_rect_category_selected"
         android:layout_marginVertical="2dp"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +36,28 @@
             android:textSize="16sp"
             android:fontFamily="@font/pretendard_regular"
             android:textColor="@color/dark_gray"/>
+
+
+        <!-- 빈 공간을 차지할 View -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <TextView
+            android:id="@+id/bookmarked_number"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/rounded_rec_gray_edit_text"
+            android:text="5333"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:visibility="gone"/>
     </LinearLayout>
 
 

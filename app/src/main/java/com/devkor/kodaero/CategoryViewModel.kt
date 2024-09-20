@@ -42,23 +42,4 @@ class CategoryViewModel : ViewModel() {
         })
     }
 
-    // 카테고리 추가 메서드
-    fun addCategoryToServer(accessToken: String, category: String, color: String, memo: String) {
-        val newCategory = CategoryItemRequest(category, color, memo)
-
-        apiService.addCategory(accessToken, newCategory).enqueue(object : Callback<ApiResponse<Any>> {
-            override fun onResponse(call: Call<ApiResponse<Any>>, response: Response<ApiResponse<Any>>) {
-                if (response.isSuccessful) {
-                    // 성공적으로 추가된 경우 처리
-                    Log.d("CategoryViewModel", "Category added successfully")
-                } else {
-                    Log.e("CategoryViewModel", "Failed to add category: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<ApiResponse<Any>>, t: Throwable) {
-                Log.e("CategoryViewModel", "Failed to add category", t)
-            }
-        })
-    }
 }
