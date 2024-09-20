@@ -185,13 +185,41 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-
                 R.id.fragment_favorites -> {
-                    if (currentFragment !is FavoritesFragment) {
-                        supportFragmentManager.beginTransaction()
-                            .add(R.id.main_container, FavoritesFragment(),"FavoritesFragment")
-                            .addToBackStack("FavoritesFragment")
-                            .commit()
+                    if (currentFragment !is HomeFragment && currentFragment != null) {
+                        // 백 스택에 HomeFragment가 있는지 확인
+                        val fragmentInBackStack = supportFragmentManager.findFragmentByTag("HomeFragment")
+                        if (fragmentInBackStack != null) {
+                            // HomeFragment가 백 스택에 있는 경우, 그곳으로 이동
+                            supportFragmentManager.popBackStack("HomeFragment", 0)
+                        } else {
+                            // HomeFragment가 백 스택에 없는 경우, 새로 추가
+                            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.home_container, HomeFragment(), "HomeFragment")
+                                .addToBackStack("HomeFragment")
+                                .commit()
+                        }
+
+                        // 프래그먼트 전환 후 모달 열기
+                        supportFragmentManager.addOnBackStackChangedListener(object : FragmentManager.OnBackStackChangedListener {
+                            override fun onBackStackChanged() {
+                                val newFragment = supportFragmentManager.findFragmentByTag("HomeFragment")
+                                if (newFragment is HomeFragment) {
+                                    // 모달 열기 함수 호출
+                                    (newFragment as HomeFragment).openFavoriteModal()
+                                    // 리스너 제거
+                                    supportFragmentManager.removeOnBackStackChangedListener(this)
+                                }
+                            }
+                        })
+
+                        item.setIcon(R.drawable.favorites_button)
+                    }
+
+                    else{
+                        val newFragment = supportFragmentManager.findFragmentByTag("HomeFragment")
+                        (newFragment as HomeFragment).openFavoriteModal()
                         item.setIcon(R.drawable.favorites_button)
                     }
                     true

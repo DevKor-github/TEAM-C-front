@@ -1,0 +1,29 @@
+<!-- item_favorite.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:id="@+id/item_category_add">
+
+    <ImageView
+        android:id="@+id/icon_star_add"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/icon_star_add"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="즐겨찾기 추가"
+        android:textSize="16sp"
+        android:fontFamily="@font/pretendard_regular"
+        android:textColor="@color/dark_gray"/>
+
+</LinearLayout>

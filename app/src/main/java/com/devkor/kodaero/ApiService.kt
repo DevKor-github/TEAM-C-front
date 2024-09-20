@@ -2,6 +2,7 @@ package com.devkor.kodaero
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.PATCH
@@ -92,12 +93,42 @@ interface ApiService {
         @Body suggestionRequest: SuggestionRequest
     ): Call<Void>
 
+    @GET("categories")
+    fun getCategories(
+        @Query("type") type: String,
+        @Query("id") id: Int
+    ): Call<ApiResponse<CategoryResponse>>
+
+    @POST("categories")
+    fun addCategory(
+        @Header("AccessToken") accessToken: String,
+        @Body categoryItem: CategoryItemRequest
+    ): Call<ApiResponse<Any>>
+
+
+    @POST("/api/bookmarks")
+    fun addBookmarks(@Body request: BookmarkRequest): Call<ApiResponse<Any>>
+
+
+    @GET("/api/categories/{categoryId}/bookmarks")
+    fun getBookmarks(@Path("categoryId") categoryId: Int): Call<ApiResponse<BookmarkResponse>>
+
+    // 북마크 삭제 API 메서드
+    @DELETE("/api/bookmarks/{bookmarkId}")
+    fun deleteBookmark(
+        @Path("bookmarkId") bookmarkId: Int
+    ): Call<ApiResponse<Any>>
+
+    @DELETE("/api/categories/{categoryId}")
+    fun deleteCategory(@Path("categoryId") categoryId: Int): Call<ApiResponse<Any>>
+
     @PATCH("users/username")
     fun editUserName(
         @Header("AccessToken") accessToken: String,
         @Header("RefreshToken") refreshToken: String,
         @Query("username") username: String
     ): Call<Void>
+  
 }
 
 data class LoginRequest(
@@ -285,4 +316,35 @@ data class PlaceInfoResponse(
     val operating: Boolean,
     val xcoord: Int,
     val ycoord: Int
+)
+
+data class CategoryResponse(
+    val categoryList: List<CategoryItem>,
+    val bookmarkId: Int?
+)
+
+data class CategoryItem(
+    val categoryId: Int,
+    val category: String,
+    val color: String,  // 색상 값
+    val memo: String,
+    val bookmarkCount: Int,
+    val bookmarked: Boolean
+)
+
+data class CategoryItemRequest(
+    val category: String,
+    val color: String,
+    val memo: String
+)
+
+data class BookmarkResponse(
+    val bookmarkList: List<Bookmark>
+)
+
+data class Bookmark(
+    val bookmarkId: Int,
+    val locationType: String,
+    val locationId: Int,
+    val memo: String
 )
