@@ -1,13 +1,9 @@
 package com.devkor.kodaero
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +13,15 @@ import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devkor.kodaero.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -32,6 +30,8 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -227,6 +227,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         val prefix = "고려대학교 서울캠퍼스"
 
+        val favoriteAddButton = includedLayout.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
+
+        favoriteAddButton.setOnClickListener{
+            openFavoriteAddingModal(selectedBuildingId!!)
+        }
+
         val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
 
         modalDepartButton.setOnClickListener {
@@ -384,6 +390,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val standardBottomSheet = includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        val favoriteModal = binding.favoriteModal.root
+        val favoriteBottomSheet = favoriteModal.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val favoriteBottomSheetBehavior = BottomSheetBehavior.from(favoriteBottomSheet)
+        favoriteBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     // BottomSheet의 확장 상태를 확인하는 메서드
@@ -426,6 +437,56 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+    private fun openFavoriteAddingModal(buildingId: Int) {
+        // Favorite Modal의 루트 레이아웃을 가져오기
+        val favoriteAddingModal = binding.favoriteModal.standardBottomSheet
+
+        // Close 버튼 참조
+        val favoriteAddingModalCloseButton = binding.favoriteModal.root.findViewById<ImageButton>(R.id.modal_sheet_close_button)
+
+        // RecyclerView 참조
+        val favoriteRecyclerView = binding.favoriteModal.root.findViewById<RecyclerView>(R.id.modal_sheet_favorite_types)
+
+        // BottomSheetBehavior로 모달 동작 관리
+        val bottomSheetBehavior = BottomSheetBehavior.from(favoriteAddingModal)
+
+        // 닫기 버튼 클릭 시 모달 닫기
+        favoriteAddingModalCloseButton.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        // 드래그를 비활성화하여 상하로 움직이지 않도록 설정
+        bottomSheetBehavior.isDraggable = false
+
+        // RecyclerView 설정
+        favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())  // 프래그먼트의 컨텍스트 사용
+        val adapter = CategoryAdapter(emptyList()) // 초기에는 빈 리스트 설정
+        favoriteRecyclerView.adapter = adapter
+
+        // 어댑터의 AddButton 클릭 리스너 설정
+        adapter.onAddButtonClick = {
+            // 다이얼로그를 띄우기
+            val dialog = AddCategoryDialog(requireContext())
+            dialog.show()
+        }
+
+        // ViewModel을 통해 데이터 관찰 및 RecyclerView에 바인딩
+        val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
+        categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
+            adapter.updateItems(items)
+        }
+
+        // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
+        categoryViewModel.fetchCategories(buildingId)
+
+        // 0.1초 후에 BottomSheet를 확장 상태로 설정하여 열기
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(100)  // 0.1초 지연
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+
 
     fun openBuildingModal(buildingId: Int) {
         val building = getBuildingInfo(buildingId) ?: return
@@ -493,7 +554,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val adapter = FacilityTypeAdapter(building.placeTypes, requireContext())
         facilityTypesRecyclerView.adapter = adapter
 
-        standardBottomSheet.setOnClickListener {
+        buildingName.setOnClickListener {
             navigateToBuildingDetailFragment()
         }
 
