@@ -1,6 +1,7 @@
 package com.devkor.kodaero
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,6 +25,10 @@ class BuildingDetailFragment : Fragment() {
 
     private lateinit var viewModel: FetchDataViewModel
     private var selectedBuildingId: Int? = null
+
+    private lateinit var selectedBuildingName: String
+    private var selectedBuildingAboveFloor: Int? = null
+    private var selectedBuildingUnderFloor: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,22 +57,24 @@ class BuildingDetailFragment : Fragment() {
         val facilityRecyclerView = view.findViewById<RecyclerView>(R.id.building_detail_facility_types)
         val buildingImageView = view.findViewById<ImageView>(R.id.building_detail_image)
         val operatingTimeLayout = view.findViewById<LinearLayout>(R.id.building_detail_operating_time_layout)
+        val operatingTime1 = view.findViewById<TextView>(R.id.building_detail_operating_time_1)
+        val operatingTime2 = view.findViewById<TextView>(R.id.building_detail_operating_time_2)
+        val operatingTime3 = view.findViewById<TextView>(R.id.building_detail_operating_time_3)
         val showOperatingTimeLayout = view.findViewById<RelativeLayout>(R.id.show_operating_time_layout)
         val showOperatingTimeButton = view.findViewById<ImageButton>(R.id.show_operating_time_button)
+        val innerMapButton = view.findViewById<Button>(R.id.modal_innermap_button)
+        val modalDepartButton = view.findViewById<Button>(R.id.modal_depart_button)
+        val modalArriveButton = view.findViewById<Button>(R.id.modal_arrive_button)
         val facilityButton = view.findViewById<Button>(R.id.building_detail_facility_button)
-        val communityButton = view.findViewById<Button>(R.id.building_detail_community_button)
         val tmiButton = view.findViewById<Button>(R.id.building_detail_tmi_button)
 
         val facilityGridView = view.findViewById<RecyclerView>(R.id.building_detail_facilities_gridview)
-        val communityLayout = view.findViewById<RelativeLayout>(R.id.building_detail_community_layout)
         val tmiLayout = view.findViewById<RelativeLayout>(R.id.building_detail_tmi_layout)
         val tmiNameTextView = view.findViewById<TextView>(R.id.building_detail_tmi_name)
         val tmiDetailTextView = view.findViewById<TextView>(R.id.building_detail_tmi)
 
-        // 기본적으로 운영 시간을 숨김
         operatingTimeLayout.visibility = View.GONE
 
-        // 운영 시간 버튼 클릭 시 토글
         showOperatingTimeLayout.setOnClickListener {
             val isVisible = operatingTimeLayout.visibility == View.VISIBLE
             if (isVisible) {
@@ -78,16 +86,24 @@ class BuildingDetailFragment : Fragment() {
             }
         }
 
-        // 리사이클러뷰 설정
         facilityRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         facilityGridView.layoutManager = GridLayoutManager(context, 2)
 
         selectedBuildingId?.let { id ->
+            val building = getBuildingInfo(id) ?: return
+
+            selectedBuildingName = building.name
+            selectedBuildingAboveFloor = building.floor
+            selectedBuildingUnderFloor = building.underFloor
+
             viewModel.fetchBuildingDetail(id)
             viewModel.buildingDetail.observe(viewLifecycleOwner, Observer { buildingDetail ->
                 buildingNameTextView.text = buildingDetail?.name
                 buildingAddressTextView.text = buildingDetail?.address
                 buildingDeadlineTextView.text = buildingDetail?.nextBuildingTime
+                operatingTime1.text = buildingDetail?.weekdayOperatingTime
+                operatingTime2.text = buildingDetail?.saturdayOperatingTime
+                operatingTime3.text = buildingDetail?.sundayOperatingTime
 
                 if (buildingDetail?.operating == true) {
                     buildingOperatingStatusTextView.text = "운영 중"
@@ -97,61 +113,155 @@ class BuildingDetailFragment : Fragment() {
                     buildingDeadlineTextTextView.text = "에 운영 시작"
                 }
 
-                // Load the image using Glide
                 buildingDetail?.imageUrl?.let { url ->
                     Glide.with(this)
                         .load(url)
                         .into(buildingImageView)
                 }
 
-                // Set up facility grid view adapter
-                val facilityGridAdapter = FacilityGridAdapter(buildingDetail?.mainFacilityList ?: emptyList())
+                val displayMetrics = resources.displayMetrics
+                val screenWidth = displayMetrics.widthPixels
+                val itemMargin = 20 * resources.displayMetrics.density
+                val itemWidth = (screenWidth / 2) - (2 * itemMargin.toInt())
+
+                val facilityGridAdapter = FacilityGridAdapter(
+                    facilities = buildingDetail?.mainFacilityList ?: emptyList(),
+                    itemWidth = itemWidth,
+                    onItemClick = { placeId ->
+                        navigateToInnerMapFragment(placeId)
+                    }
+                )
                 facilityGridView.adapter = facilityGridAdapter
 
-                // Set TMI details
                 tmiNameTextView.text = buildingDetail?.name
                 tmiDetailTextView.text = buildingDetail?.details?.replace("\\n", "\n")
 
-                // Set up horizontal facility types
                 val adapter = buildingDetail?.existTypes?.let { FacilityTypeAdapter(it, requireContext()) }
                 facilityRecyclerView.adapter = adapter
 
-                // Set the initial active button and display
-                setActiveButton(facilityButton, communityButton, tmiButton)
+                setActiveButton(facilityButton, tmiButton)
             })
         }
 
-        // 버튼 클릭 시 활성화 상태 변경 및 레이아웃 전환
-        facilityButton.setOnClickListener {
-            setActiveButton(facilityButton, communityButton, tmiButton)
-            showLayout(facilityGridView, communityLayout, tmiLayout)
+        innerMapButton.setOnClickListener {
+            navigateToInnerMapFragment()
         }
 
-        communityButton.setOnClickListener {
-            setActiveButton(communityButton, facilityButton, tmiButton)
-            showLayout(communityLayout, facilityGridView, tmiLayout)
+        val prefix = "고려대학교 서울캠퍼스"
+
+        modalDepartButton.setOnClickListener {
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(true, cleanedBuildingName, "BUILDING", selectedBuildingId)
+        }
+
+        modalArriveButton.setOnClickListener {
+            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
+            putBuildingDirectionsFragment(false, cleanedBuildingName, "BUILDING", selectedBuildingId)
+        }
+
+        facilityButton.setOnClickListener {
+            setActiveButton(facilityButton, tmiButton)
+            showLayout(facilityGridView, tmiLayout)
         }
 
         tmiButton.setOnClickListener {
-            setActiveButton(tmiButton, facilityButton, communityButton)
-            showLayout(tmiLayout, facilityGridView, communityLayout)
+            setActiveButton(tmiButton, facilityButton)
+            showLayout(tmiLayout, facilityGridView)
         }
     }
 
-    private fun setActiveButton(activeButton: Button, inactiveButton1: Button, inactiveButton2: Button) {
+    private fun setActiveButton(activeButton: Button, inactiveButton: Button) {
         activeButton.setBackgroundColor(resources.getColor(R.color.red))
         activeButton.setTextColor(resources.getColor(R.color.bright_gray))
 
-        inactiveButton1.setBackgroundColor(resources.getColor(R.color.white))
-        inactiveButton1.setTextColor(resources.getColor(R.color.black))
-
-        inactiveButton2.setBackgroundColor(resources.getColor(R.color.white))
-        inactiveButton2.setTextColor(resources.getColor(R.color.black))
+        inactiveButton.setBackgroundColor(resources.getColor(R.color.white))
+        inactiveButton.setTextColor(resources.getColor(R.color.black))
     }
 
-    private fun showLayout(visibleLayout: View, vararg invisibleLayouts: View) {
+    private fun showLayout(visibleLayout: View, invisibleLayout: View) {
         visibleLayout.visibility = View.VISIBLE
-        invisibleLayouts.forEach { it.visibility = View.GONE }
+        invisibleLayout.visibility = View.GONE
+    }
+
+    private fun navigateToInnerMapFragment() {
+        if (selectedBuildingAboveFloor != null && selectedBuildingUnderFloor != null && selectedBuildingId != null && selectedBuildingName != null) {
+            val innerMapFragment = InnerMapFragment.newInstance(
+                selectedBuildingName!!,
+                selectedBuildingAboveFloor!!,
+                selectedBuildingUnderFloor!!,
+                selectedBuildingId!!
+            )
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.add(R.id.main_container, innerMapFragment)
+            transaction.addToBackStack("InnerMapFragment")
+            transaction.commit()
+        } else {
+            Log.e("navigateToInnerMapFragment", "Missing one or more required arguments")
+        }
+    }
+
+    private fun navigateToInnerMapFragment(roomId: Int) {
+        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
+
+                if (buildingItem != null) {
+                    // 캐시된 BuildingItem의 정보를 사용
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask, false
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                // placeInfo가 null인 경우 오류 처리
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
+        }
+    }
+
+    private fun getBuildingInfo(buildingId: Int): BuildingItem? {
+        val building = BuildingCache.get(buildingId)
+
+        if (building != null) {
+            return building
+        } else {
+            return null
+        }
+    }
+
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+                putString("placeType", placeType)
+                if (id != null) {
+                    putInt("placeId", id)
+                }
+            }
+        }
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
+            ?.addToBackStack("DirectionFragment")
+            ?.commit()
     }
 
     companion object {

@@ -316,13 +316,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             binding.convenienceStoreButton,
             binding.readingRoomButton,
             binding.studyRoomButton,
+            binding.bookReturnMachineButton,
             binding.loungeButton,
             binding.waterPurifierButton,
-            binding.printerButton,
             binding.vendingMachineButton,
+            binding.printerButton,
+            binding.tumblerWasherButton,
+            binding.onestopAutoMachineButton,
+            binding.bankButton,
             binding.smokingAreaButton,
-            binding.sleepingRoomButton,
-            binding.bookReturnMachineButton
+            binding.showerRoomButton,
+            binding.gymButton,
+            binding.sleepingRoomButton
         )
 
         for (button in buttonIds) {
@@ -338,9 +343,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val currentCameraPosition = getCurrentCameraPosition()
         val currentZoomLevel = getCurrentZoomLevel()
 
-        val pinSearchFragment = PinSearchFragment.newInstance(keyword, currentCameraPosition, currentZoomLevel)
+        val pinSearchFragment = PinSearchFragment.newInstance(keyword, 0, currentCameraPosition, currentZoomLevel)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.add(R.id.main_container, pinSearchFragment)
+        transaction.replace(R.id.main_container, pinSearchFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
@@ -495,9 +500,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         standardBottomSheet.setOnClickListener {
             navigateToBuildingDetailFragment()
+            closeModal()
         }
-
-
 
         isInitialExpand = true
 
@@ -508,6 +512,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     Log.e("", "turned changed $newState $isInitialExpand")
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
                         navigateToBuildingDetailFragment()
+                        closeModal()
                     }
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                         isInitialExpand = true

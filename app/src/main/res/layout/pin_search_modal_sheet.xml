@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/pin_search_modal_sheet">
+    android:id="@+id/pin_search_modal_sheet"
+    android:elevation="8dp">
 
     <FrameLayout
         android:id="@+id/standard_bottom_sheet"
