@@ -49,29 +49,33 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="10dp">
+                    android:paddingHorizontal="10dp"
+                    android:clipChildren="false">
 
                     <TextView
                         android:id="@+id/modal_sheet_building_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/building_name"
                         android:fontFamily="@font/pretendard_bold"
-                        android:textSize="18dp"
+                        android:text="@string/building_name"
                         android:textColor="@color/dark_gray"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
+                        android:padding="3dp"
                         android:id="@+id/modal_sheet_bookmarked_button"
-                        android:src="@drawable/button_bookmarked_off"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
+                        android:src="@drawable/button_bookmarked_off"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

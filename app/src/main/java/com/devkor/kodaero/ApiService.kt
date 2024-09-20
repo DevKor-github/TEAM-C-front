@@ -90,6 +90,20 @@ interface ApiService {
         @Header("RefreshToken") refreshToken: String,
         @Body suggestionRequest: SuggestionRequest
     ): Call<Void>
+
+
+    @GET("categories")
+    fun getCategories(
+        @Query("type") type: String,
+        @Query("id") id: Int
+    ): Call<ApiResponse<CategoryResponse>>
+
+    @POST("categories")
+    fun addCategory(
+        @Header("AccessToken") accessToken: String,
+        @Body categoryItem: CategoryItemRequest
+    ): Call<ApiResponse<Any>>
+
 }
 
 data class LoginRequest(
@@ -276,4 +290,24 @@ data class PlaceInfoResponse(
     val operating: Boolean,
     val xcoord: Int,
     val ycoord: Int
+)
+
+data class CategoryResponse(
+    val categoryList: List<CategoryItem>,
+    val bookmarkId: Int?
+)
+
+data class CategoryItem(
+    val categoryId: Int,
+    val category: String,
+    val color: String,  // 색상 값
+    val memo: String,
+    val bookmarkCount: Int,
+    val bookmarked: Boolean
+)
+
+data class CategoryItemRequest(
+    val category: String,
+    val color: String,
+    val memo: String
 )
