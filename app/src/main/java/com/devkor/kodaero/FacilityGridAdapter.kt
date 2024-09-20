@@ -8,8 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilityList>) :
-    RecyclerView.Adapter<FacilityGridAdapter.ViewHolder>() {
+class FacilityGridAdapter(
+    private val facilities: List<BuildingDetailMainFacilityList>,
+    private val onItemClick: (Int) -> Unit,
+    private val itemWidth: Int
+) : RecyclerView.Adapter<FacilityGridAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -19,6 +22,12 @@ class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilit
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val facility = facilities[position]
+
+        val layoutParams = holder.itemView.layoutParams
+        layoutParams.width = itemWidth
+        layoutParams.height = itemWidth
+        holder.itemView.layoutParams = layoutParams
+
         holder.facilityName.text = facility.name
         if (facility.imageUrl != null) {
             Glide.with(holder.itemView.context)
@@ -26,6 +35,10 @@ class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilit
                 .into(holder.facilityImage)
         } else {
             holder.facilityImage.setImageDrawable(null)
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick(facility.placeId)
         }
     }
 
@@ -36,3 +49,4 @@ class FacilityGridAdapter(private val facilities: List<BuildingDetailMainFacilit
         val facilityName: TextView = view.findViewById(R.id.building_detail_facility_name)
     }
 }
+

@@ -328,4 +328,36 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
+    fun editUserName(newUserName: String) {
+        val accessToken = TokenManager.getAccessToken()
+        val refreshToken = TokenManager.getRefreshToken()
+
+        if (accessToken == null || refreshToken == null) {
+            Log.e("FetchDataViewModel", "No tokens available.")
+            return
+        }
+
+        service.editUserName(accessToken, refreshToken, newUserName).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                responseCode = response.code()
+
+                if (response.isSuccessful) {
+                    val newAccessToken = response.headers()["AccessToken"]
+
+                    if (!newAccessToken.isNullOrEmpty()) {
+                        Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
+                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                    }
+                    Log.d("FetchDataViewModel", "Username updated successfully to $newUserName")
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("FetchDataViewModel", "Error updating username: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("FetchDataViewModel", "Failed to update username: ${t.message}")
+            }
+        })
+    }
 }
