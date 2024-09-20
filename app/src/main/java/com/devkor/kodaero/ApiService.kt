@@ -2,6 +2,7 @@ package com.devkor.kodaero
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -103,6 +104,23 @@ interface ApiService {
         @Header("AccessToken") accessToken: String,
         @Body categoryItem: CategoryItemRequest
     ): Call<ApiResponse<Any>>
+
+
+    @POST("/api/bookmarks")
+    fun addBookmarks(@Body request: BookmarkRequest): Call<ApiResponse<Any>>
+
+
+    @GET("/api/categories/{categoryId}/bookmarks")
+    fun getBookmarks(@Path("categoryId") categoryId: Int): Call<ApiResponse<BookmarkResponse>>
+
+    // 북마크 삭제 API 메서드
+    @DELETE("/api/bookmarks/{bookmarkId}")
+    fun deleteBookmark(
+        @Path("bookmarkId") bookmarkId: Int
+    ): Call<ApiResponse<Any>>
+
+    @DELETE("/api/categories/{categoryId}")
+    fun deleteCategory(@Path("categoryId") categoryId: Int): Call<ApiResponse<Any>>
 
 }
 
@@ -309,5 +327,16 @@ data class CategoryItem(
 data class CategoryItemRequest(
     val category: String,
     val color: String,
+    val memo: String
+)
+
+data class BookmarkResponse(
+    val bookmarkList: List<Bookmark>
+)
+
+data class Bookmark(
+    val bookmarkId: Int,
+    val locationType: String,
+    val locationId: Int,
     val memo: String
 )
