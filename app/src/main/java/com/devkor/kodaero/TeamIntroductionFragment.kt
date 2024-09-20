@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import com.devkor.kodaero.databinding.TeamIntroductionBinding
+import com.devkor.kodaero.databinding.FragmentTeamIntroductionBinding
 
 class TeamIntroductionFragment : Fragment() {
 
-    private var _binding: TeamIntroductionBinding? = null
+    private var _binding: FragmentTeamIntroductionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = TeamIntroductionBinding.inflate(inflater, container, false)
+        _binding = FragmentTeamIntroductionBinding.inflate(inflater, container, false)
 
         binding.backToMypageButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
