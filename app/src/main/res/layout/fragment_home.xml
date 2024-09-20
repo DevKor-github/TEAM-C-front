@@ -279,6 +279,19 @@
             app:layout_constraintTop_toBottomOf="@id/facility_button_scroll_layout" />
 
     <include layout="@layout/modal_sheet"
-        android:id="@+id/includedLayout"/>
+        android:id="@+id/includedLayout"
+        tools:visibility="gone"/>
+
+    <include layout="@layout/modal_sheet_bookmark"
+        android:id="@+id/bookmark_modal"
+        tools:visibility="gone"/>
+
+    <include layout="@layout/modal_sheet_favorite"
+        android:id="@+id/favorite_modal"
+        tools:visibility="gone"/>
+
+    <include layout="@layout/modal_sheet_favorite_detail"
+        android:id="@+id/favorite_modal_detail"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
