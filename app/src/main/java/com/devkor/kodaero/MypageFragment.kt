@@ -23,7 +23,7 @@ class MypageFragment : Fragment() {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val userInfo = TokenManager.getUserInfo()
+        val userInfo = arguments?.getParcelable<UserInfo>("userInfo") ?: TokenManager.getUserInfo()
 
         userInfo?.let {
             binding.username.text = it.username
@@ -149,4 +149,5 @@ class MypageFragment : Fragment() {
         val mainActivity = activity as? MainActivity
         mainActivity?.binding?.bottomNavigationView?.selectedItemId = R.id.fragment_home
     }
+
 }
