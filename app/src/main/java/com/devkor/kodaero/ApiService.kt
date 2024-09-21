@@ -84,14 +84,10 @@ interface ApiService {
 
     @GET("users/mypage")
     fun getUserInfo(
-        @Header("AccessToken") accessToken: String,
-        @Header("RefreshToken") refreshToken: String
     ): Call<ApiResponse<UserInfo>>
 
     @POST("suggestions")
     fun summitSuggestion(
-        @Header("AccessToken") accessToken: String,
-        @Header("RefreshToken") refreshToken: String,
         @Body suggestionRequest: SuggestionRequest
     ): Call<Void>
 
@@ -126,8 +122,6 @@ interface ApiService {
 
     @PATCH("users/username")
     fun editUserName(
-        @Header("AccessToken") accessToken: String,
-        @Header("RefreshToken") refreshToken: String,
         @Query("username") username: String
     ): Call<Void>
   
