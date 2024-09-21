@@ -28,6 +28,7 @@ class InnerMapTouchHandler(
     private val innerMapBinding: InnerMapContainerBinding,
     private val floor: Int,
     private val buildingId: Int,
+    private val fragment: InnerMapFragment, // InnerMapFragment의 참조 추가
     private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
@@ -175,6 +176,11 @@ class InnerMapTouchHandler(
                     if (placeInfo != null && placeInfo.maskIndex != 0) {
                         val fetchedRoomName = placeInfo.name
                         standardBottomSheet.findViewById<TextView>(R.id.modal_sheet_building_name).text = fetchedRoomName
+
+
+                        // Binding 객체를 통해 UI 업데이트
+                        fragment.selectedPlaceId = roomId // 예시로 추가된 코드
+
                         if(placeInfo.detail != ".") {
                             roomDetail.text = placeInfo.detail
                             roomDetail.visibility = View.VISIBLE

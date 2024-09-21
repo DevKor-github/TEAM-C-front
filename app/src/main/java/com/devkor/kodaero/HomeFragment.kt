@@ -507,6 +507,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             val selectedCategories = adapter.getSelectedCategories()
             val bookmarkManager = BookmarkManager(requireContext(), RetrofitClient.instance)
             bookmarkManager.addBookmarks(selectedCategories, "BUILDING", buildingId, "")
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(100)  // 0.1초 지연
+                updateBookmarkButton(buildingId)
+            }
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
@@ -634,24 +638,32 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 // 북마크 삭제 처리
                 bookmarkManager.deleteBookmark(bookmarkId)
             },
-            onItemClick = { buildingId ->
-                val buildingItem = BuildingCache.get(buildingId)
-                if (buildingItem != null) {
-                    // BuildingItem이 캐시에 존재하면 위치로 카메라 이동
-                    val position = buildingItem.latitude?.let { buildingItem.longitude?.let { it1 ->
-                        LatLng(it,
-                            it1
-                        )
-                    } }
+            onItemClick = { buildingId, buildingType ->
+                if(buildingType == "BUILDING") {
+                    val buildingItem = BuildingCache.get(buildingId)
+                    if (buildingItem != null) {
+                        // BuildingItem이 캐시에 존재하면 위치로 카메라 이동
+                        val position = buildingItem.latitude?.let {
+                            buildingItem.longitude?.let { it1 ->
+                                LatLng(
+                                    it,
+                                    it1
+                                )
+                            }
+                        }
 
-                    // HomeFragment의 카메라를 해당 위치로 이동
-                    if (position != null) {
-                        moveCameraToPosition(position)
+                        // HomeFragment의 카메라를 해당 위치로 이동
+                        if (position != null) {
+                            moveCameraToPosition(position)
+                        }
                     }
                 }
 
-                // buildingId를 사용하여 모달 열기
-                openBuildingModal(buildingId)
+                else if(buildingType == "PLACE") {
+                    // buildingId를 사용하여 모달 열기
+                    navigateToInnerMapFragment(buildingId)
+                }
+                else Log.e("FavoriteDetail","Type Error")
 
             }
         )
@@ -664,30 +676,32 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         bookmarkManager.fetchBookmarks(categoryId) { bookmarkList ->
             bookmarkList?.let {
-                val items = mutableListOf<FavoriteBuildingItem>()
-                for (bookmark in it) {
-                    when (bookmark.locationType) {
-                        "BUILDING" -> {
-                            fetchDataViewModel.fetchBuildingDetail(bookmark.locationId)
-                            fetchDataViewModel.buildingDetail.observe(viewLifecycleOwner) { buildingDetail ->
+                Log.e("BookMarkAdd", "$bookmarkList")
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val items = mutableListOf<FavoriteBuildingItem>()
+
+                    for (bookmark in it) {
+                        when (bookmark.locationType) {
+                            "BUILDING" -> {
+                                val buildingDetail = fetchDataViewModel.fetchBuildingDetailSync(bookmark.locationId)
                                 buildingDetail?.let { detail ->
-                                    items.add(FavoriteBuildingItem(detail.buildingId, detail.name, detail.address!!, bookmark.bookmarkId))
-                                    adapter.updateItems(items)
+                                    items.add(FavoriteBuildingItem(detail.buildingId,"BUILDING", detail.name, detail.address!!, bookmark.bookmarkId))
                                 }
                             }
-                        }
-                        "PLACE" -> {
-                            fetchDataViewModel.fetchPlaceInfo(bookmark.locationId) { placeInfo ->
+                            "PLACE" -> {
+                                val placeInfo = fetchDataViewModel.fetchPlaceInfoSync(bookmark.locationId)
                                 placeInfo?.let { info ->
-                                    items.add(FavoriteBuildingItem(info.buildingId, info.name, info.detail, bookmark.bookmarkId))
-                                    adapter.updateItems(items)
+                                    items.add(FavoriteBuildingItem(info.buildingId, "PLACE", info.name, info.detail, bookmark.bookmarkId))
                                 }
                             }
                         }
+                        // 어댑터 업데이트는 각 아이템이 추가된 후에 수행
+                        adapter.updateItems(items)
                     }
                 }
             }
         }
+
 
         // 모달을 확장 상태로 설정
         val bottomSheetBehavior = BottomSheetBehavior.from(favoriteDetailModal)
@@ -714,7 +728,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
         val standardBottomSheet =
             binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
-        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+        val standardBottomSheetBehavior =
+            BottomSheetBehavior.from(standardBottomSheet)
+
+        updateBookmarkButton(buildingId)
+
+
 
         buildingName.text = building.name
         buildingAddress.text = building.address
@@ -936,6 +955,67 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         // Insets을 강제로 적용하여 초기 패딩 설정
         layout.requestApplyInsets()
     }
+    private fun updateBookmarkButton(buildingId: Int) {
+        val bookmarkedButton = binding.includedLayout.root.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
+        val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
+
+        categoryViewModel.fetchCategories(buildingId)
+
+        categoryViewModel.categories.observe(viewLifecycleOwner) { categoryList ->
+            categoryList?.let { categories ->
+                val hasBookmarkedItem = categories.any { it.bookmarked }
+                if (hasBookmarkedItem) {
+                    Log.d("CategoryCheck", "There is at least one bookmarked category.")
+                    bookmarkedButton.setImageResource(R.drawable.button_bookmarked_on)
+                } else {
+                    Log.d("CategoryCheck", "No bookmarked categories found.")
+                    bookmarkedButton.setImageResource(R.drawable.button_bookmarked_off)
+                }
+                // 버튼을 다시 그리도록 강제
+                bookmarkedButton.invalidate()
+                bookmarkedButton.requestLayout()
+            } ?: run {
+                Log.e("CategoryCheck", "Failed to fetch categories or no categories found.")
+            }
+        }
+    }
+
+
+    private fun navigateToInnerMapFragment(roomId: Int) {
+        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
+            placeInfo?.let {
+                // 캐시에서 BuildingItem 가져오기
+                val buildingItem = BuildingCache.get(it.buildingId)
+
+                if (buildingItem != null) {
+                    // 캐시된 BuildingItem의 정보를 사용
+                    val selectedBuildingName = buildingItem.name
+                    val selectedBuildingAboveFloor = buildingItem.floor ?: 0
+                    val selectedBuildingUnderFloor = buildingItem.underFloor
+
+                    val selectedRoomFloor = it.floor
+                    val selectedRoomMask = it.maskIndex
+
+                    val innerMapFragment = InnerMapFragment.newInstanceFromSearch(
+                        selectedBuildingName, selectedBuildingAboveFloor, selectedBuildingUnderFloor,
+                        it.buildingId, selectedRoomFloor, selectedRoomMask, false
+                    )
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    transaction.add(R.id.main_container, innerMapFragment)
+                    transaction.addToBackStack("InnerMapFragment")
+                    transaction.commit()
+                } else {
+                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
+                    Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
+                }
+            } ?: run {
+                // placeInfo가 null인 경우 오류 처리
+                Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
+            }
+        }
+    }
+
 
 
 }

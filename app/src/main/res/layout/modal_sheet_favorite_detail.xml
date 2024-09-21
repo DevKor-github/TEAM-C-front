@@ -133,16 +133,21 @@
 
 
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="10dp"/>
 
 
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:overScrollMode="never"
                     android:id="@+id/search_list_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/favorite_list_building"
-                    android:layout_below="@id/modal_sheet_top_container"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_below="@id/modal_sheet_top_container"/>
 
 
             </LinearLayout>

@@ -4,9 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
+import retrofit2.await
+import retrofit2.awaitResponse
+
 
 class FetchDataViewModel : ViewModel() {
     private val _buildingSearchItems = MutableLiveData<List<BuildingSearchItem>>()
@@ -118,6 +124,21 @@ class FetchDataViewModel : ViewModel() {
         })
     }
 
+    suspend fun fetchBuildingDetailSync(buildingId: Int): BuildingDetailItem? {
+        return try {
+            val response = service.getBuildingDetail(buildingId).awaitResponse()
+            if (response.isSuccessful) {
+                response.body()?.data
+            } else {
+                Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: HttpException) {
+            Log.e("FetchDataViewModel", "API call failed: ${e.message}")
+            null
+        }
+    }
+
     fun fetchRoomList(buildingId: Int, buildingFloor: Int) {
         service.searchBuildingFloor(buildingId, buildingFloor).enqueue(object : Callback<ApiResponse<RoomListResponse>> {
             override fun onResponse(call: Call<ApiResponse<RoomListResponse>>, response: Response<ApiResponse<RoomListResponse>>) {
@@ -226,6 +247,7 @@ class FetchDataViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         callback(response.body()?.data)
+                        Log.d("FetchDataViewModel", "API response successful")
                     } else {
                         Log.d("FetchDataViewModel", "API response unsuccessful. Code: ${response.code()}, Message: ${response.message()}")
                         callback(null)
@@ -237,6 +259,24 @@ class FetchDataViewModel : ViewModel() {
                     callback(null)
                 }
             })
+    }
+
+
+    suspend fun fetchPlaceInfoSync(roomId: Int): PlaceInfoResponse? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = service.getPlaceInfo(roomId).execute()  // 동기적으로 호출
+                if (response.isSuccessful) {
+                    response.body()?.data
+                } else {
+                    Log.d("FetchDataViewModel", "API response unsuccessful. Code: ${response.code()}, Message: ${response.message()}")
+                    null
+                }
+            } catch (e: Exception) {
+                Log.d("FetchDataViewModel", "API call failed: ${e.message}")
+                null
+            }
+        }
     }
 
     fun getUserTokens(provider: String, email: String, token: String) {
