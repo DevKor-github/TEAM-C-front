@@ -3,6 +3,10 @@ package com.devkor.kodaero
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +55,20 @@ class EditNameFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.editNameText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrBlank()) {
+                    binding.editNameButton.setBackgroundResource(R.drawable.rounded_rec_red)
+                } else {
+                    binding.editNameButton.setBackgroundResource(R.drawable.rounded_rec_gray)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         binding.editNameButton.setOnClickListener {
             val enteredText = binding.editNameText.text.toString()
             hideKeyboard()
@@ -67,9 +85,13 @@ class EditNameFragment : Fragment() {
         binding.editNameYesButton.setOnClickListener {
             val newUsername = binding.editNameLayoutText.text.toString()
 
-            viewModel.editUserName(newUsername)
+            binding.editNameLayout.visibility = View.GONE
+            binding.editNameComplete.visibility = View.VISIBLE
 
-            checkTokensAndFetchUserInfo()
+            Handler(Looper.getMainLooper()).postDelayed({
+                viewModel.editUserName(newUsername)
+                checkTokensAndFetchUserInfo()
+            }, 1000)
         }
 
         binding.editNameNoButton.setOnClickListener {
