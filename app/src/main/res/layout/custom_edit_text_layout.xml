@@ -40,7 +40,7 @@
             android:layout_height="54dp"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:hint="학교 건물을 검색해 주세요"
+            android:hint="학교 건물을 검색해주세요"
             android:textSize="15dp"
             android:elevation="0dp"
             android:background="@drawable/rounded_rec_white"
