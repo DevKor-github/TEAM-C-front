@@ -332,7 +332,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             binding.tumblerWasherButton,
             binding.onestopAutoMachineButton,
             binding.bankButton,
-            binding.smokingAreaButton,
+            binding.smokingBoothButton,
             binding.showerRoomButton,
             binding.gymButton,
             binding.sleepingRoomButton

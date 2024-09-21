@@ -125,7 +125,7 @@
 
                     <ImageButton
                         android:id="@+id/smoking_area_button"
-                        android:src="@drawable/button_smoking_area"
+                        android:src="@drawable/button_smoking_booth"
                         android:layout_width="80dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
