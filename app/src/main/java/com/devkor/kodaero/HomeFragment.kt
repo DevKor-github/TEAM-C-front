@@ -122,6 +122,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         if (!hasPermission()) {
             requestPermissions(PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
+            initMapView()
         } else {
             initMapView()
         }
