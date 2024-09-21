@@ -421,6 +421,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         replaceInnermapMask()
         updateTouchHandler()
 
+        togglePinDisplay(null,null,true)
+
         // Draw the route for the current building and floor
         drawRouteForCurrentFloor(routeView, searchedRoute, currentBuildingId, innermapCurrentFloor)
 
@@ -788,29 +790,34 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     // 버튼 클릭 시 핀을 표시하거나 제거하는 함수
-    private fun togglePinDisplay(floorRoomList: List<RoomList>, placeType: String, resetParam: Boolean) {
+    private fun togglePinDisplay(floorRoomList: List<RoomList>?, placeType: String?, resetParam: Boolean) {
         val facilityLayout = _binding?.includedMap?.facility  // facility 레이아웃을 가져옴
 
+        Log.e("","todddddddddd")
         facilityLayout?.let {
             // placeType이 이미 표시된 상태라면, 핀을 제거하고 상태를 초기화
-            if(resetParam){
+            if (resetParam) {
                 it.removeAllViews() // 이미지 제거
                 currentDisplayedPinType = null // 현재 표시된 핀 상태 초기화
                 return
             }
-            if (currentDisplayedPinType == placeType) {
-                it.removeAllViews() // 이미지 제거
-                currentDisplayedPinType = null // 현재 표시된 핀 상태 초기화
-            } else {
-                // 새로운 핀을 표시
-                val drawableResId = getPinDrawableByPlaceType(placeType)
-                val drawable = resources.getDrawable(drawableResId, null)
 
-                // placeType에 맞는 핀 아이콘을 그리기
-                drawRoomCoordinatesByPlaceType(it, floorRoomList, placeType, drawable)
+            if(floorRoomList != null && placeType != null) {
 
-                // 현재 표시된 핀의 타입 업데이트
-                currentDisplayedPinType = placeType
+                if (currentDisplayedPinType == placeType) {
+                    it.removeAllViews() // 이미지 제거
+                    currentDisplayedPinType = null // 현재 표시된 핀 상태 초기화
+                } else {
+                    // 새로운 핀을 표시
+                    val drawableResId = getPinDrawableByPlaceType(placeType)
+                    val drawable = resources.getDrawable(drawableResId, null)
+
+                    // placeType에 맞는 핀 아이콘을 그리기
+                    drawRoomCoordinatesByPlaceType(it, floorRoomList, placeType, drawable)
+
+                    // 현재 표시된 핀의 타입 업데이트
+                    currentDisplayedPinType = placeType
+                }
             }
         }
     }
