@@ -42,6 +42,9 @@ class FetchDataViewModel : ViewModel() {
     private val _userInfo = MutableLiveData<UserInfo?>()
     val userInfo: LiveData<UserInfo?> get() = _userInfo
 
+    private val _editUserNameResult = MutableLiveData<Boolean>()
+    val editUserNameResult: LiveData<Boolean> get() = _editUserNameResult
+
     var responseCode: Int? = null
 
     private val service = RetrofitClient.instance
@@ -260,16 +263,9 @@ class FetchDataViewModel : ViewModel() {
     }
 
     fun fetchUserInfo() {
-        val accessToken = TokenManager.getAccessToken()
         val refreshToken = TokenManager.getRefreshToken()
 
-        if (accessToken == null || refreshToken == null) {
-            Log.e("FetchDataViewModel", "No tokens available.")
-            _userInfo.value = null
-            return
-        }
-
-        service.getUserInfo(accessToken, refreshToken).enqueue(object : Callback<ApiResponse<UserInfo>> {
+        service.getUserInfo().enqueue(object : Callback<ApiResponse<UserInfo>> {
             override fun onResponse(call: Call<ApiResponse<UserInfo>>, response: Response<ApiResponse<UserInfo>>) {
                 responseCode = response.code()
 
@@ -278,7 +274,9 @@ class FetchDataViewModel : ViewModel() {
 
                     if (!newAccessToken.isNullOrEmpty()) {
                         Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
-                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                        if (refreshToken != null) {
+                            TokenManager.saveTokens(newAccessToken, refreshToken)
+                        }
                     }
 
                     _userInfo.value = response.body()?.data
@@ -301,17 +299,11 @@ class FetchDataViewModel : ViewModel() {
     }
 
     fun submitSuggestion(title: String, type: String, content: String) {
-        val accessToken = TokenManager.getAccessToken()
         val refreshToken = TokenManager.getRefreshToken()
-
-        if (accessToken == null || refreshToken == null) {
-            Log.e("FetchDataViewModel", "No tokens available.")
-            return
-        }
 
         val suggestionRequest = SuggestionRequest(title, type, content)
 
-        service.summitSuggestion(accessToken, refreshToken, suggestionRequest).enqueue(object : Callback<Void> {
+        service.summitSuggestion(suggestionRequest).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 responseCode = response.code()
 
@@ -320,7 +312,9 @@ class FetchDataViewModel : ViewModel() {
 
                     if (!newAccessToken.isNullOrEmpty()) {
                         Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
-                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                        if (refreshToken != null) {
+                            TokenManager.saveTokens(newAccessToken, refreshToken)
+                        }
                     }
                     Log.d("FetchDataViewModel", "Suggestion submitted successfully")
                 } else {
@@ -336,24 +330,21 @@ class FetchDataViewModel : ViewModel() {
     }
 
     fun editUserName(newUserName: String) {
-        val accessToken = TokenManager.getAccessToken()
         val refreshToken = TokenManager.getRefreshToken()
 
-        if (accessToken == null || refreshToken == null) {
-            Log.e("FetchDataViewModel", "No tokens available.")
-            return
-        }
-
-        service.editUserName(accessToken, refreshToken, newUserName).enqueue(object : Callback<Void> {
+        service.editUserName(newUserName).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 responseCode = response.code()
 
                 if (response.isSuccessful) {
+                    _editUserNameResult.postValue(true)
                     val newAccessToken = response.headers()["AccessToken"]
 
                     if (!newAccessToken.isNullOrEmpty()) {
                         Log.d("FetchDataViewModel", "New access token received: $newAccessToken")
-                        TokenManager.saveTokens(newAccessToken, refreshToken)
+                        if (refreshToken != null) {
+                            TokenManager.saveTokens(newAccessToken, refreshToken)
+                        }
                     }
                     Log.d("FetchDataViewModel", "Username updated successfully to $newUserName")
                 } else {
@@ -363,6 +354,7 @@ class FetchDataViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
+                _editUserNameResult.postValue(false)
                 Log.e("FetchDataViewModel", "Failed to update username: ${t.message}")
             }
         })

@@ -88,11 +88,47 @@ class EditNameFragment : Fragment() {
             binding.editNameLayout.visibility = View.GONE
             binding.editNameComplete.visibility = View.VISIBLE
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                viewModel.editUserName(newUsername)
-                checkTokensAndFetchUserInfo()
-            }, 1000)
+            viewModel.editUserName(newUsername)
+
+            viewModel.editUserNameResult.observe(viewLifecycleOwner, Observer { isSuccess ->
+                if (isSuccess) {
+                    var isUpdated = false
+
+                    val handler = Handler(Looper.getMainLooper())
+                    val checkUpdateRunnable = object : Runnable {
+                        override fun run() {
+                            if (isUpdated) return
+
+                            checkTokensAndFetchUserInfo()
+
+                            viewModel.userInfo.observe(viewLifecycleOwner, Observer { userInfo ->
+                                if (userInfo?.username == newUsername) {
+                                    isUpdated = true
+
+                                    TokenManager.saveUserInfo(userInfo)
+
+                                    val fragment = requireActivity().supportFragmentManager
+                                        .findFragmentByTag("MypageFragment") as? MypageFragment
+
+                                    fragment?.updateUserInfo(userInfo)
+
+                                    handler.postDelayed({
+                                        requireActivity().supportFragmentManager.popBackStack()
+                                    }, 500)
+                                } else {
+                                    handler.postDelayed(this, 500)
+                                }
+                            })
+                        }
+                    }
+
+                    handler.post(checkUpdateRunnable)
+                } else {
+                    Toast.makeText(requireContext(), "닉네임 수정 실패", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
+
 
         binding.editNameNoButton.setOnClickListener {
             binding.editNameBlackLayout.visibility = View.GONE
@@ -124,20 +160,6 @@ class EditNameFragment : Fragment() {
             viewModel.userInfo.observe(viewLifecycleOwner, Observer { userInfo ->
                 if (userInfo != null) {
                     TokenManager.saveUserInfo(userInfo)
-
-                    val bundle = Bundle().apply {
-                        putParcelable("userInfo", userInfo)
-                    }
-
-                    val mypageFragment = MypageFragment().apply {
-                        arguments = bundle
-                    }
-
-                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                    requireActivity().supportFragmentManager.popBackStack()
-                    transaction.add(R.id.main_container, mypageFragment)
-                    transaction.addToBackStack("MypageFragment")
-                    transaction.commit()
                 }
             })
         }

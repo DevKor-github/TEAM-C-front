@@ -122,9 +122,7 @@ class SuggestionFragment : Fragment() {
         }
 
         binding.goToHomeButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_container, HomeFragment())
-                .commit()
+            fragmentManager?.popBackStack("HomeFragment", 0)
         }
     }
 
