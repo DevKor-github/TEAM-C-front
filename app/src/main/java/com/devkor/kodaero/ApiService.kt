@@ -9,6 +9,8 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 data class ApiResponse<T>(
     val statusCode: Int,
@@ -148,6 +150,7 @@ data class UserTokens(
     val refreshToken: String
 )
 
+@Parcelize
 data class UserInfo(
     val username: String,
     val email: String,
@@ -156,7 +159,7 @@ data class UserInfo(
     val role: String,
     val level: String,
     val categoryCount: Int
-)
+) : Parcelable
 
 data class BuildingListResponse(
     val list: List<BuildingItem>
