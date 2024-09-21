@@ -413,7 +413,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val favoriteDetailBottomSheet = favoriteModalDetail.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val favoriteDetailBottomSheetBehavior = BottomSheetBehavior.from(favoriteDetailBottomSheet)
         favoriteDetailBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
     }
 
     // BottomSheet의 확장 상태를 확인하는 메서드
@@ -486,17 +485,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val adapter = CategoryAdapter(emptyList()) // 초기에는 빈 리스트 설정
         bookMarkRecyclerView.adapter = adapter
 
-        // 어댑터의 AddButton 클릭 리스너 설정
-        adapter.onAddButtonClick = {
-            // 다이얼로그를 띄우기
-            val dialog = AddCategoryDialog(requireContext())
-            dialog.show()
-        }
-
         // ViewModel을 통해 데이터 관찰 및 RecyclerView에 바인딩
         val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
         categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
             adapter.updateItems(items)
+        }
+
+
+        // 어댑터의 AddButton 클릭 리스너 설정
+        adapter.onAddButtonClick = {
+            // 다이얼로그를 띄우기
+            val dialog = AddCategoryDialog(requireContext(), categoryViewModel)
+            dialog.show()
         }
 
         // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
@@ -507,6 +507,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             val selectedCategories = adapter.getSelectedCategories()
             val bookmarkManager = BookmarkManager(requireContext(), RetrofitClient.instance)
             bookmarkManager.addBookmarks(selectedCategories, "BUILDING", buildingId, "")
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         // 0.1초 후에 BottomSheet를 확장 상태로 설정하여 열기
@@ -543,20 +544,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 },
                 onAddButtonClick = {
                     // Add 버튼 클릭 시 수행할 작업
-                    val dialog = AddCategoryDialog(requireContext())
+                    val dialog = AddCategoryDialog(requireContext(), categoryViewModel)
                     dialog.show()
                 }
             )
             favoriteRecyclerView.adapter = adapter
 
 
-            // ViewModel에서 카테고리 데이터를 가져와 어댑터에 업데이트
-            categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
-                adapter.updateItems(items)
+
+            // 0.3초 후에 모달을 확장 상태로 설정
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(100)  // 0.1초 지연
+                // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
+                categoryViewModel.fetchCategories(1)
+                // ViewModel에서 카테고리 데이터를 가져와 어댑터에 업데이트
+                categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
+                    adapter.updateItems(items)
+                }
             }
 
-            // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
-            categoryViewModel.fetchCategories(1)
 
             // 닫기 버튼 클릭 시 모달 닫기
             favoriteModalCloseButton.setOnClickListener {
@@ -581,6 +587,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val favoriteDetailModal = binding.favoriteModalDetail.standardBottomSheet
 
 
+        // 카테고리 텍스트 설정
+        val title = binding.favoriteModalDetail.root.findViewById<TextView>(R.id.title)
+        title.text = category
+
         // 카테고리 삭제 버튼 설정
         val deleteButton = binding.favoriteModalDetail.root.findViewById<TextView>(R.id.delete_button)
 
@@ -589,16 +599,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         // 삭제 버튼 클릭 리스너 설정
         deleteButton.setOnClickListener {
-            // 카테고리 삭제 확인
-            AlertDialog.Builder(requireContext())
-                .setTitle("카테고리 삭제")
-                .setMessage("정말로 카테고리를 삭제하시겠습니까?")
-                .setPositiveButton("삭제") { _, _ ->
-                    bookmarkManager.deleteCategory(categoryId)
-                }
-                .setNegativeButton("취소", null)
-                .show()
+            val dialog = DeleteConfirmationDialog(requireContext()) {
+                // 카테고리 삭제 로직 실행
+                bookmarkManager.deleteCategory(categoryId)
+                openFavoriteModal()
+            }
+            dialog.show()
         }
+
 
 
         // 색상에 따른 드로어블 설정 (기존 코드를 유지)

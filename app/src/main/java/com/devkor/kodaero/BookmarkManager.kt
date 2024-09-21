@@ -17,7 +17,11 @@ class BookmarkManager(private val context: Context, private val apiService: ApiS
         apiService.addBookmarks(requestBody).enqueue(object : Callback<ApiResponse<Any>> {
             override fun onResponse(call: Call<ApiResponse<Any>>, response: Response<ApiResponse<Any>>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(context, "북마크가 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    if (categoryIdList.isEmpty()) {
+                        Toast.makeText(context, "북마크 저장이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "북마크가 성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(context, "북마크 추가에 실패했습니다: ${response.code()}", Toast.LENGTH_SHORT).show()
                     Log.e("BookmarkManager", "Error: ${response.errorBody()?.string()}")

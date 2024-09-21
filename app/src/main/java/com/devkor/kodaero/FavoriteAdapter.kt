@@ -1,5 +1,6 @@
 package com.devkor.kodaero
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,6 +89,7 @@ class FavoriteAdapter(
                 selectedPositions.add(index)
             }
         }
+        Log.e("dddfsdfsdf","$items")
         notifyDataSetChanged()
     }
 

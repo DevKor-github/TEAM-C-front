@@ -18,18 +18,28 @@
         android:textColor="@color/dark_gray"/>
 
     <!-- 이름 입력 필드 -->
-    <EditText
-        android:id="@+id/category_input"
+    <LinearLayout
+        android:id="@+id/touch_area"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/rounded_rec_gray_edit_text"
-        android:gravity="center_horizontal|center_vertical"
-        android:textSize="20sp"
-        android:fontFamily="@font/pretendard_regular"
-        android:textColor="@color/dark_gray"
-        android:hint="1~18자 이내 입력"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:background="@drawable/rounded_rec_gray_edit_text">
 
+        <com.devkor.kodaero.CenteredEditText
+            android:id="@+id/category_input"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/dark_gray"
+            android:background="@null"
+            android:clickable="false"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+    </LinearLayout>
 
 
 
