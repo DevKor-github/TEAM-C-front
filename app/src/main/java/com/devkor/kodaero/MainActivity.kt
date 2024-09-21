@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
                             // HomeFragment가 백 스택에 없는 경우, 새로 추가
                             supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             supportFragmentManager.beginTransaction()
-                                .replace(R.id.home_container, HomeFragment(), "HomeFragment")
+                                .add(R.id.home_container, HomeFragment(), "HomeFragment")
                                 .addToBackStack("HomeFragment")
                                 .commit()
                         }

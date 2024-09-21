@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 class FavoriteBuildingAdapter(
     private var items: MutableList<FavoriteBuildingItem>,
     private val onDeleteClick: (Int) -> Unit, // 북마크 ID를 전달하는 삭제 리스너
-    private val onItemClick: (Int) -> Unit // Building ID를 전달하는 아이템 클릭 리스너
+    private val onItemClick: (Int, String) -> Unit // Building ID를 전달하는 아이템 클릭 리스너
 ) : RecyclerView.Adapter<FavoriteBuildingAdapter.BuildingViewHolder>() {
 
     // 뷰홀더 클래스 정의
@@ -39,7 +39,7 @@ class FavoriteBuildingAdapter(
 
         // 아이템 클릭 리스너 설정
         holder.itemView.setOnClickListener {
-            onItemClick(item.buildingId) // buildingId를 전달하여 콜백 호출
+            onItemClick(item.buildingId, item.buildingType) // buildingId를 전달하여 콜백 호출
         }
     }
 
@@ -62,6 +62,7 @@ class FavoriteBuildingAdapter(
 
 data class FavoriteBuildingItem(
     val buildingId: Int,
+    val buildingType: String,
     val buildingName: String,
     val buildingAddress: String,
     val bookmarkId: Int

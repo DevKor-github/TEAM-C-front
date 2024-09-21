@@ -18,7 +18,7 @@
             android:textSize="18sp"
             android:fontFamily="@font/pretendard_semibold"
             android:textColor="@color/dark_gray"
-            android:layout_marginVertical="50dp"/>
+            android:layout_marginVertical="40dp"/>
     </LinearLayout>
 
     <!-- 경계선 추가 -->
@@ -47,7 +47,7 @@
                 android:textColor="@color/red"
                 android:background="#00ff0000"
                 android:textSize="18sp"
-                android:fontFamily="@font/pretendard_semibold"/>
+                android:fontFamily="@font/pretendard_regular"/>
         </LinearLayout>
 
         <!-- 경계선 추가 -->
@@ -71,7 +71,7 @@
                 android:textColor="@color/red"
                 android:background="#00ff0000"
                 android:textSize="18sp"
-                android:fontFamily="@font/pretendard_semibold"/>
+                android:fontFamily="@font/pretendard_regular"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -13,9 +13,14 @@ import android.widget.FrameLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
 import com.devkor.kodaero.databinding.InnerMapContainerBinding
@@ -24,6 +29,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.otaliastudios.zoom.OverPanRangeProvider
 import com.otaliastudios.zoom.ZoomEngine
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.io.InputStream
 
@@ -78,6 +85,8 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private var selectedBuildingAboveFloor: Int? = null
     private var selectedBuildingUnderFloor: Int? = null
 
+    var selectedPlaceId: Int = 0
+
     private var innermapCurrentFloor: Int = 1
 
     // 초기 colorMap
@@ -93,6 +102,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private lateinit var customScrollView: CustomScrollView
     private lateinit var customScrollViewLayout: FrameLayout
+    private lateinit var modalBookMarkedButton: ImageButton
 
     private var searchedFloor: Int = 1
     private var searchedMask: Int = 0
@@ -144,6 +154,13 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             binding.includedModal.root.findViewById(R.id.standard_bottom_sheet)
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
 
+        modalBookMarkedButton =
+            binding.includedModal.root.findViewById(R.id.modal_sheet_bookmarked_button)
+
+        modalBookMarkedButton.setOnClickListener {
+            openBookMarkModal(selectedPlaceId)
+        }
+
         customScrollView = binding.customScrollView
         customScrollViewLayout = binding.customScrollViewLayout
 
@@ -187,6 +204,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                 innerMapBinding = binding,
                 floor = innermapCurrentFloor,
                 buildingId = selectedBuildingId,
+                fragment = this, // Fragment 참조 전달
                 replaceInnermapCallback = { groupId ->
                     replaceInnermap(groupId)
                 }
@@ -213,7 +231,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         Log.d("InnerMapFragment", "Selected Building Under Floor: $selectedBuildingUnderFloor")
         Log.d("InnerMapFragment", "Selected Building Id: $selectedBuildingId")
 
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        closeModal()
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -355,6 +373,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             includedLayout.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        val bookMarkAddingModal = binding.bookmarkModal.standardBottomSheet
+        val bottomSheetBehavior = BottomSheetBehavior.from(bookMarkAddingModal)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun readJsonAndUpdateColorMap() {
@@ -594,6 +616,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     innerMapBinding = binding,
                     floor = innermapCurrentFloor,
                     buildingId = selectedBuildingId,
+                    fragment = this, // Fragment 참조 전달
                     replaceInnermapCallback = { groupId ->
                         replaceInnermap(groupId)
                     }
@@ -828,5 +851,95 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     }
                 }
             }
+    }
+
+    private fun openBookMarkModal(placeId: Int) {
+        // BookMark Modal의 루트 레이아웃을 가져오기
+        val bookMarkAddingModal = binding.bookmarkModal.standardBottomSheet
+
+        // Close 버튼 참조
+        val bookMarkAddingModalCloseButton = binding.bookmarkModal.root.findViewById<ImageButton>(R.id.modal_sheet_close_button)
+
+        // Save 버튼 참조
+        val saveBookmarkButton = binding.bookmarkModal.root.findViewById<Button>(R.id.save_bookmark_button)
+
+        // RecyclerView 참조
+        val bookMarkRecyclerView = binding.bookmarkModal.root.findViewById<RecyclerView>(R.id.modal_sheet_bookmark_types)
+
+        // BottomSheetBehavior로 모달 동작 관리
+        val bottomSheetBehavior = BottomSheetBehavior.from(bookMarkAddingModal)
+
+        // 닫기 버튼 클릭 시 모달 닫기
+        bookMarkAddingModalCloseButton.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        // 드래그를 비활성화하여 상하로 움직이지 않도록 설정
+        bottomSheetBehavior.isDraggable = false
+
+        // RecyclerView 설정
+        bookMarkRecyclerView.layoutManager = LinearLayoutManager(requireContext())  // 프래그먼트의 컨텍스트 사용
+        val adapter = CategoryAdapter(emptyList()) // 초기에는 빈 리스트 설정
+        bookMarkRecyclerView.adapter = adapter
+
+        // ViewModel을 통해 데이터 관찰 및 RecyclerView에 바인딩
+        val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
+        categoryViewModel.categories.observe(viewLifecycleOwner) { items ->
+            adapter.updateItems(items)
+        }
+
+        // 어댑터의 AddButton 클릭 리스너 설정
+        adapter.onAddButtonClick = {
+            // 다이얼로그를 띄우기
+            val dialog = AddCategoryDialog(requireContext(), categoryViewModel)
+            dialog.show()
+        }
+
+        // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
+        categoryViewModel.fetchCategories(placeId)
+
+        // Save 버튼 클릭 시 동작 설정
+        saveBookmarkButton.setOnClickListener {
+            val selectedCategories = adapter.getSelectedCategories()
+            val bookmarkManager = BookmarkManager(requireContext(), RetrofitClient.instance)
+            bookmarkManager.addBookmarks(selectedCategories, "PLACE", placeId, "")
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(100)  // 0.1초 지연
+                updateBookmarkButton(placeId)
+            }
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        // 0.1초 후에 BottomSheet를 확장 상태로 설정하여 열기
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(300)  // 0.1초 지연
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    private fun updateBookmarkButton(placeId: Int) {
+        val bookmarkedButton = binding.includedModal.root.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
+        Log.d("CategoryCheck", "${binding.bookmarkModal.root}")
+        val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
+
+        categoryViewModel.fetchCategories(placeId)
+
+        categoryViewModel.categories.observe(viewLifecycleOwner) { categoryList ->
+            categoryList?.let { categories ->
+                val hasBookmarkedItem = categories.any { it.bookmarked }
+                if (hasBookmarkedItem) {
+                    Log.d("CategoryCheck", "There is at least one bookmarked category.")
+                    bookmarkedButton.setImageResource(R.drawable.button_bookmarked_on)
+                } else {
+                    Log.d("CategoryCheck", "No bookmarked categories found.")
+                    bookmarkedButton.setImageResource(R.drawable.button_bookmarked_off)
+                }
+                // 버튼을 다시 그리도록 강제
+                bookmarkedButton.invalidate()
+                bookmarkedButton.requestLayout()
+            } ?: run {
+                Log.e("CategoryCheck", "Failed to fetch categories or no categories found.")
+            }
+        }
     }
 }
