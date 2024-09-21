@@ -64,7 +64,7 @@ class SearchListAdapter(
         fun bind(building: BuildingSearchItem) {
             buildingNameTextView.text = building.name
 
-            if (building.locationType == "CLASSROOM") {
+            if (building.locationType == "PLACE") {
                 // ViewModel을 사용해 API 호출
                 building.id?.let {
                     viewModel.fetchPlaceInfo(it) { placeInfo ->

@@ -691,7 +691,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                             "PLACE" -> {
                                 val placeInfo = fetchDataViewModel.fetchPlaceInfoSync(bookmark.locationId)
                                 placeInfo?.let { info ->
-                                    items.add(FavoriteBuildingItem(info.buildingId, "PLACE", info.name, info.detail, bookmark.bookmarkId))
+                                    items.add(FavoriteBuildingItem(info.placeId, "PLACE", info.name, info.detail, bookmark.bookmarkId))
                                 }
                             }
                         }
@@ -982,13 +982,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun navigateToInnerMapFragment(roomId: Int) {
-        viewModel.fetchPlaceInfo(roomId) { placeInfo ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            Log.e("ewfewfewf","$roomId")
+            val placeInfo = viewModel.fetchPlaceInfoSync(roomId)
             placeInfo?.let {
                 // 캐시에서 BuildingItem 가져오기
                 val buildingItem = BuildingCache.get(it.buildingId)
-
                 if (buildingItem != null) {
-                    // 캐시된 BuildingItem의 정보를 사용
                     val selectedBuildingName = buildingItem.name
                     val selectedBuildingAboveFloor = buildingItem.floor ?: 0
                     val selectedBuildingUnderFloor = buildingItem.underFloor
@@ -1006,16 +1006,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     transaction.addToBackStack("InnerMapFragment")
                     transaction.commit()
                 } else {
-                    // 캐시에 BuildingItem이 없는 경우 디버그 로그 출력
                     Log.d("navigateToInnerMapFragment", "BuildingItem not found in cache for buildingId: ${it.buildingId}")
                 }
             } ?: run {
-                // placeInfo가 null인 경우 오류 처리
                 Log.d("navigateToInnerMapFragment", "Failed to fetch place info.")
             }
         }
+
     }
-
-
 
 }

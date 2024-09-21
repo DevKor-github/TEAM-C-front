@@ -195,11 +195,11 @@ class InnerMapTouchHandler(
                         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                         standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(true, fetchedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(true, fetchedRoomName, roomId, "PLACE")
                         }
 
                         standardBottomSheet.findViewById<View>(R.id.modal_arrive_button).setOnClickListener {
-                            navigateToGetDirectionsFragment(false, fetchedRoomName, roomId, "CLASSROOM")
+                            navigateToGetDirectionsFragment(false, fetchedRoomName, roomId, "PLACE")
                         }
                     } else {
                         Log.e("InnerMapTouchHandler", "Failed to fetch place name")
