@@ -241,7 +241,7 @@ class FetchDataViewModel : ViewModel() {
 
     fun getUserTokens(provider: String, email: String, token: String) {
         val loginRequest = LoginRequest(provider, email, token)
-        val service = RetrofitClient.instance
+
         service.getUserTokens(loginRequest).enqueue(object : Callback<ApiResponse<UserTokens>> {
             override fun onResponse(call: Call<ApiResponse<UserTokens>>, response: Response<ApiResponse<UserTokens>>) {
                 if (response.isSuccessful) {
@@ -265,6 +265,7 @@ class FetchDataViewModel : ViewModel() {
 
         if (accessToken == null || refreshToken == null) {
             Log.e("FetchDataViewModel", "No tokens available.")
+            _userInfo.value = null
             return
         }
 
@@ -283,12 +284,18 @@ class FetchDataViewModel : ViewModel() {
                     _userInfo.value = response.body()?.data
                     Log.d("FetchDataViewModel", "User info: ${response.body()?.data}")
                 } else {
-                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    if (response.code() == 403) {
+                        Log.e("FetchDataViewModel", "Unauthorized - 403 error")
+                        _userInfo.value = null
+                    } else {
+                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
+                    }
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse<UserInfo>>, t: Throwable) {
                 Log.e("FetchDataViewModel", "API call failed: ${t.message}")
+                _userInfo.value = null
             }
         })
     }

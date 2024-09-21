@@ -26,29 +26,23 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG = "LoginActivity"
     }
 
-    // Initialize ViewModel using Kotlin's viewModels delegate
     private val viewModel: FetchDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-        // Key Hash 얻기
         val keyHash = Utility.getKeyHash(this)
 
-        // Key Hash를 로그로 출력 (Logcat에서 확인)
         Log.d("KeyHash", keyHash)
 
         KakaoSdk.init(this, "8f0c8f0fbe9c7aef1bb90ba2f1b4fae3")
 
-        // Initialize TokenManager
         TokenManager.init(this)
 
         val googleLoginButton: ImageButton = findViewById(R.id.google_login_button)
         val naverLoginButton: ImageButton = findViewById(R.id.naver_login_button)
         val kakaoLoginButton: ImageButton = findViewById(R.id.kakao_login_button)
-
 
         setStatusBarTextColor(isLightText = false)
 
@@ -79,19 +73,14 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "AccessToken: ${it.accessToken}")
                 Log.d(TAG, "RefreshToken: ${it.refreshToken}")
 
-                // Store tokens in TokenManager
                 TokenManager.saveTokens(it.accessToken, it.refreshToken)
 
-                // After saving tokens, fetch user info
                 viewModel.fetchUserInfo()
 
-                // Observe user info and save it in TokenManager
                 viewModel.userInfo.observe(this, Observer { userInfo ->
                     if (userInfo != null) {
-                        // Save the user info in TokenManager
                         TokenManager.saveUserInfo(userInfo)
 
-                        // Navigate to MainActivity
                         navigateToMainActivity()
                     } else {
                         Log.e(TAG, "Failed to fetch user info")
@@ -114,7 +103,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun startKakaoLogin() {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-            // 카카오톡 로그인
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
                     Log.e(TAG, "로그인 실패 $error")
@@ -133,7 +121,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // 사용자 정보를 요청하고 getUserToken을 실행하는 함수
     private fun fetchUserInfoAndToken() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
@@ -142,7 +129,6 @@ class LoginActivity : AppCompatActivity() {
                 val kakaoEmail = user.kakaoAccount?.email
                 Log.e(TAG, "사용자 정보 요청 성공, 이메일 : $kakaoEmail")
 
-                // 이메일이 있는 경우에 getUserToken 호출
                 if (!kakaoEmail.isNullOrEmpty()) {
                     getUserToken("KAKAO", kakaoEmail, "")
                 } else {
@@ -152,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // getUserToken 호출하여 ViewModel로 전달
     private fun getUserToken(provider: String, email: String, token: String) {
         viewModel.getUserTokens(provider, email, token)
     }
