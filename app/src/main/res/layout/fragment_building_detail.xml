@@ -90,7 +90,8 @@
                     android:id="@+id/show_operating_time_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="10dp"
                     app:layout_constraintTop_toBottomOf="@id/building_detail_address"
                     app:layout_constraintStart_toEndOf="@id/building_detail_guideline1">
 
@@ -140,7 +141,6 @@
                     android:id="@+id/building_detail_operating_time_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:orientation="vertical"
                     android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/show_operating_time_layout"
@@ -224,7 +224,7 @@
                     android:id="@+id/building_detail_facility_types"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_building_detail_types"
@@ -316,9 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/building_detail_boundary"
-                app:layout_constraintVertical_bias="0.5">
+                app:layout_constraintTop_toBottomOf="@+id/building_detail_boundary">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/building_detail_guideline5"
