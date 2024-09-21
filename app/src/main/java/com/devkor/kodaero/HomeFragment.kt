@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devkor.kodaero.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
@@ -196,6 +197,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val cameraScrollUpdate = CameraUpdate.scrollTo(initCameraPosition)
         naverMap.moveCamera(cameraZoomUpdate)
         naverMap.moveCamera(cameraScrollUpdate)
+
+        // 지도 제약 설정
+        val latLngBounds = LatLngBounds(
+            LatLng(37.57977937432624, 127.02283666260797), // 남서쪽 (SW) 좌표
+            LatLng(37.60021922232589, 127.03716333739249)  // 북동쪽 (NE) 좌표
+        )
+        naverMap.setExtent(latLngBounds)
+
+        // 줌 레벨 제한 설정
+        naverMap.minZoom = 14.0
+
 
         val includedLayout = binding.includedLayout.root
 
