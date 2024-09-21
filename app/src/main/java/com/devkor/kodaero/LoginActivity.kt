@@ -40,8 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
         TokenManager.init(this)
 
-        val googleLoginButton: ImageButton = findViewById(R.id.google_login_button)
-        val naverLoginButton: ImageButton = findViewById(R.id.naver_login_button)
         val kakaoLoginButton: ImageButton = findViewById(R.id.kakao_login_button)
 
         setStatusBarTextColor(isLightText = false)
@@ -50,14 +48,6 @@ class LoginActivity : AppCompatActivity() {
             decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             statusBarColor = Color.TRANSPARENT
-        }
-
-        googleLoginButton.setOnClickListener {
-
-        }
-
-        naverLoginButton.setOnClickListener {
-
         }
 
         kakaoLoginButton.setOnClickListener {

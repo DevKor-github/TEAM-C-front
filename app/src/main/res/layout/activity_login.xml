@@ -30,29 +30,12 @@
         app:layout_constraintVertical_bias="0.9">
 
         <ImageButton
-            android:id="@+id/google_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/login_google"
-            android:background="@android:color/transparent"
-            tools:ignore="MissingConstraints" />
-
-        <ImageButton
-            android:id="@+id/naver_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/login_naver"
-            app:layout_constraintStart_toEndOf="@id/google_login_button"
-            android:background="@android:color/transparent"
-            tools:ignore="MissingConstraints" />
-
-        <ImageButton
             android:id="@+id/kakao_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/login_kakao"
-            app:layout_constraintStart_toEndOf="@id/naver_login_button"
+            android:src="@drawable/button_kakao_login"
             android:background="@android:color/transparent"
+            android:elevation="8dp"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
