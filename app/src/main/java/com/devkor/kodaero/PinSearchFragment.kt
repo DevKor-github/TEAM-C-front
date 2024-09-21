@@ -151,7 +151,7 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
             "BANK" -> "은행"
             "SHOWER_ROOM" -> "샤워실"
             "GYM" -> "헬스장"
-            "SMOKING_AREA" -> "흡연구역"
+            "SMOKING_BOOTH" -> "흡연구역"
             "SLEEPING_ROOM" -> "수면실"
 
             else -> facilityType

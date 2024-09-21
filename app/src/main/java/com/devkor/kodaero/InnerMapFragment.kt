@@ -2,7 +2,6 @@ package com.devkor.kodaero
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
@@ -17,7 +16,6 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.FragmentManager
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
 import com.devkor.kodaero.databinding.InnerMapContainerBinding
@@ -705,7 +703,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             "WATER_PURIFIER" -> R.drawable.pin_water_purifier
             "PRINTER" -> R.drawable.pin_printer
             "VENDING_MACHINE" -> R.drawable.pin_vending_machine
-            "SMOKING_BOOTH" -> R.drawable.pin_smoking_area
+            "SMOKING_BOOTH" -> R.drawable.pin_smoking_booth
             "SLEEPING_ROOM" -> R.drawable.pin_sleeping_room
             "BOOK_RETURN_MACHINE" -> R.drawable.pin_book_return
             "BANK" -> R.drawable.pin_bank
