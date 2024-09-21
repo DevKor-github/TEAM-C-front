@@ -97,7 +97,7 @@
         android:hint="어흥"
         android:textSize="14dp"
         android:textColor="@color/map_main"
-        android:textColorHint="@color/map_main"
+        android:textColorHint="@color/map_sub"
         android:fontFamily="@font/pretendard_semibold"
         android:background="@drawable/rounded_rec_bright_gray"
         android:elevation="8dp"

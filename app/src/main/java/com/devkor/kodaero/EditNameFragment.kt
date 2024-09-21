@@ -3,6 +3,7 @@ package com.devkor.kodaero
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.devkor.kodaero.databinding.FragmentEditNameBinding
 
@@ -67,12 +69,7 @@ class EditNameFragment : Fragment() {
 
             viewModel.editUserName(newUsername)
 
-            TokenManager.clearTokensAndUserInfo()
-
-            val splashIntent = Intent(requireActivity(), SplashActivity::class.java)
-            startActivity(splashIntent)
-
-            requireActivity().finish()
+            checkTokensAndFetchUserInfo()
         }
 
         binding.editNameNoButton.setOnClickListener {
@@ -93,6 +90,35 @@ class EditNameFragment : Fragment() {
     private fun hideKeyboard() {
         val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(binding.editNameText.windowToken, 0)
+    }
+
+    private fun checkTokensAndFetchUserInfo() {
+        val accessToken = TokenManager.getAccessToken()
+        val refreshToken = TokenManager.getRefreshToken()
+
+        if (accessToken != null && refreshToken != null) {
+            viewModel.fetchUserInfo()
+
+            viewModel.userInfo.observe(viewLifecycleOwner, Observer { userInfo ->
+                if (userInfo != null) {
+                    TokenManager.saveUserInfo(userInfo)
+
+                    val bundle = Bundle().apply {
+                        putParcelable("userInfo", userInfo)
+                    }
+
+                    val mypageFragment = MypageFragment().apply {
+                        arguments = bundle
+                    }
+
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    requireActivity().supportFragmentManager.popBackStack()
+                    transaction.add(R.id.main_container, mypageFragment)
+                    transaction.addToBackStack("MypageFragment")
+                    transaction.commit()
+                }
+            })
+        }
     }
 
     override fun onDestroyView() {
