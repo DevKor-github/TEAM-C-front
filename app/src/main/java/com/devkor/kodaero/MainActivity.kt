@@ -138,31 +138,49 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    private var lastClickTime: Long = 0
 
     fun setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            val currentTime = System.currentTimeMillis()
+
+            // 0.5초 이내에 중복 호출된 경우 무시
+            if (currentTime - lastClickTime < 50) {
+                return@setOnItemSelectedListener true
+            }
+
+            lastClickTime = currentTime
             val currentFragment = supportFragmentManager.findFragmentById(R.id.main_container)
 
             when (item.itemId) {
                 R.id.fragment_home -> {
                     if (currentFragment !is HomeFragment) {
-                        // 백 스택에 HomeFragment가 있는지 확인
                         val fragmentInBackStack = supportFragmentManager.findFragmentByTag("HomeFragment")
                         if (fragmentInBackStack != null) {
-                            // HomeFragment가 백 스택에 있는 경우, 그곳으로 이동
                             supportFragmentManager.popBackStack("HomeFragment", 0)
                         } else {
-                            // HomeFragment가 백 스택에 없는 경우, 새로 추가
                             supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.home_container, HomeFragment(), "HomeFragment")
                                 .addToBackStack("HomeFragment")
                                 .commit()
                         }
+
+                        // HomeFragment가 로드된 후 closeModal 실행
+                        val newFragment = supportFragmentManager.findFragmentByTag("HomeFragment")
+                        if (newFragment is HomeFragment) {
+                            newFragment.closeModal()
+                        }
+
+                        Log.e("MainActivityBug", "${item.itemId}")
                         item.setIcon(R.drawable.home_button)
+                    } else {
+                        // 현재 HomeFragment일 때도 closeModal 호출
+                        (currentFragment as HomeFragment).closeModal()
                     }
                     true
                 }
+
 
                 R.id.fragment_bus -> {
                     if (currentFragment !is BusFragment) {

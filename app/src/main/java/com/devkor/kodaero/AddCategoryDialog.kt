@@ -8,12 +8,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddCategoryDialog(context: Context) : Dialog(context) {
+class AddCategoryDialog(context: Context, private val categoryViewModel: CategoryViewModel) : Dialog(context) {
 
     private var onCategoryAddListener: ((String, String) -> Unit)? = null
     private var selectedColor: String = "red"
@@ -29,6 +30,18 @@ class AddCategoryDialog(context: Context) : Dialog(context) {
 
         val addButton = findViewById<Button>(R.id.add_button)
         val categoryInput = findViewById<EditText>(R.id.category_input)
+
+        val touchArea = findViewById<LinearLayout>(R.id.touch_area)
+
+        touchArea.setOnClickListener {
+            categoryInput.hint = ""  // 힌트 제거
+            categoryInput.requestFocus()
+            // 클릭된 것처럼 처리하기
+            categoryInput.performClick()
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(categoryInput, InputMethodManager.SHOW_IMPLICIT)
+        }
+
 
         categoryInput.gravity = Gravity.CENTER
 
@@ -111,6 +124,7 @@ class AddCategoryDialog(context: Context) : Dialog(context) {
                     } else {
                         Toast.makeText(context, "카테고리 추가에 실패했습니다: ${response.code()}", Toast.LENGTH_SHORT).show()
                     }
+                    onCategoryAddSuccess()
                 }
 
                 override fun onFailure(call: Call<ApiResponse<Any>>, t: Throwable) {
@@ -120,6 +134,11 @@ class AddCategoryDialog(context: Context) : Dialog(context) {
         } else {
             Toast.makeText(context, "액세스 토큰이 없습니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun onCategoryAddSuccess() {
+        // 카테고리 추가 후 다시 데이터를 가져오도록 ViewModel에 요청
+        categoryViewModel.fetchCategories(1)
     }
 
 
