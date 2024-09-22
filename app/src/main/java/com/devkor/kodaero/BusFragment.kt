@@ -67,6 +67,12 @@ class BusFragment : Fragment(), OnMapReadyCallback {
 
         setupBottomSheet()
 
+        return _binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         _binding.searchButton.setOnClickListener {
             navigateToSearchBuildingFragment()
             closeModal()
@@ -76,8 +82,6 @@ class BusFragment : Fragment(), OnMapReadyCallback {
             navigateToGetDirectionsFragment()
             closeModal()
         }
-
-        setHorizontalScrollViewButtonListeners()
 
         _binding.pinOnoffButton.setOnClickListener {
             if (areMarkersVisible) {
@@ -99,7 +103,8 @@ class BusFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
-        return _binding.root
+        setHorizontalScrollViewButtonListeners()
+
     }
 
     private fun setupBottomSheet() {
