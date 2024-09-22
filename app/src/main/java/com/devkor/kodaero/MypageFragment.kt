@@ -3,7 +3,6 @@ package com.devkor.kodaero
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,12 +67,15 @@ class MypageFragment : Fragment() {
         }
 
         binding.logoutButton.setOnClickListener {
-            showLogoutConfirmation()
+            // 로그아웃 확인 다이얼로그 호출
+
+            context?.let { it1 ->
+                LogoutConfirmationDialog(it1) {
+                    handleLogout() // 로그아웃 처리 함수 호출
+                }
+            }?.show()
         }
 
-        binding.logoutYesButton.setOnClickListener {
-            handleLogout()
-        }
 
         binding.guideButton.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -82,10 +84,25 @@ class MypageFragment : Fragment() {
             transaction.commit()
         }
 
+        // 버튼 클릭 리스너 설정
+        binding.developerButton.setOnClickListener {
+            // 다이얼로그 호출
 
-        binding.logoutNoButton.setOnClickListener {
-            hideLogoutConfirmation()
+            // 다이얼로그 표시
+            context?.let { it1 ->
+                DeveloperAuthDialog(it1) { isVerified ->
+                    if (isVerified) {
+                        // 암호 검증 성공 시 실행할 코드
+                        MainActivity.isNodeMaskBuild = true
+                        // 필요한 다른 처리 로직을 여기에 추가
+                    } else {
+                        // 실패 시 추가 처리가 필요하면 여기에 작성
+                    }
+                }
+            }?.show()
         }
+
+
 
         return view
     }
@@ -141,16 +158,6 @@ class MypageFragment : Fragment() {
     private fun navigateToInstar() {
         var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/kodaero_ku/"))
         startActivity(intent)
-    }
-
-    private fun showLogoutConfirmation() {
-        binding.logoutLayout.visibility = View.VISIBLE
-        binding.logoutBlackLayout.visibility = View.VISIBLE
-    }
-
-    fun hideLogoutConfirmation() {
-        binding.logoutLayout.visibility = View.GONE
-        binding.logoutBlackLayout.visibility = View.GONE
     }
 
     fun isLogoutConfirmationVisible(): Boolean {

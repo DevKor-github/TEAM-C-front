@@ -23,8 +23,8 @@ class GuideImageSliderFragment : Fragment() {
 
         val images = listOf(
             R.drawable.image_guide_page_1,
-            R.drawable.image_guide_page_2,
-            R.drawable.image_guide_page_3
+            R.drawable.image_guide_page_3,
+            R.drawable.image_guide_page_2
         )
 
         val adapter = ImageSliderAdapter(images)

@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mypage_user_layout"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_height="250dp"
         android:background="@drawable/background_mypage"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
+            app:layout_constraintGuide_percent="0.9" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_rec_red"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="2dp"
                 app:layout_constraintTop_toBottomOf="@id/user_layout"
@@ -145,18 +145,19 @@
                 app:layout_constraintVertical_bias="0.6" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:padding="4dp"
                 android:src="@drawable/button_edit_name"
                 android:background="@drawable/circle_white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.9"
-                android:elevation="16dp"/>
+                app:layout_constraintVertical_bias="1"
+                android:elevation="16dp"
+                android:outlineProvider="none" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -331,11 +332,39 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logout_button"
+        android:id="@+id/developer_button"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/mypage_item_border"
         app:layout_constraintTop_toBottomOf="@id/guide_button">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mypage_guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="개발자 도구"
+            android:textColor="@color/map_main"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/mypage_guideline11"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/mypage_item_border"
+        app:layout_constraintTop_toBottomOf="@id/developer_button">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/mypage_guideline10"

@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    companion object {
+        var isNodeMaskBuild: Boolean = false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -99,13 +103,6 @@ class MainActivity : AppCompatActivity() {
                 val pinSearchFragment = currentFragment as PinSearchFragment
                 if (pinSearchFragment.hasSelectedMarkers()) {
                     pinSearchFragment.unselectAllMarkers()
-                    return
-                }
-            }
-
-            is MypageFragment -> {
-                if (currentFragment.isLogoutConfirmationVisible()) {
-                    currentFragment.hideLogoutConfirmation()
                     return
                 }
             }
