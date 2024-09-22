@@ -420,8 +420,12 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         replaceInnermap()
         replaceInnermapMask()
         updateTouchHandler()
-
         togglePinDisplay(null,null,true)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val restroomList = viewModel.fetchRestrooms(selectedBuildingId, floor)
+            showRestroomPinDisplay(restroomList)
+        }
 
         // Draw the route for the current building and floor
         drawRouteForCurrentFloor(routeView, searchedRoute, currentBuildingId, innermapCurrentFloor)
@@ -717,6 +721,10 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     // 현재 표시된 핀의 placeType을 저장할 변수
     private var currentDisplayedPinType: String? = null
 
+
+    // 현재 Restroom 의 토글을 저장할 변수
+    private var isRestroomShowed: Boolean = true
+
     private fun getPinDrawableByPlaceType(placeType: String): Int {
         return when (placeType) {
             "CAFE" -> R.drawable.pin_cafe
@@ -735,6 +743,14 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             "FITNESS_ROOM" -> R.drawable.pin_fitness_room
             "TUMBLER_WASHER" -> R.drawable.pin_tumbler_washer
             "SHOWER_ROOM" -> R.drawable.pin_shower_room
+            "TOILET" -> R.drawable.pin_restroom_male_image
+            "MEN_TOILET" -> R.drawable.pin_restroom_male_image
+            "WOMEN_TOILET" -> R.drawable.pin_restroom_female_image
+            "MEN_HANDICAPPED_TOILET" -> R.drawable.pin_restroom_male_image
+            "WOMEN_HANDICAPPED_TOILET" -> R.drawable.pin_restroom_female_image
+            "STAIR" -> R.drawable.pin_stair_image
+            "ELEVATOR" -> R.drawable.pin_elevator_image
+            "ENTERANCE" -> R.drawable.pin_enterance_image
             else -> R.drawable.pin_cafe // 기본 핀 설정
         }
     }
@@ -789,11 +805,61 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
+    // 화장실 핀을 그리는 함수
+    private fun drawRestroomCoordinates(facilityLayout: FrameLayout, floorRoomList: List<RoomList>, placeType: String, drawable: Drawable) {
+        // 필터링된 좌표 가져오기
+        val filteredRooms = floorRoomList
+            .filter { room -> room.placeType == placeType }  // placeType 필터링
+            .distinctBy { room -> room.id }  // id로 중복 제거
+
+        Log.e("rgwgewgregrge","$floorRoomList")
+
+        // 부모 레이아웃에서 기존에 표시된 ImageView가 있으면 제거
+
+        // FrameLayout의 크기를 가져옵니다.
+        val width = facilityLayout.width
+        val height = facilityLayout.height
+
+        // 스케일 계산 (이미지 크기에 맞춰 좌표 스케일링)
+        val originalSize = 1680f
+        val scaleFactor = minOf(width / originalSize, height / originalSize)
+        val offsetX = (width - originalSize * scaleFactor) / 2
+        val offsetY = (height - originalSize * scaleFactor) / 2
+
+        // 고정된 크기 설정: 100px x 100px
+        val fixedWidth = 30
+        val fixedHeight = 30
+
+        filteredRooms.forEach { room ->
+            val xCoord = offsetX + room.xcoord * scaleFactor
+            val yCoord = offsetY + room.ycoord * scaleFactor
+
+            // ImageView를 동적으로 생성
+            val pinImageView = ImageView(facilityLayout.context)
+
+            // 드로어블을 ImageView에 설정
+            pinImageView.setImageDrawable(drawable)
+
+            // 드로어블의 크기 설정 (고정된 크기)
+            val params = FrameLayout.LayoutParams(fixedWidth, fixedHeight)
+
+            // 위치 설정: 좌표의 중앙에 배치
+            pinImageView.layoutParams = params
+            pinImageView.x = xCoord - (fixedWidth / 2)  // 수평 중앙 맞춤
+            pinImageView.y = yCoord - (fixedHeight / 2) // 수직 중앙 맞춤
+
+            // ImageView를 부모 레이아웃에 추가
+            facilityLayout.addView(pinImageView)
+
+            Log.e("RestroomPin", "Placed restroom icon at coordinates: $xCoord, $yCoord")
+        }
+    }
+
+
     // 버튼 클릭 시 핀을 표시하거나 제거하는 함수
     private fun togglePinDisplay(floorRoomList: List<RoomList>?, placeType: String?, resetParam: Boolean) {
         val facilityLayout = _binding?.includedMap?.facility  // facility 레이아웃을 가져옴
 
-        Log.e("","todddddddddd")
         facilityLayout?.let {
             // placeType이 이미 표시된 상태라면, 핀을 제거하고 상태를 초기화
             if (resetParam) {
@@ -821,6 +887,83 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
     }
+
+    private fun showRestroomPinDisplay(floorRoomList: List<Restroom>?) {
+        val restroomLayout = _binding?.includedMap?.restroom  // restroom layout
+
+        restroomLayout?.let {
+            if (!isRestroomShowed) {
+                it.removeAllViews() // Remove all restroom pins
+                return
+            }
+
+            // Remove all existing views before adding new ones
+            it.removeAllViews()
+
+            floorRoomList?.let { rooms ->
+                val restroomTypes = listOf("TOILET",
+                    "MEN_TOILET",
+                    "WOMEN_TOILET",
+                    "MEN_HANDICAPPED_TOILET",
+                    "WOMEN_HANDICAPPED_TOILET",
+                    "STAIR",
+                    "ENTERANCE",
+                    "ELEVATOR")
+
+                restroomTypes.forEach { restroomType ->
+                    val filteredRooms = rooms.filter { room -> room.type == restroomType }
+                    val drawableResId = getPinDrawableByPlaceType(restroomType)
+                    val drawable = resources.getDrawable(drawableResId, null)
+
+                    // Draw restroom pins for each type
+                    drawRestroomCoordinates(restroomLayout, filteredRooms, drawable)
+                }
+            }
+        }
+    }
+    private fun drawRestroomCoordinates(layout: FrameLayout, rooms: List<Restroom>, drawable: Drawable) {
+
+        // Get FrameLayout size
+        val width = layout.width
+        val height = layout.height
+
+        // Calculate scaling factors
+        val originalSize = 1680f
+        val scaleFactor = minOf(width / originalSize, height / originalSize)
+        val offsetX = (width - originalSize * scaleFactor) / 2
+        val offsetY = (height - originalSize * scaleFactor) / 2
+
+        // Set fixed size for the drawable
+        val drawableWidth = 30
+        val drawableHeight = 30
+
+        rooms.forEach { room ->
+            val xCoord = offsetX + room.xcoord * scaleFactor
+            val yCoord = offsetY + room.ycoord * scaleFactor
+
+            // Create ImageView for the pin
+            val pinImageView = ImageView(layout.context).apply {
+                setImageDrawable(drawable)
+                layoutParams = FrameLayout.LayoutParams(drawableWidth, drawableHeight).apply {
+                    x = xCoord - drawableWidth / 2  // Center horizontally
+                    y = yCoord - drawableHeight / 2 // Center vertically
+                }
+            }
+
+            // Add the pin to the layout
+            layout.addView(pinImageView)
+
+            Log.e("Restroom", "Pin placed at: $xCoord, $yCoord")
+        }
+    }
+
+    // Call this function to toggle the state
+    fun toggleRestroomState() {
+        isRestroomShowed = !isRestroomShowed
+        //showRestroomPinDisplay(floorRoomList)  // Assuming floorRoomList is accessible here
+    }
+
+
 
     // 버튼 클릭 리스너 설정
     private fun updateFacilityButtonsVisibility(floorRoomList: List<RoomList>) {

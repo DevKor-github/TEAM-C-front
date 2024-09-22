@@ -399,4 +399,41 @@ class FetchDataViewModel : ViewModel() {
             }
         })
     }
+
+    suspend fun fetchRestrooms(buildingId: Int, floor: Int): List<Restroom> {
+        val response = withContext(Dispatchers.IO) {
+            service.searchBuildingFloor(buildingId, floor).execute()
+        }
+
+        Log.d("InnerMapFragment", "Bitmap replaced sdgsgeregegrg resource")
+
+        return if (response.isSuccessful) {
+            val roomList = response.body()?.data?.roomList ?: emptyList()
+            val nodeList = response.body()?.data?.nodeList ?: emptyList()
+
+            val roomRestrooms = roomList.map { room ->
+                Restroom(
+                    id = room.id,
+                    type = room.placeType,
+                    xcoord = room.xcoord,
+                    ycoord = room.ycoord
+                )
+            }
+
+            val nodeRestrooms = nodeList.map { node ->
+                Restroom(
+                    id = node.id,
+                    type = node.type,
+                    xcoord = node.xcoord,
+                    ycoord = node.ycoord
+                )
+            }
+
+            // RoomList와 NodeList를 합쳐서 반환
+            roomRestrooms + nodeRestrooms
+        } else {
+            emptyList()
+        }
+    }
+
 }
