@@ -81,6 +81,20 @@ class MypageFragment : Fragment() {
         return view
     }
 
+    fun updateUserInfo(userInfo: UserInfo) {
+        binding.username.text = userInfo.username
+        binding.userLevel.text = userInfo.level
+        binding.userLevelText.text = when (userInfo.level) {
+            "1" -> "갓난호랑이"
+            "2" -> "아기호랑이"
+            "3" -> "사춘기호랑이"
+            "4" -> "MZ호랑이"
+            "5" -> "어른호랑이"
+            else -> "호랑이"
+        }
+    }
+
+
     private fun navigateToEditNameFragment() {
         val editNameFragment = EditNameFragment()
 

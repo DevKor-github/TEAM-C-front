@@ -67,6 +67,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            is BusFragment -> {
+                if (currentFragment.isBottomSheetExpanded()) {
+                    currentFragment.closeModal()
+                    Log.e("MainActivity", "expanded")
+                    return
+                }
+            }
+
             is InnerMapFragment -> {
                 if (currentFragment.isBottomSheetExpanded()) {
                     currentFragment.closeModal()

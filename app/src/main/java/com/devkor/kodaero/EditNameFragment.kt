@@ -3,6 +3,10 @@ package com.devkor.kodaero
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +55,20 @@ class EditNameFragment : Fragment() {
     }
 
     private fun setupListeners() {
+        binding.editNameText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!s.isNullOrBlank()) {
+                    binding.editNameButton.setBackgroundResource(R.drawable.rounded_rec_red)
+                } else {
+                    binding.editNameButton.setBackgroundResource(R.drawable.rounded_rec_gray)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         binding.editNameButton.setOnClickListener {
             val enteredText = binding.editNameText.text.toString()
             hideKeyboard()
@@ -67,10 +85,50 @@ class EditNameFragment : Fragment() {
         binding.editNameYesButton.setOnClickListener {
             val newUsername = binding.editNameLayoutText.text.toString()
 
+            binding.editNameLayout.visibility = View.GONE
+            binding.editNameComplete.visibility = View.VISIBLE
+
             viewModel.editUserName(newUsername)
 
-            checkTokensAndFetchUserInfo()
+            viewModel.editUserNameResult.observe(viewLifecycleOwner, Observer { isSuccess ->
+                if (isSuccess) {
+                    var isUpdated = false
+
+                    val handler = Handler(Looper.getMainLooper())
+                    val checkUpdateRunnable = object : Runnable {
+                        override fun run() {
+                            if (isUpdated) return
+
+                            checkTokensAndFetchUserInfo()
+
+                            viewModel.userInfo.observe(viewLifecycleOwner, Observer { userInfo ->
+                                if (userInfo?.username == newUsername) {
+                                    isUpdated = true
+
+                                    TokenManager.saveUserInfo(userInfo)
+
+                                    val fragment = requireActivity().supportFragmentManager
+                                        .findFragmentByTag("MypageFragment") as? MypageFragment
+
+                                    fragment?.updateUserInfo(userInfo)
+
+                                    handler.postDelayed({
+                                        requireActivity().supportFragmentManager.popBackStack()
+                                    }, 500)
+                                } else {
+                                    handler.postDelayed(this, 500)
+                                }
+                            })
+                        }
+                    }
+
+                    handler.post(checkUpdateRunnable)
+                } else {
+                    Toast.makeText(requireContext(), "닉네임 수정 실패", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
+
 
         binding.editNameNoButton.setOnClickListener {
             binding.editNameBlackLayout.visibility = View.GONE
@@ -102,20 +160,6 @@ class EditNameFragment : Fragment() {
             viewModel.userInfo.observe(viewLifecycleOwner, Observer { userInfo ->
                 if (userInfo != null) {
                     TokenManager.saveUserInfo(userInfo)
-
-                    val bundle = Bundle().apply {
-                        putParcelable("userInfo", userInfo)
-                    }
-
-                    val mypageFragment = MypageFragment().apply {
-                        arguments = bundle
-                    }
-
-                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                    requireActivity().supportFragmentManager.popBackStack()
-                    transaction.add(R.id.main_container, mypageFragment)
-                    transaction.addToBackStack("MypageFragment")
-                    transaction.commit()
                 }
             })
         }
