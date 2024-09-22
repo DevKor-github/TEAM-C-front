@@ -1,266 +1,246 @@
 [
     [
-        "Layer_x5F_border",
+        "Layer_x5F_border-5",
         1
     ],
     [
-        "Layer_4",
+        "Layer_x5F_others-5",
         2
     ],
     [
-        "Layer_5",
+        "Layer_255",
         3
     ],
     [
-        "Layer_6",
+        "Layer_256",
         4
     ],
     [
-        "Layer_7",
+        "Layer_257",
         5
     ],
     [
-        "Layer_2",
+        "Layer_258",
         6
     ],
     [
-        "Layer_8",
+        "Layer_259",
         7
     ],
     [
-        "Layer_9",
+        "Layer_260",
         8
     ],
     [
-        "Layer_10",
+        "Layer_261",
         9
     ],
     [
-        "Layer_11",
+        "Layer_262",
         10
     ],
     [
-        "Layer_12",
+        "Layer_263",
         11
     ],
     [
-        "Layer_13",
+        "Layer_264",
         12
     ],
     [
-        "Layer_14",
+        "Layer_265",
         13
     ],
     [
-        "toilet5",
+        "Layer_243",
         14
     ],
     [
-        "toilet6",
+        "Layer_244",
         15
     ],
     [
-        "Layer_67",
+        "Layer_245",
         16
     ],
     [
-        "Layer_17",
+        "Layer_246",
         17
     ],
     [
-        "Layer_x5F_others",
+        "Layer_247",
         18
     ],
     [
-        "Layer_19",
+        "Layer_248",
         19
     ],
     [
-        "Layer_20",
+        "Layer_249",
         20
     ],
     [
-        "Layer_21",
+        "Layer_250",
         21
     ],
     [
-        "Layer_22",
+        "Layer_251",
         22
     ],
     [
-        "Layer_23",
+        "Layer_252",
         23
     ],
     [
-        "Layer_24",
+        "Layer_253",
         24
     ],
     [
-        "Layer_25",
+        "Layer_254",
         25
     ],
     [
-        "Layer_26",
+        "Layer_230",
         26
     ],
     [
-        "Layer_27",
+        "Layer_231",
         27
     ],
     [
-        "Layer_28",
+        "Layer_232",
         28
     ],
     [
-        "Layer_29",
+        "Layer_233",
         29
     ],
     [
-        "Layer_30",
+        "Layer_234",
         30
     ],
     [
-        "Layer_31",
+        "Layer_235",
         31
     ],
     [
-        "Layer_32",
+        "Layer_236",
         32
     ],
     [
-        "Layer_33",
+        "Layer_237",
         33
     ],
     [
-        "Layer_34",
+        "Layer_238",
         34
     ],
     [
-        "Layer_35",
+        "Layer_239",
         35
     ],
     [
-        "Layer_36",
+        "Layer_240",
         36
     ],
     [
-        "Layer_37",
+        "Layer_241",
         37
     ],
     [
-        "Layer_38",
+        "Layer_242",
         38
     ],
     [
-        "Layer_39",
+        "Layer_219",
         39
     ],
     [
-        "Layer_40",
+        "Layer_220",
         40
     ],
     [
-        "Layer_41",
+        "Layer_221",
         41
     ],
     [
-        "Layer_42",
+        "Layer_222",
         42
     ],
     [
-        "Layer_43",
+        "Layer_223",
         43
     ],
     [
-        "Layer_44",
+        "Layer_224",
         44
     ],
     [
-        "Layer_45",
+        "Layer_225",
         45
     ],
     [
-        "Layer_46",
+        "Layer_226",
         46
     ],
     [
-        "Layer_47",
+        "Layer_227",
         47
     ],
     [
-        "Layer_48",
+        "Layer_228",
         48
     ],
     [
-        "Layer_49",
+        "Layer_229",
         49
     ],
     [
-        "Layer_50",
+        "Layer_207",
         50
     ],
     [
-        "Layer_51",
+        "Layer_208",
         51
     ],
     [
-        "Layer_52",
+        "Layer_209",
         52
     ],
     [
-        "Layer_53",
+        "Layer_210",
         53
     ],
     [
-        "Layer_54",
+        "Layer_211",
         54
     ],
     [
-        "Layer_55",
+        "Layer_212",
         55
     ],
     [
-        "Layer_56",
+        "Layer_213",
         56
     ],
     [
-        "Layer_57",
+        "Layer_214",
         57
     ],
     [
-        "Layer_58",
+        "Layer_215",
         58
     ],
     [
-        "Layer_59",
+        "Layer_216",
         59
     ],
     [
-        "Layer_60",
+        "Layer_217",
         60
     ],
     [
-        "Layer_61",
+        "Layer_218",
         61
-    ],
-    [
-        "toilet1",
-        62
-    ],
-    [
-        "toilet2",
-        63
-    ],
-    [
-        "toilet3",
-        64
-    ],
-    [
-        "toilet4",
-        65
-    ],
-    [
-        "Layer_70",
-        66
     ]
 ]

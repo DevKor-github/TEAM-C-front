@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="0.1" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/mypage_guideline2"
             android:layout_width="wrap_content"
@@ -342,7 +342,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="39dp" />
+            app:layout_constraintGuide_percent="0.1"/>
 
         <TextView
             android:layout_width="wrap_content"
