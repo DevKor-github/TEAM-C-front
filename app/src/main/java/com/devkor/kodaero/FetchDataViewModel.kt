@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,6 +14,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.await
 import retrofit2.awaitResponse
+import java.io.IOException
 
 
 class FetchDataViewModel : ViewModel() {
@@ -433,6 +436,42 @@ class FetchDataViewModel : ViewModel() {
             roomRestrooms + nodeRestrooms
         } else {
             emptyList()
+        }
+    }
+    suspend fun fetchPubs(): List<Pub>? {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                service.getPubs().execute()
+            }
+            if (response.isSuccessful) {
+                val pubs = response.body()?.data?.list ?: emptyList()
+                Log.d("com.devkor.kodaero.KoyeonViewModel", "Successfully fetched pubs: $pubs")
+                pubs
+            } else {
+                Log.e("com.devkor.kodaero.KoyeonViewModel", "Failed to fetch pubs: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("com.devkor.kodaero.KoyeonViewModel", "Exception occurred: ${e.message}", e)
+            null
+        }
+    }
+
+
+    suspend fun fetchKoyeonStatus(): Boolean? {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                service.getKoyeonStatus().execute()
+            }
+            if (response.isSuccessful) {
+                response.body()?.data?.isKoyeon
+            } else {
+                Log.e("FetchKoyeonStatus", "Failed to fetch status: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("FetchKoyeonStatus", "Exception occurred: ${e.message}", e)
+            null
         }
     }
 

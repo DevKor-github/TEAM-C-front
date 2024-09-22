@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="-32dp"
-            tools:layout_editor_absoluteY="257dp" >
+            tools:layout_editor_absoluteY="257dp">
         </com.naver.maps.map.MapView>
 
     </FrameLayout>
@@ -281,6 +281,18 @@
             app:layout_constraintEnd_toStartOf="@id/home_guideline6"
             app:layout_constraintTop_toBottomOf="@id/facility_button_scroll_layout" />
 
+        <ImageButton
+            android:id="@+id/koyeon_button"
+            android:src="@drawable/button_koyeon"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_rec_white"
+            android:backgroundTint="#AAFFFFFF"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toStartOf="@id/home_guideline6"
+            app:layout_constraintTop_toBottomOf="@id/pin_onoff_button"
+            android:visibility="gone"/>
+
     <include layout="@layout/modal_sheet"
         android:id="@+id/includedLayout"
         tools:visibility="gone"/>
@@ -295,6 +307,6 @@
 
     <include layout="@layout/modal_sheet_favorite_detail"
         android:id="@+id/favorite_modal_detail"
-        tools:visibility="visible"/>
+        tools:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

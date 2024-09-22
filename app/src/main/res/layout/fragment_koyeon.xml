@@ -1,0 +1,51 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:id="@+id/koyeon_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:elevation="5dp"
+        android:background="#FDFDFD">
+
+        <ImageButton
+            android:id="@+id/back_to_home_button"
+            android:src="@drawable/grey_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/facility_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="고연전 무료주점"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textColor="@color/dark_gray"
+            android:textSize="16dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/koyeon_map_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/koyeon_top_bar">
+
+        <com.naver.maps.map.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <include layout="@layout/modal_sheet_koyeon"
+        android:id="@+id/modal_sheet_koyeon"/>
+</RelativeLayout>
