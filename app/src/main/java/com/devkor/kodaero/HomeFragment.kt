@@ -818,8 +818,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             selectedBuildingId = building.buildingId
 
             buildingName.setOnClickListener {
-                navigateToBuildingDetailFragment()
-                closeModal()
+                if (!building.isFromPlaceInfo) {
+                    navigateToBuildingDetailFragment()
+                    closeModal()
+                }
             }
 
             isInitialExpand = true
@@ -828,10 +830,16 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 standardBottomSheetBehavior.addBottomSheetCallback(object :
                     BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        // 모달이 확장될 때 building.isFromPlaceInfo를 체크
                         if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
-                            navigateToBuildingDetailFragment()
-                            closeModal()
+                            // isFromPlaceInfo가 false일 때만 navigateToBuildingDetailFragment 호출
+                            if (!building.isFromPlaceInfo) {
+                                navigateToBuildingDetailFragment()
+                                closeModal()
+                            }
                         }
+
+                        // 모달이 숨겨지거나 축소되면 isInitialExpand를 true로 리셋
                         if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                             isInitialExpand = true
                         } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -840,13 +848,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                        // 슬라이드 상태에서의 추가 처리
+                        // 슬라이드 상태에서의 추가 처리 (필요하면 여기에 추가)
                     }
                 })
 
                 // 콜백이 등록되었음을 기록
                 isBottomSheetCallbackRegistered = true
             }
+
 
             // 바텀시트 상태를 바로 확장 상태로 설정
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
