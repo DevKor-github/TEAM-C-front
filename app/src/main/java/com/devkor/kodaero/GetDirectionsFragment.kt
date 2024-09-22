@@ -14,14 +14,16 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
+import com.naver.maps.map.util.FusedLocationSource
 
-class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
+class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentGetDirectionsBinding? = null
     private val binding get() = _binding!!
 
@@ -103,7 +105,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 if (result != null) {
                     binding.searchStartingPointBar.text = result
                 }
-                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD"){
+                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD" && false){
                     arrivalPointHint = null
                     binding.searchArrivalPointBar.text = null
                 }
@@ -116,7 +118,7 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
                 if (result != null) {
                     binding.searchArrivalPointBar.text = result
                 }
-                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD"){
+                if (startingPointPlaceType == "COORD" && arrivalPointPlaceType == "COORD" && false){
                     startingPointHint = null
                     binding.searchStartingPointBar.text = null
                 }
@@ -461,6 +463,12 @@ class  GetDirectionsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map
+
+
+        // LocationSource 설정
+        val locationSource = FusedLocationSource(this, 1)
+        naverMap!!.locationSource = locationSource
+        naverMap!!.locationTrackingMode = LocationTrackingMode.NoFollow
 
         naverMap!!.uiSettings.isLocationButtonEnabled = false
         naverMap!!.uiSettings.isZoomControlEnabled = false

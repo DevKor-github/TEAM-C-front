@@ -475,4 +475,22 @@ class FetchDataViewModel : ViewModel() {
         }
     }
 
+    suspend fun fetchPubInfo(pubId: Int): PubDetail? {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                service.getPubInfo(pubId).execute()
+            }
+            if (response.isSuccessful) {
+                response.body()?.data
+            } else {
+                Log.e("FetchPubInfo", "Failed to fetch pub info: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("FetchPubInfo", "Exception occurred: ${e.message}", e)
+            null
+        }
+    }
+
+
 }

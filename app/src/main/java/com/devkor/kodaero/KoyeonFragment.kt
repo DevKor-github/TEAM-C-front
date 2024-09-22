@@ -5,21 +5,30 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.devkor.kodaero.databinding.FragmentKoyeonBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class KoyeonFragment : Fragment(), OnMapReadyCallback {
 
@@ -29,16 +38,27 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var viewModel: FetchDataViewModel
 
+
+    // 콜백이 이미 등록되었는지 여부를 추적하는 변수
+    private var isBottomSheetCallbackRegistered = false
+
+    // 바텀시트 상태 추적 변수
+    private var isInitialExpand = true
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentKoyeonBinding.inflate(inflater, container, false)
+        closeModal()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        closeModal()
 
         binding.backToHomeButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -46,6 +66,18 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
         initMapView()
+
+        binding.locationBuuton.setOnClickListener {
+            val locationHelper = LocationHelper(requireActivity())
+
+            locationHelper.checkAndRequestLocationPermission(
+                onPermissionGranted = {
+                    locationHelper.checkGpsEnabledAndRequestLocation { lat, lng ->
+
+                    }
+                }
+            )
+        }
 
     }
 
@@ -78,31 +110,158 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
         // 줌 레벨 제한 설정
         naverMap.minZoom = 14.0
 
+        // LocationSource 설정
+        val locationSource = FusedLocationSource(this, 1)
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
+
 
         viewLifecycleOwner.lifecycleScope.launch {
-
-
-            withContext(Dispatchers.IO) {
+            val pubs = withContext(Dispatchers.IO) {
                 viewModel.fetchPubs()
-            }?.forEach { pub ->
-                addMarker(LatLng(pub.latitude, pub.longitude), pub.name)
             }
 
+            pubs?.forEach { pub ->
+                val marker = Marker().apply {
+                    position = LatLng(pub.latitude, pub.longitude)
+                    icon = OverlayImage.fromResource(R.drawable.pin_koyeon)
+                    map = naverMap
+                }
+                marker.setOnClickListener {
+                    closeModal()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        delay(100)
+                        openKoyeonModal(pub.id)
+                    }
+                    true
+                }
+            }
         }
-    }
 
 
-    private fun addMarker(position: LatLng, name: String) {
-        Marker().apply {
-            this.position = position
-            this.icon = OverlayImage.fromResource(R.drawable.pin_koyeon)
-            this.map = naverMap
-            this.captionText = name
-        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun openKoyeonModal(pubId: Int) {
+        Log.e("FetchPubInfo","$pubId")
+        viewLifecycleOwner.lifecycleScope.launch {
+            val pub = withContext(Dispatchers.IO) {
+                viewModel.fetchPubInfo(pubId)
+            }
+
+            if (pub == null) {
+                Log.e("openKoyeonModal", "Pub not found.")
+                return@launch
+            }
+
+            // Update modal with the pub information
+            val pubName = binding.modalSheetKoyeon.root.findViewById<TextView>(R.id.name)
+            val pubAddress = binding.modalSheetKoyeon.root.findViewById<TextView>(R.id.address)
+            val standardBottomSheet = binding.modalSheetKoyeon.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+            val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+            val menuButton = binding.modalSheetKoyeon.menuButton
+            val pubSponsor = binding.modalSheetKoyeon.root.findViewById<TextView>(R.id.sponser)
+
+
+
+
+            // Set the pub details
+            pubName.text = pub.name
+            pubAddress.text = pub.address ?: "주소 정보 없음"
+            pubSponsor.text = pub.sponsor
+
+            menuButton.setOnClickListener {
+                closeModal()
+                navigateToPubDetailFragment(pub)
+            }
+
+
+            binding.modalSheetKoyeon.modalDepartButton.setOnClickListener{
+                putBuildingDirectionsFragment(
+                    isStartingPoint = true,
+                    buildingName = pub.name, // 여기에 실제 건물 이름을 설정하세요
+                    placeType = "COORD",
+                    id = -1 // 여기에 실제 건물 ID를 설정하세요
+                )
+            }
+            binding.modalSheetKoyeon.modalArriveButton.setOnClickListener {
+                putBuildingDirectionsFragment(
+                    isStartingPoint = false,
+                    buildingName = pub.name, // 여기에 실제 건물 이름을 설정하세요
+                    placeType = "COORD",
+                    id = -1 // 여기에 실제 건물 ID를 설정하세요
+                )
+            }
+
+            isInitialExpand = true
+
+            if (!isBottomSheetCallbackRegistered) {
+                standardBottomSheetBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
+
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
+                            // Perform actions when the sheet is fully expanded
+                        }
+
+                        // Reset the initial expand flag when the sheet is collapsed or hidden
+                        if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            isInitialExpand = true
+                        } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                            isInitialExpand = false
+                        }
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        // Optional: Handle actions during the slide, if needed
+                    }
+                })
+
+                isBottomSheetCallbackRegistered = true
+            }
+
+            // Expand the bottom sheet to show the pub details
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+
+    private fun closeModal(){
+        val standardBottomSheet = binding.modalSheetKoyeon.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+        val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
+        standardBottomSheetBehavior.state=BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    private fun navigateToPubDetailFragment(pubDetail: PubDetail) {
+        val koyeonMenuFragment = KoyeonMenuFragment.newInstance(pubDetail)
+        parentFragmentManager.beginTransaction()
+            .add(R.id.main_container, koyeonMenuFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+                putString("placeType", placeType)
+                if (id != null) {
+                    putInt("placeId", id)
+                }
+            }
+        }
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
+            ?.addToBackStack("DirectionFragment")
+            ?.commit()
+    }
+
+
 }

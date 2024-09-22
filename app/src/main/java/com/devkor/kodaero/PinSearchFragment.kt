@@ -458,6 +458,10 @@ class PinSearchFragment : Fragment(), OnMapReadyCallback {
         naverMap.locationSource = locationSource
         naverMap.uiSettings.isLocationButtonEnabled = false
         naverMap.uiSettings.isZoomControlEnabled = false
+
+        // LocationSource 설정
+        val locationSource = FusedLocationSource(this, 1)
+        naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
         val initPosition = arguments?.getParcelable<LatLng>(ARG_INIT_CAMERA_POSITION) ?: initCameraPosition
