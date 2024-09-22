@@ -51,6 +51,8 @@ class SplashActivity : AppCompatActivity() {
                     navigateToMainActivity()
                 } else if (viewModel.responseCode == 403) {
                     navigateToLoginActivity()
+                } else {
+                    navigateToLoginActivity()
                 }
             })
         } else {
