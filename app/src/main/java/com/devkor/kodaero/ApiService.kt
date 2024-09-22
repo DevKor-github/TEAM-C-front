@@ -219,23 +219,43 @@ data class BuildingSearchItem(
     val placeType: String,
     val buildingId: Int
 )
-
+// RoomListResponse 클래스
 data class RoomListResponse(
-    val roomList: List<RoomList>
+    val roomList: List<RoomList>,
+    val nodeList: List<NodeList>
 )
 
+// RoomList 데이터 클래스
 data class RoomList(
-    val type: String,
     val id: Int,
     val placeType: String,
     val name: String,
     val detail: String,
     val availability: Boolean,
     val plugAvailability: Boolean,
-    val imageUrl: String,
-    val operatingTime: String,
+    val imageUrl: String?,
+    val weekdayOperatingTime: String?,
+    val saturdayOperatingTime: String?,
+    val sundayOperatingTime: String?,
     val longitude: Double,
     val latitude: Double,
+    val xcoord: Int,
+    val ycoord: Int,
+    val operating: Boolean
+)
+
+// NodeList 데이터 클래스
+data class NodeList(
+    val id: Int,
+    val type: String,
+    val xcoord: Int,
+    val ycoord: Int
+)
+
+// Restroom 데이터 클래스
+data class Restroom(
+    val id: Int,
+    val type: String,
     val xcoord: Int,
     val ycoord: Int
 )

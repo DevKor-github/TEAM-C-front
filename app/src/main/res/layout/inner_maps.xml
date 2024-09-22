@@ -84,6 +84,12 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter" />
 
+                <FrameLayout
+                    android:id="@+id/restroom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter" />
+
                 <com.devkor.kodaero.RouteView
                     android:id="@+id/routeView"
                     android:layout_width="match_parent"
