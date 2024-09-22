@@ -649,7 +649,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             items = mutableListOf(),
             onDeleteClick = { bookmarkId ->
                 // 북마크 삭제 처리
-                bookmarkManager.deleteBookmark(bookmarkId)
+                bookmarkManager.deleteBookmark(categoryId, bookmarkId)
             },
             onItemClick = { buildingId, buildingType ->
                 if(buildingType == "BUILDING") {

@@ -58,6 +58,7 @@
             app:layout_constraintStart_toEndOf="@id/building_detail_facilities_gridview_guideline2"/>
 
         <ImageButton
+            android:clickable="false"
             android:id="@+id/building_detail_facility_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
