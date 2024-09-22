@@ -212,7 +212,7 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             )
         }
 
-        Log.e("","hh")
+        Log.e("ergwgewgrewhrh","$startingPointPlaceType, $startingPointId, $startingPointLat, $startingPointLng, $arrivalPointPlaceType, $arrivalPointId, $arrivalPointLat, $arrivalPointLng")
 
         viewModel.routeResponse.observe(viewLifecycleOwner) { routeResponse ->
             if (routeResponse != null) {

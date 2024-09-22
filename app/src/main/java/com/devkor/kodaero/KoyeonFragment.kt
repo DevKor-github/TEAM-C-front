@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.devkor.kodaero.databinding.FragmentKoyeonBinding
@@ -186,7 +187,9 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
                     isStartingPoint = true,
                     buildingName = pub.name, // 여기에 실제 건물 이름을 설정하세요
                     placeType = "COORD",
-                    id = -1 // 여기에 실제 건물 ID를 설정하세요
+                    id = -1, // 여기에 실제 건물 ID를 설정하세요
+                    lat = pub.latitude,
+                    lng = pub.longitude
                 )
             }
             binding.modalSheetKoyeon.modalArriveButton.setOnClickListener {
@@ -194,7 +197,9 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
                     isStartingPoint = false,
                     buildingName = pub.name, // 여기에 실제 건물 이름을 설정하세요
                     placeType = "COORD",
-                    id = -1 // 여기에 실제 건물 ID를 설정하세요
+                    id = -1, // 여기에 실제 건물 ID를 설정하세요
+                    lat = pub.latitude,
+                    lng = pub.longitude
                 )
             }
 
@@ -245,23 +250,22 @@ class KoyeonFragment : Fragment(), OnMapReadyCallback {
             .commit()
     }
 
-    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
-        val getDirectionsFragment = GetDirectionsFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean("isStartingPoint", isStartingPoint)
-                putString("buildingName", buildingName)
-                putString("placeType", placeType)
-                if (id != null) {
-                    putInt("placeId", id)
-                }
-            }
-        }
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int, lat: Double, lng: Double) {
+        setFragmentResult("requestKey", Bundle().apply {
+            putString("buildingName", buildingName)
+            putBoolean("isStartingPoint", isStartingPoint)
+            putString("placeType", placeType)
+            putInt("id", id)
+            putDouble("lat", lat)
+            putDouble("lng", lng)
+        })
+
+        val getDirectionsFragment = GetDirectionsFragment()
         val activity = context as? FragmentActivity
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
+            ?.add(R.id.main_container, getDirectionsFragment, "DirectionFragment")
             ?.addToBackStack("DirectionFragment")
             ?.commit()
     }
-
 
 }
