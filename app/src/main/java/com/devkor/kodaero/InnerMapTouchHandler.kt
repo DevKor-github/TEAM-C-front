@@ -32,7 +32,7 @@ class InnerMapTouchHandler(
     private val replaceInnermapCallback: (String?) -> Unit // 추가된 부분
 ) : View.OnTouchListener {
 
-    private val isNodeMaskBuild: Boolean = false
+    private var isNodeMaskBuild = MainActivity.isNodeMaskBuild
     private var fileName: String = "" // obsolete
     private var maskIndex: Int = 0
 
