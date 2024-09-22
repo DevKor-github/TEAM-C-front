@@ -23,7 +23,7 @@ fun openLocationModal(activity: FragmentActivity, place: BuildingSearchItem) {
         // HomeFragment가 이미 존재하면 popBackStack을 통해 해당 프래그먼트로 이동
         if (homeFragment.isAdded) {
             Log.d("openLocationModal", "HomeFragment already exists")
-            fragmentManager.popBackStack("SearchFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            fragmentManager.popBackStack("HomeFragment", 0)
         } else {
             // 존재하지 않으면 HomeFragment를 추가
             fragmentManager.beginTransaction()

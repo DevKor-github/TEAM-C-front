@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devkor.kodaero.databinding.FragmentBusBinding
@@ -27,6 +28,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PathOverlay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -45,6 +47,11 @@ class BusFragment : Fragment(), OnMapReadyCallback {
     private var isImageOneDisplayed = true
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+
+    private var selectedBuildingName: String? = null
+    private var selectedBuildingId: Int? = null
+
+    private val pathOverlays = mutableListOf<PathOverlay>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,9 +93,11 @@ class BusFragment : Fragment(), OnMapReadyCallback {
         _binding.pinOnoffButton.setOnClickListener {
             if (areMarkersVisible) {
                 hideMarkers()
+                hideBusRoutes()
             } else {
                 areMarkersVisible = !areMarkersVisible
                 showMarkers()
+                showBusRoutes()
                 areMarkersVisible = !areMarkersVisible
             }
             areMarkersVisible = !areMarkersVisible
@@ -102,9 +111,6 @@ class BusFragment : Fragment(), OnMapReadyCallback {
 
             closeModal()
         }
-
-        setHorizontalScrollViewButtonListeners()
-
     }
 
     private fun setupBottomSheet() {
@@ -132,10 +138,13 @@ class BusFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: NaverMap) {
         naverMap = map
 
+        naverMap.uiSettings.isZoomControlEnabled = false
+
         val cameraUpdate = CameraUpdate.scrollAndZoomTo(initCameraPosition, 14.3)
         naverMap.moveCamera(cameraUpdate)
 
         displayBusStops()
+        displayBusRoutes()
 
         naverMap.setOnMapClickListener { _, _ -> closeModal() }
     }
@@ -173,11 +182,62 @@ class BusFragment : Fragment(), OnMapReadyCallback {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    private fun displayBusRoutes() {
+        val busStops = busStopRepository.getBusStops()
+
+        val combinedPathLatLngs = mutableListOf<LatLng>()
+
+        busStops?.forEach { busStop ->
+            combinedPathLatLngs.addAll(busStop.getPathNodeAsLatLng())
+        }
+
+        val path = PathOverlay().apply {
+            this.coords = combinedPathLatLngs
+            this.color = ContextCompat.getColor(requireContext(), R.color.shuttle_bus_path)
+            this.width = 20
+            this.outlineWidth = 5
+            this.outlineColor = ContextCompat.getColor(requireContext(), R.color.red)
+            this.map = naverMap
+        }
+        pathOverlays.add(path)
+    }
+
+    private fun hideBusRoutes() {
+        pathOverlays.forEach { it.map = null }
+    }
+
+    private fun showBusRoutes() {
+        pathOverlays.forEach { it.map = naverMap }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showModal(busStop: BusStop) {
+        selectedBuildingName = busStop.name
+        selectedBuildingId = busStop.place_id
+
         _binding.busModal.modalSheetBuildingName.text = busStop.name
         _binding.busModal.busModalStopName.text = busStop.name
         updateRecyclerViews(busStop)
         updateNextBusArrival(busStop)
+
+        _binding.busModal.modalDepartButton.setOnClickListener {
+            selectedBuildingName?.let { name ->
+                selectedBuildingId?.let { id ->
+                    putBuildingDirectionsFragment(true, name, "PLACE", id)
+                }
+            }
+            closeModal()
+        }
+
+        _binding.busModal.modalArriveButton.setOnClickListener {
+            selectedBuildingName?.let { name ->
+                selectedBuildingId?.let { id ->
+                    putBuildingDirectionsFragment(false, name, "PLACE", id)
+                }
+            }
+            closeModal()
+        }
+
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
@@ -307,53 +367,22 @@ class BusFragment : Fragment(), OnMapReadyCallback {
         transaction.commit()
     }
 
-    private fun setHorizontalScrollViewButtonListeners() {
-        val buttonIds = listOf(
-            _binding.cafeButton,
-            _binding.cafeteriaButton,
-            _binding.convenienceStoreButton,
-            _binding.readingRoomButton,
-            _binding.studyRoomButton,
-            _binding.bookReturnMachineButton,
-            _binding.loungeButton,
-            _binding.waterPurifierButton,
-            _binding.vendingMachineButton,
-            _binding.printerButton,
-            _binding.tumblerWasherButton,
-            _binding.onestopAutoMachineButton,
-            _binding.bankButton,
-            _binding.smokingBoothButton,
-            _binding.showerRoomButton,
-            _binding.gymButton,
-            _binding.sleepingRoomButton
-        )
-
-        for (button in buttonIds) {
-            button.setOnClickListener {
-                val idString = resources.getResourceEntryName(it.id)
-                val keyword = idString.replace("_button", "").uppercase()
-                navigateToPinSearchFragment(keyword)
+    private fun putBuildingDirectionsFragment(isStartingPoint: Boolean, buildingName: String, placeType: String, id: Int?) {
+        val getDirectionsFragment = GetDirectionsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean("isStartingPoint", isStartingPoint)
+                putString("buildingName", buildingName)
+                putString("placeType", placeType)
+                if (id != null) {
+                    putInt("placeId", id)
+                }
             }
         }
-    }
-
-    private fun navigateToPinSearchFragment(keyword: String) {
-        val currentCameraPosition = getCurrentCameraPosition()
-        val currentZoomLevel = getCurrentZoomLevel()
-
-        val pinSearchFragment = PinSearchFragment.newInstance(keyword, 0, currentCameraPosition, currentZoomLevel)
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container, pinSearchFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
-    fun getCurrentCameraPosition(): LatLng {
-        return naverMap.cameraPosition.target
-    }
-
-    fun getCurrentZoomLevel(): Double {
-        return naverMap.cameraPosition.zoom
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.main_container, getDirectionsFragment,"DirectionFragment")
+            ?.addToBackStack("DirectionFragment")
+            ?.commit()
     }
 
     private fun hideMarkers() {
