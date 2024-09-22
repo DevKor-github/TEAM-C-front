@@ -68,12 +68,19 @@
         android:fontFamily="@font/pretendard_semibold"
         android:textColor="@color/dark_gray"/>
 
-    <LinearLayout
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_vertical"
+        android:layout_marginTop="15dp"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="15dp">
+        android:gravity="center_vertical">
 
         <!-- 맨 왼쪽 버튼 -->
         <ImageButton
@@ -174,6 +181,8 @@
             android:contentDescription="Pink"
             android:elevation="4dp" />
     </LinearLayout>
+    </HorizontalScrollView>
+
 
     <android.widget.Button
         android:id="@+id/add_button"

@@ -54,11 +54,11 @@ class BookmarkManager(private val context: Context, private val apiService: ApiS
             }
         })
     }
-
-    fun deleteBookmark(bookmarkId: Int) {
+    
+    fun deleteBookmark(categoryId: Int, bookmarkId: Int) {
         val apiService = RetrofitClient.instance
 
-        apiService.deleteBookmark(bookmarkId).enqueue(object : Callback<ApiResponse<Any>> {
+        apiService.deleteBookmark(categoryId, bookmarkId).enqueue(object : Callback<ApiResponse<Any>> {
             override fun onResponse(call: Call<ApiResponse<Any>>, response: Response<ApiResponse<Any>>) {
                 if (response.isSuccessful) {
                     Toast.makeText(context, "북마크가 삭제되었습니다.", Toast.LENGTH_SHORT).show()

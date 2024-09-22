@@ -1,5 +1,7 @@
 package com.devkor.kodaero
 
+import android.content.ClipData.Item
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +100,7 @@ class CategoryAdapter(
         // 초기 상태 설정: bookmarked가 true인 아이템을 선택된 상태로 설정
         selectedPositions.clear()
         newItems.forEachIndexed { index, item ->
+            Log.e("feweefwfe","${item}")
             if (item.bookmarked) {
                 selectedPositions.add(index)
             }

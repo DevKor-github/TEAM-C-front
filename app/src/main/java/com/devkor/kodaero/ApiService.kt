@@ -112,10 +112,12 @@ interface ApiService {
     fun getBookmarks(@Path("categoryId") categoryId: Int): Call<ApiResponse<BookmarkResponse>>
 
     // 북마크 삭제 API 메서드
-    @DELETE("/api/bookmarks/{bookmarkId}")
+    @DELETE("/api/categories/{categoryId}/bookmarks/{bookmarkId}")
     fun deleteBookmark(
+        @Path("categoryId") categoryId: Int,
         @Path("bookmarkId") bookmarkId: Int
     ): Call<ApiResponse<Any>>
+
 
     @DELETE("/api/categories/{categoryId}")
     fun deleteCategory(@Path("categoryId") categoryId: Int): Call<ApiResponse<Any>>
