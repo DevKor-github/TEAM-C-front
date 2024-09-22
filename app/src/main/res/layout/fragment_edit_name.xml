@@ -35,9 +35,9 @@
         android:layout_height="0dp"
         android:background="@color/bright_gray"
         android:elevation="8dp"
-        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toTopOf="@id/edit_name_guideline1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edit_name_guideline1">
+        tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/edit_name_guideline2"
@@ -53,9 +53,9 @@
             android:background="@android:color/transparent"
             android:src="@drawable/grey_back_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/edit_name_guideline2"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/edit_name_guideline2"/>
+            app:layout_constraintVertical_bias="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,60 +78,58 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/pretendard_regular"
         android:gravity="center"
         android:text="닉네임을 수정해 주세요."
-        android:textSize="14dp"
         android:textColor="@color/map_main"
-        android:fontFamily="@font/pretendard_regular"
-        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
+        android:textSize="14dp"
         app:layout_constraintEnd_toStartOf="@id/edit_name_guideline4"
-        app:layout_constraintTop_toBottomOf="@id/edit_name_header"/>
+        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
+        app:layout_constraintTop_toBottomOf="@id/edit_name_header" />
 
     <EditText
         android:id="@+id/edit_name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:paddingVertical="5dp"
-        android:gravity="center"
-        android:hint="어흥"
-        android:textSize="14dp"
-        android:textColor="@color/map_main"
-        android:textColorHint="@color/map_sub"
-        android:fontFamily="@font/pretendard_semibold"
         android:background="@drawable/rounded_rec_bright_gray"
         android:elevation="8dp"
-        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
-        app:layout_constraintEnd_toStartOf="@id/edit_name_guideline4"
-        app:layout_constraintTop_toBottomOf="@id/edit_name_header_text"/>
-
-    <LinearLayout
-        android:id="@+id/edit_name_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
+        android:fontFamily="@font/pretendard_semibold"
         android:gravity="center"
-        android:elevation="16dp"
-        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
+        android:hint="어흥"
+        android:paddingVertical="5dp"
+        android:textColor="@color/map_main"
+        android:textColorHint="@color/map_sub"
+        android:textSize="14dp"
         app:layout_constraintEnd_toStartOf="@id/edit_name_guideline4"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintTop_toBottomOf="@id/edit_name_header_text">
+        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
+        app:layout_constraintTop_toBottomOf="@id/edit_name_header_text" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/button_edit_name"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/edit_name_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_rec_gray"
+        android:elevation="8dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:paddingVertical="5dp"
+        android:text="확인"
+        android:textColor="@color/bright_gray"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@id/edit_name_guideline4"
+        app:layout_constraintStart_toEndOf="@id/edit_name_guideline3"
+        app:layout_constraintTop_toBottomOf="@id/edit_name_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_name_black_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
         android:alpha="0.5"
+        android:background="@color/black"
         android:elevation="16dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_name_layout"
@@ -151,11 +149,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/edit_name_guideline5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/edit_name_guideline5"
             app:layout_constraintVertical_bias="0.5">
 
             <TextView
@@ -176,9 +174,9 @@
                 android:text="호이"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -214,15 +212,15 @@
             android:id="@+id/edit_name_yes_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_bold"
             android:gravity="center"
             android:text="예"
-            android:textSize="14dp"
             android:textColor="@color/red"
-            android:fontFamily="@font/pretendard_bold"
-            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edit_name_guideline6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_name_guideline6"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/edit_name_guideline6"
@@ -235,31 +233,47 @@
             android:id="@+id/edit_name_no_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fontFamily="@font/pretendard_bold"
             android:gravity="center"
             android:text="아니오"
-            android:textSize="14dp"
             android:textColor="@color/map_main"
-            android:fontFamily="@font/pretendard_bold"
-            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/edit_name_guideline6"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="#EFEFEF"
             app:layout_constraintBottom_toTopOf="@id/edit_name_guideline5"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:background="#EFEFEF"
-            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/edit_name_yes_button"/>
+            app:layout_constraintStart_toEndOf="@id/edit_name_yes_button"
+            app:layout_constraintTop_toBottomOf="@id/edit_name_guideline5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/edit_name_complete"
+        android:src="@drawable/icon_red_check"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:padding="25dp"
+        android:elevation="16dp"
+        android:visibility="gone"
+        android:background="@drawable/rounded_rec_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
