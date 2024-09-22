@@ -861,6 +861,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
     }
 
     private fun openBookMarkModal(placeId: Int) {
+
         // BookMark Modal의 루트 레이아웃을 가져오기
         val bookMarkAddingModal = binding.bookmarkModal.standardBottomSheet
 
@@ -903,7 +904,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
 
         // 빌딩 ID를 사용하여 카테고리 데이터를 가져오도록 ViewModel에 요청
-        categoryViewModel.fetchCategories(placeId)
+        categoryViewModel.fetchCategoriesPlace(placeId)
 
         // Save 버튼 클릭 시 동작 설정
         saveBookmarkButton.setOnClickListener {
@@ -924,21 +925,20 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
         }
     }
 
-    private fun updateBookmarkButton(placeId: Int) {
+    fun updateBookmarkButton(placeId: Int) {
         val bookmarkedButton = binding.includedModal.root.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
         Log.d("CategoryCheck", "${binding.bookmarkModal.root}")
         val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
 
-        categoryViewModel.fetchCategories(placeId)
-
-        categoryViewModel.categories.observe(viewLifecycleOwner) { categoryList ->
-            categoryList?.let { categories ->
-                val hasBookmarkedItem = categories.any { it.bookmarked }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val categories = categoryViewModel.fetchCategoriesPlaceSync(placeId)
+            categories?.let {
+                val hasBookmarkedItem = it.any { it.bookmarked }
                 if (hasBookmarkedItem) {
-                    Log.d("CategoryCheck", "There is at least one bookmarked category.")
+                    Log.d("CategoryCheck", "There is at least one bookmarked category. $categories")
                     bookmarkedButton.setImageResource(R.drawable.button_bookmarked_on)
                 } else {
-                    Log.d("CategoryCheck", "No bookmarked categories found.")
+                    Log.d("CategoryCheck", "No bookmarked categories found. $categories")
                     bookmarkedButton.setImageResource(R.drawable.button_bookmarked_off)
                 }
                 // 버튼을 다시 그리도록 강제
@@ -949,4 +949,6 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             }
         }
     }
+
+
 }
