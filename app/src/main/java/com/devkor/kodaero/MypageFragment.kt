@@ -74,6 +74,10 @@ class MypageFragment : Fragment() {
             handleLogout()
         }
 
+        binding.guideButton.setOnClickListener{
+            // ImageSliderFragment로 이동
+        }
+
         binding.logoutNoButton.setOnClickListener {
             hideLogoutConfirmation()
         }

@@ -1,7 +1,6 @@
 package com.devkor.kodaero
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -968,15 +967,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         // Insets을 강제로 적용하여 초기 패딩 설정
         layout.requestApplyInsets()
     }
+
     private fun updateBookmarkButton(buildingId: Int) {
         val bookmarkedButton = binding.includedLayout.root.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
         val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
 
-        categoryViewModel.fetchCategories(buildingId)
-
-        categoryViewModel.categories.observe(viewLifecycleOwner) { categoryList ->
-            categoryList?.let { categories ->
-                val hasBookmarkedItem = categories.any { it.bookmarked }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val categories = categoryViewModel.fetchCategoriesBuildingSync(buildingId)
+            categories?.let {
+                val hasBookmarkedItem = it.any { it.bookmarked }
                 if (hasBookmarkedItem) {
                     Log.d("CategoryCheck", "There is at least one bookmarked category.")
                     bookmarkedButton.setImageResource(R.drawable.button_bookmarked_on)

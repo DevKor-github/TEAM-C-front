@@ -341,16 +341,14 @@ class BuildingDetailFragment : Fragment() {
         bookMarkBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-
     private fun updateBookmarkButton(buildingId: Int) {
         val bookmarkedButton = binding.buildingDetailBookmarkedButton
         val categoryViewModel: CategoryViewModel by viewModels()  // 프래그먼트 전용 ViewModel
 
-        categoryViewModel.fetchCategories(buildingId)
-
-        categoryViewModel.categories.observe(viewLifecycleOwner) { categoryList ->
-            categoryList?.let { categories ->
-                val hasBookmarkedItem = categories.any { it.bookmarked }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val categories = categoryViewModel.fetchCategoriesBuildingSync(buildingId)
+            categories?.let {
+                val hasBookmarkedItem = it.any { it.bookmarked }
                 if (hasBookmarkedItem) {
                     Log.d("CategoryCheck", "There is at least one bookmarked category.")
                     bookmarkedButton.setImageResource(R.drawable.button_bookmarked_on)
@@ -366,4 +364,5 @@ class BuildingDetailFragment : Fragment() {
             }
         }
     }
+
 }

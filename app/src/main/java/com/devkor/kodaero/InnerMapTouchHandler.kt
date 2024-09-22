@@ -194,6 +194,8 @@ class InnerMapTouchHandler(
                         standardBottomSheet.findViewById<View>(R.id.innermap_container).visibility = View.GONE
                         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
+                        fragment.updateBookmarkButton(roomId)
+
                         standardBottomSheet.findViewById<View>(R.id.modal_depart_button).setOnClickListener {
                             navigateToGetDirectionsFragment(true, fetchedRoomName, roomId, "PLACE")
                         }
