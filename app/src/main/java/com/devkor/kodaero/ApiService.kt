@@ -11,6 +11,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import retrofit2.Response
 
 data class ApiResponse<T>(
     val statusCode: Int,
@@ -126,8 +127,36 @@ interface ApiService {
     fun editUserName(
         @Query("username") username: String
     ): Call<Void>
-  
+
+    @GET("/api/koyeon/pubs")
+    fun getPubs(): Call<ApiResponse<PubsResponse>>
+
+    @GET("/api/koyeon")
+    fun getKoyeonStatus(): Call<ApiResponse<KoyeonStatus>>
+
+
 }
+
+
+data class KoyeonStatus(
+    val id: Int,
+    val isKoyeon: Boolean
+)
+
+
+
+data class PubsResponse(
+    val list: List<Pub>
+)
+
+data class Pub(
+    val id: Int,
+    val name: String,
+    val longitude: Double,
+    val latitude: Double
+)
+
+
 
 data class LoginRequest(
     val provider: String,

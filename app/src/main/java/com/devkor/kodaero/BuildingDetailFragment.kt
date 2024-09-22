@@ -54,6 +54,7 @@ class BuildingDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         closeModal()
+        selectedBuildingId?.let { updateBookmarkButton(it) }
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
 

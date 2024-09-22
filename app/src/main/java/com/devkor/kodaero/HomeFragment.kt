@@ -272,6 +272,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
+        val koyeonButton = binding.koyeonButton
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            val isKoyeon = viewModel.fetchKoyeonStatus()
+
+            Log.e("feafweff","$isKoyeon")
+            if (isKoyeon == true) {
+                binding.koyeonButton.visibility = View.VISIBLE
+            } else {
+                binding.koyeonButton.visibility = View.GONE
+            }
+
+            koyeonButton.setOnClickListener{
+                navigateToKoyeonFragment()
+            }
+
+
+        }
+
     }
 
     override fun onResume() {
@@ -1025,6 +1044,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+    }
+
+    private fun navigateToKoyeonFragment(){
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, KoyeonFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }
