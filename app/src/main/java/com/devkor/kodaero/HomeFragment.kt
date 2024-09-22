@@ -29,6 +29,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.GroundOverlay
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
@@ -58,6 +59,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var viewModel: FetchDataViewModel
 
     private val markers = mutableListOf<Marker>()
+    private var pinMarker: Marker? = null
+
 
     private lateinit var selectedBuildingName: String
     private var selectedBuildingId: Int? = 1
@@ -239,28 +242,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             closeModal()
         }
 
-        val prefix = "고려대학교 서울캠퍼스"
-
         val bookMarkAddButton = includedLayout.findViewById<ImageButton>(R.id.modal_sheet_bookmarked_button)
 
         bookMarkAddButton.setOnClickListener{
             openBookMarkModal(selectedBuildingId!!)
-        }
-
-        val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
-
-        modalDepartButton.setOnClickListener {
-            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
-            putBuildingDirectionsFragment(true, cleanedBuildingName, "BUILDING", selectedBuildingId)
-            closeModal()
-        }
-
-        val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
-
-        modalArriveButton.setOnClickListener {
-            val cleanedBuildingName = selectedBuildingName.removePrefix(prefix).trim()
-            putBuildingDirectionsFragment(false, cleanedBuildingName, "BUILDING", selectedBuildingId)
-            closeModal()
         }
 
         viewModel = ViewModelProvider(this).get(FetchDataViewModel::class.java)
@@ -425,6 +410,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val favoriteDetailBottomSheet = favoriteModalDetail.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
         val favoriteDetailBottomSheetBehavior = BottomSheetBehavior.from(favoriteDetailBottomSheet)
         favoriteDetailBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        pinMarker?.map = null
+        pinMarker = null
     }
 
     // BottomSheet의 확장 상태를 확인하는 메서드
@@ -723,114 +711,160 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
     fun openBuildingModal(buildingId: Int) {
         closeModal()
-        val building = getBuildingInfo(buildingId) ?: return
 
-        val buildingName =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
-        val buildingAddress =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
-        val buildingOperating =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
-        val buildingNextOperating =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
-        val buildingNextOperatingCont =
-            binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
-        val standardBottomSheet =
-            binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
-        val standardBottomSheetBehavior =
-            BottomSheetBehavior.from(standardBottomSheet)
-
-        updateBookmarkButton(buildingId)
-
-
-
-        buildingName.text = building.name
-        buildingAddress.text = building.address
-
-        when {
-            building.weekdayOperatingTime.contains("00:00-00:00") ||
-                    building.saturdayOperatingTime.contains("00:00-00:00") ||
-                    building.sundayOperatingTime.contains("00:00-00:00") -> {
-
-                buildingOperating.text = "운영 정보 없음"
-                buildingOperating.setTextColor(resources.getColor(R.color.gray, null))
-                buildingNextOperating.text = null
-                buildingNextOperatingCont.text = null
+        // 비동기적으로 getBuildingInfo 호출
+        getBuildingInfo(buildingId) { building ->
+            if (building == null) {
+                return@getBuildingInfo // Building 정보가 없으면 함수 종료
             }
 
-            building.weekdayOperatingTime.contains("00:00-23:59") &&
-                    building.saturdayOperatingTime.contains("00:00-23:59") &&
-                    building.sundayOperatingTime.contains("00:00-23:59") -> {
+            addPinImageToMap(building.latitude, building.longitude)
 
-                buildingOperating.text = "운영 중"
-                buildingOperating.setTextColor(resources.getColor(R.color.red, null))
-                buildingNextOperating.text = "상시 운영"
-                buildingNextOperatingCont.text = null
+            val buildingName =
+                binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_name)
+            val buildingAddress =
+                binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_building_address)
+            val buildingOperating =
+                binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_operating_status)
+            val buildingNextOperating =
+                binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline)
+            val buildingNextOperatingCont =
+                binding.includedLayout.root.findViewById<TextView>(R.id.modal_sheet_deadline_cont)
+            val standardBottomSheet =
+                binding.includedLayout.root.findViewById<FrameLayout>(R.id.standard_bottom_sheet)
+            val standardBottomSheetBehavior =
+                BottomSheetBehavior.from(standardBottomSheet)
+            val innerMapButton =
+                binding.includedLayout.root.findViewById<Button>(R.id.modal_innermap_button)
+            val facilityTypesRecyclerView =
+                binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
+            val adapter = FacilityTypeAdapter(building.placeTypes ?: emptyList(), requireContext())
+            facilityTypesRecyclerView.adapter = adapter
+            val includedLayout = binding.includedLayout.root
+            val modalDepartButton = includedLayout.findViewById<Button>(R.id.modal_depart_button)
+            val modalArriveButton = includedLayout.findViewById<Button>(R.id.modal_arrive_button)
+
+
+            updateBookmarkButton(buildingId)
+
+            // Building 정보 설정
+            buildingName.text = building.name
+            buildingAddress.text = building.address
+
+            // 적절한 placeType 설정
+            val placeType = if (building.isFromPlaceInfo) "PLACE" else "BUILDING"
+
+            modalDepartButton.setOnClickListener {
+                val cleanedBuildingName = building.name.removePrefix("고려대학교 서울캠퍼스").trim()
+                putBuildingDirectionsFragment(true, cleanedBuildingName, placeType, building.buildingId)
+                closeModal()
             }
 
-            else -> {
-                if (building.operating) {
+            modalArriveButton.setOnClickListener {
+                val cleanedBuildingName = building.name.removePrefix("고려대학교 서울캠퍼스").trim()
+                putBuildingDirectionsFragment(false, cleanedBuildingName, placeType, building.buildingId)
+                closeModal()
+            }
+
+            if (building.isFromPlaceInfo) {
+                innerMapButton.visibility = View.GONE
+                facilityTypesRecyclerView.visibility = View.GONE
+            } else {
+                innerMapButton.visibility = View.VISIBLE
+                facilityTypesRecyclerView.visibility = View.VISIBLE
+            }
+
+            when {
+                building.weekdayOperatingTime?.contains("00:00-00:00") == true ||
+                        building.saturdayOperatingTime?.contains("00:00-00:00") == true ||
+                        building.sundayOperatingTime?.contains("00:00-00:00") == true -> {
+
+                    buildingOperating.text = "운영 정보 없음"
+                    buildingOperating.setTextColor(resources.getColor(R.color.gray, null))
+                    buildingNextOperating.text = null
+                    buildingNextOperatingCont.text = null
+                }
+
+                building.weekdayOperatingTime?.contains("00:00-23:59") == true &&
+                        building.saturdayOperatingTime?.contains("00:00-23:59") == true &&
+                        building.sundayOperatingTime?.contains("00:00-23:59") == true -> {
+
                     buildingOperating.text = "운영 중"
                     buildingOperating.setTextColor(resources.getColor(R.color.red, null))
-                    buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
-                    buildingNextOperatingCont.text = "에 운영 종료"
-                } else {
-                    buildingOperating.text = "운영 종료"
-                    buildingOperating.setTextColor(resources.getColor(R.color.red, null))
-                    buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
-                    buildingNextOperatingCont.text = "에 운영 시작"
+                    buildingNextOperating.text = "상시 운영"
+                    buildingNextOperatingCont.text = null
+                }
+
+                else -> {
+                    if (building.operating == true) {
+                        buildingOperating.text = "운영 중"
+                        buildingOperating.setTextColor(resources.getColor(R.color.red, null))
+                        buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
+                        buildingNextOperatingCont.text = "에 운영 종료"
+                    } else {
+                        buildingOperating.text = "운영 종료"
+                        buildingOperating.setTextColor(resources.getColor(R.color.red, null))
+                        buildingNextOperating.text = building.nextBuildingTime ?: "운영 시간이 설정되지 않았습니다"
+                        buildingNextOperatingCont.text = "에 운영 시작"
+                    }
                 }
             }
-        }
 
-        selectedBuildingName = building.name
-        selectedBuildingAboveFloor = building.floor
-        selectedBuildingUnderFloor = building.underFloor
-        selectedBuildingId = building.buildingId
+            selectedBuildingName = building.name
+            selectedBuildingAboveFloor = building.floor ?: 0
+            selectedBuildingUnderFloor = building.underFloor ?: 0
+            selectedBuildingId = building.buildingId
 
-        val facilityTypesRecyclerView =
-            binding.includedLayout.root.findViewById<RecyclerView>(R.id.modal_sheet_facility_types)
-        val adapter = FacilityTypeAdapter(building.placeTypes, requireContext())
-        facilityTypesRecyclerView.adapter = adapter
+            buildingName.setOnClickListener {
+                navigateToBuildingDetailFragment()
+                closeModal()
+            }
 
-        buildingName.setOnClickListener {
-            navigateToBuildingDetailFragment()
-            closeModal()
-        }
+            isInitialExpand = true
 
-        isInitialExpand = true
-
-        if (!isBottomSheetCallbackRegistered) {
-            standardBottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    Log.e("", "turned changed $newState $isInitialExpand")
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
-                        navigateToBuildingDetailFragment()
-                        closeModal()
+            if (!isBottomSheetCallbackRegistered) {
+                standardBottomSheetBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_EXPANDED && !isInitialExpand) {
+                            navigateToBuildingDetailFragment()
+                            closeModal()
+                        }
+                        if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            isInitialExpand = true
+                        } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                            isInitialExpand = false
+                        }
                     }
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
-                        isInitialExpand = true
-                    } else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        isInitialExpand = false
-                        Log.e("", "turned flase")
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        // 슬라이드 상태에서의 추가 처리
                     }
-                }
+                })
 
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    // 슬라이드 상태에서의 추가 처리
-                }
-            })
+                // 콜백이 등록되었음을 기록
+                isBottomSheetCallbackRegistered = true
+            }
 
-            // 콜백이 등록되었음을 기록
-            isBottomSheetCallbackRegistered = true
+            // 바텀시트 상태를 바로 확장 상태로 설정
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
+    }
 
-        // 바텀시트 상태를 바로 확장 상태로 설정
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    private fun addPinImageToMap(latitude: Double?, longitude: Double?) {
+        if (latitude != null && longitude != null) {
+            pinMarker?.map = null
+
+            pinMarker = Marker().apply {
+                position = LatLng(latitude, longitude)
+                icon = OverlayImage.fromResource(R.drawable.spot)
+                width = Marker.SIZE_AUTO
+                height = Marker.SIZE_AUTO
+                map = naverMap
+            }
+        }
     }
 
     private fun navigateToBuildingDetailFragment() {
@@ -848,16 +882,49 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun getBuildingInfo(buildingId: Int): BuildingItem? {
+    private fun getBuildingInfo(buildingId: Int, callback: (BuildingItem?) -> Unit) {
         // BuildingCache에서 빌딩 정보를 가져옴
         val building = BuildingCache.get(buildingId)
 
         if (building != null) {
-            // 캐시에 빌딩 정보가 있는 경우 해당 정보를 반환
-            return building
+            // 캐시에 빌딩 정보가 있는 경우 해당 정보를 콜백으로 반환
+            callback(building)
         } else {
-            return null // 또는 예외 처리
+            // 캐시에 없으면 비동기적으로 PlaceInfoResponse를 받아와 처리
+            viewModel.fetchPlaceInfo(buildingId) { placeInfoResponse ->
+                if (placeInfoResponse != null) {
+                    // PlaceInfoResponse를 BuildingItem으로 변환
+                    val buildingItem = convertPlaceInfoToBuildingItem(placeInfoResponse)
+                    callback(buildingItem)
+                } else {
+                    // API 요청 실패 시 null 반환
+                    callback(null)
+                }
+            }
         }
+    }
+
+    // PlaceInfoResponse를 BuildingItem으로 변환하는 함수
+    private fun convertPlaceInfoToBuildingItem(placeInfoResponse: PlaceInfoResponse): BuildingItem {
+        return BuildingItem(
+            buildingId = placeInfoResponse.placeId,
+            name = placeInfoResponse.name,
+            imageUrl = placeInfoResponse.imageUrl ?: "",
+            detail = placeInfoResponse.detail,
+            address = null, // PlaceInfoResponse에 없는 값은 null로 처리
+            weekdayOperatingTime = placeInfoResponse.operatingTime,
+            saturdayOperatingTime = "", // 여기에 적절한 값을 넣어야 함
+            sundayOperatingTime = "", // 여기에 적절한 값을 넣어야 함
+            needStudentCard = false, // 필요한 경우에 설정
+            longitude = placeInfoResponse.longitude,
+            latitude = placeInfoResponse.latitude,
+            floor = placeInfoResponse.floor,
+            underFloor = 0, // 여기에 적절한 값을 넣어야 함
+            nextBuildingTime = placeInfoResponse.nextPlaceTime,
+            placeTypes = emptyList(), // 빈 리스트로 설정
+            operating = placeInfoResponse.operating,
+            isFromPlaceInfo = true // convertPlaceInfoToBuildingItem을 통해 생성된 경우 true
+        )
     }
 
     private fun updateMarkersVisibility(zoom: Double) {
