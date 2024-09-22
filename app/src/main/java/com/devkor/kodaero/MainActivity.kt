@@ -198,16 +198,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.fragment_community -> {
-                    if (currentFragment !is CommunityFragment) {
-                        supportFragmentManager.beginTransaction()
-                            .add(R.id.main_container, CommunityFragment(),"CommunityFragment")
-                            .addToBackStack("CommunityFragment")
-                            .commit()
-                        item.setIcon(R.drawable.community_button)
-                    }
-                    true
-                }
                 R.id.fragment_favorites -> {
                     if (currentFragment !is HomeFragment && currentFragment != null) {
                         // 백 스택에 HomeFragment가 있는지 확인
