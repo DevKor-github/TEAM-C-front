@@ -3,6 +3,7 @@ package com.devkor.kodaero
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,9 +75,13 @@ class MypageFragment : Fragment() {
             handleLogout()
         }
 
-        binding.guideButton.setOnClickListener{
-            // ImageSliderFragment로 이동
+        binding.guideButton.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.add(R.id.main_container, GuideImageSliderFragment())
+            transaction.addToBackStack(null)  // Optional: Adds the transaction to the back stack
+            transaction.commit()
         }
+
 
         binding.logoutNoButton.setOnClickListener {
             hideLogoutConfirmation()
