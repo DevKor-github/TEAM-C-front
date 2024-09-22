@@ -171,9 +171,9 @@ data class BuildingItem(
     val imageUrl: String,
     val detail: String,
     val address: String?,
-    val weekdayOperatingTime: String,
-    val saturdayOperatingTime: String,
-    val sundayOperatingTime: String,
+    val weekdayOperatingTime: String?,
+    val saturdayOperatingTime: String?,
+    val sundayOperatingTime: String?,
     val needStudentCard: Boolean,
     val longitude: Double?,
     val latitude: Double?,
@@ -181,7 +181,8 @@ data class BuildingItem(
     val underFloor: Int,
     val nextBuildingTime: String?,
     val placeTypes: List<String>,
-    val operating: Boolean
+    val operating: Boolean,
+    val isFromPlaceInfo: Boolean = false
 )
 
 data class BuildingDetailItem(
