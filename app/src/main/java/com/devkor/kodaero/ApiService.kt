@@ -134,6 +134,8 @@ interface ApiService {
     @GET("/api/koyeon")
     fun getKoyeonStatus(): Call<ApiResponse<KoyeonStatus>>
 
+    @GET("/api/koyeon/pubs/{pubId}")
+    fun getPubInfo(@Path("pubId") pubId: Int): Call<ApiResponse<PubDetail>>
 
 }
 
@@ -156,6 +158,17 @@ data class Pub(
     val latitude: Double
 )
 
+@Parcelize
+data class PubDetail(
+    val id: Int,
+    val name: String,
+    val sponsor: String?,
+    val longitude: Double,
+    val latitude: Double,
+    val address: String?,
+    val operatingTime: String?,
+    val menus: List<String>?
+) : Parcelable
 
 
 data class LoginRequest(

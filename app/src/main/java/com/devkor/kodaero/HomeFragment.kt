@@ -152,6 +152,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         setHorizontalScrollViewButtonListeners()
 
+
+        binding.locationBuuton.setOnClickListener {
+            val locationHelper = LocationHelper(requireActivity())
+
+            locationHelper.checkAndRequestLocationPermission(
+                onPermissionGranted = {
+                    locationHelper.checkGpsEnabledAndRequestLocation { lat, lng ->
+
+                    }
+                }
+            )
+        }
     }
 
     private fun initMapView() {
@@ -178,6 +190,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         // naverMap.uiSettings.isLocationButtonEnabled = true
         // naverMap.locationTrackingMode = LocationTrackingMode.Follow
         naverMap.uiSettings.isZoomControlEnabled = false
+
+        // LocationSource 설정
+        val locationSource = FusedLocationSource(this, 1)
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.NoFollow
 
         naverMap.addOnCameraChangeListener { reason, animated ->
             val currentZoom = naverMap.cameraPosition.zoom

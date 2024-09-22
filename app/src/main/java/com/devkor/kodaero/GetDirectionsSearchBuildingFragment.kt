@@ -61,40 +61,24 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
 
         binding.directionToolbar.visibility = View.VISIBLE
 
-
         binding.myLocation.setOnClickListener {
             locationHelper = LocationHelper(requireActivity())
-            // 위치 권한 확인 및 요청
+
             locationHelper.checkAndRequestLocationPermission(
                 onPermissionGranted = {
-                    // GPS 활성화 확인 및 위치 요청
-                    locationHelper.checkGpsEnabledAndRequestLocation(
-                        onLocationReceived = { lat, lng ->
-                            // 위치를 성공적으로 가져왔을 때 실행할 코드
-                            returnToGetDirectionsFragment(
-                                buildingName = "내 위치",
-                                placeType = "COORD",
-                                0,
-                                lat,
-                                lng
-                            )
-                        },
-                        onGpsNotEnabled = {
-                            // GPS가 활성화되지 않은 경우 실행할 코드
-                            locationHelper.promptEnableGps()
-                        },
-                        onFailure = {
-                            // 위치를 가져오는 데 실패한 경우 실행할 코드
-                            showShortToast(requireContext(), "위치를 가져오는 데 실패했습니다.")
-                        }
-                    )
-                },
-                onPermissionDenied = {
-                    // 권한이 거부된 경우 권한을 다시 요청
-                    locationHelper.requestLocationPermissionAgain()
+                    locationHelper.checkGpsEnabledAndRequestLocation { lat, lng ->
+                        returnToGetDirectionsFragment(
+                            buildingName = "내 위치",
+                            placeType = "COORD",
+                            id = 0,
+                            lat = lat,
+                            lng = lng
+                        )
+                    }
                 }
             )
         }
+
 
 
         val layoutManager = LinearLayoutManager(requireContext())

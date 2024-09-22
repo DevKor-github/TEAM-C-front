@@ -44,8 +44,19 @@
             android:id="@+id/map_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/location_buuton"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_location"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="35dp"
+            android:elevation="4dp"/>
     </FrameLayout>
 
     <include layout="@layout/modal_sheet_koyeon"
-        android:id="@+id/modal_sheet_koyeon"/>
+        android:id="@+id/modal_sheet_koyeon"
+        tools:visibility="gone"/>
 </RelativeLayout>

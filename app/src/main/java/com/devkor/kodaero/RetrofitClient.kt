@@ -6,7 +6,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "http://43.202.47.183/api/"
+    // 개발 서버
+    // private const val BASE_URL = "http://43.202.47.183/api/"
+
+    // 배포 서버
+    private const val BASE_URL = "http://3.36.90.27/api/"
+
 
     val instance: ApiService by lazy {
         // Logging Interceptor 설정

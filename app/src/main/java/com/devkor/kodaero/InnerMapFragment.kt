@@ -750,7 +750,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
             "WOMEN_HANDICAPPED_TOILET" -> R.drawable.pin_restroom_female_image
             "STAIR" -> R.drawable.pin_stair_image
             "ELEVATOR" -> R.drawable.pin_elevator_image
-            "ENTERANCE" -> R.drawable.pin_enterance_image
+            "ENTRANCE" -> R.drawable.pin_entrance_image
             else -> R.drawable.pin_cafe // 기본 핀 설정
         }
     }
@@ -907,7 +907,7 @@ class InnerMapFragment : Fragment(), CustomScrollView.OnFloorSelectedListener {
                     "MEN_HANDICAPPED_TOILET",
                     "WOMEN_HANDICAPPED_TOILET",
                     "STAIR",
-                    "ENTERANCE",
+                    "ENTRANCE",
                     "ELEVATOR")
 
                 restroomTypes.forEach { restroomType ->
