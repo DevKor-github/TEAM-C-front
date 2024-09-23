@@ -478,6 +478,20 @@ class GetDirectionsFragment : Fragment(), OnMapReadyCallback {
             displayDuration(it.duration)
             pendingRouteResponse = null
         }
+
+
+        binding.locationBuuton.visibility = View.VISIBLE
+        binding.locationBuuton.setOnClickListener {
+            val locationHelper = LocationHelper(requireActivity())
+
+            locationHelper.checkAndRequestLocationPermission(
+                onPermissionGranted = {
+                    locationHelper.checkGpsEnabledAndRequestLocation { lat, lng ->
+
+                    }
+                }
+            )
+        }
     }
 
     override fun onStart() {
