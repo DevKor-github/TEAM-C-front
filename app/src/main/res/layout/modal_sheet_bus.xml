@@ -1,0 +1,827 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/modal_sheet_bus">
+
+    <FrameLayout
+        android:id="@+id/standard_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@color/black"
+        android:backgroundTint="@color/white"
+        tools:layout_height="match_parent"
+        style="@style/Widget.Material3.BottomSheet">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <LinearLayout
+                android:id="@+id/bus_modal_info_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/modal_guideline2"
+                app:layout_constraintStart_toStartOf="@id/modal_guideline1"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                    android:id="@+id/drag_handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:clipChildren="false">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.07" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.08" />
+
+                    <ImageView
+                        android:id="@+id/modal_sheet_bus_icon"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/icon_bus"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/modal_guideline5"/>
+
+                    <TextView
+                        android:id="@+id/modal_sheet_building_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_bold"
+                        android:text="안암학사 차고"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toEndOf="@id/modal_guideline6"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:padding="3dp"
+                        android:id="@+id/modal_sheet_bookmarked_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/button_bookmarked_off"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/modal_sheet_operating_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="10dp">
+
+                    <TextView
+                        android:id="@+id/modal_sheet_next_arrive_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00"
+                        android:textSize="12dp"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:id="@+id/modal_sheet_next_arrive_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 도착 예정"
+                        android:textSize="12dp"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/pretendard_semibold"/>
+
+                    <TextView
+                        android:id="@+id/modal_sheet_next_next_arrive_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  -  다음 버스 "
+                        android:textSize="12dp"
+                        android:textColor="@color/map_sub"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                    <TextView
+                        android:id="@+id/modal_sheet_next_next_arrive_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:40"
+                        android:textSize="12dp"
+                        android:textColor="@color/map_sub"
+                        android:fontFamily="@font/pretendard_regular"/>
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:clipToPadding="false">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.48" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/modal_guideline4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.52" />
+
+                    <android.widget.Button
+                        android:id="@+id/modal_depart_button"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textSize="18dp"
+                        android:textColor="@color/red"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/rounded_rec_white"
+                        android:text="출발"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/modal_guideline3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.widget.Button
+
+                        android:id="@+id/modal_arrive_button"
+                        android:textAppearance="@style/PretendardTextStyle"
+                        android:textSize="18dp"
+                        android:textColor="@color/red"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/rounded_rec_white"
+                        android:text="도착"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/modal_guideline4"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/bus_modal_boundary"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#E4E4E4"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_info_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_boundary"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시간표 "
+                    android:textSize="14dp"
+                    android:textColor="@color/map_main"
+                    android:fontFamily="@font/pretendard_semibold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(출발지: "
+                    android:textSize="14dp"
+                    android:textColor="@color/map_main"
+                    android:fontFamily="@font/pretendard_regular"/>
+
+                <TextView
+                    android:id="@+id/bus_modal_stop_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="안암학사 차고"
+                    android:textSize="14dp"
+                    android:textColor="@color/map_main"
+                    android:fontFamily="@font/pretendard_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:textSize="14dp"
+                    android:textColor="@color/map_main"
+                    android:fontFamily="@font/pretendard_regular"/>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="출발시간"
+                android:textSize="11dp"
+                android:textColor="@color/bright_gray"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable_header"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_title"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="비고"
+                android:textSize="11dp"
+                android:textColor="@color/bright_gray"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable_header_2"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline7"
+                app:layout_constraintEnd_toEndOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_title"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/modal_guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_8_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="8:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_header"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_9_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="9:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_8_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_10_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="10:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_9_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_11_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="11:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_10_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_12_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="12:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_11_hour"/>
+            <TextView
+                android:id="@+id/bus_modal_timetable_13_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="13:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_12_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_14_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="14:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_13_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_15_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="15:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_14_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_16_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="16:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_15_hour"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_17_hour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:layout_marginStart="10dp"
+                android:text="17:"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                android:background="@drawable/bus_modal_timetable"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline8"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_16_hour"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_8_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_8_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_header"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_8_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_8_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_9_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_9_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_8_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_9_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_9_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_10_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_10_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_9_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_10_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_10_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_11_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_11_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_10_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_11_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_11_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_12_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_12_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_11_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_12_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_12_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_13_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_13_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_12_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_13_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_13_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_14_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_14_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_13_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_14_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_14_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_15_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_15_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_14_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_15_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_15_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_16_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_16_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_15_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_16_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_16_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_17_minute_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_17_hour"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline7"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_16_minute_layout"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_17_hour">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bus_modal_timetable_17_minute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_bus_modal_timetable_minute"
+                    android:nestedScrollingEnabled="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_8_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_8_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_header"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_9_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_9_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_9_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_8_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_10_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_10_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_10_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_9_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_11_minute_layout"/>
+
+            <TextView
+                android:id="@+id/bus_modal_timetable_11_12_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:text="점심시간"
+                android:textSize="11dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_regular"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_11_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_10_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_13_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_13_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_13_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_11_12_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_14_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_14_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_14_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_13_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_15_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_15_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_15_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_14_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_16_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_16_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_16_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_15_note"
+                app:layout_constraintBottom_toTopOf="@id/bus_modal_timetable_17_minute_layout"/>
+
+            <LinearLayout
+                android:id="@+id/bus_modal_timetable_17_note"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bus_modal_timetable_2"
+                app:layout_constraintStart_toEndOf="@id/bus_modal_timetable_17_minute_layout"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_16_note"
+                app:layout_constraintBottom_toBottomOf="@id/bus_modal_timetable_17_minute_layout"/>
+
+            <TextView
+                android:id="@+id/bus_modal_notification_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="10dp"
+                android:text="안내사항"
+                android:textSize="14dp"
+                android:textColor="@color/map_main"
+                android:fontFamily="@font/pretendard_semibold"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_timetable_17_hour"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bus_modal_notification"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="50dp"
+                app:layout_constraintStart_toEndOf="@id/modal_guideline1"
+                app:layout_constraintEnd_toStartOf="@id/modal_guideline2"
+                app:layout_constraintTop_toBottomOf="@id/bus_modal_notification_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

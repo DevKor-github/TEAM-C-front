@@ -1,0 +1,67 @@
+<!-- item_favorite.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@drawable/rounded_rec_white"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    android:elevation="2dp"
+    android:padding="5dp"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ImageView
+        android:id="@+id/selected_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/rounded_rect_category_selected"
+        android:layout_marginVertical="2dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:id="@+id/item_category">
+
+        <ImageView
+            android:id="@+id/restaurant_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon_restaurant"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="메뉴"
+            android:textSize="16sp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textColor="@color/red"/>
+
+
+        <!-- 빈 공간을 차지할 View -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:text="무료"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+
+</FrameLayout>

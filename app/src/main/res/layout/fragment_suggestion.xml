@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bright_gray"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/suggestion_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bright_gray"
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/suggestion_guideline9"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <ImageButton
+            android:id="@+id/back_to_mypage_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/grey_back_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/suggestion_guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="건의함"
+            android:textColor="#424242"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/suggestion_guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.075" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/suggestion_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/suggestion_guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/suggestion_guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/suggestion_guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.475" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/suggestion_guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.525" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/suggestion_guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.04" />
+
+            <ImageView
+                android:id="@+id/suggestion_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/suggestion_comment"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_guideline4" />
+
+            <TextView
+                android:id="@+id/suggestion_instar_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/suggestion_rounded_rec_red"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="공식 인스타그램"
+                android:textColor="@color/map_main"
+                android:textSize="11dp"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline5"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_comment" />
+
+            <TextView
+                android:id="@+id/suggestion_kakao_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/suggestion_rounded_rec_red"
+                android:elevation="4dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="카카오톡 채널"
+                android:textColor="@color/map_main"
+                android:textSize="11dp"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline6"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_comment" />
+
+            <TextView
+                android:id="@+id/suggestion_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="건의사항 종류"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_instar_button" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/suggestion_select_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/suggestion_rounded_rec_white"
+                android:elevation="4dp"
+                android:padding="8dp"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_type_text">
+
+                <TextView
+                    android:id="@+id/suggestion_select_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="건의사항 종류 선택"
+                    android:textColor="@color/map_main"
+                    android:textSize="14dp"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageView
+                    android:id="@+id/suggestion_select_type_arrow"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@drawable/button_show_operating_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
+                android:id="@+id/suggestion_select_type_scroll"
+                android:layout_width="0dp"
+                android:layout_height="142dp"
+                android:background="@drawable/suggestion_rounded_rec_white"
+                android:elevation="4dp"
+                android:nestedScrollingEnabled="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_select_type">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/suggestion_LOCATION_ERROR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="시설 위치 오류"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_INCORRECT_NAME"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="잘못된 시설 명"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_INCORRECT_OPERATION_HOURS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="잘못된 운영 시간"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_CLOSED_PLACE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="없거나 사라진 장소"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_INCORRECT_ROUTE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="잘못된 경로 안내"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_ADDITIONAL_INFORMATION"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="추가하고 싶은 정보"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_FUNCTIONAL_ERROR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="기능 오류"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_FEATURE_SUGGESTION"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="기능 추가 요청"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_INCONVENIENCE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="불편한 점"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_QUESTION"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="궁금한 점"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/suggestion_OTHER"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mypage_item_border"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:padding="8dp"
+                        android:text="기타"
+                        android:textColor="@color/map_main"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/suggestion_title_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/suggestion_rounded_rec_gray"
+                android:paddingVertical="10dp"
+                app:layout_constraintBottom_toTopOf="@id/suggestion_summit_button"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_select_type"
+                android:elevation="4dp"
+                android:translationZ="-1dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/suggestion_guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.03" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/suggestion_guideline8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.97" />
+
+                <EditText
+                    android:id="@+id/suggestion_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:hint="제목을 입력해 주세요"
+                    android:textColor="@color/map_main"
+                    android:textColorHint="@color/map_main"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toStartOf="@id/suggestion_guideline8"
+                    app:layout_constraintStart_toEndOf="@id/suggestion_guideline7"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/suggestion_line"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#E1E1E1"
+                    app:layout_constraintEnd_toStartOf="@id/suggestion_guideline8"
+                    app:layout_constraintStart_toEndOf="@id/suggestion_guideline7"
+                    app:layout_constraintTop_toBottomOf="@id/suggestion_title" />
+
+                <EditText
+                    android:id="@+id/suggestion_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="top"
+                    android:hint="내용을 입력해 주세요"
+                    android:nestedScrollingEnabled="true"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/map_main"
+                    android:textColorHint="#B0B0B0"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/suggestion_guideline8"
+                    app:layout_constraintStart_toEndOf="@id/suggestion_guideline7"
+                    app:layout_constraintTop_toBottomOf="@id/suggestion_line"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/suggestion_content_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="0"
+                    android:textColor="@color/map_sub"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/suggestion_content_total" />
+
+                <TextView
+                    android:id="@+id/suggestion_content_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:text="/500"
+                    android:textColor="@color/map_sub"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/suggestion_guideline8" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/suggestion_summit_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/rounded_rec_red"
+                android:fontFamily="@font/pretendard_semibold"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="작성하기"
+                android:textColor="@color/bright_gray"
+                android:textSize="16dp"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/suggestion_guideline2"
+                app:layout_constraintStart_toEndOf="@id/suggestion_guideline1"
+                app:layout_constraintTop_toBottomOf="@id/suggestion_title_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/suggestion_summit_black_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:alpha="0.5"
+        android:elevation="8dp"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/suggestion_summit_layout"
+        android:layout_width="300dp"
+        android:layout_height="215dp"
+        android:background="@drawable/rounded_rec_white"
+        android:elevation="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/suggestion_summit_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/suggestion_guideline11"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/suggestion_guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <TextView
+            android:id="@+id/suggestion_summit_exit_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="닫기"
+            android:textSize="16dp"
+            android:textColor="@color/red"
+            android:fontFamily="@font/pretendard_bold"
+            android:background="@drawable/rounded_rec_white"
+            android:elevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/suggestion_guideline11"
+            app:layout_constraintBottom_toTopOf="@id/suggestion_guideline14"
+            app:layout_constraintStart_toEndOf="@id/suggestion_guideline12"
+            app:layout_constraintEnd_toStartOf="@id/suggestion_guideline15"/>
+
+        <TextView
+            android:id="@+id/go_to_home_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="홈 화면으로"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_bold"
+            android:background="@drawable/rounded_rec_red"
+            android:elevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/suggestion_guideline11"
+            app:layout_constraintBottom_toTopOf="@id/suggestion_guideline14"
+            app:layout_constraintStart_toEndOf="@id/suggestion_guideline16"
+            app:layout_constraintEnd_toStartOf="@id/suggestion_guideline13"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

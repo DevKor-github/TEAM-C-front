@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true">
 
     <LinearLayout
@@ -43,16 +44,22 @@
             android:layout_height="match_parent">
 
             <HorizontalScrollView
+                android:id="@+id/facility_button_scroll_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:translationZ="1dp"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="29dp"/>
 
                     <ImageButton
                         android:id="@+id/cafe_button"
@@ -90,9 +97,9 @@
                         android:layout_marginEnd="5dp" />
 
                     <ImageButton
-                        android:id="@+id/rest_area_button"
-                        android:src="@drawable/button_rest_area"
-                        android:layout_width="83dp"
+                        android:id="@+id/lounge_button"
+                        android:src="@drawable/button_lounge"
+                        android:layout_width="70dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
@@ -119,7 +126,7 @@
 
                     <ImageButton
                         android:id="@+id/smoking_area_button"
-                        android:src="@drawable/button_smoking_area"
+                        android:src="@drawable/button_smoking_booth"
                         android:layout_width="80dp"
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
@@ -131,11 +138,22 @@
                         android:layout_height="29dp"
                         android:layout_marginEnd="5dp" />
 
+                    <ImageButton
+                        android:id="@+id/book_return_machine_button"
+                        android:src="@drawable/button_book_return_machine"
+                        android:layout_width="86dp"
+                        android:layout_height="29dp"
+                        android:layout_marginEnd="5dp" />
+                    <View
+                        android:layout_width="19dp"
+                        android:layout_height="29dp"/>
+
                 </LinearLayout>
 
             </HorizontalScrollView>
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/pin_onoff_button"
                 android:layout_marginTop="55dp"
                 android:layout_marginRight="20dp"
@@ -143,33 +161,137 @@
                 android:background="#00000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pin_off_button"/>
+                android:src="@drawable/pin_off_button"
+                android:translationZ="1dp"/>
+
+            <RelativeLayout
+                android:id="@+id/get_directions_guide_layout"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:elevation="2dp"
+                android:background="@drawable/rounded_rec_white"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/get_directions_route_guide_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_number"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textSize="10dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:background="@drawable/red_circle"/>
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_inout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="실내"
+                            android:textSize="12dp"
+                            android:textColor="@color/dark_gray"
+                            android:fontFamily="@font/pretendard_regular"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" 경로 안내"
+                            android:textSize="12dp"
+                            android:textColor="@color/dark_gray"
+                            android:fontFamily="@font/pretendard_regular"/>
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_below="@id/get_directions_route_guide_layout"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/get_directions_guide_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2층으로 이동하세요."
+                            android:textSize="18dp"
+                            android:textColor="@color/map_main"
+                            android:fontFamily="@font/pretendard_semibold"/>
+
+                    </HorizontalScrollView>
+
+                </RelativeLayout>
+
+                <ImageButton
+                    android:id="@+id/to_next_guide_button"
+                    android:src="@drawable/move_inside_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:elevation="8dp"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
 
             <include
                 layout="@layout/inner_maps"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:id="@+id/includedMap"/>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/frame_width"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="bottom|start">
+                android:gravity="bottom|start"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp">
 
                 <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="@dimen/frame_width"
+                    android:id="@+id/customScrollViewLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_container_background"
-                    android:clipToOutline="true"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="30dp">
+                    android:background="@drawable/rounded_rec_custom_scroll"
+                    android:clipToOutline="true">
 
-                    <com.example.deckor_teamc_front.CustomScrollView
+                    <com.devkor.kodaero.CustomScrollView
                         android:id="@+id/customScrollView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"/>
+
+                    <com.devkor.kodaero.GradientBlurView
+                        android:id="@+id/customScrollTopBlur"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        app:hasTopBlur="true"
+                        app:hasBottomBlur="false"/>
+
+                    <com.devkor.kodaero.GradientBlurView
+                        android:id="@+id/customScrollBottomBlur"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        app:hasTopBlur="false"
+                        app:hasBottomBlur="true"
+                        android:layout_marginTop="0dp"/>
+
                 </FrameLayout>
 
             </LinearLayout>
@@ -177,7 +299,11 @@
 
             <include
                 layout="@layout/modal_sheet"
-                android:id="@+id/includedModal" />
+                android:id="@+id/includedModal"
+                tools:visibility="gone"/>
+            <include layout="@layout/modal_sheet_bookmark"
+                android:id="@+id/bookmark_modal"
+                tools:visibility="visible"/>
             </FrameLayout>
     </LinearLayout>
 </layout>

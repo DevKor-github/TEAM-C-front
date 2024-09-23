@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="scroll_view_max_height">200dp</dimen>
     <dimen name="item_height">50dp</dimen>
     <dimen name="frame_width">50dp</dimen>
     <dimen name="frame_radius">100dp</dimen>

@@ -1,4 +1,5 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +12,8 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:background="@color/black"
-        android:layout_marginTop="80dp"
         android:backgroundTint="@color/white"
+        tools:layout_height="match_parent"
         style="@style/Widget.Material3.BottomSheet">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,34 +48,43 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:clipChildren="false">
 
                     <TextView
                         android:id="@+id/modal_sheet_building_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/pretendard_bold"
                         android:text="@string/building_name"
-                        android:textAppearance="@style/PretendardTextStyle"
-                        android:textColor="@color/map_main"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
+                        android:padding="5dp"
                         android:id="@+id/modal_sheet_bookmarked_button"
-                        android:src="@drawable/button_bookmarked_off"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
+                        android:src="@drawable/button_bookmarked_off"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:id="@+id/modal_sheet_building_address"
@@ -91,9 +101,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
+                    android:id="@+id/modal_sheet_operating_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp">
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="10dp">
 
                     <TextView
                         android:id="@+id/modal_sheet_operating_status"
@@ -115,6 +127,7 @@
                         android:fontFamily="@font/pretendard_regular"/>
 
                     <TextView
+                        android:id="@+id/modal_sheet_deadline_cont"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="3dp"
@@ -129,7 +142,9 @@
                     android:id="@+id/modal_sheet_facility_types"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingHorizontal="10dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_building_detail_types"/>
@@ -138,7 +153,9 @@
                     android:id="@+id/innermap_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="5dp"
                     android:clipToPadding="false">
 
                     <android.widget.Button
@@ -146,8 +163,9 @@
                         android:id="@+id/modal_innermap_button"
                         android:textAppearance="@style/PretendardTextStyle"
                         android:textColor="@color/white"
+                        android:textSize="16dp"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/rounded_rec_red"
                         android:text="건물 내부 지도 보기"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +180,9 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="10dp"
                     android:clipToPadding="false">
 
 
@@ -171,22 +191,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.45" />
+                        app:layout_constraintGuide_percent="0.48" />
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/modal_guideline4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.55" />
+                        app:layout_constraintGuide_percent="0.52" />
 
 
                     <android.widget.Button
 
                         android:id="@+id/modal_depart_button"
                         android:textAppearance="@style/PretendardTextStyle"
+                        android:textSize="18dp"
                         android:textColor="@color/red"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/rounded_rec_white"
                         android:text="출발"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -199,9 +220,10 @@
 
                         android:id="@+id/modal_arrive_button"
                         android:textAppearance="@style/PretendardTextStyle"
+                        android:textSize="18dp"
                         android:textColor="@color/red"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/rounded_rec_white"
                         android:text="도착"
                         app:layout_constraintBottom_toBottomOf="parent"

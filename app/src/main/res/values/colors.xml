@@ -6,7 +6,29 @@
     <color name="gray">#FFB0B0B0</color>
     <color name="dark_gray">#FF424242</color>
     <color name="red">#FFF85C5C</color>
-    <color name="map_main">#FF333333</color>
+    <color name="layout_border">#EFEFEF</color>
+    <color name="map_main">#FF424242</color>
     <color name="map_sub">#FFB0B0B0</color>
-
+    <color name="neon_red">#FF8A80</color>
+    <color name="pastel_pink">#FFB2B2</color>
+    <color name="background">#F5F5F5</color>
+    <color name="cafe">#FF8A3A</color>
+    <color name="cafeteria">#FF8A3A</color>
+    <color name="convenience_store">#FF8A3A</color>
+    <color name="reading_room">#61BE41</color>
+    <color name="study_room">#61BE41</color>
+    <color name="book_return_machine">#61BE41</color>
+    <color name="lounge">#FF715E</color>
+    <color name="bank">#FF715E</color>
+    <color name="water_purifier">#41A4F7</color>
+    <color name="printer">#41A4F7</color>
+    <color name="vending_machine">#41A4F7</color>
+    <color name="tumbler_washer">#41A4F7</color>
+    <color name="onestop_auto_machine">#41A4F7</color>
+    <color name="smoking_booth">#6C788F</color>
+    <color name="sleeping_room">#BA9B85</color>
+    <color name="shower_room">#BA9B85</color>
+    <color name="gym">#BA9B85</color>
+    <color name="shuttle_bus">#FF715E</color>
+    <color name="shuttle_bus_path">#FFABAB</color>
 </resources>

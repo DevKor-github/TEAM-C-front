@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_margin="30dp"
+    android:background="@drawable/rounded_rec_white_dialog">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="개발자 인증"
+        android:textSize="20sp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textColor="@color/dark_gray"/>
+
+    <!-- 이름 입력 필드 -->
+    <LinearLayout
+        android:id="@+id/touch_area"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:background="@drawable/rounded_rec_gray_edit_text">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            android:gravity="center"
+            app:hintEnabled="false"
+            style="@style/Widget.Design.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/dark_gray"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:gravity="center"
+                android:textColorHint="@color/gray"
+                android:hint="암호를 입력하세요"
+                android:singleLine="true"
+                android:textAlignment="center"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <android.widget.Button
+        android:id="@+id/confirm_button"
+        android:textAppearance="@style/PretendardTextStyle"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_rec_red"
+        android:text="확인"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+</LinearLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="B2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.69 867.01">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 3px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke: #f48589;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #facbcf;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #fef2f2;
+      }
+
+      .cls-5 {
+        font-size: 5.8px;
+      }
+
+      .cls-5, .cls-6, .cls-7 {
+        fill: #231f20;
+        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+      }
+
+      .cls-6 {
+        font-size: 8.37px;
+      }
+
+      .cls-7 {
+        font-size: 12px;
+      }
+
+      .cls-4 {
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_x5F_border">
+    <polygon class="cls-4" points="239.65 169.45 239.02 355.65 140.36 355.65 140.36 658.13 1221.87 658.13 1221.87 360.82 1230.01 360.82 1230.01 169.45 1054.7 169.45 1054.7 353.82 1003.68 353.82 1003.68 501.91 943.99 501.91 943.99 355.51 422.46 355.51 422.46 173.45 239.65 169.45"/>
+  </g>
+  <g id="Layer_324">
+    <polygon class="cls-2" points="205.93 659.33 889.17 659.33 889.17 500.29 381.69 500.29 381.69 396.04 205.93 396.04 205.93 659.33"/>
+    <text class="cls-7" transform="translate(530.49 570.29)"><tspan x="0" y="0">기계실</tspan></text>
+  </g>
+  <g id="Layer_x5F_others">
+    <rect class="cls-2" x="140.36" y="498.92" width="46.21" height="41.82"/>
+    <rect class="cls-2" x="186.57" y="498.92" width="19.35" height="41.82"/>
+    <rect class="cls-2" x="140.36" y="540.75" width="65.57" height="41.52"/>
+    <rect class="cls-2" x="140.36" y="582.27" width="65.57" height="77.06"/>
+    <rect class="cls-2" x="263.95" y="215.15" width="20.14" height="36.79"/>
+    <rect class="cls-2" x="303.8" y="251.94" width="43.48" height="43.48"/>
+    <rect class="cls-2" x="347.28" y="306.08" width="31.59" height="31.59"/>
+    <rect class="cls-2" x="1087.01" y="251.61" width="31.17" height="43.14"/>
+    <rect class="cls-2" x="1087.01" y="294.75" width="31.17" height="34.19"/>
+    <rect class="cls-2" x="1087.01" y="328.94" width="31.17" height="25.43"/>
+    <polyline class="cls-1" points="239.02 355.65 263.95 355.65 263.95 295.42"/>
+    <polyline class="cls-1" points="1057.38 216.96 1202.58 216.96 1202.58 251.61"/>
+    <g>
+      <rect class="cls-3" x="283.88" y="215.15" width="8.76" height="36.79"/>
+      <rect class="cls-3" x="292.64" y="215.15" width="9.11" height="36.79"/>
+      <rect class="cls-3" x="301.75" y="215.15" width="10.52" height="36.79"/>
+      <rect class="cls-3" x="312.27" y="215.15" width="8.41" height="36.79"/>
+      <rect class="cls-3" x="320.68" y="215.15" width="10.52" height="36.79"/>
+      <rect class="cls-3" x="331.2" y="215.15" width="7.54" height="36.79"/>
+      <rect class="cls-3" x="338.73" y="215.15" width="11.39" height="36.79"/>
+      <rect class="cls-3" x="350.12" y="215.15" width="10.52" height="36.79"/>
+      <rect class="cls-3" x="360.64" y="215.15" width="9.11" height="36.79"/>
+      <rect class="cls-3" x="369.75" y="215.15" width="9.11" height="36.79"/>
+    </g>
+    <g>
+      <rect class="cls-3" x="716.86" y="500.29" width="5.21" height="17.7"/>
+      <rect class="cls-3" x="722.08" y="500.29" width="5.42" height="17.7"/>
+      <rect class="cls-3" x="727.5" y="500.29" width="6.26" height="17.7"/>
+      <rect class="cls-3" x="733.76" y="500.29" width="5.01" height="17.7"/>
+      <rect class="cls-3" x="738.76" y="500.29" width="6.26" height="17.7"/>
+      <rect class="cls-3" x="745.02" y="500.29" width="4.48" height="17.7"/>
+      <rect class="cls-3" x="749.51" y="500.29" width="6.78" height="17.7"/>
+      <rect class="cls-3" x="756.29" y="500.29" width="6.26" height="17.7"/>
+      <rect class="cls-3" x="762.54" y="500.29" width="5.42" height="17.7"/>
+      <rect class="cls-3" x="767.97" y="500.29" width="5.42" height="17.7"/>
+    </g>
+    <g>
+      <rect class="cls-1" x="1003.68" y="501.91" width="7.44" height="17.6"/>
+      <rect class="cls-1" x="1011.13" y="501.91" width="7.74" height="17.6"/>
+      <rect class="cls-1" x="1018.87" y="501.91" width="8.93" height="17.6"/>
+      <rect class="cls-1" x="1027.8" y="501.91" width="7.15" height="17.6"/>
+      <rect class="cls-1" x="1034.95" y="501.91" width="8.93" height="17.6"/>
+      <rect class="cls-1" x="1043.88" y="501.91" width="6.4" height="17.6"/>
+      <rect class="cls-1" x="1050.29" y="501.91" width="9.68" height="17.6"/>
+      <rect class="cls-1" x="1059.96" y="501.91" width="8.93" height="17.6"/>
+      <rect class="cls-1" x="1068.9" y="501.91" width="7.74" height="17.6"/>
+      <rect class="cls-1" x="1076.64" y="501.91" width="7.74" height="17.6"/>
+    </g>
+    <g>
+      <rect class="cls-1" x="1087.01" y="216.96" width="8.77" height="34.65"/>
+      <rect class="cls-1" x="1095.78" y="216.96" width="9.12" height="34.65"/>
+      <rect class="cls-1" x="1104.9" y="216.96" width="10.53" height="34.65"/>
+      <rect class="cls-1" x="1115.43" y="216.96" width="8.42" height="34.65"/>
+      <rect class="cls-1" x="1123.85" y="216.96" width="10.53" height="34.65"/>
+      <rect class="cls-1" x="1134.38" y="216.96" width="7.55" height="34.65"/>
+      <rect class="cls-1" x="1141.93" y="216.96" width="11.41" height="34.65"/>
+      <rect class="cls-1" x="1153.33" y="216.96" width="10.53" height="34.65"/>
+      <rect class="cls-1" x="1163.86" y="216.96" width="9.12" height="34.65"/>
+      <rect class="cls-1" x="1172.99" y="216.96" width="9.12" height="34.65"/>
+    </g>
+    <line class="cls-1" x1="378.87" y1="215.15" x2="422.46" y2="215.15"/>
+    <polygon class="cls-1" points="347.28 295.42 347.28 337.67 378.87 337.67 378.87 355.65 337.47 355.65 337.47 295.42 347.28 295.42"/>
+  </g>
+  <g id="Layer_338">
+    <polygon class="cls-2" points="1202.58 360.82 1138.85 360.82 1138.85 319.27 1165.78 319.27 1165.78 251.61 1202.58 251.61 1202.58 360.82"/>
+    <text class="cls-7" transform="translate(1159.34 341.65)"><tspan x="0" y="0">창고</tspan></text>
+  </g>
+  <g id="Layer_323">
+    <rect class="cls-2" x="140.36" y="355.65" width="65.57" height="143.27"/>
+    <text class="cls-7" transform="translate(150.39 430.27)"><tspan x="0" y="0">발전기실</tspan></text>
+  </g>
+  <g id="Layer_325">
+    <polygon class="cls-2" points="420.23 448.86 420.23 500.29 492.32 500.29 492.32 396.04 456.27 396.04 456.27 448.86 420.23 448.86"/>
+    <text class="cls-7" transform="translate(439.21 468.15)"><tspan x="0" y="0">감시실</tspan></text>
+  </g>
+  <g id="Layer_326">
+    <polygon class="cls-2" points="468.69 355.65 468.69 396.04 492.32 396.04 492.32 500.29 733.22 500.29 733.22 355.65 468.69 355.65"/>
+    <text class="cls-7" transform="translate(583.89 430.95)"><tspan x="0" y="0">전기실</tspan></text>
+  </g>
+  <g id="Layer_327">
+    <rect class="cls-2" x="420.23" y="415.85" width="19.81" height="33.01"/>
+    <text class="cls-6" transform="translate(426.64 424.99) scale(1.08 1)"><tspan x="0" y="0">샤</tspan><tspan x="0" y="10.04">워</tspan><tspan x="0" y="20.08">실</tspan></text>
+  </g>
+  <g id="Layer_328">
+    <rect class="cls-1" x="420.23" y="396.04" width="19.81" height="19.81"/>
+  </g>
+  <g id="Layer_329">
+    <rect class="cls-2" x="290.92" y="295.42" width="46.55" height="60.24"/>
+    <text class="cls-7" transform="translate(291.44 321.32)"><tspan x="0" y="0">용역원실</tspan><tspan x="12.13" y="14.4">(남)</tspan></text>
+  </g>
+  <g id="Layer_330">
+    <rect class="cls-2" x="263.95" y="251.94" width="39.84" height="43.48"/>
+  </g>
+  <g id="Layer_331">
+    <polygon class="cls-2" points="943.99 501.91 1003.68 501.91 1003.68 519.51 1084.38 519.51 1084.38 500.29 1165.75 500.29 1165.75 658.13 943.99 658.13 943.99 501.91"/>
+    <text class="cls-7" transform="translate(1024.94 582.19)"><tspan x="0" y="0">기계실 상부</tspan></text>
+  </g>
+  <g id="Layer_332">
+    <rect class="cls-1" x="1003.68" y="477.68" width="25.51" height="24.22"/>
+  </g>
+  <g id="Layer_333">
+    <rect class="cls-2" x="1042.11" y="477.68" width="12.58" height="24.22"/>
+    <text class="cls-5" transform="translate(1045.56 484.61) scale(1.03 1)"><tspan x="0" y="0">샤</tspan><tspan x="0" y="6.96">워</tspan><tspan x="0" y="13.92">실</tspan></text>
+  </g>
+  <g id="Layer_334">
+    <rect class="cls-2" x="1003.68" y="429.78" width="51.01" height="47.91"/>
+    <text class="cls-7" transform="translate(1006.44 449.51)"><tspan x="0" y="0">용역원실</tspan><tspan x="12.13" y="14.4">(여)</tspan></text>
+  </g>
+  <g id="Layer_335">
+    <rect class="cls-2" x="1003.68" y="353.82" width="51.01" height="75.96"/>
+  </g>
+  <g id="Layer_336">
+    <polygon class="cls-2" points="1138.85 360.82 1221.87 360.82 1221.87 658.13 1165.75 658.13 1165.75 500.29 1084.38 500.29 1084.38 380.03 1138.85 380.47 1138.85 360.82"/>
+    <text class="cls-7" transform="translate(1124.68 453.73)"><tspan x="0" y="0">폐수처리장</tspan></text>
+  </g>
+</svg>

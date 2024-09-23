@@ -9,10 +9,6 @@
         android:title=""
         android:icon="@drawable/disabled_bus_button"/>
     <item
-        android:id="@+id/fragment_community"
-        android:title=""
-        android:icon="@drawable/disabled_community_button"/>
-    <item
         android:id="@+id/fragment_favorites"
         android:title=""
         android:icon="@drawable/disabled_favorites_button"/>

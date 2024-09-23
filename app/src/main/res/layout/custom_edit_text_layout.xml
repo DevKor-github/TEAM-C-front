@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/rounded_rec_white"
     android:padding="0dp"
-    android:elevation="10dp"
+    android:elevation="2dp"
     android:gravity="center_vertical">
 
 
@@ -34,22 +34,30 @@
             flexbox:justifyContent="flex_start"
             flexbox:alignItems="center"/>
 
-        <EditText
+        <com.devkor.kodaero.CustomEditTextWithHint
             android:id="@+id/edit_text"
             android:layout_width="0dp"
             android:layout_height="54dp"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:hint="학교 건물을 검색해 주세요"
+            android:hint="학교 건물을 검색해주세요"
             android:textSize="15dp"
             android:elevation="0dp"
-            android:background="@android:color/transparent"/>
+            android:background="@drawable/rounded_rec_white"
+            android:singleLine="true"
+            android:textColor="@color/map_main"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColorHint="@color/gray"
+            android:gravity="center_vertical"
+        />
+
 
         <ImageButton
             android:id="@+id/clear_button"
             android:src="@drawable/delete_text_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="15dp"
             android:background="@android:color/transparent"
             android:visibility="gone"/>
