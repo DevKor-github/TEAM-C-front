@@ -281,7 +281,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
             Log.e("feafweff","$isKoyeon")
             if (isKoyeon == true) {
-                binding.koyeonButton.visibility = View.VISIBLE
+                // binding.koyeonButton.visibility = View.VISIBLE
             } else {
                 binding.koyeonButton.visibility = View.GONE
             }

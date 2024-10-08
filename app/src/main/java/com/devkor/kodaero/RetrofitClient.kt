@@ -10,7 +10,7 @@ object RetrofitClient {
     // private const val BASE_URL = "http://43.202.47.183/api/"
 
     // 배포 서버
-    private const val BASE_URL = "http://3.36.90.27/api/"
+    private const val BASE_URL = "http://be.kodaero.site/api/"
 
 
     val instance: ApiService by lazy {
