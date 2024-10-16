@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.devkor.kodaero.debug",
+  "applicationId": "com.ku.kodaero.debug",
   "variantName": "debug",
   "elements": [
     {

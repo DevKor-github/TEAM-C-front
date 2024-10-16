@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <g id="Layer_x5F_border">
+    <g>
+      <polygon points="769.4 673.06 793.21 606.06 737.02 606.06 737.02 589.06 686.02 589.06 686.02 570.06 635.02 570.06 635.02 552.06 584.02 552.06 584.02 534.06 533.02 534.06 533.02 514.15 527.95 512.37 538.4 482.66 511.61 473.23 535.42 405.56 562.21 414.99 563.42 411.56 831.95 506.06 843.02 506.06 843.02 513.06 905.02 513.06 905.02 509.06 1407.02 509.06 1407.02 658.06 900.02 658.06 900.02 646.06 892.02 646.06 892.02 673.06 769.4 673.06" fill="#fff"/>
+      <path d="M538.48,411.94l26.79,9.43,1.21-3.43,264.62,93.12h6.92v6.93l.19.07h71.81v-4h492v139h-497v-12h-18v27h-110.53l23.23-65.36-4.67-1.64h-53.03v-17h-51v-19h-51v-18h-51v-18h-51v-18.45l-3.69-1.3,10.45-29.71-26.79-9.43,20.49-58.24M532.36,399.19l-3.32,9.43-20.49,58.24-3.32,9.43,9.43,3.32,17.36,6.11-7.13,20.28-3.32,9.43,6.44,2.27v21.36h51v18h51v18h51v19h51v17h54.11l-19.07,53.65-4.74,13.35h134.7v-15h515v-159h-512v4h-52v-7h-15.21l-263.01-92.55-9.43-3.32-1.21,3.43-17.36-6.11-9.43-3.32h0Z" fill="#e18686"/>
+    </g>
+  </g>
+  <g id="Layer_x5F_others">
+    <g>
+      <g>
+        <rect x="528.39" y="415.99" width="28.49" height="60.13" transform="translate(185.79 -158.99) rotate(20.05)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <rect x="528" y="432.81" width="27.9" height="28.54" transform="translate(186.1 -158.69) rotate(20.05)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="548.05" y1="432.85" x2="538.05" y2="459.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="557.05" y1="444.85" x2="531.37" y2="435.72" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="555.05" y1="451.85" x2="529.37" y2="442.72" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="553.05" y1="458.85" x2="527.37" y2="449.72" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+      <rect x="829.05" y="641.85" width="57" height="25" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <g>
+        <polygon points="798.01 603.85 777.05 661.68 777.05 666.85 829.05 666.85 829.05 603.85 798.01 603.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <g>
+          <rect x="785.92" y="627.99" width="15.82" height="21.19" transform="translate(267.01 -233.44) rotate(20.05)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+          <line x1="801.05" y1="637.85" x2="788.45" y2="633.32" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+          <line x1="800.05" y1="644.85" x2="786.05" y2="639.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        </g>
+        <g>
+          <rect x="813.62" y="631.4" width="14.71" height="20.73" transform="translate(-4.64 5.98) rotate(-.42)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+          <line x1="827.03" y1="638.62" x2="814.59" y2="638.78" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+          <line x1="828.43" y1="645.38" x2="814.61" y2="645.58" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        </g>
+        <rect x="798.56" y="652.35" width="14.95" height="14.68" transform="translate(-4.7 5.79) rotate(-.41)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="805.76" y1="652.24" x2="805.96" y2="666.06" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="813.05" y1="631.35" x2="805.05" y2="631.35" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+      <g>
+        <rect x="1319.05" y="595.85" width="30" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <rect x="1319.05" y="611.85" width="30" height="29" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="1334.05" y1="611.85" x2="1334.05" y2="640.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="1319.05" y1="619.85" x2="1349.05" y2="619.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="1319.05" y1="626.85" x2="1349.05" y2="626.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+        <line x1="1319.05" y1="633.85" x2="1349.05" y2="633.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+      <polygon points="818.96 532.85 818.02 532.85 806.05 566.58 806.05 569.85 833.05 569.85 833.05 538.19 818.96 532.85" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+    </g>
+  </g>
+  <g id="Layer_x5F_toilet4">
+    <rect x="1379.5" y="595.5" width="21" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_toilet3">
+    <rect x="1348.5" y="595.5" width="31" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_toilet2">
+    <rect x="954.5" y="595.5" width="38" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_toilet1">
+    <rect x="906.5" y="595.5" width="48" height="56" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_lounge">
+    <rect x="575.61" y="439.78" width="95.25" height="64.46" transform="translate(193.39 -181.02) rotate(19.51)" fill="none" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+  </g>
+  <g id="Layer_x5F_313">
+    <g>
+      <rect x="662.28" y="483.72" width="25.9" height="39.85" transform="translate(206.93 -196.56) rotate(19.51)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(669.56 505.35)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="0" y="0" letter-spacing="-.01em">3</tspan><tspan x="4.27" y="0">13</tspan></text>
+    </g>
+  </g>
+  <g id="Layer312A">
+    <g>
+      <rect x="672.76" y="460.94" width="25.9" height="25.58" transform="translate(197.55 -201.78) rotate(19.51)" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(677.73 475.35)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="0" y="0" letter-spacing="-.01em">3</tspan><tspan x="4.27" y="0">12A</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_312">
+    <g>
+      <polygon points="836.5 515.5 836.5 511.5 833.24 511.5 829.44 511.5 826.18 510.34 826.2 510.29 702.05 466.31 680.63 526.77 804.78 570.75 818.37 532.39 822.56 533.87 822.56 533.87 832.56 537.42 832.56 569.6 909.5 569.6 909.5 515.5 836.5 515.5" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(733.68 523.04)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="18"><tspan x="0" y="0" letter-spacing="0em">3</tspan><tspan x="12.82" y="0">12</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_311A">
+    <g>
+      <rect x="993.5" y="513.5" width="31" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(998.85 543.72)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="8"><tspan x="0" y="0" letter-spacing="-.01em">3</tspan><tspan x="5.7" y="0">11A</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_311">
+    <g>
+      <rect x="909.66" y="513.5" width="84" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(937.74 546.44)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0" letter-spacing="0em">3</tspan><tspan x="11.39" y="0" letter-spacing="0em">11</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_310">
+    <g>
+      <rect x="1024.96" y="513.5" width="49" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1037.63 544.92)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0" letter-spacing="-.01em">3</tspan><tspan x="8.54" y="0">10</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_309">
+    <g>
+      <rect x="1073.55" y="513.5" width="81" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1096.54 546.44)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">309</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_308">
+    <g>
+      <rect x="1154.86" y="513.5" width="81" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1177.7 546.44)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">308</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_307">
+    <g>
+      <rect x="1235.55" y="513.5" width="61" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1249.26 546.44)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">307</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_306">
+    <g>
+      <rect x="1296.61" y="513.5" width="21" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1300.54 543.12)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="0" y="0">306</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_305">
+    <g>
+      <rect x="1317.86" y="513.5" width="83" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1342.02 546.44)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="16"><tspan x="0" y="0">305</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_304">
+    <g>
+      <rect x="1286.71" y="595.5" width="32" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1291.79 626.32)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="10"><tspan x="0" y="0">304</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_303">
+    <g>
+      <rect x="1236.41" y="595.5" width="50" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1248.27 626.92)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="12"><tspan x="0" y="0">303</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_302">
+    <g>
+      <rect x="1214.66" y="595.5" width="22" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1219.15 625.12)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="6"><tspan x="0" y="0">302</tspan></text>
+    </g>
+  </g>
+  <g id="Layer_x5F_301">
+    <g>
+      <rect x="992.5" y="595.5" width="222" height="56" fill="#f8cdce" stroke="#e18686" stroke-miterlimit="10" stroke-width="3"/>
+      <text transform="translate(1079.72 631.02)" font-family="NanumSquareNeo-eHv-KSCpc-EUC-H, &apos;NanumSquare Neo OTF&apos;" font-size="24"><tspan x="0" y="0">301</tspan></text>
+    </g>
+  </g>
+</svg>

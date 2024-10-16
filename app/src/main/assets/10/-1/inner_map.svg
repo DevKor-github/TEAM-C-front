@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1287.29 919.13">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1287.3 919.1">
   <defs>
     <style>
       .cls-1 {
         fill: #fed0d0;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 3px;
       }
 
       .cls-1, .cls-2, .cls-3 {
@@ -11,174 +15,173 @@
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-3 {
-        stroke-width: 3px;
-      }
-
-      .cls-4 {
-        font-size: 10.21px;
-      }
-
-      .cls-4, .cls-5, .cls-6 {
-        fill: #000;
-      }
-
-      .cls-4, .cls-6 {
-        font-family: NanumSquareOTFEB-KSCpc-EUC-H, NanumSquareOTF;
-      }
-
       .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
         fill: #fef3f2;
         stroke-width: 10px;
       }
 
-      .cls-5 {
-        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
+      .cls-4 {
+        font-size: 10.2px;
+      }
+
+      .cls-4, .cls-5 {
+        font-family: NanumSquareOTFEB-KSCpc-EUC-H, NanumSquareOTF;
       }
 
       .cls-5, .cls-6 {
-        font-size: 14.58px;
+        font-size: 14.6px;
       }
 
-      .cls-3 {
-        fill: none;
+      .cls-7 {
+        fill: #ccbaba;
+      }
+
+      .cls-6 {
+        font-family: NanumSquareNeoTTF-dEb, 'NanumSquare Neo';
       }
     </style>
   </defs>
-  <g id="Layer_border">
-    <path class="cls-2" d="M783.92,554.5l-.63-42.5h77l-.48-191.32h-.26c4.19-50.86-44.31-88.38-53.97-95.86-13.04-10.09-55.62-39.81-118.12-37.71-56.83,1.91-93.51,28.89-103.54,36.5-8.43,6.39-59.81,45.37-55.43,97.08h-.68l.49,191.32h85v43l-200-.5v-267.64h-81.67v267.64l-45.33-.38.12-322.01h-37.92v-37.71h-100.62v37.71h-49.58v549.75s188.12.13,188.12.13h895.41v-227.5h-397.9Z"/>
-  </g>
-  <g id="Layer_2" data-name="Layer 2">
-    <rect class="cls-1" x="530.95" y="700.26" width="54.69" height="81.9"/>
-    <text class="cls-5" transform="translate(533.03 745.56)"><tspan x="0" y="0">B103A</tspan></text>
-  </g>
-  <g id="Layer_3" data-name="Layer 3">
-    <rect class="cls-1" x="371.01" y="700.26" width="159.94" height="81.9"/>
-    <text class="cls-5" transform="translate(423.61 747.81)"><tspan x="0" y="0">B102B</tspan></text>
-  </g>
-  <g id="Layer_8" data-name="Layer 8">
-    <rect class="cls-1" x="318.23" y="700.26" width="52.78" height="81.9"/>
-    <text class="cls-5" transform="translate(319.03 747.47)"><tspan x="0" y="0">B102A</tspan></text>
-  </g>
-  <g id="Layer_9" data-name="Layer 9">
-    <polygon class="cls-1" points="98.29 556.04 207.84 556.04 207.84 700.26 318.23 700.26 318.23 782.16 98.29 782.16 98.29 556.04"/>
-    <text class="cls-5" transform="translate(141.99 722.87)"><tspan x="0" y="0">B101</tspan></text>
-  </g>
-  <g id="Layer_6" data-name="Layer 6">
-    <rect class="cls-1" x="586.1" y="700.81" width="53.96" height="81.67"/>
-    <text class="cls-5" transform="translate(587.44 747.3)"><tspan x="0" y="0">B103B</tspan></text>
-  </g>
-  <g id="Layer_7" data-name="Layer 7">
-    <rect class="cls-1" x="640.06" y="700.81" width="212.91" height="81.67"/>
-    <text class="cls-5" transform="translate(735.48 745)"><tspan x="0" y="0">B104</tspan></text>
-  </g>
-  <g id="Layer_10" data-name="Layer 10">
-    <rect class="cls-1" x="852.97" y="700.81" width="110.83" height="81.67"/>
-    <text class="cls-5" transform="translate(886.98 745.7)"><tspan x="0" y="0">B105</tspan></text>
-  </g>
-  <g id="Layer_11" data-name="Layer 11">
-    <rect class="cls-1" x="963.8" y="700.81" width="109.99" height="81.67"/>
-    <text class="cls-5" transform="translate(1000.69 745.47)"><tspan x="0" y="0">B106</tspan></text>
-  </g>
-  <g id="Layer_12" data-name="Layer 12">
-    <rect class="cls-1" x="1109.64" y="741.64" width="72.92" height="40.83"/>
-  </g>
-  <g id="Layer_13" data-name="Layer 13">
-    <rect class="cls-1" x="1068.8" y="556.43" width="113.75" height="112.29"/>
-    <text class="cls-5" transform="translate(1107.9 616.93)"><tspan x="0" y="0">B109</tspan></text>
-  </g>
-  <g id="Layer_14" data-name="Layer 14">
-    <rect class="cls-1" x="1109.64" y="700.81" width="72.92" height="40.83"/>
-    <text class="cls-5" transform="translate(1127.53 724.33)"><tspan x="0" y="0">B108</tspan></text>
-  </g>
-  <g id="Layer_15" data-name="Layer 15">
-    <rect class="cls-1" x="746.51" y="556.43" width="42.29" height="112.29"/>
-    <text class="cls-6" transform="translate(750.47 615.95)"><tspan x="0" y="0">B113</tspan></text>
-  </g>
-  <g id="Layer_26" data-name="Layer 26">
-    <polygon class="cls-1" points="267.15 645.03 267.15 621.34 334.72 621.34 334.72 668.72 305.95 668.72 294.23 645.03 267.15 645.03"/>
-    <text class="cls-6" transform="translate(292.18 640.3)"><tspan x="0" y="0">B120</tspan></text>
-  </g>
-  <g id="Layer_27" data-name="Layer 27">
-    <polygon class="cls-1" points="334.72 668.72 334.72 621.34 294.23 621.34 294.23 556.43 368.81 556.43 368.81 668.72 334.72 668.72"/>
-    <text class="cls-6" transform="translate(312.03 605.98)"><tspan x="0" y="0">B119</tspan></text>
-  </g>
-  <g id="Layer_28" data-name="Layer 28">
-    <rect class="cls-1" x="368.81" y="556.43" width="55.42" height="112.29"/>
-    <text class="cls-6" transform="translate(377.25 616.81)"><tspan x="0" y="0">B118</tspan></text>
-  </g>
-  <g id="Layer_29" data-name="Layer 29">
-    <rect class="cls-1" x="424.23" y="556.43" width="55.42" height="112.29"/>
-    <text class="cls-6" transform="translate(428.38 616.55)"><tspan x="0" y="0">B117A</tspan></text>
-  </g>
-  <g id="Layer_30" data-name="Layer 30">
-    <rect class="cls-1" x="479.64" y="556.43" width="52.5" height="112.29"/>
-    <text class="cls-6" transform="translate(484.05 616.19)"><tspan x="0" y="0">B117B</tspan></text>
-  </g>
-  <g id="t">
-    <rect class="cls-3" x="532.14" y="556.43" width="35" height="112.29"/>
-  </g>
-  <g id="Layer_32" data-name="Layer 32">
-    <rect class="cls-1" x="599.22" y="556.43" width="40.83" height="40.83"/>
-    <text class="cls-6" transform="translate(600.94 580.71)"><tspan x="0" y="0">B115</tspan></text>
-  </g>
-  <g id="Layer_others">
-    <g>
-      <rect class="cls-3" x="882.38" y="639.13" width="26.01" height="10.72"/>
-      <line class="cls-3" x1="882.14" y1="620.6" x2="882.14" y2="638.1"/>
-      <line class="cls-3" x1="882.14" y1="632.26" x2="908.39" y2="632.26"/>
-      <line class="cls-3" x1="882.14" y1="624.97" x2="908.39" y2="624.97"/>
-      <line class="cls-3" x1="882.14" y1="616.22" x2="908.39" y2="616.22"/>
-      <line class="cls-3" x1="882.14" y1="608.93" x2="908.39" y2="608.93"/>
-      <line class="cls-3" x1="890.89" y1="600.18" x2="906.93" y2="600.18"/>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <g id="Layer_x5F_border">
+        <path class="cls-3" d="M783.9,554.5l-.6-42.5h77l-.5-191.3h-.3c4.2-50.9-44.3-88.4-54-95.9-13-10.1-55.6-39.8-118.1-37.7-56.8,1.9-93.5,28.9-103.5,36.5-8.4,6.4-59.8,45.4-55.4,97.1h-.7l.5,191.3h85v43l-200-.5v-267.6h-81.7v267.6l-45.3-.4V232.1c.1,0-37.8,0-37.8,0v-37.7h-100.6v37.7h-49.6v549.7s188.1.1,188.1.1h895.4v-227.5h-397.9Z"/>
+      </g>
+      <g id="Layer_2">
+        <rect class="cls-1" x="530.9" y="700.3" width="54.7" height="81.9"/>
+        <text class="cls-6" transform="translate(532.9 744.8)"><tspan x="0" y="0">B103A</tspan></text>
+      </g>
+      <g id="Layer_3">
+        <rect class="cls-1" x="371" y="700.3" width="159.9" height="81.9"/>
+        <text class="cls-6" transform="translate(426 744.8)"><tspan x="0" y="0">B102B</tspan></text>
+      </g>
+      <g id="Layer_8">
+        <rect class="cls-1" x="318.2" y="700.3" width="52.8" height="81.9"/>
+        <text class="cls-6" transform="translate(319.4 744.8)"><tspan x="0" y="0">B102A</tspan></text>
+      </g>
+      <g id="Layer_9">
+        <polygon class="cls-1" points="98.3 556 207.8 556 207.8 700.3 318.2 700.3 318.2 782.2 98.3 782.2 98.3 556"/>
+        <text class="cls-6" transform="translate(142 722.9)"><tspan x="0" y="0">B101</tspan></text>
+      </g>
+      <g id="Layer_6">
+        <rect class="cls-1" x="586.1" y="700.8" width="54" height="81.7"/>
+        <text class="cls-6" transform="translate(587.9 745.3)"><tspan x="0" y="0">B103B</tspan></text>
+      </g>
+      <g id="Layer_7">
+        <rect class="cls-1" x="640.1" y="700.8" width="212.9" height="81.7"/>
+        <text class="cls-6" transform="translate(726.8 745.3)"><tspan x="0" y="0">B104</tspan></text>
+      </g>
+      <g id="Layer_10">
+        <rect class="cls-1" x="853" y="700.8" width="110.8" height="81.7"/>
+        <text class="cls-6" transform="translate(888.9 745.3)"><tspan x="0" y="0">B105</tspan></text>
+      </g>
+      <g id="Layer_11">
+        <rect class="cls-1" x="963.8" y="700.8" width="110" height="81.7"/>
+        <text class="cls-6" transform="translate(999.2 745.3)"><tspan x="0" y="0">B106</tspan></text>
+      </g>
+      <g id="Layer_13">
+        <rect class="cls-1" x="1016.8" y="556.4" width="165.8" height="112.3"/>
+        <text class="cls-6" transform="translate(1080 616.2)"><tspan x="0" y="0">B109</tspan></text>
+      </g>
+      <g id="Layer_14">
+        <rect class="cls-1" x="1073.8" y="700.8" width="108.8" height="81.7"/>
+        <text class="cls-6" transform="translate(1108.4 745.3)"><tspan x="0" y="0">B108</tspan></text>
+      </g>
+      <g id="Layer_15">
+        <rect class="cls-1" x="746.5" y="556.4" width="42.3" height="112.3"/>
+        <text class="cls-5" transform="translate(749.3 616.6)"><tspan x="0" y="0">B113</tspan></text>
+      </g>
+      <g id="Layer_26">
+        <polygon class="cls-1" points="267.2 645 267.2 621.3 334.7 621.3 334.7 668.7 305.9 668.7 294.2 645 267.2 645"/>
+        <text class="cls-5" transform="translate(292.2 640.3)"><tspan x="0" y="0">B120</tspan></text>
+      </g>
+      <g id="Layer_27">
+        <polygon class="cls-1" points="334.7 668.7 334.7 621.3 294.2 621.3 294.2 556.4 368.8 556.4 368.8 668.7 334.7 668.7"/>
+        <text class="cls-5" transform="translate(312 606)"><tspan x="0" y="0">B119</tspan></text>
+      </g>
+      <g id="Layer_28">
+        <rect class="cls-1" x="368.8" y="556.4" width="55.4" height="112.3"/>
+        <text class="cls-5" transform="translate(377.2 616.8)"><tspan x="0" y="0">B118</tspan></text>
+      </g>
+      <g id="Layer_29">
+        <rect class="cls-1" x="424.2" y="556.4" width="55.4" height="112.3"/>
+        <text class="cls-5" transform="translate(428.4 616.6)"><tspan x="0" y="0">B117A</tspan></text>
+      </g>
+      <g id="Layer_30">
+        <rect class="cls-1" x="479.6" y="556.4" width="52.5" height="112.3"/>
+        <text class="cls-5" transform="translate(484 616.2)"><tspan x="0" y="0">B117B</tspan></text>
+      </g>
+      <g id="t">
+        <rect class="cls-2" x="532.1" y="556.4" width="35" height="112.3"/>
+      </g>
+      <g id="Layer_32">
+        <rect class="cls-1" x="599.2" y="556.4" width="40.8" height="40.8"/>
+        <text class="cls-5" transform="translate(600.9 580.7)"><tspan x="0" y="0">B115</tspan></text>
+      </g>
+      <g id="Layer_x5F_others">
+        <g>
+          <rect class="cls-2" x="882.4" y="639.1" width="26" height="10.7"/>
+          <line class="cls-2" x1="882.1" y1="620.6" x2="882.1" y2="638.1"/>
+          <line class="cls-2" x1="882.1" y1="632.3" x2="908.4" y2="632.3"/>
+          <line class="cls-2" x1="882.1" y1="625" x2="908.4" y2="625"/>
+          <line class="cls-2" x1="882.1" y1="616.2" x2="908.4" y2="616.2"/>
+          <line class="cls-2" x1="882.1" y1="608.9" x2="908.4" y2="608.9"/>
+          <line class="cls-2" x1="890.9" y1="600.2" x2="906.9" y2="600.2"/>
+        </g>
+        <rect class="cls-2" x="567.1" y="556.4" width="32.1" height="112.3"/>
+        <rect class="cls-1" x="567.1" y="607.5" width="32.1" height="32.1"/>
+        <rect class="cls-1" x="567.1" y="639.6" width="32.1" height="29.2"/>
+        <g>
+          <rect class="cls-2" x="248.8" y="645" width="18.3" height="23.7"/>
+          <line class="cls-2" x1="276.9" y1="645" x2="276.9" y2="669.1"/>
+          <line class="cls-2" x1="287.1" y1="645.4" x2="287.1" y2="668.7"/>
+          <line class="cls-2" x1="297.4" y1="652.7" x2="297.4" y2="668.7"/>
+        </g>
+        <polygon class="cls-1" points="248.8 576.3 294.2 576.3 294.2 621.3 267.2 621.3 248.8 621.3 248.8 576.3"/>
+        <rect class="cls-2" x="248.8" y="621.3" width="85.9" height="47.4"/>
+        <g id="Layer_16">
+          <rect class="cls-2" x="788.3" y="556.4" width="68" height="112.3"/>
+        </g>
+        <polygon class="cls-7" points="286.3 541 98.3 541 98.3 230.7 147.9 230.7 147.9 194.4 248.5 194.4 248.5 230.7 286.4 230.7 286.3 541"/>
+      </g>
+      <g id="Layer_17">
+        <rect class="cls-1" x="908.4" y="556.4" width="33.5" height="36.5"/>
+        <text class="cls-4" transform="translate(907.9 578.7)"><tspan x="0" y="0">110E</tspan></text>
+        <rect class="cls-1" x="908.4" y="556.4" width="33.5" height="36.5"/>
+        <text class="cls-4" transform="translate(912.6 577.4)"><tspan x="0" y="0">110E</tspan></text>
+      </g>
+      <g id="Layer_18">
+        <polygon class="cls-1" points="856.4 556.4 908.4 556.4 908.4 592.9 882.4 603.3 882.4 621.2 856.4 621.2 856.4 556.4"/>
+        <text class="cls-5" transform="translate(863.8 587.5)"><tspan x="0" y="0">B111</tspan></text>
+      </g>
+      <g id="Layer_19">
+        <polygon class="cls-1" points="941.9 556.4 941.9 592.9 908.4 592.9 908.4 668.7 963.8 668.7 963.8 592.9 963.8 556.4 941.9 556.4"/>
+        <text class="cls-5" transform="translate(918.2 629.4)"><tspan x="0" y="0">B110</tspan></text>
+      </g>
+      <g id="Layer_20">
+        <rect class="cls-1" x="963.8" y="635.2" width="52.5" height="33.5"/>
+        <text class="cls-5" transform="translate(966.6 655.9)"><tspan x="0" y="0">B110A</tspan></text>
+      </g>
+      <g id="Layer_21">
+        <rect class="cls-1" x="963.8" y="611.8" width="52.5" height="23.3"/>
+        <text class="cls-5" transform="translate(966.9 627.5)"><tspan x="0" y="0">B110B</tspan></text>
+      </g>
+      <g id="Layer_22">
+        <rect class="cls-1" x="963.8" y="584.1" width="52.5" height="27.7"/>
+        <text class="cls-5" transform="translate(966.9 602)"><tspan x="0" y="0">B110C</tspan></text>
+      </g>
+      <g id="Layer_23">
+        <rect class="cls-1" x="963.8" y="556.4" width="52.5" height="27.7"/>
+        <text class="cls-5" transform="translate(966.6 574.3)"><tspan x="0" y="0">B110D</tspan></text>
+      </g>
+      <g id="Layer_31">
+        <rect class="cls-1" x="640.1" y="556.4" width="106.5" height="112.3"/>
+        <text class="cls-5" transform="translate(670.2 616.6)"><tspan x="0" y="0">B114</tspan></text>
+      </g>
     </g>
-    <rect class="cls-3" x="567.14" y="556.43" width="32.08" height="112.29"/>
-    <rect class="cls-1" x="567.14" y="607.47" width="32.08" height="32.08"/>
-    <rect class="cls-1" x="567.14" y="639.56" width="32.08" height="29.17"/>
-    <g>
-      <rect class="cls-3" x="248.82" y="645.03" width="18.33" height="23.69"/>
-      <line class="cls-3" x1="276.91" y1="645.03" x2="276.91" y2="669.1"/>
-      <line class="cls-3" x1="287.14" y1="645.39" x2="287.14" y2="668.72"/>
-      <line class="cls-3" x1="297.35" y1="652.68" x2="297.35" y2="668.72"/>
-    </g>
-    <polygon class="cls-1" points="248.82 576.28 294.23 576.28 294.23 621.34 267.15 621.34 248.82 621.34 248.82 576.28"/>
-    <rect class="cls-3" x="248.82" y="621.34" width="85.9" height="47.38"/>
-    <g id="Layer_16" data-name="Layer 16">
-      <rect class="cls-3" x="788.32" y="556.43" width="68.05" height="112.29"/>
-    </g>
-    <rect class="cls-1" x="1074.1" y="700.81" width="34.7" height="81.67"/>
-    <rect class="cls-1" x="1016.3" y="556.43" width="52.5" height="112.29"/>
-  </g>
-  <g id="Layer_17" data-name="Layer 17">
-    <rect class="cls-1" x="908.39" y="556.43" width="33.54" height="36.46"/>
-    <text class="cls-4" transform="translate(907.87 578.74)"><tspan x="0" y="0">B110B</tspan></text>
-  </g>
-  <g id="Layer_18" data-name="Layer 18">
-    <polygon class="cls-1" points="856.37 556.43 908.39 556.43 908.39 592.89 882.38 603.28 882.38 621.19 856.37 621.19 856.37 556.43"/>
-    <text class="cls-6" transform="translate(863.84 587.47)"><tspan x="0" y="0">B111</tspan></text>
-  </g>
-  <g id="Layer_19" data-name="Layer 19">
-    <polygon class="cls-1" points="941.93 556.43 941.93 592.89 908.39 592.89 908.39 668.72 963.8 668.72 963.8 592.89 963.8 556.43 941.93 556.43"/>
-    <text class="cls-6" transform="translate(918.24 629.44)"><tspan x="0" y="0">B110</tspan></text>
-  </g>
-  <g id="Layer_20" data-name="Layer 20">
-    <rect class="cls-1" x="963.8" y="635.18" width="52.5" height="33.54"/>
-    <text class="cls-6" transform="translate(966.85 655.05)"><tspan x="0" y="0">B110A</tspan></text>
-  </g>
-  <g id="Layer_21" data-name="Layer 21">
-    <rect class="cls-1" x="963.8" y="611.85" width="52.5" height="23.33"/>
-    <text class="cls-6" transform="translate(966.29 628.46)"><tspan x="0" y="0">B110B</tspan></text>
-  </g>
-  <g id="Layer_22" data-name="Layer 22">
-    <rect class="cls-1" x="963.8" y="584.14" width="52.5" height="27.71"/>
-    <text class="cls-6" transform="translate(968.19 602.89)"><tspan x="0" y="0">B110C</tspan></text>
-  </g>
-  <g id="Layer_23" data-name="Layer 23">
-    <rect class="cls-1" x="963.8" y="556.43" width="52.5" height="27.71"/>
-    <text class="cls-6" transform="translate(964.83 575.08)"><tspan x="0" y="0">B110D</tspan></text>
-  </g>
-  <g id="Layer_31" data-name="Layer 31">
-    <rect class="cls-1" x="640.06" y="556.43" width="106.46" height="112.29"/>
-    <text class="cls-6" transform="translate(670.19 616.6)"><tspan x="0" y="0">B114</tspan></text>
   </g>
 </svg>

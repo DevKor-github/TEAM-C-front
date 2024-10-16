@@ -1,146 +1,154 @@
 [
     [
-        "toilet",
+        "Layer_x5F_border",
         1
     ],
     [
-        "Layer_3",
+        "toilet",
         2
     ],
     [
-        "Layer_4",
+        "Layer_3",
         3
     ],
     [
-        "Layer_5",
+        "Layer_4",
         4
     ],
     [
-        "Layer_6",
+        "Layer_5",
         5
     ],
     [
-        "Layer_7",
+        "Layer_6",
         6
     ],
     [
-        "Layer_8",
+        "Layer_7",
         7
     ],
     [
-        "Layer_11",
+        "Layer_8",
         8
     ],
     [
-        "Layer_12",
+        "Layer_x5F_others",
         9
     ],
     [
-        "Layer_13",
+        "Layer_11",
         10
     ],
     [
-        "Layer_14",
+        "Layer_12",
         11
     ],
     [
-        "Layer_15",
+        "Layer_13",
         12
     ],
     [
-        "Layer_16",
+        "Layer_14",
         13
     ],
     [
-        "Layer_17",
+        "Layer_15",
         14
     ],
     [
-        "Layer_18",
+        "Layer_16",
         15
     ],
     [
-        "Layer_19",
+        "Layer_17",
         16
     ],
     [
-        "toilet5",
+        "Layer_18",
         17
     ],
     [
-        "Layer_21",
+        "Layer_19",
         18
     ],
     [
-        "Layer_22",
+        "toilet5",
         19
     ],
     [
-        "Layer_23",
+        "Layer_21",
         20
     ],
     [
-        "toilet4",
+        "Layer_22",
         21
     ],
     [
-        "toilet3",
+        "Layer_23",
         22
     ],
     [
-        "Layer_26",
+        "toilet4",
         23
     ],
     [
-        "toilet2",
+        "toilet3",
         24
     ],
     [
-        "Layer_28",
+        "Layer_26",
         25
     ],
     [
-        "Layer_29",
+        "toilet2",
         26
     ],
     [
-        "Layer_37",
+        "Layer_28",
         27
     ],
     [
-        "Layer_38",
+        "Layer_29",
         28
     ],
     [
-        "Layer_30",
+        "Layer_37",
         29
     ],
     [
-        "Layer_31",
+        "Layer_38",
         30
     ],
     [
-        "Layer_32",
+        "Layer_30",
         31
     ],
     [
-        "Layer_33",
+        "Layer_31",
         32
     ],
     [
-        "Layer_34",
+        "Layer_32",
         33
     ],
     [
-        "Layer_35",
+        "Layer_33",
         34
     ],
     [
-        "Layer_36",
+        "Layer_34",
         35
     ],
     [
-        "Layer_39",
+        "Layer_35",
         36
+    ],
+    [
+        "Layer_36",
+        37
+    ],
+    [
+        "Layer_39",
+        38
     ]
 ]
