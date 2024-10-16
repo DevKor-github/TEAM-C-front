@@ -19,16 +19,6 @@
             tools:layout_editor_absoluteY="257dp">
         </com.naver.maps.map.MapView>
 
-        <ImageView
-            android:id="@+id/location_buuton"
-            android:layout_gravity="bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_location"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="35dp"
-            android:elevation="4dp"/>
-
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

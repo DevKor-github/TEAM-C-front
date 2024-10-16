@@ -163,324 +163,271 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/suggestion_button"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/mypage_user_layout">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/mypage_user_layout"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="건의하기"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/suggestion_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            tools:ignore="MissingConstraints">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="건의하기"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/introduction_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/suggestion_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="팀원 소개"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/guide_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/introduction_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="가이드 페이지"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline9"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/kodaero_kakao_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/guide_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="고대로 카카오 채널"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline7"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/kodaero_instar_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/kodaero_kakao_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="고대로 공식 인스타그램"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/terms_policies_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/kodaero_instar_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="약관 및 정책"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline12"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/developer_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/terms_policies_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="개발자 도구"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline11"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/developer_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="로그아웃"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline10"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/secession_button"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/mypage_item_border"
+            app:layout_constraintTop_toBottomOf="@id/logout_button">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/mypage_guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="탈퇴하기"
+                android:textColor="@color/map_main"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/mypage_guideline6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/introduction_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/suggestion_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="팀원 소개"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rating_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/introduction_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="앱 평가하기"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/kodaero_kakao_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/rating_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="고대로 카카오 채널"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline7"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/kodaero_instar_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/kodaero_kakao_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="고대로 공식 인스타그램"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline8"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/guide_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/kodaero_instar_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="가이드 페이지"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/developer_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/guide_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="개발자 도구"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline11"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/mypage_item_border"
-        app:layout_constraintTop_toBottomOf="@id/developer_button">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/mypage_guideline10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="로그아웃"
-            android:textColor="@color/map_main"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/mypage_guideline10"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logout_black_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        android:alpha="0.5"
-        android:visibility="gone"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logout_layout"
-        android:layout_width="240dp"
-        android:layout_height="130dp"
-        android:background="@drawable/rounded_rec_white"
-        android:elevation="8dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="로그아웃 하시겠습니까?"
-            android:textColor="@color/black"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/logout_guideline1"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/logout_guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.65" />
-
-        <TextView
-            android:id="@+id/logout_yes_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="예"
-            android:textSize="14dp"
-            android:textColor="@color/red"
-            android:fontFamily="@font/pretendard_bold"
-            app:layout_constraintTop_toBottomOf="@id/logout_guideline1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_name_guideline6"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/edit_name_guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <TextView
-            android:id="@+id/logout_no_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="아니오"
-            android:textSize="14dp"
-            android:textColor="@color/map_main"
-            android:fontFamily="@font/pretendard_bold"
-            app:layout_constraintTop_toBottomOf="@id/logout_guideline1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/edit_name_guideline6"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#EFEFEF"
-            app:layout_constraintBottom_toTopOf="@id/logout_guideline1"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="#EFEFEF"
-            app:layout_constraintTop_toBottomOf="@id/logout_guideline1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/logout_yes_button"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

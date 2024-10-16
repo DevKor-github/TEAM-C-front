@@ -271,20 +271,20 @@
                     android:background="@drawable/rounded_rec_custom_scroll"
                     android:clipToOutline="true">
 
-                    <com.devkor.kodaero.CustomScrollView
+                    <com.ku.kodaero.CustomScrollView
                         android:id="@+id/customScrollView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"/>
 
-                    <com.devkor.kodaero.GradientBlurView
+                    <com.ku.kodaero.GradientBlurView
                         android:id="@+id/customScrollTopBlur"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/item_height"
                         app:hasTopBlur="true"
                         app:hasBottomBlur="false"/>
 
-                    <com.devkor.kodaero.GradientBlurView
+                    <com.ku.kodaero.GradientBlurView
                         android:id="@+id/customScrollBottomBlur"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/item_height"

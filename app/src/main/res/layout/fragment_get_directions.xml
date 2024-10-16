@@ -33,7 +33,7 @@
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
-            <com.devkor.kodaero.CustomButtonWithHint
+            <com.ku.kodaero.CustomButtonWithHint
                 android:id="@+id/search_starting_point_bar"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
@@ -66,7 +66,7 @@
                 android:translationZ="50dp"
                 android:background="@android:color/transparent"/>
 
-            <com.devkor.kodaero.CustomButtonWithHint
+            <com.ku.kodaero.CustomButtonWithHint
                 android:id="@+id/search_arrival_point_bar"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
@@ -114,18 +114,6 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="-32dp"
             tools:layout_editor_absoluteY="257dp" />
-
-        <ImageView
-            android:id="@+id/location_buuton"
-            android:layout_gravity="bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_location"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="150dp"
-            android:elevation="4dp"
-            android:visibility="gone"/>
-
 
         <RelativeLayout
             android:id="@+id/get_directions_select_direction_layout"

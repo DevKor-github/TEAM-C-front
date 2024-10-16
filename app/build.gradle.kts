@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.devkor.kodaero"
+    namespace = "com.ku.kodaero"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.devkor.kodaero"
+        applicationId = "com.ku.kodaero"
         minSdk = 24
         targetSdk = 34
         versionCode = 2

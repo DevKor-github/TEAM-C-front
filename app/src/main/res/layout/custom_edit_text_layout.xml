@@ -34,7 +34,7 @@
             flexbox:justifyContent="flex_start"
             flexbox:alignItems="center"/>
 
-        <com.devkor.kodaero.CustomEditTextWithHint
+        <com.ku.kodaero.CustomEditTextWithHint
             android:id="@+id/edit_text"
             android:layout_width="0dp"
             android:layout_height="54dp"

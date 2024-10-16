@@ -90,7 +90,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter" />
 
-                <com.devkor.kodaero.RouteView
+                <com.ku.kodaero.RouteView
                     android:id="@+id/routeView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
