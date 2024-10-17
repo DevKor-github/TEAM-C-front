@@ -1,5 +1,6 @@
 package com.ku.kodaero
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -138,6 +139,26 @@ class SearchBuildingFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.root.setOnClickListener {
+            if (binding.customEditTextLayout.editText.hasFocus()) {
+                hideKeyboard(binding.customEditTextLayout.editText)
+                binding.customEditTextLayout.editText.clearFocus()
+            }
+        }
+
+        binding.searchListRecyclerview.setOnTouchListener { _, _ ->
+            if (binding.customEditTextLayout.editText.hasFocus()) {
+                hideKeyboard(binding.customEditTextLayout.editText)
+                binding.customEditTextLayout.editText.clearFocus()
+            }
+            false
+        }
+    }
+
     override fun onDestroyView() {
         taggedBuildingId = null
         super.onDestroyView()
@@ -211,5 +232,10 @@ class SearchBuildingFragment : Fragment() {
         transaction.add(R.id.main_container, pinSearchFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

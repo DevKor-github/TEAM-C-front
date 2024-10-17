@@ -1,5 +1,7 @@
 package com.ku.kodaero
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
@@ -46,6 +49,23 @@ class SuggestionFragment : Fragment() {
         setupListeners()
 
         return binding.root
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.root.setOnTouchListener { _, _ ->
+            if (binding.suggestionTitle.hasFocus()) {
+                hideKeyboard(binding.suggestionTitle)
+                binding.suggestionTitle.clearFocus()
+            }
+            if (binding.suggestionContent.hasFocus()) {
+                hideKeyboard(binding.suggestionContent)
+                binding.suggestionContent.clearFocus()
+            }
+            false
+        }
     }
 
     private fun setupListeners() {
@@ -152,6 +172,11 @@ class SuggestionFragment : Fragment() {
         type = ""
         title = ""
         content = ""
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     override fun onDestroyView() {

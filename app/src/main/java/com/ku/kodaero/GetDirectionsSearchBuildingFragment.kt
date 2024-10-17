@@ -1,5 +1,6 @@
 package com.ku.kodaero
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -108,6 +109,26 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.root.setOnClickListener {
+            if (binding.customEditTextLayout.editText.hasFocus()) {
+                hideKeyboard(binding.customEditTextLayout.editText)
+                binding.customEditTextLayout.editText.clearFocus()
+            }
+        }
+
+        binding.searchListRecyclerview.setOnTouchListener { _, _ ->
+            if (binding.customEditTextLayout.editText.hasFocus()) {
+                hideKeyboard(binding.customEditTextLayout.editText)
+                binding.customEditTextLayout.editText.clearFocus()
+            }
+            false
+        }
+    }
+
     override fun onDestroyView() {
         taggedBuildingId = null
         super.onDestroyView()
@@ -144,23 +165,8 @@ class GetDirectionsSearchBuildingFragment : Fragment() {
         requireActivity().supportFragmentManager.popBackStack()
     }
 
-
-    fun showShortToast(context: Context, message: String) {
-        if (isToastVisible) {
-            // 입력이 이미 막혀있다면 바로 리턴
-            return
-        }
-
-        isToastVisible = true
-
-        val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
-        toast.show()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(5000)  // 5초 대기
-            isToastVisible = false  // 입력을 다시 허용
-        }
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
 }

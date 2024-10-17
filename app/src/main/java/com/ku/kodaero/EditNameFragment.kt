@@ -1,5 +1,6 @@
 package com.ku.kodaero
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -45,11 +46,20 @@ class EditNameFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val username = arguments?.getString("username")
         binding.editNameText.hint = username ?: "닉네임을 입력하세요"
+
+        binding.root.setOnTouchListener { _, _ ->
+            if (binding.editNameText.hasFocus()) {
+                hideKeyboard()
+                binding.editNameText.clearFocus()
+            }
+            false
+        }
     }
 
     private fun setupListeners() {
