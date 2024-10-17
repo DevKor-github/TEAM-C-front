@@ -322,16 +322,14 @@ class FetchDataViewModel : ViewModel() {
                     _userInfo.value = response.body()?.data
                     Log.d("FetchDataViewModel", "User info: ${response.body()?.data}")
                 } else {
-                    if (response.code() != 200) {
-                        Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
-                        _userInfo.value = null
-                    }
+                    _userInfo.value = null
+                    Log.e("FetchDataViewModel", "Error response: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse<UserInfo>>, t: Throwable) {
-                Log.e("FetchDataViewModel", "API call failed: ${t.message}")
                 _userInfo.value = null
+                Log.e("FetchDataViewModel", "API call failed: ${t.message}")
             }
         })
     }

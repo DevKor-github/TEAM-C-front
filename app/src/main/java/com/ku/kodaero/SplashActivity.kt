@@ -48,8 +48,6 @@ class SplashActivity : AppCompatActivity() {
                 if (userInfo != null) {
                     TokenManager.saveUserInfo(userInfo)
                     navigateToMainActivity()
-                } else if (viewModel.responseCode != 200) {
-                    navigateToLoginActivity()
                 } else {
                     navigateToLoginActivity()
                 }
