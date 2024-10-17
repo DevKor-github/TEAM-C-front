@@ -1,34 +1,34 @@
 [
     [
-        "Layer_x5F_border",
+        "Layer_border",
         1
     ],
     [
-        "Layer_x5F_others",
+        "Layer_others",
         2
     ],
     [
-        "Layer_x5F_toilet4",
+        "Layer_toilet4",
         3
     ],
     [
-        "Layer_x5F_toilet3",
+        "Layer_toilet3",
         4
     ],
     [
-        "Layer_x5F_toilet2",
+        "Layer_toilet2",
         5
     ],
     [
-        "Layer_x5F_toilet1",
+        "Layer_toilet1",
         6
     ],
     [
-        "Layer_x5F_lounge",
+        "Layer_lounge",
         7
     ],
     [
-        "Layer_x5F_313",
+        "Layer_313",
         8
     ],
     [
@@ -36,55 +36,55 @@
         9
     ],
     [
-        "Layer_x5F_312",
+        "Layer_312",
         10
     ],
     [
-        "Layer_x5F_311A",
+        "Layer_311A",
         11
     ],
     [
-        "Layer_x5F_311",
+        "Layer_311",
         12
     ],
     [
-        "Layer_x5F_310",
+        "Layer_310",
         13
     ],
     [
-        "Layer_x5F_309",
+        "Layer_309",
         14
     ],
     [
-        "Layer_x5F_308",
+        "Layer_308",
         15
     ],
     [
-        "Layer_x5F_307",
+        "Layer_307",
         16
     ],
     [
-        "Layer_x5F_306",
+        "Layer_306",
         17
     ],
     [
-        "Layer_x5F_305",
+        "Layer_305",
         18
     ],
     [
-        "Layer_x5F_304",
+        "Layer_304",
         19
     ],
     [
-        "Layer_x5F_303",
+        "Layer_303",
         20
     ],
     [
-        "Layer_x5F_302",
+        "Layer_302",
         21
     ],
     [
-        "Layer_x5F_301",
+        "Layer_301",
         22
     ]
 ]
